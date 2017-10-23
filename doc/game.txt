@@ -1,0 +1,362 @@
+
+ ****************************** game.txt ******************************
+
+
+ *  This file is part of Humanitas.
+
+ *  Humanitas is free software; you can redistribute it and/or modify it under
+ *  the terms of the GNU General Public License as published by the Free
+ *  Software Foundation; either version 2 of the License, or (at your option)
+ *  any later version.
+
+ *  Humanitas is distributed in the hope that it will be useful, but WITHOUT ANY
+ *  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ *  details.
+
+ *  You should have received a copy of the GNU General Public License along with
+ *  Humanitas; if not, write to the Free Software Foundation, Inc., 51 Franklin
+ *  St, Fifth Floor, Boston, MA  02110-1301 USA
+
+ *)
+
+
+*** 7 frimaire an 219
+
+De l’interface
+
+Toutes les interactions, à l’exception des saisies de string, peuvent être
+effectuées aussi bien à la souris qu’au clavier.
+L’interface est composée de *fenêtres, et d’une *scene lorsqu’une partie est
+chargée.
+Les fenêtres sont positionnées selon leur utilité :
+- la barre du haut regroupent des fenêtre-boutons.
+- la barre du bas affiche des informations
+- les piles de droite et de gauche regroupent des fenêtres liées au concept.
+- la position centrale est occupée par les autres fenetres (confirmation,
+  evenement, endOfTurn, options du jeu)
+Les fenêtres appartiennent à ces groupes, identifiant leur position potentielle.
+
+Les fenetres des piles gauche et droite s’affichent par défaut dans les tiers
+gauche et droite, laissant le tiers central de l’écran disponible pour la
+carte. 
+L’organisation des fenetres sera optimisée pour cette taille. Cependant,
+certaines fenetres dépasseront la hauteur indiquée. Elles pourront alors :
+- être parcourue avec la roulette
+
+Les fenetres de position centrale, et elles seules, peuvent recouvrir
+partiellement d’autres fenetres (en l’occurence la carte et les piles). 
+
+Les piles ont deux caractéristiques particulières :
+- elles seules peuvent contenir des fenêtres cachées. Elles contiennent au plus
+  une seule fenetre ouverte, les autres fenetres de la pile sont cachées.
+- les fenêtres de pile peuvent être ouvertes, au choix, dans la pile de gauche
+  ou de droite.
+- les piles peuvent être parcourues == changement de l’ordre des fenêtre dans
+  la pile
+
+Les fenetres ont les caractéristiques suivantes :
+- leur position et taille sont exprimées en Screen.element.
+  Le nombre de Screen.element dans la hauteur et la largeur de l’écran, et leur
+  wip et hip, sont fonction de la résolution (sans toutefois être proportionnel)
+  et du Screen.ratio.
+- elles ont une position constante, à l’exception des fenetres de pile, pouvant
+  être ouverte dans les moitié gauche, ou droite, de l’écran.
+- elles ont une largeur constante
+- elles ont une hauteur constante
+- elles sont fermées, ouvertes, actives=ouverte+sélectionnée, ou cachées.
+  Seules les fenêtres ouvertes sont visibles.
+  Quand une fenetre est ouverte à l’emplacement d’une autre, cette autre est
+  fermée (fenetres centrales), ou bien devient cachée (fenetre de pile).
+- Les fenetres peuvent contenir des boutons. Les boutons appartiennent tous à
+  une et une seule fenêtre. Une fenêtre peut éventuellement ne consister qu’en
+  un seul bouton isolé (fenetre-bouton).
+- lorsqu’elles ont des boutons, un bouton de la fenêtre peut être sélectionné.
+  Aucun ne l’est par défaut à l’ouverture de la fenêtre.
+
+- Les fenêtres actives sont plus réactives aux actions clavier. Quand une
+  fenetre est active :
+  - maj+X: ferme la pile
+  - H    : cache la pile
+  - X    : ferme la fenêtre
+  - U    : déselectionne la fenetre (la fenetre cesse d’être active pour
+    n’être qu’ouverte)
+  - F1   : ouvre une fenetre d’aide sur la fenetre plutot que l’aide générale
+  - les éventuels raccourcis clavier vers les boutons de la fenetre deviennent
+    actif (et recouvrent le cas échéant des raccourcis clavier généraux)
+  - tab  : déplace le focus
+
+- Les fenêtres peuvent toutes être ouvertes par : 
+  - l’activation du bouton dédié de la fenêtre préexistante et ouverte dédiée
+  - le raccourci clavier éventuel vers ce bouton 
+  - Les fenetres de pile sont ouvertes par défaut dans la pile par défaut
+    attribuée à la fenetre.
+    Ajouter la touche Ctrl gauche au clic gauche, ou au raccourci clavier, 
+    permet de les ouvrir dans la pile de droite. Ctrl droit les ouvre dans la
+    pile de droite.
+- elles peuvent être sélectionnées par :
+  - clic de la souris sur leur surface
+  - la circulation entre les fenetres de pile (alt + roulette sur la surface de
+    la fenetre) 
+  - l’ouverture d’une fenêtre vaut sélection immédiate
+  - la circulation entre les piles : tab
+- elles peuvent être fermeés par 
+  - un petit bouton dédié marqué d’un x
+  - alt+clic droit
+  - alt+double clic droit (fermeture de ttes les fenetres d’une pile)
+- on peut obtenir les informations sur une fenêtre ouverte : nom, raccourci clavier, et
+  description, par
+  - un clic droit sur sa surface (hors surface des boutons)
+  - un raccourci clavier (F1) après sélection de la fenêtre (et à la
+    condition qu’aucun bouton ne soit sélectionné)
+- on peut faire défiler le contenu des fenetres dont la hauteur excède la
+  hauteur de l’écran par :
+  - wheel sur la surface de la fenêtre
+  - flèches, pageUp/Down
+
+
+- les boutons sont activés par 
+  - clic gauche
+  - un raccourci clavier, dans certains cas, notamment ouverture de fenêtre et
+    confirmation d’action dans les fenêtres dédiées
+- on peut obtenir les informations sur un bouton visible : nom éventuel
+  (ouverture de fenêtre), raccourci clavier, description par
+  - un clic droit sur sa surface
+
+- La touche échap
+  1° ferme une éventuelle fenêtre *information (ouverte avec clic droit)
+  2° À défaut, ferme une éventuelle fenêtre queen
+  3° À défaut, désélectionne une éventuelle fenêtre sélectionnée
+  5° À défaut, désélectionne une éventuelle regio sélectionnée
+  6° À défaut, ouvre la fenêtre Confirm Quit
+  7° À défaut, ferme la fenêtre Confirm Quit (en tant que fenetre centrale)
+
+- la carte répond aux interactions suivantes :
+  - clic droit    : centrage sur la regio pointée
+  - alt  + droit  : changement du filtre (circulation sur les 3 filtres)
+  - ctrl + droit  : effacement / affichage des éléments graphiques supérieurs
+  - double droit  : pas d’affectation (pour ne pas gêner le déplacement)
+  - alt  + double droit : passage en mode carte / retour au zoom initial
+  - clic gauche   : sélection d’une regio + ouverture de la fenetre regio
+  - alt  + gauche : sélection / désélection d’une regio
+  - double gauche : sélection d’une regio + ouverture de la fenetre natio
+  - alt  + double gauche : sélection d’une regio + ouverture de la fenetre imperium
+  - wheel         : changement de zoom
+  - alt  + wheel  : changement de l’angle
+  - ctrl + tab    : sélection de la regio centrée/déselection de la regio sélectionnée
+  - flèches       : changement de la regio sélectionnée, ou bien, à défaut de
+    regio sélectionnée, changement de la regio centrée
+
+- l’ajustement de la carte à la case centrée est modulée par l’ouverture de
+  fenêtres de pile.
+  Lorsque une ou deux fenetres de pile sont ouvertes, la case centrée est
+  affichée à une hauteur de Screen.h/4 plutôt que Screen.h/2.
+  Lorsqu’une des deux fenetres de pile est agrandie en hauteur, la case centrée
+  est affichée dans la bonne moitié (gauche ou droite) de l’écran.
+
+On distingue deux types de raccourcis clavier :
+- les raccourcis locaux, qui ne sont actifs que lorsque la fenetre à laquelle
+  ils appartiennent est active. Ils sont composés d’une seule touche.
+- les raccourcis globaux, qui sont toujours actifs, à moins qu’ils ne soient
+  « recouverts » par un raccourci local d’une fenetre active.
+
+- les raccourcis claviers généraux appartiennent à 4 types :
+  X : exécuter certaines actions. ex : changement de filtre
+  C : ouvrir une fenêtre de confirmation d’action. ex : quitter
+  L : ouvrir une fenêtre-liste, c-a-d listant plusieurs actions généralement
+    accessible par un raccourci clavier général.
+  W : ouvrir une autre fenêtre, généralement une fenêtre essentielle du jeu.
+
+  les raccourcis claviers généraux sont les suivants (type - raccourci :
+  fonction):
+  - X - Esc: focus cancellation
+  - X - A  : option Altitude
+  - C - B  : option Borders
+  - W - C  : Consilium
+  - L - D  : Display
+  - X - E  : Earth mode
+  - L - G  : Game
+  - W - H  : Humanitas
+  - W - I  : Imperium
+  - W - J  : Junctiones
+  - L - K  : open this window
+  - W - L  : Load game
+  - W - M  : Mouse hints
+  - W - N  : option Nations
+  - W - O  : Orbis
+  - W - P  : Polis
+  - C - Q  : Quit
+  - W - R  : Regio
+  - W - S  : Stratiotikon
+  - W - T  : Task history
+  - X - U  : Un-select window
+  - W - V  : Vetera
+  - X - X  : close stack
+  - W - F12: Save game
+  - W - <space> : Time
+
+- Les fenêtre-boutons sont disposées en haut de l’écran, sur toute sa
+  largeur.  Elles donnent accès à certains des raccourcis claviers généraux.
+  Les fenêtre-boutons sont accessibles, en plus de leur raccourci clavier, par
+  les touches F1 à F12.
+  Comme toute fenêtre, elles peuvent être fermées lorsqu’elles sont inutiles au
+  joueur, soit, en l’occurence, lorsqu’il est habitué au raccourcis clavier.  
+  Elles sont les suivantes :
+  - W - F1  ou H : Help (ouverture de l’aide sur le bouton sélectionné, à défaut la fenêtre
+    sélectionnée, à défaut l’aide générale)
+  - L - F2  ou G : Fenetre-Liste Game
+  - L - F3  ou D : Fenetre-Liste Display
+  - W - F4  : change le Filtre
+  - W - F5  ou N : Natio 
+  - W - F6  ou I : Imperium
+  - W - <space>  : End_of_turn (ce raccourci affiche la date (en calendrier local))
+  - W - F7  ou C : Consilium
+  - L - F8  ou P : Polis
+  - L - F9  ou O : Orbis
+  - W - F10 ou alt+H : Humanopaedia
+  - L - F11 ou K : Keyboard shortcuts
+  - X - F12 : Save game
+
+- La barre du bas est divisé en 2 moitiés :
+  - à droite : affichage du dernier event de la partie
+    un clic permet d’ouvrir la fenêtre Vetera (liste des events) dans la pile de gauche.
+  - à gauche : dernier event interface ("game saved", "filtre
+    imperii", "loading game", etc.)
+
+- La fenetre-liste Game est composée des boutons suivants, accessibles par les
+  raccourcis locaux suivants :
+  - C - B  : Begin a new game (commencer une nle partie)
+  - W - L  : Load another game (ouvrir une autre partie entamée)
+  - X - S  : Save current state of the game
+  - C - R  : Restore last saved state (ouvrir le dernier état sauvegardé de la partie
+    courante)
+  - W - O  : game Options
+  - W - H  : Help
+  - C - Q  : Quit game
+
+- La fenetre-liste Display est composée des boutons suivants, accessibles par les
+  raccourcis locaux suivants :
+  - C - D  : restore Default display (ouverture de ttes les fenêtres-boutons,
+    réinitialisation du filtre de carte etc.)
+  - X - E  : Earth = cache les fenêtres de pile
+  - X - Y  : display map grid and coordinates (Y,x)
+  - X - T  : Tegmen
+  - X - N  : Nationes
+  - X - I  : Imperii
+  - X - S  : effacement / affichage des éléments graphiques supérieurs
+  - X - M  : basculement projection Mercator / zoom initial
+
+
+- La fenetre EndOfTurn permet les actions suivantes :
+  - valider les policies définies pour une année
+  - les valider jusqu’à ce qu’à ce qu’un évènement survienne
+  - les valider pour X années ou jusqu’à ce qu’à ce qu’un évènement survienne
+
+- La fenêtre d’aide générale est la suivante :
+Getting started
+F1: open this window
+G : Game main menu
+K : Keyboard shorcuts list
+M : Mouse hints
+<space> : Restore/Halt Time passing
+F12 : Save game
+Q   : Quit Humanitas
+
+Using windows and buttons
+Left clic : select window / activate button
+Right clic : close window
+Wheel : move throw window
+Shift+left clic : get Help about a window/button
+Alt+Right clic : close window stack
+Alt+Wheel : move throw window stack
+
+Using the map
+Left clic : select regio
+Right clic : move throw map (center upon regio)
+Wheel : change zoom level
+Ctrl+left clic : select/unselect regio
+Alt+Right clic : change map filter
+Ctrl+Right clic : hide/display cities and ressources
+Double Right clic : mercator projection / restore zoom level
+Alt+Wheel : change angle level
+
+
+
+*** 19 thermidor an 219
+
+Spécifications du jeu - intelligences
+
+- Les monarchies peuvent être gérées par une IA ou une intelligence humaine
+  (IH).
+- Une partie peut ne pas impliquer d’intelligence humaine (test du jeu, début de
+  partie)
+- Il serait souhaitable qu’une partie puisse impliquer plus d’une intelligence
+  humaine.
+- À certains moments, des joueurs humains prennent le contrôle de nations ; ils
+  peuvent également abdiquer.
+
+
+À ces fins, on pourrait différencier le concept d’adminstrateur de partie, et
+celui de joueur.
+Une partie serait nécessairement régie par un administrateur (humain), lequel
+centralise les décisions de basculement IH/IA, et l’attribution d’une IH à un
+terminal éventuellement distant.
+L’administrateur peut aussi faire courir une partie sans joueur humain : c’est
+nécessaire en début de partie. Ce peut être une option par la suite, pour tester
+les IA, ou l’ensemble du concept.
+
+
+La création d’une nouvelle partie impliquerait : 
+1° la création d’un administrateur
+2° le choix du mode de l’administateur : default ou deity
+3° l’indication du nombre de joueur humains allant participer (un montant
+indicatif qui sert à calculer la probabilité qu’une monarchie commençant soit
+attribuée ou non à une intelligence humaine)
+On peut indiquer zéro joueur humain pour tester le jeu.
+4° attendre la notification d’une monarchie disponible. 
+
+L’adminstrateur dispose alors d’une liste de monarchies disponibles. Elles sont
+appelées A-B-C etc. en mode default, et par le nom de leur nation en mode deity.
+Il peut alors, à tout moment de la partie, attribuer une monarchie dispo à un
+joueur humain.
+Les joueurs humains retirés sont inversement ajoutés à la liste.
+
+L’administrateur peut notamment créer un joueur humain sur son propre terminal.
+L’administrateur peut modifier l’indicateur du point 3° en cours de partie, par
+exemple, pour passer la partie en mode multijoueurs.
+L’administrateur peut ne pas gérer de joueur humain, soit pour tester le jeu,
+soit pour incarner un arbitre de partie multijoueur. Dans ces deux cas, il
+préfèrera le mode deity, lequel lui permet d’observer la partie sans devoir
+incarner une nation et adopter son point de vue.
+
+*** 12 messidor an 220
+
+Players, principes : Vocabulaire et conception.
+
+- la *nation a, ou non, une politique économique et diplomatique centralisée.
+
+- les nations monarchiques sont dirigées par des bureaucraties que l’on nomme *empires. Ces empires formulent et mettent en oeuvre des politiques économique et diplomatique centralisée que l’on nomme *stratégies.
+
+- les empires sont dirigés par un *prince, qui est joué par un *joueur, ou une IA.
+
+- les *joueurs, qui peuvent au choix
+  - incarner un prince
+  - regarder l’évolution du monde en spectateur
+  - incarner Dieu, soit pouvoir tout modifier à volonté
+
+Les humains sont au moins un (au moins un spectateur), et peuvent être plusieurs.
+Ils peuvent être sur un PC, ou plusieurs.
+Ils peuvent, tout en respectant certaines règles, changer de rôle en cours de partie : abdiquer au profit d’un autre joueur humain, à défaut au profit de l’IA. S’insérer dans le jeu en prenant la place d’une IA, avec l’accord des autres joueurs, etc.
+
+Les *stratégies  ne sont pas attachées aux joueurs, mais aux nations. Elles ne sont pas perdues sous prétexte que le joueur a abdiqué ou est parti incarner un autre empire en cours de partie.
+
+
+*** 18 ventose an 221
+
+De la fenetre NewGame
+
+Elle permet de créer un orbis de la résolution voulue
+Elle permet de donner un nom à l'administrateur : le player qui a demandé l'ouverture de la fenetre NewGame
+Elle permet d'ajouter d'autres players à la partie, et de spécifier leur role, une fois l'orbis créé (choix des nationalités).
+Une fois un orbis créé, on peut quitter la fenetre newGame et démarrer la partie.
+

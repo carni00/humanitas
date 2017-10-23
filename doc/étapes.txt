@@ -1,0 +1,11 @@
+pveber
+Date: 	Sat Nov 20 11:21:01 2010 CET (4 months, 2 weeks ago)
+Log Message: 	
+
+remplacement de glcaml par lablgl et ocamlsdl. C'est un premier essai, mais vu le temps que j'y ai passé, je préfèrerai que
+l'on teste sur un maximum de systèmes avant d'aller plus loin : je voudrais pas avoir à tout refaire dans l'autre sens !
+
+La plupart des appels glcaml avaient un équivalent direct dans lablgl, à part pour le picking où il a fallu réfléchir
+un peu. Mais ça a l'air de marchoter déjà pas trop mal.
+
+

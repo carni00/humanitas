@@ -1,0 +1,7740 @@
+214.11.11.14.04.06
+fenetre graphique
+
+214.11.12.08.17.06
+affichage et fonctionnemnt souris
+
+214.11.12.09.05.08
+boucle wanaquit
+
+214.11.12.09.45.52
+definition des tasks
+
+215.1.26.14.32.14
+*localisation de valeurs globales
+
+215.1.29.12.25.52
+generation d'un array de regio
+Reaffichage ssi task!=NONE
+
+215.1.29.13.37.12
+affichage de la carte le Nord en haut
+
+215.1.29.14.18.20
+generation ssi appui sur new
+
+215.1.30.07.26.48
+transformation de l'array de mutable_regio en list de regio à la fin de la génération
+
+215.1.30.08.26.56
+toilletage du code
+
+215.1.30.12.01.01
+type humanitas
+fonctions save et load
+
+215.2.1.22.50.02
+fonction couleur
+filtres d'affichage de carte
+
+215.2.2.20.47.14
+fonction couleur à 3 args
+
+215.2.2.21.21.10
+generation non buggée et affichage des nationalités des regiones
+
+215.2.3.06.47.40
+generation de la list des proximae
+
+215.2.3.08.37.24
+natio_nb est désormais une constante du jeu
+la génération se débrouille pour créer le bon nb de nationes
+
+215.2.3.09.55.49
+generation de terre par agglomeration
+correction d'un bug d'affichage de la carte (décalage d'une case en hauteur de la carte)
+
+215.2.3.11.36.55
+generation de sous-continents nationaux
+
+215.2.3.16.22.28
+redefinition de la fonction couleur avec 6 couleurs fondamentales
+
+215.2.3.16.29.36
+correction d'un bug de la transformation de l'array de mutable_regio en list de regio à la fin de la génération
+désormais, la fonction conserve l'ordre de regiones (au lieu de l'inverser)
+
+215.2.4.22.55.06
+projection map 25*25 -> 125*125
+
+215.2.5.18.28.12
+premiere agglomeration à l'échelle 25*25
+
+215.2.6.05.48.46
+deuxième agglomeration à l'échelle 125*125
+
+215.2.6.08.00.22
+generation torique
+
+215.2.6.08.55.52
+moins de nationes (terre à moitié océane)
+nationes mieux dispersées
+
+215.2.6.13.18.34
+aléatoire partiel des megapositions initiales
+
+215.2.6.16.33.34
+projection aléatoire à leur échelle des pays sur les regiones
+
+215.2.6.18.40.17
+accroissement du "taux d'agglomeration" par élargissement du champ des probas (sur 16 au lieu de sur 4) et augmentation du nombre de passage(25 au lieu de 10)
+
+215.2.6.19.08.28
+*localisation des fonctions et boucles de générations dans regio_array_create()
+
+215.2.7.07.06.58
+accroissement de l'aléatoire de la génération des pays (1/4 si il existe un voisin terr au lieu de 1/2, 12 passages au lieu de 8)
+
+215.2.7.14.49.31
+réorganisation de la fonction de génération de carte comme une suite de procédures sur arrays
+paramétrage de la procédure agglomération par deux paramètres et deux seuls: l'échelle et le filtre
+
+215.2.7.16.01.26
+nettoyage de la procédure agglomération, utilisation de Array.blit
+
+215.2.7.20.12.28
+generation du relief
+
+215.2.8.07.06.57
+generation du talus continental
+
+215.2.8.08.12.36
+forme du monde paramétrable (cylindre ou tore)
+
+215.2.8.10.05.55
+la vitesse de l'affichage semble indiquer qu'accéder à un élément d'un array est 10 fois plus rapide qu'à un élément d'une liste
+
+215.2.8.11.25.11
+module Regio_map
+
+215.2.9.09.29.06
+3 fichiers
+un module Globals pour les valeurs globales, accessibles à tous les autres modules.
+un module Regio_map qui permet de créer puis lire une map de regiones
+un module principal: hum, qui utilise Regio_map
+
+215.2.9.10.26.30
+filtre nations
+
+215.2.23.18.15.36
+optimization constantes:
+36 000 (240*150) regiones
+48 (8*6) megapositions
+20 nationes = 42% de terres émergées
+
+215.2.25.17.33.20
+Natio_list.ml
+
+215.2.26.19.14.17
+noms des villes
+
+215.2.26.20.47.41
+petite correction au relief:
+toute chaine élevée vaut frontière,
+mais une frontière ne se trouve plus systématiquement sur une chaine élevée
+
+215.2.27.08.35.16
+initialisation du PRNG par le nombre de secondes écoulées depuis 1970
+NB: il semble que la 1ere carte générée soit générée avant l'initialisation du PRNG (c'est toujours la même)
+
+215.2.27.09.05.27
+initialisation du PRNG dans Globals.ml, ie avant la def° des fonctions utilisant le module Random
+de façon à ce que la 1ere carte, également, soit aléatoire
+
+215.2.27.11.24.26
+les nationes disposent de la liste de leurs regiones
+la preuve en image: affichage des regiones par nationes
+
+215.2.27.12.47.20
+les nationes savent où se trouve leur capitale
+affichage des noms des capitales sur la carte
+
+215.2.28.07.44.26
+plan mutable de partitio
+
+215.2.28.08.20.49
+reconnaissance de la natio pointee du doigt
+
+215.2.28.10.25.34
+affichage du nom de la natio pointee
+
+215.2.28.10.59.00
+fonctions d'affichage intuitive (par le coin haut gauche)
+
+215.2.28.13.08.44
+affichage iconise de la partitio de la capacité sociale
+
+215.2.28.15.23.32
+affichage par ligne des strings et icones
+
+215.2.28.16.29.05
+putain ça a de la gueule
+
+215.2.28.20.46.43
+generation des latitudes
+fonction et filtre temperature
+
+215.2.30.17.54.02
+fonction et filtre fertilitas
+
+215.3.1.08.44.27
+calibrage largeur latitudes, proba reliefs par latitude, fertilitas
+
+215.3.1.15.49.28
+connaissance par les regiones de leur proximae
+affichage des frontières internationales
+
+215.3.1.16.33.20
+frontiers et cotes moins aleatoires
+
+215.3.1.18.04.54
+placement définitif des capitales sur une regio de fertilitas > 1. (ie ni désert ni forêt)
+NB: COMPORTEMENT ETRANGE: LE PROG SEMBLE TOURNER EN ROND SI ON NE LIMITE PAS DANS LE TEMPS LA RECHERCHE D'UNE REGIO CORRECTE. POURTANT, JE N'AI JAMAIS VU DE REGIO NON CORRECTE CHOISIE (!)
+
+215.3.1.20.44.14
+recalibrage épaisseur des latitudes
+>> 1/3 nations intertrop, 1/3 nations médit, 1/3 nations temp
+
+215.3.3.18.29.01
+calcul et affichage de la superficie totale, la superficie arable, et la fertilité moyenne des nationes
+
+215.3.4.06.29.51
+mutable status comprenant la natio pointee et le filtre
+
+215.3.4.08.18.21
+appel direct des fonctions display_map et display_natio si nécessaire
+nettoyage de la fonction game
+
+215.3.4.10.41.52
+calcul initial des attributio et capitaux en fonction de fertilitas
+affichage des capitaux
+
+215.3.4.15.24.45
+calibrage relief
+
+215.3.4.16.03.08
+simplification:
+arabilis : nb de regio de fert>0
+ager : somme des ferts des regiones arables = limite au delà de laquelle #surpop
+fertilitas (moyenne nationale) = ager / arabilis
+
+215.3.4.18.00.17
+calcul initial des attributio ind, phil et otium
+
+215.3.4.18.34.19
+fonction end_of_turn
+
+215.3.5.08.11.29
+fonction proposed_partitio
+fonction next_natio, fonction du plan de partitio humain ou IA
+
+215.3.5.08.29.43
+fonctionnement primitif de next_natio
+
+215.3.5.09.34.08
+calcul de libertas
+
+215.3.5.10.07.31
+demographics
+
+215.3.5.11.06.12
+fonction draw_endline
+affichage des demographics
+
+215.3.5.11.30.58
+vita
+
+215.3.5.12.18.15
+opérateurs sur membres de natio (prod, quot, inv, powr)
+
+215.3.5.13.21.40
+d_fames
+
+215.3.5.13.27.53
+d_morbus
+
+215.3.5.14.18.03
+nati
+initialisation correcte des demographics
+
+215.3.5.14.49.34
+suppression de la natio "zéro"
+l'océan appartient à la natio (-1), inexistante dans l'array des nations
+les nationes sont désormais numérotées de 0 à 19
+
+215.3.5.21.07.51
+placement des villes totalement aléatoire (à une distance minimale entre villes près à respecter)
+latitudes climatiques plus aléatoires
+
+215.3.6.20.27.14
+meilleures valeurs initiales
+
+215.3.7.21.34.18
+artes.structures de base
+
+215.3.8.09.25.41
+productions réelles = produits partitio * efficience consécutive des artes
+augmentation effective de libertas suite à découverte écriture
+
+215.3.9.10.38.51
+suppression de time.tmp à la fin de l'execution
+
+215.3.11.08.46.22
+séparation des parties constante et variable d'une humanitas
+
+215.3.11.14.59.00
+mise à jour des fonctions save et load:
+sauvegarde des constantes de partie en cas de new_game
+sauvegarde automatique des variables de partie à chaque tour
+
+215.3.11.16.58.54
+Le membre natio (natio propriétaire) a été retiré à la regio.
+La regio_map n'a donc que des caractères constants, et peut donc etre sauvegardé une fois par partie seulement.
+A été créé une variable globale: natio_id_map, un array d'int, en remplacement.
+natio_id_map est refreshé à la fin de la génération.
+Reste à refresher natio_id_map à chaque loadage de partie - et à chaque end_of_turn quand les frontières évolueront, mais là, il s'agira plus d'un recalcul de natio_id_map que d'un refreshage.
+
+215.3.11.17.44.04
+Refreshage de natio_id_map à chaque loadage de partie fait.
+
+215.3.11.19.50.02
+Creation d'un type natio_id
+Natio_id_map est désormais un array de natio_id, membre de hum_turn, et non un array d'int, variable globale
+Disparition du membre regio_list des nationes
+Bilan: Réduction de 96ko à 43ko de la taille des hum_turn
+
+215.3.12.09.06.56
+Grande réforme du code:
+Désormais, on n'appelle plus jamais une natio par un int, mais toujours par un natio_id.
+Création d'un module Natio_id_map pour créer cette carte, la lire, et à terme la modifier (ie faire évoluer les frontières)
+
+215.3.12.10.33.49
+Nettoyage du code
+
+215.3.12.14.57.40
+Recalibrage taille carte: 160*112
+Population mondiale init: 80M
+
+215.3.14.10.35.24
+sauvegarde en 2 fichiers différents de hum_turn: natio_id_map & natio_list
+graphiques d'évolution des variables des nationes
+
+215.3.14.14.24.15
+trois graphiques, en couleur
+
+215.3.23.18.47.05
+réforme de l'affichage: creation d'un unique display_mode à la place de filtre et g_mode
+
+215.3.24.20.08.37
+décalage progressif du graphique
+
+215.3.25.08.39.33
+correction de la génération des latitudes climatiques pour que les latitudes se rejoignent correctement au deux bouts
+
+215.3.25.09.27.25
+fonctions xeot, ceot et meot
+
+215.3.25.11.00.51
+corrections de bug dans les xeot et éclaircissement:
+la plan modifiable est toujours celui du player, qui ne change jamais
+lors de l'affichage et des fins de tour, on utilise le plan modifiable dans le cas de la natio du player, le proposed plan else.
+
+215.3.25.11.32.48
+grisage du display_mode choisi
+
+215.3.25.15.28.43
+calcul correct de copia
+le graphique commence à ressembler à qqchose
+
+215.4.11.10.45.55
+petits changements de nati:
+on se base sur morbus et non defuncti, de façon à ne plus compenser la famine par des naissances (spirale peu productive)
+secundo, division par quatre de la base de calcul du surplus des naissances visé (croissance demog plus realiste)
+
+215.4.11.11.05.12
+meilleure initialisation des vars demog
+
+215.4.12.09.36.19
+désormais,
+la somme des fertilitas de la natio s'appelle physis
+copia désigne quant à elle  la somme des (max fertilitas instrumentum)
+affichage de la densité de population
+
+215.4.17.12.12.41
+recodage précis du mécanisme de naissance de l'empire :
+la natalité tend vers un peu au dessus (defuncti-d_fames)
+la population se stabilise donc un peu au dessus copia
+Le un peu au dessus crée un otium d'environ 1.5%
+Un empire naît si otium>=1% et instrumentum>=0.5 (métallurgie maîtrisée et appliquée pour 50% de son potentiel)
+La combinaison des deux conditions se produit environ 120 ans après la découverte de la métallurgie, quand plebs dépasse à nouveau copia.
+
+215.4.17.17.29.34
+Grandiose: Humanitas devient jouable (on peut jouer avec les billes, mais dans la limite de l'otium disponible)
+(et correction d'un bug: plus de partitio_plan_refresh intempestive !)
+
+215.4.20.07.08.35
+Hum n'est jouable que sur la natio du player et si sa constitutio est imperium.
+
+215.4.20.20.06.21
+circuit religio<->fides
+
+215.4.23.09.01.48
+libertas ne descend jamais en dessous de 0.1, de façon à ce que philosophia puisse réapparaître après une disparition complète.
+En l'occurence, si religio est ramené à zéro d'un coup alors que philosophia est à zéro, philosophia réapparaît au bout de 20 ans, puis bouffe tout l'otium en 20 ans de plus.
+
+215.4.23.09.53.31
+luxus
+n'existe que si imperium
+n'augmente que si alienatio > 10%
+augmente d'autant plus vite qu'éloigné d'alienatio
+bouffe progressivement toute l'alienatio
+
+215.4.23.10.46.00
+imperium cesse d'exister s'il n'y a plus de marge de manoeuvre disponible (par ex, si luxus a tout bouffé)
+luxus cesse d'exister si imperium disparaît
+Dans ce cas de mort d'empire millénaire (basé sur la religion), on observe philosophia reprendre sa place dans les 10 ans précédant et les 10 ans suivant l'année de la chute de l'empire.
+
+215.4.23.11.16.54
+hum sait créer son rep sav, et le détruit en sortant.
+
+215.4.23.12.50.25
+pas de religio, exercitus ou oppressio sans empire
+
+215.4.23.14.28.57
+l'oppressio génèrent désormais des seditiones
+l'empire chute si ces derniers deviennent majoritaires
+
+215.7.16.22.01.23
+affichage en 1014*688
+
+215.11.9.10.10.57
+affichage pour le 1440*900
+
+215.11.9.10.52.17
+reglages graphiques divers
+
+215.11.9.12.41.28
+e.oppressio s'ajoute à alienatio pour réduire philosophia
+en revanche, e.oppressio ne modifie plus (directement) libertas
+seditiones obtient un mode de calcul plus large prenant en compte alienatio
+imperium nait dès que MET existe, plus besoin d'instrumentum développé
+On notera que les 3 tous d'otium naturel précédant l'application suffisante de MET suffisent à l'empire pour démarrer, par oppressio ou par religio (ça marche aussi avec religio)
+Note : l'impact démographique d'oppressio est purement indicatif. A revoir.
+
+215.11.10.11.44.03
+alienatio ne dépend plus de libertas. alienatio=fides. 
+Résultat :
+1°) Plus d'effet boule de neige. 
+2°) Obligation de maintenir religio à un niveau réaliste par la suite
+3°) Plus besoin de maintenir une philosophia artificielle minimum de 1000 pour faire repartir libertas après une fin d'empire
+
+215.12.8.10.01.02
+introduction du module Junctiones
+
+215.12.8.11.47.46
+creation du membre junctiones de hum_turn, creation, next, sauvegarde
+
+215.12.8.15.37.22
+redef des Juctiones comme enregistrement de 2 matrices
+generation de la matrice contact
+affichage de la matrice
+
+215.12.11.11.44.13
+affichage des relationes dans le cadre info
+
+216.4.6.09.13.00
+affichage en 1280*800
+replacement de SEDITIO par RESPUBLICA
+création type EVENTUS
+
+216.4.6.15.06.41
+replacement de hum_const par hum_game (!hum_turn)
+adjonction de vetera:eventus list à hum_game
+
+216.4.7.08.25.50
+next_natio_list dégage une eventus_list
+
+216.4.10.13.04.01
+next_natio_list intège les eventus_list fournies par next_natio (version abandonnée : calcul du tour suivant 1.5 fois plus lent, next_natio est calculé 2 fois à chaque tour)
+
+216.4.10.13.32.52
+distinction de n_n_list (nouvelle natio_list) dans la fonction next_natio_list (pas de ralentissement)
+
+216.4.11.07.43.05
+creation de vetera.ml "entre" natio_list.ml et hum.ml
+
+216.4.11.10.16.16
+creation de Vetera.make, Vetera.create, Vetera.add
+
+216.4.11.11.02.02
+normalisation de vocabulaire
+1°)
+make   = création d'une entité vide de type t à partir de rien
+create = création d'une entité signifiante de type t à partir d'autres données (à l'exception de Regio_map.create qui créé une Regio_map ex nihilo)
+2°)
+On n'écrit plus Regio_map.regio_map_create, mais Regio_map.create et idem pour les autres fonctions make et create des différents modules.
+
+216.4.11.15.49.29
+On n'écrit plus Natio_list.next_natio_list natio_list, mais Natio_list.update natio_list.
+et ainsi de suite pour les autres modules.
+
+216.4.16.10.44.24
+Substitution d'un :: à un @ pour la creation des courbes (natio_turn_list)
+
+216.4.16.10.54.41
+Substitution d'un :: à un @ pour la creation annuelle nationale de la liste des regiones (regiones_of_natio)
+
+216.4.16.11.29.41
+Substitution d'un :: à un @ dans la boucle de recherche des regiones voisines terrestres (proximae_terrae_natio_list_fun)
+
+216.4.26.11.33.43
+Vetera.create note les naissances d'empire
+
+216.4.29.10.28.46
+Vetera.save écrit un replay.txt
+
+216.4.29.20.19.23
+Vetera.create note les différents types de fin d'empire
+
+216.4.29.21.26.14
+Artes est désormais une liste d'ars et non un array d'int
+
+216.4.30.06.59.16
+Next_natio_of donne la natio suivante en faisant gaffe au nb de natio
+
+216.4.30.09.19.52
+Vetera.create note les découvertes scientiques
+
+216.4.30.13.58.42
+Initialisation et affichage des rogationes des nations voisines
+
+216.4.30.17.24.12
+On peut planifier une déclaration de guerre
+
+216.4.30.18.11.23
+rogationes_plan_refresh (on ne fait pas de déclaration de guerre 2 années de suite, on ne repropose pas la paix à ceux qui l'ont acceptée)
+
+216.5.1.21.01.03
+Creation du module Strategica
+
+216.5.3.14.57.33
+Junctiones.proximae donne la liste des nations voisines
+On affiche la liste des nations voisines sans "blanc" pour les nations inconnues
+
+216.5.3.17.40.38
+Strategica produit la liste des listes (nationales) de rogationes à réaliser
+
+216.5.4.09.37.09
+Réécriture complète de Junctiones et parties liées des autres modules
+Pas d'affichage
+
+216.5.4.11.31.34
+correction d'un bug de Junctiones.proximae
+
+216.5.4.22.34.45
+Re-affichage
+correction de rogationes_plan_correctio : en cas de N_RELATIO, 3 options : on peut ne rien faire, ou déclarer la guerre ou proposer la paix.
+
+216.5.6.15.28.55
+correction d'un bug du display:
+l'initiative diplomatique et l'affichage relatif sont soumis au contact
+
+216.5.6.16.37.51
+MAJ des relationes en fonction des rogationes du tour précédent 
+
+216.5.7.11.09.17
+strategica génère des tactics
+junctiones les stockent
+hum affichent les tactics des nations avec lesquelles on est en guerre
+
+216.5.8.18.46.27
+correction d'un bug du display: un clic dans le vide du rectangle droit ne fait plus planter
+
+216.5.9.21.11.42
+Etablissement de l'ordre des calculs de humanitas_update
+Enregistrement des déclarations de guerre par Vetera
+
+216.5.9.22.37.38
+Les républiques font la paix entre elles
+Vetera note les conclusion de paix
+
+216.5.10.10.25.48
+petit nettoyage de natio_list
+
+216.5.10.11.56.06
+tous les constantes nationales sont exprimées en 10 000eme, y compris superficies et arabilis
+calcul de vis : puissance militaire nationale (par unité de surface)
+affichage de vis
+
+216.5.10.14.53.00
+suppression de la philo minimum devenue inutile depuis qu'alienatio ne dépend plus de libertas
+renommage de fst_otium en alienatio, et snd_otium en utilis
+affichage des artes juste après les junctiones, puis les constantes nationales etc.
+
+216.5.10.20.44.45
+Changement de l'ordre des modules : Natio_list, puis Junctiones
+(Natio_list ne sert pas du module Junctiones, l'inverse sera bientot faux)
+
+216.5.10.22.38.20
+nw_map_nth permet d'accéder à un élément d'une map de largeur natio_nb
+nw_map_init permet d'initialiser une telle map
+réécriture de Junctiones avec ces deux fonctions
+
+216.5.15.18.05.27
+initialisation de la Sdl
+affichage image, font, mp3
+réaction au clavier et souris
+
+216.5.17.09.47.06
+creation de surface colorée
+
+216.5.17.19.20.09
+linkage de la fonction couleur et des couleurs de type "int32" de la Sdl
+compilation via make
+
+216.5.20.10.43.20
+creation d'un module Graphice
+creation d'une fonction fill_rect
+
+216.5.20.16.37.12
+creation des principales primitives graphiques (utilisant la Sdl)
+
+216.5.21.07.27.24
+rangement
+on n'a plus besoin de Globals.ml
+
+216.5.21.10.15.03
+creation de init.ml
+screen, screen_w, screen_h, et screen_bpp sont des variables globales. Ce qui simplifie considérablement l'écriture des modules d'affichage.
+
+216.5.21.15.11.48
+un status est fait d'un game, d'une orbe et d'une humanité. game.running devient false quand on appuie sur "x".
+
+216.5.21.15.52.02
+display affiche les fenetres de la liste des fenetres actives
+
+216.5.21.17.54.58
+distinction des clics selon leur emplacement
+
+216.5.21.21.02.50
+introduction des tasks
+scission de status.ml de main.ml
+
+216.5.22.19.02.43
+linkage primitif de Regio_map
+destruction du sous module Regio_map
+intégration des déclarations initiales nécessaires à Regio_map dans Regio_map
+création d'un Regio_map.mli
+
+216.5.22.21.27.41
+limitation stricte de l'usage d'open, ie limitation aux modules contenant des enregistrements dont la forme du contenu doit être publique au module appelant
+
+216.5.23.18.02.01
+creations de deux modules spécialisés dans le stockage des types publics : Humanitas.t et Game.t. Ce sont les seuls modules ouverts par d'autres modules
+
+216.5.24.11.21.47
+affichage d'une window et d'un button
+
+216.5.24.12.01.03
+définition de constantes et fonctions d'affichage standarts des fenetres et buttons
+
+216.5.24.14.39.29
+on peut cliquer sur le bouton quit
+
+216.5.25.21.07.18
+on génère une carte au démarrage. Reste à l'afficher.
+
+216.5.26.17.20.52
+création de l'enregistrement majeur "game"
+
+216.5.27.09.52.13
+affichage des terres
+
+216.5.28.09.32.11
+possibilité de modifier le filtre d'affichage de la carte
+affichage paramétré des boutons
+affichage automatiquement centré des fonts dans les boutons
+
+216.5.28.11.40.58
+boutons en 2L*L
+affichage des nations, de l'altitude et de la température
+"sauvegarde" du filtre en cas de new_game
+
+216.6.1.07.17.12
+affichage d'une fenetre supplementaire par clic sur un bouton
+
+216.6.1.10.59.42
+on peut fermer les fenetres par un clic droit
+
+216.6.4.14.34.03
+on peut switcher le player en cliquant sur une natio sur la carte
+
+216.6.4.18.39.02
+intégration de natio_list
+affichage des capitales
+
+216.6.6.17.09.54
+retour en 1440*900
+
+216.6.6.18.39.56
+Humanitas Handbook
+
+216.6.6.21.42.37
+on ne peut créer deux fenetres identiques
+et on ne peut meme pas avoir deux fenetres à la meme position (coin haut gauche)
+
+216.6.7.19.21.25
+fermeture des fenetres avec escape
+affichage de bandes de couleur soulignant les lignes écrites
+
+216.6.8.19.57.58
+pas de contrainte de proximité pour la creation des nations-continents =>carte plus aléatoire (probabilité accrue de grands continents de pls nations, moins de lacs géants)
+
+216.6.12.09.40.45
+placement de la capitale au hasard sur le territoire national, mais pas sur la frontière et sur la partie la plus fertile. Résultat : 60% de capitales en zone méditerranéenne, 30% en montagnes intertropicales, 10% en zone tempérée.
+affichage des frontières
+
+216.6.12.11.43.25
+rétablissement d'une légère contrainte de (non)proximité pour la création des nations continents (pour éviter les amas de nations minuscules et biscornues)
+
+216.6.18.14.51.48
+modules Player_strategica + W_partitio
+
+216.6.18.16.16.52
+arrêtes autour des fenetres et boutons
+
+216.6.19.15.17.52
+affichage du plan de partitio
+modification du plan selon le player sélectionné
+
+216.6.20.21.05.49
+réécriture de game.ml en utilisant "{ game with ... }" 
+
+216.6.21.18.07.48
+réintégration de Junctiones.ml et Strategica.ml
+creation de mli pour ces deux modules
+envoi à ces modules de natio_nb et next_natio_of à chaque fois que nécessaire, deux valeurs stockées dans game.humanitas
+
+216.6.22.09.36.05
+integration de la fonction next_humanitas
+creation de la fonction et du bouton eot
+affichage du player et du turn dans la left toolbar
+
+216.6.25.08.54.38
+affichage du plan de partitio
+possibilité de modifier le plan
+
+216.6.28.08.33.55
+ajout et mise à jour régulière de status.player_auctoritas
+
+216.6.29.06.03.20
+default_partitio renvoie désormais des valeurs en centièmes (non en dix-millièmes) pour opp, mil et rel. Il n'y a plus de possibilité pour le joueur de faire un plan au dix-millième grâce à ce que renvoie default partitio. L'excédent, toujours inférieur à 3% est stocké dans otium. Au joueur de l'utiliser s'il le souhaite.
+correction d'un bug sur le bouton M5
+
+216.6.29.10.54.22
+w_display affiche un array de couleur en fonds de fenêtre.
+L'array peut n'avoir qu'une case
+utilisation de cette fonctionnalité pour w_help
+
+216.6.29.11.08.11
+suppression de la possibilité de window_gap
+
+216.7.4.07.34.54
+creation de W_junctiones
+buttons non fonctionnels
+
+216.7.5.19.58.56
+buttons diplomatiques fonctionnels
+
+216.7.16.09.24.14
+les déserts n'appartiennent plus aux nations
+
+216.7.24.08.44.44
+début de réécriture de Regio_map
+
+216.7.24.15.45.32
+generation de continents sur une carte de 32*20 à 64*40, puis 1 à 3 projections ( *2*2 ) au choix
+
+216.7.27.09.47.31
+distinction de Continentes.ml
+
+216.7.27.16.13.42
+reintroduction des latitudes
+
+216.7.30.10.49.39
+generation de boucliers en même temps que les continents
+generation de chaines ensuite
+
+216.8.4.09.46.14
+generations d'une carte des terres parcourues par l'homme en 3000BC
+(apparition de l'homme en une regio d'altitude et de latitude intertropicale, conquêtes des terres voisines, possibilité de franchissement de certains océans peu profonds ou suffisamment proches)
+(carte temporaire servant à la generation de la natio_id_map primitive)
+
+216.8.7.15.04.50
+generation de centres de civilisation
+
+216.8.8.09.19.55
+def° et affichage correct des altitudes suivantes :
+1 =  500m
+2 = 1500
+3 = 2500
+4 = 4000
+et correction de fertilitas en conséquence
++ exclusion des jungles et taigas de l'habitabilité primitive
+
+216.8.8.10.18.55
+option affichage de la fertilité
+
+216.8.11.16.42.51
+generation de nations dans les zones de fertilité entourant les centres de civs
+toute la generation a été testée avec succès pour des cartes de 64*40 à 256*160. Optimisation pour le 128*80.
+l'emplacement des capitales est fixé aux centres de civ. Nim.create renvoie un natio_id array à cette fin à Nl.create.
+
+216.8.21.10.39.45
+fenetre regio_info
+
+216.9.19.09.00.55
+adjonction du membre tactic_tw_ti (terra incognita) à strategie
+type constitution = REGNUM | RESPUBLICA
+
+216.9.19.09.25.08
+fonctions de creation des surface initiales des nations déplacées dans Civilizations.ml
+
+216.9.19.12.09.46
+module Imperium_map
+fonction Imperium_map.make
+filtre d'intensité imperium
+
+216.9.19.15.46.39
+amelioration de la lisibilité de la fenetre natio_info
+mise à jour de W_help et New_task
+
+216.9.20.08.18.31
+modification des boutons de filtres :
+les possibilités du bouton intensité dépendent (possibilité utiles) du bouton nuance
+
+216.9.22.09.48.41
+extension annuelle des imperii
+fonctions d'accès plus pratiques et lisibles aux données d'une regio
+
+216.10.25.10.16.15
+substitution de imperium et chora à superficies et arabilis
+imperium = territoire controlé militairement
+chora = territoire économiquement exploité par la natio
+Toute la chora étant désormais arable, la distinction superficies et arabilis n'a plus d'interet.
+
+216.10.26.17.58.34
+Ablations à Natio_list.ml de :
+- Pseudo_float.ml (arithémtique des vars humaines)
+- Ars.ml
+- Partitio.ml
+
+216.10.28.09.24.39
+Affichage correct des couleurs des nations et frontières
+Fonction Imperium_map.competitor
+
+216.10.28.12.53.32
+IA_strategica créé les stratégies de chaque joueur non humain
+strategica collecte toutes les stratégies et reclasse leur contenu par type : partitio, rogatio etc. pour application
+
+216.11.01.14.02.27
+type strategics = ce que renvoie strategica
+
+216.11.05.12.35.25
+Module N(atio_id)
+
+216.11.05.12.54.14
+Chora_map remplace Natio_id_map
+
+216.11.05.17.25.28
+création de Humanitas.natio_id_list
++ remplacement des récursives par des List.map et List.filter sur nil
+
+216.11.05.20.19.08
+offensive_map
+
+216.11.07.21.35.59
+Les strategics sont
+- envoyées à Junctiones en bloc
+- ne sont plus partiellemnt intégrées à Junctiones.t
+- constituent un nouveau membre d'humanitas
+- sont lues par fonctions du module Strategics (ex-Strategica)
+
+216.11.08.07.11.00
+Caml.map_init
+Caml.map_nth
+N.map_nth
+Junctiones.offensive
+
+216.11.08.09.28.59
+Ablation du Module Contactus_map du module Junctiones
+Et Déplacement du Module Junctiones avant Imperium_map
+De sorte que Imperium_map puisse utiliser les fonctions de Junctiones
+De plus, il n'y a plus deux fonctions Junctiones.update, ce qui est plus clair
+
+216.11.09.07.40.51
+Affichage par W_junctiones de la ligne terra incognita
+Possibilité d'engager une stratégie offensive vis à vis de quiconque
+
+216.11.16.05.01.32
+Reactualisation des contacts en fonction d'Imperium_map et non Chora_map
+
+216.11.16.10.23.05
+Pas de division par zéro quand l'imperium devient nul (vis)
+Les chora occupées crééent également un contactus
+
+216.11.16.13.23.36
+Affichage des artes
+
+216.11.19.10.26.23
+Affichage de la partitio du tour précédent en arrière-plan de celle que le joueur établit
+
+216.11.22.10.18.39
+Distinction kapital/economics
+Module Natio.ml
+Fonction Natio.usus (exp des spécialistes)
+
+216.11.23.11.39.11
+Découpage et reclassement de tt le calcul national dans Natio.ml 
+Fonction Natio.update appelée par Natio_list
+Fonction Natio.next_kapital appelée par W_partitio pour projections
+
+216.11.24.20.52.00
+Affichage des usus et kapitaux présents et futurs (en fonction de la partitio choisie)
+Débugage de Natio.usus
+
+216.11.25.17.38.23
+Ecriture en couleur (n,i,l)
+
+216.11.26.20.25.50
+us° de List.map dans Map.ml
+vocabulaire : SAPIENTIA se substitue à SOPHIA
+et SOPHIA à LIBERTAS
+
+216.11.26.22.16.36
+Caml.n_list_map
+Us° d'ycelle en Left et Right_toolbar
+
+216.11.28.08.44.19
+Module Regio.ml
+
+216.11.28.10.25.12
+Regio.climax
+
+216.11.29.10.01.16
+type regio_v = { tegmen, incola, dominus }
+Imperium_map = regio_v array
+Chora_map disparaît
+La génération initiale permet aux nations de franchir 2 cases terrestres pour trouver des terres fertiles
+
+216.11.29.16.31.12
+Regio.is_passable
+
+216.11.30.14.08.08
+Transformation des regiones conquises sur la nature en SALTUS et AGER
+Mise à jour de la chora dans ce cas
+
+216.11.30.20.51.42
+Natio_list n'est plus un natio array, mais une natio list
+Us° de List.map et List.map2 dans ce module
+
+216.12.01.20.26.05
+Natio.prolatio : propension à l'expansion
+Transf° en AGER en fonction
+Suppression du tegmen SALTUS
+
+216.12.03.08.47.10
+Task XEOT et CEOT
+Substitution de List.map à un List.nth et d'un N.int_of dans Strategics
+
+216.12.03.10.09.24
+Les républiques étendent leur imperium quand prolatio>50% et imperium<3*chora
+
+216.12.10.12.37.05
+Structures pour avoir plusieurs joueurs humains
+status.human_id_list : la liste des nations humaines (par leur id)
+status.human_strategica_list : la liste des stratégies, mises à jour à chaque fois qu'un joueur modifie sa stratégie
+status.player ne désigne désormais plus que le joueur agissant dans l'interface sur une des nations humaines
+
+216.12.12.20.37.07
+Substitution de status.strategica_list à status.human_strategica_list
+Cette strategica_list, mise à jour après chaque humanitas_update, compile les stratégies à appliquer et les propositions de stratégies humaines. Elle est corrigée par l'action du joueur. Puis reclassé en strategics pour application, par humanitas_update.
+L'interface va pouvoir permettre la consultation des stratégies IA, qui sont donc désormais générées avant la décision des joueurs humains et stockées avec ces dernières dans une strategica_list unique.
+
+216.12.14.12.14.12
+Ablation du module Windows (réécrit) au module Game
+On peut ajouter ou retirer des listes de fenêtres
+Game.windows_alter se charge d'appeler la bonne fonction du module Windows pour mettre à jour Game.windows
+
+216.12.14.21.58.48
+Ablation du module Status au module Game
+Game.status_alter
+Game.windows_update met à jour la fenetre w_junctiones en appelant Windows.update (W_JUNCTIONES)
+
+216.12.15.21.31.12
+Poursuite de la réécriture de Game
+Game.humanitas_alter
+Game.eot (game, times) effectue times tour, puis fait un windows_update
+On peut désormais observer l'évolution des rogationes et relationes des nations gérées par l'IA tour par tour.
+
+216.12.15.22.30.35
+Ablation du module Humanitas au module Game
+Task keep(status)
+
+216.12.16.21.21.23
+task IA_tgl
+
+216.12.17.20.33.18
+ménage
+
+216.12.17.21.17.21
+Contactus_map devient un array array
+Us° de List.iter sur les regio.proximae
+
+216.12.20.11.48.28
+W.create
+Status.active_window
+
+216.12.20.20.43.07
+Video.font_height
+Video.font
+Video.strn_width utilisant la Sdl
+
+216.12.27.10.37.12
+Réécriture de Color.ml
+Color.t
+
+216.12.28.08.38.11
+Variation de la couleur des strn si fenêtre active
+
+216.12.28.11.39.49
+Variation de la couleur des éléments W_partitio si fenetre active
+feature achevée
+
+216.12.28.15.33.57
+Mise à jour de S.active_window en fonction des ouvertures/fermeture de fenêtre
+
+216.12.28.15.50.20
+Cliquer sur un button active la fenetre ouverte, ou a defaut, la fenetre cliquee
+
+216.12.30.21.39.02
+Clic droit inactive la fenetre active
+Tabulation bascule vers une autre fenetre, active la premiere si aucune
+
+216.13.04.14.38.29
+W_vetera
+
+217.01.03.09.22.07
+déplacement dans W_vetera avec les arrows et pageup/down
+
+217.01.03.12.05.58
+affichage du curseur
+
+217.01.03.12.54.26
+key_repeat enabled pour les arrows, pageup/down, et enter(eot)
+
+217.01.04.20.22.06
+mise à jour des keys
+
+217.01.04.22.31.05
+W_confirm
+
+217.01.05.20.05.26
+redefinition des keys
+
+217.01.07.10.23.47
+Réécriture W_junctiones à la sauce W_vetera, fonctions communes dans W.ml
+Possibilité de déplacer le curseur dans W_junctiones
+
+217.01.09.21.20.42
+Conservation (si possible) de la position du cursuer dans W_junctiones en cas d'eot ou player_select
+= différenciation W.alter et W.update
+
+217.01.10.10.58.36
+Correction d'un vieux bug dans Human_strategica empêchant les tactic et rogatio toggle
+Possibilité de faire une tactic ou rogatio toggle avec les touches T et R (envers la natio sélectionnée par le curseur)
+
+217.01.13.08.20.32
+Déplacement dans W_partitio et modification de la partitio grâce aux arrows
+
+217.01.14.09.13.22
+humanitas.vetera
+W_vetera
+
+217.01.14.11.46.19
+W_info
+
+217.01.16.10.57.49
+Enregistrement des conclusions de paix dans les Vetera
+
+217.01.17.11.25.11
+Vetera.politics
+Vetera.inventiones
+
+217.02.05.08.20.27
+Population initiale à 25-100% de copia (=simulation ancienneté adoption agriculture)
+Expansion des imperium si imperium < chora * (u + plebs / copia)
+
+217.02.07.20.34.35
+Découvertes et propagation des artes
+Filtre artes
+Publication du type natio_list.t (imbrication réciproque des modules natio et natio_list)
+
+217.02.08.15.11.33
+Imperium et Chora sont désormais exprimés en km2
+Plebs en individus
+Physis = Chora * Fertilitas
+Orbis.regio_superf mesure la superficie d'une regio en km2, il dépend du nombre de cases de la carte
+Neolithic_population_capacity = 4 hab/km2 (capacité de population d'un km2 à technologie nulle et fertilitas=1)
+Le rythme des découvertes n'est donc plus fonction du nombre de cases de la carte.
+
+217.02.12.09.16.45
+Instrumentum évolue très progressivement, en fonction des artes et de sophia
+
+217.02.20.09.42.13
+Calcul de vis
+
+217.02.26.10.53.56
+Populatio (plutôt que prolatio) désigne Natio.f qui à n associe plebs/copia
+Offensives dépend désormais de vis (la capacité effective à envahir, y compris pour la terra incognita)
+La conquête de la terra incognita est désormais régulée par Offensives, donc vis, donc militaria, donc populatio.
+
+217.02.26.11.39.27
+Valeurs initiales correctes pour militaria et vis
+Strategica initiale républicaine (IA)
+
+217.02.29.11.52.18
+l'imperium ne peut plus s'accroitre aux regiones polaires
+type mutatio = AUCTUS | STABILITAS | DEMINUTIO
+Junctiones.finium_mutatio se substitue à Junctiones.offensives
+
+217.03.02.20.07.17
+Les variations du limes sont soumises à des proba (fonction de vis)
+
+217.03.03.10.17.51
+Affichage des regiones maritimes
+Possibilité de conquérir les océans après la navigation
+
+217.03.03.11.05.35
+La diffusion d'une tech à une natio est désormais indépendant de plebs (contrairement à l'invention)
+Ainsi, les techs se diffusent aussi bien aux petites qu'aux grandes nations.
+Par contre, les inventions ont plus de chances de se produire dans les grandes nations.
+
+217.03.06.21.22.06
+proba correctes de conquérir et perdre la terra incognita en fonction des forces dispo
+
+217.03.07.20.27.06
+escape desactive (plutot que ferme) la window active
+la touche c ferme la window active
+le clic droit ferme la window cliquée (y compris si active, plutot que desactive)
+
+217.03.16.10.47.23
+recalibrage des valeurs des artes
+Natio.imperium exprimé en km2
+
+217.03.17.15.43.46
+pyramide des âges initiale
+
+217.03.17.21.12.01
+Alias.ml
+
+217.03.21.21.23.16
+Abréviation des noms de nbx modules
+
+217.03.27.10.14.27
+Affichage de la pyramide
+Module Sd
+L.int
+
+217.04.01.12.02.51
+Fonctionnement primaire de la pyramide (dans le temps)
+
+217.04.07.17.28.11
+Incidence de sophia sur la mortalité
+Famines
+Taux de fécondité général initialisé à 100%
+
+217.04.13.13.54.25
+Module Dx
+Health par génération affecté progressivement par sophia
+Gestion des naissances par les nations libres en f° de sophia et de copia
+Gestion ± prononcé en f° de l’excédent de sophia sur fides
+
+217.04.15.09.46.03
+Implications de la pyramide sur
+- la capacité de production générale
+- la consommation matérielle
+- le calcul de partitio
+Par soucis de simplification des grandeurs,
+- la capacité de prod d’un adulte est 200%
+- la fertilité des terres ordinaires est ramenée de 120% à 100%
+Il en résulte globalement une sophia initiale comparable aux équilibres précédents (25%)
+Il en résulte aussi un doublement de sophia max du fait de la réduction de la dépendance démog par le vieillissement
+, et un avantage plus prononcé aux nations méditéranéennes 
+Gestion des naissances plus réactive : sur e.sapientia
+
+
+217.06.29.8.35.42
+Seditio remplace seditiones
+MAJ Si.help
+
+217.08.07.10.22.6
+Module Std remplace Alias et L(ist)
+
+217.08.07.21.6.12
+Intégration de C dans Std
+Nouveau module Std.Map
+Module Map renommé Carte
+
+217.08.10.11.58.10
+Status.scale, centered_regio & selected_regio
+
+217.08.12.7.35.3
+Std.ios, frst, modulo etc.
+
+217.08.12.13.12.31
+Typage des différents codes de couleurs
+MAJ de Co.ml, V.ml etc.
+
+217.08.13.11.49.20
+Co.regio
+Rapport w/h de la carte
+
+217.08.13.15.11.15
+Affichage regiones carrées; bandes noires
+Carte.regio_w et y_delta
+
+217.08.14.7.41.50
+Carte.regio_id
+
+217.08.14.9.30.57
+altitudes de -4000 à +7500
+affichage regiones marines ssi € empire
+
+217.08.14.12.34.42
+regio.rid
+tegmen urbs
+Array.iter2
+
+217.08.14.18.7.1
+Carte.pos
+Carte.display_regio_selection
+
+217.08.14.20.23.32
+Déplacement sur la carte
+
+217.08.17.8.30.18
+Status.longitude
+
+217.08.17.21.58.45
+Zoom 3d iso
+
+217.08.22.23.23.12
+réécriture affinée
+
+217.08.24.21.42.24
+Relief continu en triangles
+
+217.08.25.21.18.54
+couleur unie pour les interregio de plan unique
+optimisation rep° graprique du relief
+bra pseudo_float
+
+217.08.27.11.51.8
+plages + meilleures couleurs
+
+217.09.01.15.37.40
+eaux côtières plutôt que plages
+erreur corrigée dans triangle_couple
+
+217.09.01.17.39.28
+optimisation et harmonisation des couleurs en filtre veg pour la carte et le zoom
+
+217.09.02.11.4.17
+affichage correcte des frontieres internationales
+non affichage des regiones oceanes
+
+217.09.02.14.36.22
+correction dynamique de la latitude de centered_regio 
+
+217.09.02.15.42.48
+definition dynamique de l’échelle minimum
+
+217.09.03.17.23.21
+déplacement et changement de zoom avec le keypad
+
+217.09.05.12.45.54
+déplacement et changement de zoom avec la souris
+
+217.09.07.12.34.23
+clic gauche pour la sélection
+modes selection_pure/regio/natio
+emplacement dynamique de la fenetre d’info sur la regio
+
+217.09.07.21.15.49
+parametrage influence altitude sur temp, veg et graphisme
+alt unit = 400 m
+
+217.09.08.11.11.28
+List.select
+affichage des urbes
+
+217.09.08.14.1.57
+font de taille variable
+affichage des noms des urbes
+déselection au déplacement
+
+217.09.15.9.45.44
+fleuves
+
+217.09.16.21.50.35
+largeur fleuve + effet sur la fertilité
+
+217.09.25.17.47.35
+latitudes toundra et glacier/banquise
+correction couleurs
+
+217.09.26.16.26.42
+filtre quadrillage / frontieres
+
+217.09.27.21.28.42
+couleur frontieres selon paix/guerre
+
+217.09.28.21.49.19
+curseur point+case
+
+217.10.02.11.17.36
+le déplacement sur la *carte change la cr
+
+217.10.02.12.24.6
+la carte se centre en logitude sur la cr. cl est supprimée.
+
+217.10.02.13.23.22
+Couleurs des poleis
+
+217.10.03.8.29.54
+MAJ Player_select
+
+217.10.03.21.0.43
+incidence du fleuve sur fertilité fonction du tegmen
+naissance civ sur terres les + fertiles
+l’ager initiale n’a pas traversé les jungles
+
+217.10.06.9.37.31
+Module Std.List nettoyé, réécrit et mis aux normes
+
+217.10.10.09.33.22
+MAJ Imperium_map
+
+217.10.16.14.42.44
+MAJ Partit. Luxus est désormais un taux d’alienatio
+
+217.10.17.10.19.18
+P.alter
+
+217.10.23.10.40.24
+MAJ calcul fides et seditio
+
+217.10.24.10.52.3
+Array.filter_n
+Im.imperium
+Im.chora_regiones
+MAJ Na.physis et copia
+
+217.10.25.10.48.44
+type factum_param
+P.alter_all
+
+217.10.25.11.11.47
+Proba augmentée de conquête des terres sauvages cultivables
+
+217.10.26.10.50.10
+Réécriture objectifs de natalité
+
+217.10.26.15.32.57
+Découpage Dx.v
+
+217.10.26.20.56.22
+Les opérations ligne, triangle et triangle plein issues de SDL_gfx sont maintenant obtenues à travers un module Sdl_gfx ajouté au code source. C'est plus simple que de distribuer/installer une version patchée de ocaml-sdl.
+
+217.10.28.20.54.36
+Expansion plus lente de l’agriculture
+natio.origo
+Si.date
+
+217.10.28.21.8.24
+button pYramid
+
+217.10.28.22.26.29
+Datation en calendrier local dans Wi
+
+217.10.29.21.30.51
+Naissance des civs entre 9000 et 4000 BC
+Extension géographique en fonction
+Début du jeu en 3500 BC
+
+217.10.30.8.23.3
+Ancienneté des civs fonction des potentialités agricoles premières de leur territoire à venir
+
+217.10.30.9.15.44
+In Génération de la situation init : 
+- proba de col doublée pour les fleuves
+- taille minimum de civ équiv à 500 ans d’extension
+
+217.10.30.11.24.2
+Aires cultivées originelles discontinues
+(cohérence situtation initiale et extension ultérieure de l’agriculture*)
+
+217.10.30.13.16.22
+Dx.pyramid_create prend un paramètre de plus : fdc
+Utilisation pour la pyramide initiale
+
+217.11.01.10.17.41
+Recalibrage des level des artes
+Invention plus rare
+Diffusion plus facile en proportion du dvlpmt d’instrumentum
+
+217.11.01.17.50.51
+calibrage effet sophia sur ddc
+aléatoire ±3% des naissances
+
+217.11.04.16.15.6
+Commencement d’une entreprise de relocalisation des types et suppression des truc_t.ml
+Orbis_t.orientation -> Std.point_cardinal
+
+217.11.04.18.34.31
+217.11.04.18.36.13
+(suite du rangement)
+Espace.forme
+Espace.create
+etc
+
+217.11.11.22.16.47
+Suppression de Orbis_t.ml
+regio définie comme R.t
+Module Rv pour regio_v
+Module Rid pour regio_id
+Module O(rbis) = espace (cylindrique pour le moment) contenant l’univers (forme, taille, proximae)
+game.universum inclut toutes les autres données d’une partie à un tour t (ex humanitas + regio_map)
+O.t, R.t, Rv.t et Rid.t sont privés.
+Note : la génération est sale. hésitation permanente entre int et Rid.t.
+Pas vu de bug à la première execution, mais rien de sûr, vu l’importance des modifs.
+
+217.11.14.10.31.10
+Rid.Array (functor)
+Rid.IntArray
+(arrays indexés par des Rid.t plutôt que par des int)
+(obj : nettoyer la génération)
+
+217.11.15.12.20.12
+Rid.Array
+Continentes ne travaille qu’avec des rid et renvoie un int Rid.Array.t
+O.create établit avec une w indicative la forme définitive du monde (ie apte à être le résultat de projections)
+Humanitas.ml appelle O.create, puis Rm.create o.
+
+217.11.15.14.50.46
+Appel de R.altitude (en m) et non R.alt là où c’est utile
+Continentes.mli
+
+217.11.15.16.52.13
+Continentes.agglomeration morcelée
+
+217.11.15.19.34.32
+Réécriture O.proximae
+Suppression de l’option TORE, ajout de l’option 8 voisins au lieu de 4
+
+217.11.17.22.3.1
+Agglo primitive spéciale (les diagonales sont comptées comme proximae, notamment)
+Les proximae restent au nb de 4 pour le reste du jeu
+
+217.11.18.9.10.24
+finition et commentage de Continentes.prim_agglo
+
+217.11.18.11.16.25
+nettoyage et commentage de Continentes.ml
+(note : la génération marche très bien pour des cartes de 128*72 à 512*288, et probablement aussi au delà.
+nombre et forme des continents(variables dans certaines limites), proportion des terres (env 30%), et proportion de relief, ne sont pas affectés par la taille de la carte. )
+
+217.11.23.17.43.22
+217.11.23.17.44.14
+Un module Espace pour traiter des points cardinaux et directions
+
+217.11.23.21.47.53
+List.InstanceNb
+List.Instances
+
+217.11.25.19.20.30
+Wr.description du tegmen plus conforme aux graphismes
+217.11.26.18.3.36
+Réécriture de Rm.ml avec des Rid.array...
+Rm.latitudes
+
+217.11.28.8.48.10
+... Rm.altitude ...
+
+217.11.29.12.31.52
+Rm.t et tous les arrays intermédiaires sont des Rid.Array.t
+
+217.11.29.20.27.13
+O.randomRid
+
+217.11.29.20.52.20
+qqs améliorations à Rm
+réutilisation de Continentes.lower_aside
+
+217.11.30.20.45.17
+N renommé Nid (par analogie à Rid)
+Quand souvent utilisé, Nid.t renommé nid
+
+217.12.02.7.42.5
+Na renommé N
+river ajouté à Wr
+
+217.12.02.11.11.31
+217.12.02.11.12.59
+K(apital).ml enlevé à N.ml
+
+217.12.16.8.46.56
+217.12.16.8.50.59
+Affichage correct des textures des tegmen
+-Granulosité croissante désert->ager->foret
+-Granulosité composée de :
+ -variation aléatoire des rgb
+ -augmentation de la proba des var° sombre
+-Dégradé de granulosité grace aux interregio mixtes
+
+217.12.16.14.58.8
+petits régleages des couleurs
+
+217.12.19.9.43.31
+seed en fonction des rid de l’interregio (et non de la centered_regio)
+nettoyage de Ci.interregio
+
+217.12.19.11.4.0
+Nl.get attend 2 arguments et non un couple
+
+217.12.19.15.46.27
+Com n’utilise plus le type natio
+Nl.update fournit à N.update la liste des proximae (nationes voisines) (pour la diff° des artes)
+
+217.12.20.8.53.57
+nl n’est plus paramètre de N.update (aboutissement du commit précédent)
+P.alter_all ne demande plus de natio en paramètre, les données sont attachées au factum_param (ex : PLEBS_P(plebs))
+
+217.12.23.8.6.2
+Le type natio ne sera plus utilisé avant le module natio.
+Par contre, P et K, notamment, utilisant leurs types respectifs constamment, il y aura un Nt.ml (Natio (sous)Types) commun à tous les «sous modules» de N.
+P ne requiert plus une natio, mais un Nt.data
+
+217.12.23.9.11.1
+K.v et K.next ne requiert plus de natio
+
+217.12.27.13.51.25
+N.t remplace Humanitas_t.natio
+
+217.12.27.19.40.46
+Dx.t
+
+217.12.27.19.47.16
+kapital et computatio déplacés dans Nt
+P, K, N et Wp nécessite Nt
+
+217.12.28.17.18.15
+Module Prox(ima_natio) = ce que l’on sait des nationes voisines
+Mis juste avant N
+
+217.12.28.20.27.57
+Types tactic, relatio, rogatio et mutatio déplacés dans J
+Strategica mis dans IA_strategica, et Strategics dans J, en attendant mieux
+
+217.12.30.13.21.50
+ars devient Ars.t
+eventus devient Vetera.eventus
+
+218.01.01.4.19.52
+attributio devient P.attributio
+
+218.01.02.8.11.27
+partitio devient Nt.partitio
+J.strategics devient Strategics.t
+
+218.01.05.7.45.25
+neolithic_population_capacity devient Dx.npc
+
+218.01.05.8.46.48
+J.icm (imperium_cost_minimum)
+
+218.01.05.9.29.13
+facultas et alimonium pyramid déplacé dans Dx
+Humanitas_t supprimé.
+(merci :argdo)
+
+218.01.05.11.40.20
+Réécriture Pf avec exceptions
+
+218.01.06.13.24.13
+Module I(mpensae) : la marge de manoeuvre du stratège en 10e
+Dans la fenetre Partitio, les boutons +1 / -1 ajoutent et retranchent des 10e.
+Note : L’exception Pf.quot est appelée en cas de +1, il va falloir y remédier. Mieux : revoir tous les Pf.quot.
+
+218.01.12.11.52.1
+Pf.quot exige désormais une valeur en cas de division par zéro
+Il doit être utilisé quand le cas peut arriver.
+Sinon, On doit utiliser Pf.quote, qui demande une string et fait un failwith string le cas échéant.
+Idem pour Std.quot et Std.quote pour les int.
+
+218.01.19.9.26.29
+P.margo
+P.impensae
+I.to_partitio
+
+218.01.19.9.52.56
+P.default (la partitio par défaut du joueur humain) utilise désormais le module I, et a du etre déplacé dans Human_strategica
+
+218.01.19.10.3.35
+IA_strategica devient S
+IA_strategica.strategica devient S.t
+
+218.01.20.10.39.23
+Définition précise des occupations militaires et états vassaux
+J.damnum
+
+218.01.20.12.46.19
+Com devient F(inium)M(ap) : la map des confins
+On y calculera, après les varations de Im, les contacts (c’est déjà le cas)
+et les territoires occupés.
+
+218.01.23.10.5.25
+calcul des surfaces des territoires occupées
+
+218.01.23.10.50.14
+Geographia : description des maps ( Rm et Im )
+- contacts entre empires
+- superficies des chora
+- superficies des chora occupées
+
+218.01.27.19.50.44
+F(ructus) : du produit national au revenu national (effets des guerres et tributs)
+(module intermédiaire entre P et K)
+... en cours de réalisation ...
+
+218.01.30.6.44.42
+F.create
+Matrix.inv_map
+List.n_filter
+P.list_sum
+
+218.01.30.10.41.21
+Humanitas calcule les produits et revenus (F) en fonction de geographia (G), puis les nation (Nl) en fonction de F.
+On peut désormais, de ce fait, réduire à néant un imperium étranger en occupant toute sa chora (l’occupation affecte désormais militaria de la natio occupée) (ce qui provoque une division par zéro, à voir)
+
+218.02.02.20.43.47
+G.imperiumArray
+
+218.02.03.10.8.6
+G.impChoraList
+G.impCeList
+
+218.02.03.11.19.52
+G.impTiList
+
+218.02.04.6.55.25
+Calcul correct de vis, en fonction de G
+
+218.02.04.7.59.13
+Wy : Échelle en largeur évolutive en fonction de la génération la plus nombreuse
+(en général les naissances)
+
+218.02.04.9.39.38
+./hum 128 pour une carte de 128 de largeur. (defaut = 256)
+
+218.02.04.12.14.25
+gradient désert/savane/jungle moins brutal
+changement code couleur des atributiones
+
+218.02.04.18.56.34
+suppression de Im.imperium (G peut remplir cette fonction)
+
+218.02.05.20.45.12
+218.02.06.19.58.9
+G.physisArray
+G.copiaArray
+
+(préférable à Im.chora_regiones, qui lit toute l’Im pour chaque natio (soit 20 fois))
+
+218.02.07.8.5.59
+Civilizations.origo = (lieu,date) requis par N.create au lieu de ccm
+=> plus besoin de chercher la capitale sur la ccm, plus besoin de chora_regiones
+nettoyage de G et N
+
+218.02.07.12.27.37
+correction d’une coquille
+Le transfert du tribut semble fonctionner après signature d’une paix.
+
+218.02.09.6.49.40
+Im.natio (type : ce qu’Im.make a besoin de savoir des natio)
+N.imNatio
+
+218.02.09.7.6.18
+remplacement des array multiples par un imNatioArray
+
+218.02.10.8.9.46
+Amelioration de Im.neo_incola : on peut désormais coloniser les terres d’une natio étrangère
+(division par zéro quand la natio est anéantie (parce qu’ils crèvent de faim faute de terre))
+
+J.relatio demande désormais 3 args et non un triplet
+
+218.02.11.8.21.36
+Im.natio.densitas : proba de dispersion fonction (aussi) de la densité de pop
+Im.natio.humanitas : proba d’assimilation en temps de paix fonction du rapport des degrés de civilisation
+
+Au test, ça a l’air de fonctionner. Les empires maitrisant la métallurgie peuvent facilement, au choix, disperser ou assimiler les nations primitives, en deux ou trois décennies.
+
+(toujours div par zero quand plebs nulle)
+218.02.15.12.44.13
+m
+
+218.02.16.7.12.59
+J, G, et militaria transmis à Dx.create
+
+218.02.17.7.56.36
+Des villes et colonies
+
+218.02.17.9.31.26
+Dx : utilisation de List.n_remove
+
+218.02.17.10.35.58
+J.warNb
+Dx.mdc (pertes militaires)
+
+218.02.17.12.25.50
+meilleure Dx.ndc 
+
+218.02.17.15.0.5
+218.02.17.15.58.40
+List.filter_n
+J.warNatioList
+G.lostChora
+Dx.odc (pertes civiles dans les territoires occupés en temps de guerre)
+
+218.02.17.19.24.12
+Std.soi
+Nid.oi
+Nid.ti
+
+218.02.18.9.3.33
+G.warRatio
+Dx.naissances (effet de la mobilisation sur les naissances)
+
+218.02.18.9.20.39
+G open Pseudo_float
+
+218.02.18.9.55.9
+N et sous-modules de N nettoyés des div by zero pour nation éliminée
+
+218.02.18.10.23.37
+O.areCoordLegal
+plus de plantage pour clic dans l’océan austral
+
+218.02.18.11.19.32
+Pertes en capital fixe dues à la guerre
+
+218.02.18.11.37.48
+MAJ humanopaedia
+
+218.02.18.14.2.32
+transformation en COLONIA des URBS assimilées
+
+218.02.19.18.55.3
+n.active
+(la natio n’est plus active quand sa chora est nulle ; on n’exécute alors plus N.update)
+
+218.02.19.19.12.57
+plus de plantage à l’affichage d’une pyramide nulle
+
+
+218.02.26.18.20.58
+218.02.26.20.12.18
+Earth.displayUrbsName utilise la cl plutôt que la nl
+
+218.02.26.20.40.53
+List.add et remove attendent une liste Puis un élément
+Wr en adéquation avec les nvx graphismes des villes
+L’écriture républicanise.
+
+
+218.02.28.18.21.30
+Les vici deviennent urbs
+
+218.02.29.18.38.33
+De la guerre et des politeia
+
+218.03.02.8.2.36
+Gros chamboulement en cours
+commit temporaire
+
+218.03.02.8.18.30
+Ajout des modules C et Cl (oubli depuis 5 ou 6 commit)
+Renommage Strategica_list en Sl
+ajout de qqs mli
+
+218.03.02.9.47.13
+Humanitas renommé H
+MAJ modules consécutive au renommage Strategica_list 
+Mutation de la definition du type 'a Nid.Map.t de 'a Nid.List.t Nid.List.t en ((nid*nid)*'a) list suivant les conseils de philippe
+Fonction Nid.Map.of_ll : 'a Nid.List.t Nid.List.t -> 'a Nid.Map.t
+(ce commit devrait être compilable)
+
+218.03.02.10.40.48
+Nid.List.snth (secured nth : récupère les Not_found)
+Nid.Map.snth
+=> plus de plantage à cause de l’absence de rogatio etc.
+
+
+Nid.List.map 
+Nid.List.iter
+attendent une fonction qui attend deux arguments : un nid et un 'a
+Cl.t est désormais une Nid.List.t
+
+218.03.02.15.30.37
+Comme Cl est une Nid.List.t,
+et comme Nid.List.map f transmet le nid aux f (idem pour iter etc.),
+Civitas.t n’a plus besoin de champ nid.
+
+218.03.07.20.37.35
+tentative de faire de J.relatioMap une Nid.Map.t où
+1. seules les paix et guerres sont enregistrées (l’absence dans la map équivalant N_RELATIO)
+2. une relatio, laquelle concerne deux nationes, n’est présente qu’en un (et non deux) exemplaires
+3. la map reste ordonnée ainsi, par ex : (1,2) (1,3) (1,8) (2,3) (2,8) (3,8)
+
+Vetera est à réécrire.
+
+218.03.08.8.10.53
+Human_strategica.tac_tgl fonctionne à nouveau
+
+218.03.08.8.55.19
+rog_tgl fonctionne
+
+218.03.08.9.28.23
+J.relatio utilise Nid.bnth, ie regarde la relatio entre n1 et n2 si on lui demande la relatio entre 
+n2 et n1 (parce que la première peut être présente alors que la seconde non)
+Au vu de Wj, la nle relatioMap semble fonctionner.
+
+218.03.08.12.11.36
+Vetera.newRelationes 
+(réutilise J.newRelationes détaché à cette occasion)
+
+218.03.08.15.56.15
+N_RELATIO combiné à une tactique offensive vaut désormais agression militaire
+(On peut attaquer sans déclaration de guerre)
+La conquête de la terra incognita relève de ce cas de figure, dans la mesure où
+1. on n’entretient pas de relatio avec la ti
+2. la relatio par défaut (en cas d’absence dans la map) est N_RELATIO
+
+Il en résulte que le membre ttwti (tactic towards ti) n’est plus nécessaire et
+est supprimé (de J et de S)
+La simple élaboration d’une tactic OFF envers la ti, dans S, devrait suffire
+à débuter la conquête de ti (à coder)
+J.finium mutatio doit de plus être lui aussi transformé en Nim.t
+(version compilable mais incomplète)
+
+218.03.09.6.29.51
+J.finiumMutatio devient une Nim.t
+
+218.03.09.7.49.2
+J.natio
+
+218.03.09.8.15.4
+Stratégie de base : (Nid.none,offensive) (conquête de la ti)
+218.03.10.17.42.24
+Nl devient une N.t Nid.List.t
+
+218.03.12.9.3.48
+suppression de prox.id
+creation des proxima par N
+
+218.03.12.9.13.27
+m : G.pil
+
+218.03.12.9.27.23
+Nl.proximaList n’attend que g et nl
+
+218.03.12.18.15.11
+Nl.nf     : (N.t->'a) -> t -> nid -> 'a
+
+218.03.15.8.10.52
+218.03.15.8.13.47
+Nl.instArray et imNatioArray deviennent des Nid.Array.t
+
+218.03.15.10.44.3
+Nid.Array.map_of_nil
+- permet de créer des arrays à partir de nil 
+la position des item dans l’array dépend des clés des item dans la nil (et non de la position dans la nil)
+intérêt : créer des arrays de données nationales (ie des structures avec accès rapide à la n-ième natio, utiles pour les modules Im et G, qui recherchent des infos nationales pour chaque regio, chaque tour) à partir de liste de natio où toutes les nationes ne sont peut-être pas présentes (et/ou pas classées, accessoirement).
+
+218.03.15.11.8.31
+Nl.ntDataList renvoie une nil
+
+218.03.15.12.22.38
+Rétablissement de Vetera.inventiones et politics
+
+218.03.15.14.34.30
+F.factum_list devient une nil
+
+218.03.15.15.16.29
+G.contactusMx devient une nix (Nid.Matrix.t)
+
+218.03.15.18.3.51
+G.finesMx devient une nix
+
+218.03.15.18.9.23
+G.choraArray idem
+
+218.03.16.8.5.43
+G.physisArray 
+
+218.03.16.8.11.8
+G.copiaArray
+
+218.03.16.8.21.10
+G.imperiumArray
+
+218.03.16.10.37.15
+G.impChoraList, impCeList et TiList deviennent des nil
+
+218.03.16.10.50.21
+G.mli
+
+218.03.16.11.37.38
+Nid.listLength : *longueur d’une nid list
+
+218.03.16.11.54.58
+G ne requiert plus nnb, mais uniquement nil (la nid list).
+Afin de permettre aux nationes de ne pas naître, de naître plus tard, de disparaître, ou d’être absente d’une liste pour toute autre raison, les nil, nim, nia et nix peuvent être troués.
+On ne doit donc plus utiliser nnb (conçu comme à la fois nb de nations et largeur des matrices).
+Le nb de nations n’a plus d’importance. La largeur est obtenu par des fonctions ad hoc (qui renvoient le nid maximum existant d’une liste, incrémenté de 1)
+
+218.03.17.20.1.5
+Us° de Nl.map2
+
+218.03.17.21.1.18
+Im devient un Ria.t (il était temps d’y penser)
+
+218.03.19.13.52.17
+éléments de F deviennent des nim et nil.
+
+218.03.22.8.31.33
+F réécrit et semble fonctionner
+tributumMap distingué pour affichage de l’origine des tributs
+Div par zéro le tour suivant une Natio killed
+
+218.03.22.9.39.7
+suppression de S.n_id
+
+218.03.22.9.46.8
+suppression de N.id
+(les clés des nil étant des identifiant de natio, la natio ne requiert plus du champ id)
+
+218.03.22.10.54.27
+début de réécriture de Civilizations...
+
+218.03.22.11.30.0
+...
+
+218.03.22.12.18.30
+...
+
+218.03.22.14.6.43
+...
+
+218.03.22.15.1.41
+...
+
+218.03.22.18.30.55
+...
+
+218.03.23.9.1.36
+Civilizations génère une liste de nid, plutôt qu’un nb de nations. Reste à l’utiliser.
+
+218.03.23.9.32.35
+Nid.nb = le nb de nid différents (le nb de natio qui peuvent apparaître dans une partie)
+Nia.length = Nid.nb
+Nia et Nix.make et init ne requiert plus d’arg w
+
+218.03.23.10.39.50
+utilisation de u.nnb supprimés
+ça compile mais ça déconne
+
+218.03.23.12.2.40
+218.03.23.12.3.9
+ça a l’air de marcher
+(il fallait juste écrire g.make() et non g.make pour qu’un nvel enregistrement soit créé)
+
+218.03.23.15.7.17
+affichage des hameaux
+
+218.03.23.15.50.11
+possibilité de switcher entre les natio en mode Earth : clic sur regio d’une natio puis caps_lock
+
+218.03.23.18.52.51
+nettoyage de Std en cours
+Std.element supprimé au profit de ?.option
+
+218.03.24.20.30.11
+modification angle en mode Earth 45 -> 70°
+ombrage du relief maintenu tel quel (donc forcé par rapport à l’angle)
+=> ça fait plus carte d’état major, vue de dessus (presque à 90°), que photo aérienne, ce qui n’est pas plus mal.
+l’écran est mieux utilisé (meilleure équivalence nb de cases sur largeur et hauteur écran)
+l’absence d’élément graphique émergeant du sol (maison, arbre), cohérente avec les échelles utilisées, devient également cohérence avec l’angle de vue.
+
+218.03.24.21.51.28
+bug supprimé
+
+218.03.26.17.18.38
+révision de Std.ml en cours
+
+218.03.26.20.7.36
+Std.List maj
+
+218.03.26.21.1.22
+... Array.nIter2
+
+218.03.27.20.13.56
+Std maj
+
+218.03.29.9.3.31
+Commencement de révision de l’interface
+game.mli créé
+type map=CARTE|EARTH
+
+218.03.30.12.40.35
+nouvelle organisation des données :
+
+type game =
+  {
+  status : status; (* ce qui peut changer à chaque clic *)
+  windows : window list; (* idem *)
+  orbis : orbis;
+  }
+
+type orbis = (* monde : ne change qu'en cas de end_of_turn ou new_game ou load_game *)
+  {
+  espace : E.t;
+  regio_map : Rm.t;
+  (* données constantes du monde : ne change qu’en cas de new_game ou load_game *)
+  turn : int;
+  natio_id_list : Nid.t list;
+  imperium_map : Im.t;
+  geographia : G.t;
+  junctiones : J.t;
+  civitasList : Cl.t;
+  natio_list : Nl.t;
+  strategics : Strategics.t;
+  vetera : Vetera.t;
+  (* données variable du monde : change à chaque end_of_turn *)
+  }
+
+
+218.04.01.20.41.27
+Révision de la création des latitudes en cours
+
+218.04.02.7.7.46
+List.eCompare
+
+
+(waou ça remarche)
+Rm.latitudes_create révisé et augmenté (latitudes clim en partie non parrallèles, et avec intensité de courbure variable)
+
+218.04.12.7.1.55
+Nid.List devient Nid.Nil
+Nid.Map devient Nid.Nim
+(le nom Nid.List devrait être réservé aux listes de nid, et non aux listes indexées par des nid)
+
+218.04.12.7.15.8
+Nid.Array -> Nid.Nia
+Nid.Matrix -> Nid.Nix
+
+calcul optimal du nombre (en largeur et en hauteur) et de la taille (arrondi en dessous et au dessus) de la taille des éléments (unités graphiques) de l’écran, ce, en fonction de la résolution.
+En vue d’une refonte sérieuse de l’interface.
+
+218.05.18.8.9.9
+Nid.Nid_list -> Nid.List
+
+218.05.18.11.7.32
+m
+
+218.05.18.12.23.34
+task TOGGLE
+218.05.19.6.11.17
+utilisation de key.ke_state, mais ça n’a pas l’air de marcher
+
+218.05.19.6.44.50
+À défaut, on reste sur des modificateurs bloqués et débloqués par pression successives.
+
+218.08.06.18.39.25
+Importation de la nouvelle interface de Philippe (de mon point de vue)
+Pas grand chose (sinon)
+
+218.08.07.18.47.3
+Co.opengl_of_nil
+
+218.08.07.21.19.0
+affichage de la simple-carte en NIL(0;0;0)
+
+218.08.08.0.13.50
+premier jet.
+Ça serait bien de pouvoir dézoomer ou se déplacer... voire de compiler en natif...
+
+218.08.09.9.31.22
+55° c’est pas mal. 70° c’est trop.
+ajout de ars.mli
+
+218.08.09.11.49.55
+affichage de tte la carte
+compilation en natif
+
+218.08.09.13.4.55
+éclaircissement plus prononcé avec l’altitude
+retour du Nord en haut.
+
+218.08.09.13.54.10
+plages
+
+218.08.09.17.57.33
+éclarcissement altitude optimisé (infime à 400 m, net à 1200 m)
+désert éclarci
+les fleuves verdissent et foncissent les déserts à mesure de leur largeur
+plages moins marquées
+module Co : gris moyen éclairci
+
+218.08.12.5.9.50
+affichage par lat et lon
+déplacement sur la carte
+
+218.08.12.6.51.14
+fusion color.ml et Co.ml en co.ml
+
+218.08.12.7.25.57
+m
+
+218.08.12.9.6.2
+quelques mli de plus.
+
+218.08.12.9.28.40
+normalisations des noms des ml.
+
+218.08.12.9.37.37
+normalisation terminée.
+
+
+game_t devient t
+status.map et st sont supprimés
+status.angle introduit
+
+218.08.14.20.39.35
+un .humrc pour éviter de recompiler (c’est lent) pour des boutilles.
+map_width mis dedans.
+
+218.08.16.6.53.2
+essais pour calcul du nb de cases à afficher.
+la carte est décalée vers le bas de l’écran, ce que l’on voit en zoom max extérieur.
+tu peux corriger ça philippe ?
+
+218.08.16.7.5.23
+Pour éviter cela, il faut être au dessus de l’équateur.
+
+Il faudra donc, tout en conservant un y théorique pour le moment où le joueur rezoome, afficher la carte en fonction d’un y fonctionnel rapprochant progressivement le y théorique de l’équateur en deça d’un certain niveau de zoom.
+
+218.08.16.7.11.4
+le variable de 7.1 (à réévaluer à 7.2) fonctionne impeccable.
+de même que la var ScreenRatio.
+
+218.08.16.10.44.27
+déplacement de glScalef avant glTranslatef
+et recalcul des constantes en fonction pour un zoom max ext.
+
+218.08.16.13.50.59
+calcul du nb de cases à afficher en fonction de
+1. omega : « l’ouverture des yeux », apparemment 44°
+2. alpha : l’angle de vue
+3. l’éloignement en z des yeux
+
+Pb évident : la case au centre de l’écran, actuellement case centrale des cases à afficher, ne doit plus l’être pour un angle inférieur à 90°.
+Dans ce cas, elle devrait être une case au sud de la case centrale des cases à afficher.
+
+218.08.16.16.19.26
+essai de distinction des cases à afficher au nord (plus nbses) et au sud de la case centrale.
+ça a de l’effet, mais ça ne colle tjrs pas.
+on dirait que le rapport xw/yw reste égal au screenRatio à 40°.
+
+218.08.17.20.3.18
+En ne mélangeant plus degrés et radians, ça marche tout de suite beaucoup mieux...
+
+218.08.20.18.56.45
+la case centrée l’est bien.
+la surface affichée est presque parfaite pour un rognage nul.
+2 imperfections visibles :
+- il manque généralement 1 case sur tous les bords
+- il manque qqs cases à gauche et à droite, et ce d’autant plus qu’on est loin && qu’on a un angle faible (jusqu’à 8 cases de chque côté en eloignement=80 cases et angle=60°).
+
+218.08.21.19.1.42
+affinage du calcul des cases à afficher.
+*1.090 en largeur (var° constatée de *1.000 (90°) à *1.087 (80° avec e=127)
+et +1 case de chaque côté
+
+218.08.22.20.48.11
+préparation du code pour les zooms et angles.
+
+218.08.22.21.41.58
+constantes d’affichage dans Screen
+
+218.08.24.14.57.57
+zoom fonctionnel
+
+218.08.24.16.0.18
+correction du « bug » de scaleMax.
+
+Philippe, tu aurais pu être moine copiste.
+
+218.08.25.19.37.35
+optimisation opengl
+218.08.26.9.2.6
+couleurs plus sympathiques pour une correction gamma nulle.
+retrait temp de l’éclaircissement par l’altitude.
+
+218.08.26.9.41.30
+Std.intSum
+altitude apparente des océans revue à (-100 m) au lieu de -400
+
+218.08.26.10.32.11
+m
+
+218.08.26.12.44.1
+module Switch (non testé)
+
+218.08.26.13.11.26
+218.08.26.19.13.29
+tranparence de la grille en fonction de scale
+
+218.08.27.9.44.56
+ajout de tLat et pLat à la regio (en vue de remplacer lat)
+L’objectif est triple :
+- distinguer les « latitudes  » de Température de celles de précipitations, de façon à avoir des déserts froids en latitude « tempérée ».
+- substituer des valeurs entières de température et de précipitations aux valeurs construites de « latitude  » de façon à avoir des dégradés entre des zones climatiques.
+- concevoir ensuite la température comme une fonction de tLat et alt, l’humidité comme une fonction de pLat, alt, et river, enfin le climax comme le couple (température, humidité)
+
+218.08.27.11.21.11
+Rm.tLat_constantes
+
+218.08.27.12.0.44
+latitudes_array_create crée désormais des int Ria.t
+les regiones sont ttes en lat TROPIC jusqu’à ce que le champ lat disparaisse.
+
+218.08.27.18.1.36
+affichage de tlat (du bleu au rouge, théoriquement)
+correction des bugs
+il y a tjrs des sauts de couleurs, pê lorsqu’une zone climatique est d’une largeur nulle.
+Ceci étant, maintenant que les zones sont des dégradés, on va pê avoir besoin de moins de zones.
+
+218.08.27.19.21.11
+nombre de « latitudes théoriques de génération  » réduit à 4.
+On dirait bien que les gaps disparaissent.
+Étape suivante : pLat
+
+218.08.28.17.52.2
+module Rm.Latitude (pour y voir plus clair)
+
+218.08.28.18.23.29
+Latitude.arrayCreate proprifié
+
+218.08.28.18.33.24
+génération et affichage de plat.
+
+218.08.28.21.7.41
+R.thermos
+
+218.09.01.18.51.30
+profond remaniement du module couleur.
+Les nuances sont désormais mieux réparties sur l’arc ; les gaps en nuances sont moins prononcées.
+Les nuances pures (ie d’intensité maximum) sont désormais accessibles en système nil.
+L’équivalence des luminosité à nuance différente et intensité et luminosité théoriquement égales est améliorée.
+
+Ceci est obtenu de la façon suivante :
+Les points de repères du cercle sont plus nombreux, non uniformément répartis en alpha (et bien choisis, ie près des gaps), non grisés, et leur luminosité naturelle est utilisée comme paramètre.
+
+On peut encore améliorer le système en 
+- multipliant les points de repères (une simple liste à augmenter)
+- définir des points de repères en deux dimensions au lieu d’une (nuance et luminosité, plutôt que nuance seule) (plus hard)
+
+218.09.01.23.31.52
+m
+
+218.09.01.23.50.5
+Std devient Sle
+
+218.09.03.7.23.17
+std devient sle (standart library extension)
+sle.List.init accepte un argument optionnel : b(eginning)
+r.thermos utilise Switch
+
+218.09.03.11.57.31
+Switch.v1p et f1p réécrits.
+Co.nuance utilise v1p.
+
+218.09.03.13.49.25
+R.hugros
+
+218.09.04.9.21.51
+- Switch.y : associe son ordonnée à l’abscisse d’un point d’une ligne brisée définie
+   par une liste de points de coord (a,b)
+- Ci.climaxNuance ébauche
+
+218.09.04.11.25.47
+module Co.N(uance)
+N.t
+N.dist
+N.mean
+
+218.09.04.17.0.28
+Co.nil = NIL of (N.t*int*int)
+
+218.09.06.21.47.46
+Représentation de la densité de la végétation (Rv.forest) (par la luminosité)
+
+(r.lat obsolete mise en arid pour pouvoir observer le climax, les modules humains sont à remanier en fonction de la nle implémentation de la végétation)
+
+218.09.07.9.35.24
+Rv.ariditas
+Représentation de l’aridité par une baisse d’intensité.
+
+218.09.07.13.18.21
+plage et mer (eaux côtières pour le moment)
+
+218.09.07.18.32.37
+toundras (régression de la forêt par froid extrême)
+
+218.09.08.7.20.46
+glaciers ébauche + jungle moins bleue
+
+218.09.08.8.5.4
+correction bug Sle.intSum
+altUnit porté à 500 m
+glaciers optimisés
+
+218.09.08.11.49.14
+ébauche recentrage en y en petite échelle.
+
+218.09.08.12.55.21
+recentrage achevé
+
+218.09.08.19.0.12
+glaciers optimisés
+
+218.09.10.9.47.59
+intensité en diminution dès arid=30
+hugros moins affectée par l’altitude
+
+218.09.10.14.40.13
+correction du bug de E.randomRid
+
+218.09.10.20.38.41
+dessin des côtes par modif du calcul des couleurs des plages et des eaux côtières
+
+218.09.10.20.56.50
+Co.nuance, intens, et lumina (*décomposition d’une Co.nil*)
+
+218.09.10.21.11.47
+distinction ocean-mer-cote-littoral
+
+218.09.11.9.43.37
+l’altitude de l’océan varie de -1 à -6 selon l’éloignement de la côte
+Ci.ocean dépend de alt. la luminosité décroît avec l’éloignement de la côte.
+
+218.09.11.10.5.30
+progression plus douce de l’effet de l’aridité sur l’intensité.
+
+218.09.11.11.36.10
+suppression du bug de Rv.forest
+
+218.09.11.17.44.52
+banquise
+
+218.09.22.9.49.27
+physis (potentialité physique de la regio du point de vue de l’humanité agricole)
+
+physis (potentialité physique de la regio du point de vue de l’humanité agricole)
+(vert - bleu = bon)
+(orange - rouge = mauvais)
+
+218.09.24.8.38.13
+Rv.is_farmable
+
+218.09.24.9.58.55
+Redéfinition de R.is_farmable en fonction de physis et instrumentum
+(physis est notamment la prédisposition de la regio à l’agriculture. L’instrumentum national permet
+de mettre en valeur des terres de physis inférieure à u)
+
+218.09.24.11.13.33
+instrumentum devient un argument optionnel de is_farmable
+(défaut = u : instrumentum nul)
+
+218.09.24.11.35.19
+suppression de R.fertilitas (obsolete)
+et utilisation de R.physis instead
+
+218.09.25.8.44.17
+suppression de R.climax (obsolete)
+déplacement de is_passable de Rv dans R.
+
+218.09.25.9.28.18
+suppression de R.t.latitude (entre autres)
+
+218.09.25.10.29.8
+déplacement du type latitude dans le module Rm.Latitude (il ne sert plus qu’ici)
+
+218.10.01.9.56.2
+création d’un filtre physis propre, distinct du filtre veg.
+
+218.10.02.8.27.38
+nombre de nuances de base porté de 13 à 20
+- amélioration de la répartition des nuances, et donc des dégradés
+- une nuance bien distincte par natio pour leur affichage
+
+218.10.02.11.44.52
+Nommage des identifiants de natio (nid) : vic, chi etc.
+(La liste des nationes existantes dans une partie est une liste d’id de natio)
+Ci.natio associe à un nid une nuance
+importation du vieux Si (n’est pas utilisé).
+
+218.10.02.15.20.52
+ébauche d’affichage des nationes
+note : la physis est trop favorable
+
+218.10.08.9.9.31
+218.10.08.9.41.42
+suppression de PHY comme n_filtre et création comme i_filtre (la couleur est d’autant plus intense
+que la physis est favorable)
+affichage VEG (nuance) && PHY (intensité)
+
+219.02.23.11.15.45
+quadtrees, display_list
+
+219.02.23.11.25.48
+s#camera_move 90. 45. ;
+me semble régler le pb de l’affichage, à première vue.
+À voir.
+
+219.02.24.17.38.15
+un centrage objectif.
+
+219.02.24.19.54.47
+voilà pour l’angle.
+(si on regarde la carte par le mauvais coté, on peut ajouter un -. 180.)
+
+219.02.26.13.45.1
+affichage d’une portion de la carte
+
+219.02.26.17.23.49
+lisibilisation du code et renommages préalables au debugage
+
+219.02.26.17.37.54
+le cadre colle.
+
+219.02.26.17.47.4
+et en plus, le NW est bien en haut à gauche...
+
+219.02.26.18.15.56
+le crénelage est anormal, mais sinon, ça a l’air de marcher.
+
+219.02.27.21.13.52
+rétablis déplacement avec clic
+
+
+219.02.29.12.18.9
+m
+
+219.02.29.16.9.18
+utilisation de lablgl
+
+219.02.30.9.58.47
+Découpage progressif des bords de la carte au fur et à mesure du zoom
+Visualisation 
+
+219.02.30.10.22.36
+proprification
+
+219.02.30.10.40.7
+219.02.30.10.42.58
+Résolution d’écran lue dans un .screenRes
+Ne pas commiter ce fichier.
+
+219.02.30.12.2.36
+angle 4 par défaut
+alt+wheel pour modifier (Alt comme Angle)
+
+219.02.30.12.16.19
+villes non grises
+
+219.02.30.12.36.48
+module S renommé strategica pour éviter confusion avec React.S
+
+219.03.01.17.42.32
+cylindre rétabli
+
+219.03.01.18.4.33
+filtres à faire.
+
+219.03.01.18.37.56
+Ci.ars
+
+219.03.02.7.44.57
+module Abbrev
+
+219.03.02.9.46.8
+version propre
+219.03.02.15.30.4
+recentrage de y au dézoomage
+pb : ul et lr ne suivent pas.
+
+219.03.02.15.48.4
+ul et lr suivent.
+
+219.03.03.11.44.40
+Amélioration du dessin des latitudes
+- la variabilité n’est plus affectée par la taille de la carte (elle n’est plus trop grande pour une
+  petite carte)
+- la latitude prec équatoriale est plus stable
+- la latitude moyenne prec aride est plus haute en lat
+- les lat de référence ne peuvent s’approcher de plus de h/18. Sauf, en ce qui concerne l’équateur,
+  parce qu’il y a des deux lats équat. 
+La somme de ces mesures réduit nettement la proba de voir, et l’intensité, des gaps jungle/désert.
+
+219.03.03.12.39.23
+debugage version précédente.
+Ici, la ref lat arid regarde effectivement si elle s’approche trop des autres.
+Les autres ne le font pas encore.
+Note : la supression de la dualité des équats a une contrepartie : la diminution de la taille de la
+jungle la plus dense. À revoir.
+
+219.03.03.14.8.13
+debugage : vm est une map de variation (de lat par rapport à la lat standart)
+
+219.03.03.14.16.48
+tout le monde surveille tout le monde
+
+219.03.03.14.25.22
+debugage, mais ça déconne tjrs.
+il ne faudrait qu’un équateur.
+
+219.03.03.14.38.33
+219.03.07.10.34.12
+Spécification de l’interface à développer.
+
+219.03.08.21.39.46
+interface (suite)
+
+219.03.10.13.23.17
+interface (suite et fin)
+
+219.03.14.16.36.4
+bug wheel de portable corrigé
+
+219.03.15.18.1.46
+meilleur recentrage de y
+- plus progressif (1.5 au lieu de 2.) dans le cas général
+- mais plus strict pour les régions pôlaires (ymin et ymax)
+La possibilité de faire varier l’angle demeure une épine non gérée (et ingérable)
+
+clic droit pour le déplacement (le clic gauche, c’est pour sélectionner les regiones)
+
+219.03.15.20.28.37
+219.03.15.20.41.45
+rétablissement de la possibilité de créer facilement une carte de la taille voulue
+
+219.03.15.20.50.4
+ancien filtre natio activé.
+ça marche.
+
+219.03.17.7.20.22
+lecture wip/hip dans .humrc
+.humrc retiré de la svn list
+
+lecture mapWidth en argument dans hum.ml
+init supprimé
+orbis.create attend un int
+
+
+219.03.17.9.24.22
+quatre filtre possible ajoutés
+
+219.03.17.16.3.56
+MAJ ci.regio
+
+219.03.17.17.32.19
+219.03.17.17.36.10
+F4 et Alt+clic droit switchent le filtre
+
+Le système de fenêtre et de raccourci clavier locaux aux fenetres permettra ultérieurement de
+choisir un filtre en particulier en 2 touches clavier (cf humanopaedia).
+
+219.03.17.17.47.2
+avec ci.mli, c’est mieux.
+
+219.04.06.12.6.35
+219.04.06.18.30.13
+amélioration d’un bon facteur (au moins 2), en :
+- remplaçant la liste des nuances par un array (pour faire des nth)
+- supprimant les littoraux (étude de ts les voisins dans Ci.regio)
+
+mais je ne vois pas d’autre gain notable, nous permettant à nouveau un facteur deux...
+
+219.04.07.14.49.6
+colorTriray
+219.04.08.10.51.12
+La computation n,i,l -> r,v,b prenait du temps.
+Les couleurs définies en r,v,b sont prégénérés, stockées dans colorTriray.
+colorTriray est un tableau qui associe à une couleur n,i,l une couleur r,v,b.
+Il stocke 128*128*128 couleurs.
+Le module Co gère la lecture du fichier (l’écriture est en commentaire à la fin).
+
+219.04.09.14.51.7
+219.04.09.14.51.53
+219.04.10.14.57.12
+module HddArray pour lire les fichiers-array
+module HddArrayWrite pour les créer
+3 matrices ajoutées (fonctions lourdes de Regio)
+
+219.04.10.15.31.33
+Deux arrays de plus pour les deux Switch.y de Ci.
+
+219.04.11.16.16.50
+219.04.11.19.22.21
+bon squelette pour une optimisation
+La génération de la Cylinder2.regio map appelle Ci.regioFun
+On regarde une fois la carte pour sortir pour chaque regio toutes les données graphiques dont on a
+besoin.
+
+219.04.12.11.45.50
+debugage des créations et lectures des arrays du module Regio.
+la création de carte remarche
+
+219.04.12.11.52.8
+debugage lecture des deux Array du module Ci
+
+219.04.12.14.20.18
+petite optimisation
+(une lecture de rm au lieu de 2)
+
+219.04.13.11.41.5
+type Cylinder2.regio.color = Gui.Game.filter -> Co.t 
+
+colorTriray removed (il vaut mieux
+éviter de mettre des données binaires sur le svn (qui n'est à l'aise
+qu'avec des fichiers texte), surtout si elles peuvent être générées.)
+
+219.04.14.18.53.21
+affichage tegmen restauré 
+on dirait que les terres sont planes...
+
+219.04.15.14.34.44
+debugage thermosFun et HugrosFun (requièrent désormais une altitude en mètres)
+optimisation sévère de Co.N.nuance (suppression du List.init)
+Cependant le chargement du Triray reste 2.5 sec plus rapide que sa génération.
+
+219.04.15.15.54.51
+219.04.15.16.4.30
+suppression des Array (parce qu’on peut les générer à partir du code commité)
+filtre montes opérationnel
+
+219.04.15.18.23.14
+219.04.15.18.25.43
+abandons des arrays des modules R et Ci
+Temps de lecture sur disque plus long de 0.2 sec que l’exécution des fonctions en entier (depuis l’optimisation de
+Switch.y) (pour une carte de 256*128 et 3 filtres)
+
+
+219.04.15.21.16.8
+m
+
+219.04.19.8.58.1
+simplification: plus besoin de trimballer regio_color partout
+
+
+219.04.19.15.48.42
+219.04.19.15.49.12
+version corrigée et pratique pour générer l’exécutable générant le triray
+
+219.04.19.17.56.45
+version corrigée et pratique pour générer l’exécutable générant le triray
+219.04.19.18.2.53
+219.04.19.18.3.32
+La plus rapide chez moi (2.5 secondes).
+
+Note : Commenter chaque ligne d’une zone à commenter est à proscrire, c’est illisible et inutilement long à décommenter
+Question subsidiaire : À quoi servent les infames (/* ?
+
+219.04.19.20.56.57
+m
+
+219.04.19.21.40.13
+ébauche de filtre nationes
+
+219.04.20.20.21.26
+ombres de relief et de tegmen plus ou moins prononcées sur chaque filtre.
+
+219.04.22.9.2.4
+219.04.22.9.2.28
+219.04.22.9.2.41
+squelette pour calculer la plebs de chaque regio.
+Vus : - la complexité du calcul (à venir)
+      - l’utilité multiple de l’information : couleur en filter natio, info sur la densité dans la fenetre regio, et
+	pê calcul des pertes civiles dans les zones de guerre,
+Plebs devient un membre de Rv.
+
+NB : N étant calculé après Im pour un tour donné, Rv.plebs est calculé sur la plebs N-1. Rv.plebs doit donc être
+entendu comme une approximation utile, et rien de plus. N.plebs reste calculé sur N.plebs(N-1) et ne peut être la
+somme des Rv.plebs.
+Si l’on souhaite absolument que la somme des Rv.plebs égale N.plebs, la solution la moins mauvaise serait de
+calculer un troisième tableau de regiones après le calcul des nationes (moyens disproportionnée à l’utilité).
+Une solution plus réaliste serait de calculer N.plebs comme d’habitude, et de Ne fournir au joueur que les Rv.plebs et
+leur somme.
+Ainsi, 1° Les comptes sont bons 2° Le joueur n’a accès qu’à des valeurs approchées, ce qui n’a rien de choquant.
+
+
+219.04.22.12.6.20
+calcul R.plebs initiale
+
+219.04.22.15.33.42
+affichage correct de la densité de pop en mode Natio
+
+219.11.09.22.43.5
+Ébauche de Fenêtre Regio (c’est pas encore une fenêtre)
+
+219.11.18.8.58.22
+relecture et correction des coquilles de l’article interface
+
+219.11.19.12.15.47
+Refonte partielle de l’humanopaedia : textes remaniés et reclassés par ordre d’importance.
+Ouverture d’un game.txt contenant l’article interface, et qqs propos sur le multijoueurs.
+
+219.12.02.16.20.51
+suppression du bug des « falaises sous-marines côtières »
+suppression temporaire des dégradés, pour rendre la carte le plus lisible
+
+219.12.03.7.31.53
+relief rétabli
+meilleur couleur glacier
+
+219.12.03.10.57.20
+219.12.03.17.28.53
+wRegio placée à un endroit convenable.
+
+219.12.03.20.36.11
+fenêtre regio présentable
+
+219.12.04.20.25.20
+tout à peu près bien placé, avec des segments de droite pour repousser et bloquer correctement les widgets,
+mais on devrait pouvoir faire cela de façon plus élégante
+
+219.12.04.21.49.47
+widget box : a une largeur et une hauteur spécifiées, et contient un widget à l’intérieur
+
+219.12.04.22.49.28
+219.12.05.18.4.0
+219.12.05.18.4.23
+219.12.05.18.4.51
+219.12.05.18.5.26
+219.12.05.18.6.13
+buttons valables
+
+219.12.05.21.47.0
+délimitation des espaces de l’interface
+
+219.12.06.8.2.14
+réécritures diverses
+
+219.12.06.9.36.56
+widget bar
+
+219.12.06.14.40.49
+wRegio n’apparaît que lorsqu’une regio est sélectionnée
+
+219.12.08.19.8.19
+Window.Status nous dit quelles sont les fenêtres ouvertes, active, cachées etc.
+
+219.12.08.20.23.58
+gameScreen affiche les windows existantes dans status
+
+219.12.09.10.5.52
+commit de la mort
+le clic gauche sélectionne une regio, et *commande la création d’une wRegio, laquelle est ajoutée au status
+gameScreen.rightStack affiche la première fenêtre de la pile de droite
+
+219.12.09.11.31.23
+réécriture en + lisible de cylinder2.picking_handler
+
+219.12.09.11.50.14
+restauration de Status.update
+
+219.12.09.12.16.3
+Je pense que picking_handler (l’affectation d’une command à un clic) n’a rien à faire dans cylinder2.
+Je l’ai mis dans gui.game (vu qu’il utilise la SDL, et gui.game.send)
+
+219.12.09.13.55.31
+Déplacer la carte ferme la wRegio
+
+219.12.09.18.4.47
+gameScreen renommé display (un terme particulier est préférable à une périphrase)
+fonctions d’écriture pour string constante et signaux
+
+219.12.09.21.2.32
+wRegio regarde l’orbis qu’on lui donne
+
+219.12.10.7.52.22
+petites améliorations diverses
+
+219.12.10.10.24.45
+cylinder enlevé, puisque l’on utilise cylinder2
+test des lignes avec wRegio
+
+219.12.10.13.20.24
+réglage de la taille normale de la carte : 360*160
+normalisation des noms de membres de orbis
+
+219.12.10.13.36.30
+module Espace (quasiment vide, et vidé) renommé EspaceTmp en attente de suppression
+module E renommé Espace
+
+les modules qui utilisent souvent ce module commencent par la ligne
+module E = Espace
+
+
+219.12.10.15.51.58
+Le rapport largeur/hauteur de la carte étant normalisé pour un cylindre,
+un espace n’est plus défini par sa taille et sa width, mais simplement par sa sizeLevel (4 possibilités, séparé par
+un facteur 4 (en surface))
+
+Ces niveaux servent également pour les projections dans Continentes.
+
+219.12.10.18.57.57
+ajustement génération :
+un peu moins de boucliers
+des chaînes plus hautes
+
+219.12.10.22.25.1
+réglage des rm.latitudes sur Espace.cylinderLatitudeMax
+glaciers et inlandsis plus réalistes (réduits)
+début de mise en place de R.climax (dénomination du couvert végétal, pour l’affichage uniquement)
+
+219.12.11.21.9.39
+R.climax (associe un couvert végétal climacique à une regio)
+description ds wRegio
+
+219.12.12.22.37.56
+R.climat, sur le même principe que climax, attribue une string compréhensible aux attributs de la regio, pour
+wRegio.
+
+219.12.13.8.28.47
+affichage du débit des fleuves
+
+219.12.13.13.20.29
+m
+
+219.12.13.16.29.41
+219.12.13.16.29.58
+window translucide avec une bordure smoothée
+
+219.12.13.18.24.58
+window renommé quartz
+les towers sont quartz avec une bordure moins large
+
+219.12.13.19.8.56
+colonnes correctes et égales dans wRegio
+
+219.12.14.20.40.8
+panel avec padding
+
+219.12.14.22.19.39
+codage du display.button, pas testé
+
+219.12.16.9.2.34
+achèvement graphisme button.
+en haut à gauche : boutons relâché et enfoncé
+
+219.12.16.10.34.45
+couleur de fond neutre
+
+219.12.16.11.47.29
+nettoyage de display
+
+219.12.16.14.8.1
+nettoyage supplémentaire
+
+219.12.16.15.55.13
+le button Esc réagit graphiquement aux pressions sur le clavier
+
+219.12.16.16.4.34
+avec button.ml, ça ira mieux
+
+219.12.16.21.53.50
+poursuite implémentation interface
+
+219.12.17.7.26.57
+219.12.17.7.27.14
+suppression des open 
+alias
+
+219.12.17.8.16.49
+possibilité d’annuler un appui clavier en appuyant sur ESC (ou autre raccourci actif) avant de relâcher la touche
+fautive
+
+219.12.17.8.32.40
+handler un peu plus lisible
+
+219.12.17.9.3.46
+factorisation des fonctions fréquentes (à venir) de handler
+
+219.12.17.10.28.27
+les towerButton servant à ouvrir une window s’appellent désormais W.Gate W.wName
+
+219.12.17.12.38.42
+contenu (colonnes, lignes de strings etc.) des windows (wRegio en l’occurence) déplacé dans window
+seul le mode d’affichage (vpack, quartz, font size, etc.) des window va dans display
+
+219.12.17.17.42.15
+embryon de fenetre (help) contenant buttons et strings
+
+219.12.17.20.32.44
+finition de sheetWidgetMake
+
+219.12.17.20.51.35
+wHelp complète.
+Reste à rendre les buttons actifs
+
+219.12.17.21.26.33
+optimisation et normalisation de la taille des fonts
+
+219.12.20.8.17.8
+tower-buttons rajoutés
+
+219.12.20.8.34.25
+plantage sur clic sur tower dont la duty n’a pas été précisé résolu
+ce qui est étonnant est qu’il n’y avait pas de warning pour le match incomplet dans W.duty
+
+219.12.20.9.19.4
+widget.Font.charSize et strnSize
+
+219.12.20.11.48.15
+la taille de la font s’ajuste à l’iBox dans laquelle la string doit s’afficher
+
+219.12.20.14.6.26
+proprification
+
+219.12.20.14.33.57
+proprification ...
+
+219.12.20.17.53.43
+proprification + insertion des lignes de wHelp dans des boxes de même hauteur que les buttons
+
+219.12.21.6.19.16
+touches F1 etc. affichées en exposant sur chaque tower-button.
+
+219.12.21.20.34.25
+petite modif pour éviter le plantage lié au font.
+
+219.12.22.17.43.1
+possibilité de sélectionner une window
+(l’ouverture sélectionne; U un-select)
+
+219.12.22.20.17.8
+graphisme des buttons U et X 
+
+219.12.23.7.39.6
+nouveaux petits buttons de fenêtre
++ révision display.button
+
+219.12.23.10.37.47
+le bouton U est actif : il désélectionne la fenêtre
+quand une fenêtre est active, seuls ses raccourcis sont actifs
+quand aucune n’est active, seuls les raccourcis généraux sont actifs
+
+219.12.23.13.13.47
+refonte du handler
+on associe, si c’est possible, la touche pressée (ou relachée), à un bouton.
+(Chaque bouton a un identifiant unique du type W.name*B.name)
+
+219.12.23.15.12.42
+Gui.Game.taskofButton associe une liste de commands à un (W.name*B.name)
+
+219.12.24.7.33.29
+Les stacks hidden ne sont pas affichées
+Le bouton hide fonctionne
+Les ouvertures de window doivent préciser un emplacement : default, left, ou right
+
+219.12.24.12.16.50
+Les Ctrl gauche et droit permettent d’afficher les sheets à gauche ou à droite
+Sans mod, la fenêtre s’affiche à sa place par défaut
+Avec Alt, elle s’affiche dans la position alternative à sa place par défaut
+Une fenêtre n’est jamais dans les deux piles à la fois. l’ouvrir à droite la kill dans la pile de gauche.
+
+219.12.24.15.20.20
+ws ne contient plus de membre activeWindow, mais un membre activeWidget
+Il n'est pas pertinent de rendre les towers active, et les sheets cachées encore moins.
+L’activeWidget est : la leftStack, la rightStack, ou la queen.
+
+219.12.24.15.54.42
+activeWidget renommé focus.
+suppression de la suppression de focus à la fermeture de window. Il en résulte que le focus reste dans ce cas sur, par
+exemple, la pile, et que la window d’en dessous (s’il en est une) est activée automatiquement.
+C’est magique.
+
+219.12.24.16.44.22
+tabulation permet de circuler entre les windows
+
+219.12.24.20.2.22
+les boutons N(ext) et P(revious) permettent de circuler entre les fenêtre d’une pile (changement de l’ordre des
+items de la pile, le focus sur la pile demeure, la sélection de la fenetre se fait automatiquement : la fenetre
+sélectionnée est la première de la pile, si la pile est focusée)
+
+219.12.25.18.55.43
+sélection de fenêtre plus élégante
+
+219.12.25.21.21.38
+résolution du bug du décalage de la sheet entre la sélection et la non-sélection
+
+219.12.26.19.35.10
+m
+
+219.12.27.8.3.30
+219.12.27.8.3.40
+C ferme la fenêtre visible de la pile
+X ferme ttes les fenêtres de la pile
+
+219.12.27.13.51.12
+début de réécriture du centrage de la carte
+
+219.12.27.16.36.58
+m
+
+219.12.27.19.6.22
+le (re)centrage de la scene se fait en fonction de la place allouée stricto sensu à la scène, stacks exclues.
+
+219.12.27.19.11.12
+219.12.28.21.13.11
+status.taskHistory
+embryon de W.taskHistory
+
+219.12.30.8.51.1
+strn déplacées dans si.ml
+windows déplacées de w à wi
+
+219.13.01.7.11.7
+avec les buttons, c’est encore mieux
+
+219.13.01.10.49.37
+m
+
+219.13.01.11.5.30
+m
+
+219.13.01.11.31.32
+m
+
+219.13.01.15.32.57
+219.13.01.15.34.23
+Déplacement de picking_handler dans handler.ml
+ctrl gauche + clic ouvre la wRegio à gauche
+
+219.13.04.8.2.56
+module Sle.iList (liste indexée)
+windows.scrollPosList (liste des positions dans le scrolling de la window, indexée par w.name)
+status.windows.t devient private
+
+219.13.04.10.53.28
+command wScroll
+window taskHistory
+
+219.13.04.11.25.23
+W.name et W.pos déplacé en WindowID.t et WindowID.pos
+Wi.regio et Wi.help déplacé en W.regio et W.help
+Wi à supprimer
+
+219.13.04.12.37.4
+Window.default
+
+219.13.04.17.15.44
+status utilise le module wid, mais n’utilise le module window
+window utilise le module status
+window.window crée n’importe quel fenêtre
+
+219.13.05.17.57.52
+display.scrollMargin
+
+219.13.05.19.31.17
+status.wScroll
+
+219.13.05.20.28.40
+on peut scroller la taskHistory window avec les arrows
+
+220.01.02.11.25.50
+modification de l’organisation des données dans Window.contents
+Les contents sont des lignes (et non plus des colonnes), ce qui sera plus pratique pour décrire les window
+Par contre, l’affichage se faire toujours par colonne
+Une fonction de Display « retourne » les matrices
+
+220.01.02.13.27.32
+collage des lignes dans le haut des sheets
+
+220.01.02.15.57.39
+numérotation des tasks accomplies dans Win.taskHistory
+
+220.01.02.16.27.9
+colonnes de taille et alignement déterminées
+
+220.01.02.16.52.27
+espace entre les colonnes
+enable_key_repeat
+
+220.01.03.8.29.57
+comportement des scrolls ouvert quand la hauteur des données à afficher s’agrandit en temps réel :
+- quand on est en haut de la fenêtre, le focus reste sur le haut et affiche les nouveaux éléments à afficher
+- quand on est ailleurs, le scroll se fixe sur ces élémets-là.
+
+220.01.03.12.4.30
+MAJ game.txt
+
+220.01.03.12.22.57
+Window.create remplace Status.window
+
+220.01.03.12.40.9
+Malgré l’activation de la répétition (pour les arrows), la répétition ne fonctionne plus (tant mieux) avec les
+raccourcis clavier vers les buttons
+
+220.01.03.19.32.59
+fenêtre Game
+(les buttons ne fonctionnent pas encore)
+
+220.01.05.16.57.20
+Display.window 
+Display.windowContents
+
+220.01.05.17.31.4
+découpage de display :
+Display.make crée le widget global
+l’ex module gameScreen retourne dans hum ; gameScreen appelle Display.make
+la partie handler va dans handler.ml ; gameScreen appelle Handler.handler
+
+
+220.01.06.7.57.15
+220.01.06.7.58.22
+simplification du code display
+
+220.01.06.11.25.10
+Window.laList
+Display.windowHip
+
+220.01.06.12.19.56
+nettoyage
+fenêtre Game presque présentable
+
+220.01.06.13.25.59
+Seules les sheets ont les 6 tiny buttons
+Les queens n’en ont aucun
+
+220.01.06.16.30.56
+Display.windowMatrix
+
+220.01.06.16.44.55
+on peut presser les gros buttons des window
+
+220.01.06.17.11.11
+Button Game.Quit actif
+taskofButton déplacé dans handler (bcp plus logique)
+
+220.01.06.20.7.41
+window Quit
+
+220.01.06.20.47.28
+window.queen
+window.newGame
+
+220.01.07.17.24.20
+window NewGame ok
+
+220.01.07.20.21.49
+module Status.Scene
+(paramètres de la scene)
+
+220.01.08.18.11.24
+window Display
+
+220.01.09.8.17.13
+nettoyage status.Windows
+
+220.01.09.9.23.51
+nettoyage Status
+
+220.01.09.9.51.34
+maj handler pour les fonctions de display
+
+220.01.09.13.17.48
+cylinder regarde status.scene.filter
+
+220.01.09.13.35.46
+f / F4 switche le filtre
+DT, DM, DN select un filtre
++/- zoom et unzoom
+
+220.01.09.15.10.58
+déplacement sur la carte avec le pavé numérique
+
+220.01.09.20.16.1
+déplacement au keypad adapté au niveau de zoom
+
+220.01.10.8.10.39
+earthMode
+
+220.01.10.9.24.12
+fusion des deux handler.mod_state
+
+220.01.10.10.49.18
+Handler.task_of_sceneMouseEvent sur le modèle de task_of_button
+avec utilisation des memes fonctions pour les modifiers
+
+220.01.10.11.5.50
+Grâce à la séparation gameScreen / handler, scrollMargin peut être déplacé de handler à display,
+et handler n'a plus besoin du paramètre shil
+
+220.01.10.11.16.51
+finition handler
+
+220.01.10.12.26.9
+button display/hide stacks fonctionnel
+
+220.01.10.14.59.20
+button de couleur différente en fonction de leur niveau d’éveil = réactivité aux raccourcis clavier
+
+220.01.11.20.7.17
+window Regio title
+R ouvre la window regio
+clic sélectionne une regio, mais n’ouvre plus la window regio (on pourra vouloir étudier les nationes ou les imperii
+plutôt que le regiones)
+
+220.01.13.8.28.41
+possibilité de sélectionner une regio et de déplacer la sélection avec ctrl+keypad
+
+220.01.13.9.56.1
+220.01.13.9.57.36
+implémentation touche échap
+
+220.01.13.11.9.23
+tabulation rend visible (et sélectionne) les stacks cachées
+les focus inutiles et invisibles sont désormais annulés
+
+220.01.13.15.10.15
+window Help
+window Mouse Hints
+
+220.01.13.20.26.19
+window Keys
+
+220.01.13.21.13.24
+fine scrollBar permettant de voir quelle partie de la window on regarde
+la scrollBar n’est pas et ne sera pas clicable (la wheel suffira)
+
+220.01.14.21.9.27
+possibilité de revenir en arrière dans le parcours des queen
+les queen ont un petit button U(ndo) et un X(quit)
+cancel équivaut à undo
+
+220.01.14.21.32.25
+lctrl et rctrl permettent de focuser (et rendre visible) la stack voulue
+
+220.01.16.8.31.35
+MAJ du code du button
+
+220.01.16.10.24.36
+tower et queen plus transparentes
+marches des buttons moins transparentes
+tour des buttons plus léger
+
+220.01.16.11.29.42
+nettoyage display
+
+220.01.17.9.33.14
+souris « restaurée »
+Pb : Les rects sont souvent nécessaires pour « tenir » les widgets au bon endroit, mais la souris ne « passe » pas à
+travers
+
+220.01.17.12.27.43
+R.woodland (forêt claire)
+R.silva (densité de la végétation)
+Affichage correcte de R.silva (plutôt que hugros)
+Suppression du dégradé de luminosité pour l'altitude en mode `tegmen
+
+220.01.17.14.57.41
+frontière marquée (graphiquement) entre les stades de la végétation (silva)
+
+220.01.17.16.39.35
+Co.N.custom
+couleurs plus réalistes : océan plus bleu, terres plus grises
+
+220.01.18.20.25.56
+utilisation du système d’affichage actuel pour afficher des plages et le fond des mers, plutôt que la surface de l’eau
+Il faudrait afficher dessus, avec une légère transparence, la surface de l’eau, à une altitude nulle, simplement
+sous la forme de un losange bleu par case de mer.
+On aurait ainsi de jolies côtes, avec un trait de côte marqué (le bord du losange bleu), et des dégradés judicieux de part et d’autre.
+
+On pourrait aussi alors passer le fond des océans en noir, et donc ne plus rien afficher en deça d’une certaine
+profondeur, ce qui ferait beaucoup de triangles en moins à afficher.
+
+220.01.18.21.16.40
+c’est plus clair en distinguant
+R.altitude (altitude exprimée dans W.regio et effet sur le climat)
+R.gAltitude (altitude graphique, en float, y compris fond des mers)
+
+220.01.19.12.43.10
+plaine abyssale noire non affichée
+reste à afficher la surface de l’océan avec un alpha
+
+220.01.19.21.32.22
+océan transparent (à fignoler)
+
+220.01.19.22.35.38
+bonne couleur pour les océans
++ niveau de la mer un peu plus bas pour avoir des plages
++ grille avec un alpha de 0.1
+
+220.01.20.8.31.19
+m
+
+220.01.20.9.28.27
+tallus continental plus violent et plus court
+océan plus transparent (0.8)
+
+220.01.20.10.3.28
+côtes courbes
+plaine abyssale moins profonde
+
+220.01.20.12.49.50
+fleuves visibles (en altitude de plaine)
+(le fleuve de plaine creuse un lit légèrement en dessous du niveau de la mer ; la surface de l’océan fait apparaître
+le fleuve)
+
+220.01.20.16.16.9
+c'est loin d'etre parfait, mais on voit désormais toutes les rivieres, meme en altitude
+affichage de plans bleus inclinés "entre" deux regiones dont les deux "ont" une riviere
+
+220.01.20.16.32.22
+plans bleus moins larges
+
+220.01.20.19.55.10
+bug principal (affichage fleuve) détecté et corrigé
+
+220.01.20.20.34.19
+représentation des fleuves de 1000m3 par seconde et moins par une simple ligne
+
+220.01.20.20.51.11
+estuaire moins large, fleuve + large => meilleure continuité fleuve/estuaire
+
+220.01.20.21.3.30
+m
+
+les lignes fines ayant tendance à disparaître d’un zoom à l’autre, il vaudrait mieux appliquer des lignes un poil
+plus épaisses, mais avec un alpha moindre
+
+220.01.21.19.15.57
+les ruisseaux ne deviennent plus de gros fleuves sur les cases de plaines (l'océan ne « remonte » plus autant)
+les rivers ont un alpha différencié en fonction de leur profondeur
+
+220.01.21.19.25.48
+estuaire + gris = meilleure jonction entre océan et fleuve antérieur
+
+220.01.24.21.42.12
+optimisation du lieu de coupure entre l’alpha fleuve et l’alpha océan (coupure placée juste avant l’estuaire)
+
+220.01.25.20.3.45
+220.01.25.20.7.4
+point_cardinal renommé direction 
+etc.
+
+220.01.25.20.23.17
+E.web
+
+220.01.25.20.32.9
+réforme de E.forme
+ça compile mais ça plante et ça n’est pas étonnant
+
+220.01.27.11.27.21
+partie humaine de orbis supprimée (temporairement)
+
+220.01.27.12.38.21
+type forme = Cylinder (plutôt que cylinder of int, le web décide de l’int en question)
+
+220.01.27.13.53.34
+réécriture de Espace.proximaCreate
+
+220.01.27.14.3.51
+type proximae = {
+  lesQuatre : (Rid.t list) option;
+  lesHuit   : (Rid.t list) option;
+  toutes    : (Rid.t list);
+  }
+L’objectif est de passer la carte finale en octal, tout en gardant la possibilité de ne regarder que 4 voisins si c’est suffisant.
+Rappel : la carte micro initiale de la génération est en octal (pour faire des continents variés)
+les cartes intermédiaires de projection/agglo en quadral pour des raisons d’efficacité
+
+Quand la carte finale sera une sphère, seule la troisième des listes sera générée.
+
+220.01.27.15.5.6
+E.lesQuatre
+E.lesHuit
+E.is_polar
+
+220.01.27.15.22.14
+L’espace final est octal, mais on ne regarde que les quatre à chaque fois que c’est suffisant.
+
+220.01.27.19.51.40
+bug ordre des proximae résolu
+
+220.01.27.20.33.3
+optimisation diverses graphisme fleuves
+
+220.01.28.18.54.18
+R.coast (la regio est-elle voisine d’un océan (8 voisins))
+
+220.01.28.20.15.44
+la surface de l’océan n’est affiché que sur les cases de mer et côtes
+
+220.01.30.9.58.45
+module flumen
+objectifs :
+- avoir un plan des fleuves avec leurs affluents, chaque flumen étant une sorte d’arbre
+- additionner les débits des affluents
+- savoir vers ou, à chaque rid, les fleuves coulent
+
+220.01.30.13.13.56
+R.nettPrecFun (précipitations nettes, ie évaporation déduite)
+Flumen.fluxusUdpate (calcule le débit pour tout le cours d’un fleuve et de ses affluents)
+
+220.01.30.22.31.11
+flumenList.create créée une liste de flumen.t
+
+220.02.01.8.47.9
+ça marche à peu près.
+
+220.02.01.9.36.55
+un bug résolu (priorité match et ; )
+il en reste un (list.hd)
+
+220.02.01.10.14.25
+solution au deuxième bug : cas des affluents rejoignant un confluent préexistant
+
+220.02.01.11.34.11
+utilisation de R.direction pour afficher les fleuves
+Pour chaque regio, l’eau ne s’écoule que vers une seule direction, et on la connaît
+intérêt : plus besoin de regarder si les proximae « ont » une rivière pour afficher les fleuves
+
+On pourrait aussi faire un List.iter sur la flumenList plutôt que de faire un test pour chaque regio
+
+220.02.01.13.39.1
+rétablissement affichage de surface d’eau pour les fleuve
++ factorisation
+
+220.02.01.16.32.46
+simplification de R.wAlt
+
+220.02.01.19.18.51
+m
+
+220.02.02.18.8.40
+suppression des glaciers d’altitude nulle (a fortiori traversés par des fleuves)
+ruisseaux plus transparents (notamment source sur glacier, et traversant les déserts)
+
+220.02.04.8.14.28
+commentation de flumen
+ajout de mli
+
+220.02.04.9.28.31
+bug faux glacier corrigé
+
+220.02.04.10.2.46
+fleuves plus haut pour limiter l’effet canyon (le fleuve pris en 2 regio d’alt supérieures voit sa surface réduite)
+largeur de la surface des fleuve réduite pour les fleuves moyens et rendue plus aléatoire (pour compenser
+l’aléatoire perdu du fait de leur placement plus haut)
+
+220.02.04.12.9.23
+le débit a désormais un effet logarithmique sur la végétation (revalorisation des fleuves petits et moyens)
+
+220.02.04.12.27.50
+limitation profondeur du lit des grands fleuves (pour ne pas avoir d’estuaire biscornu)
+
+220.02.04.13.18.10
+bug corr : ordre des args de R.nettPrecFun
+
+220.02.04.14.39.44
+possibilité de créer des sources sur les flancs de 400 m (au lieu de 1200 mini), de façon à avoir des fleuves à peu
+près partout
+évaporation subie par les fleuves réduites de moitié, de façon à pouvoir avoir des fleuves en zone subaride, et des
+fleuves qui arrivent parfois à traverser les déserts (mais en perdant du débit)
+
+220.02.04.20.51.19
+montée progressive des altitudes graphiques adoucie (plateau 400 m un peu exagéré)
+
+220.02.07.9.7.43
+sauvegarde des variations en latitude des latitudes climatiques frontières à l’issue des générations des cartes de
+latitude climatique
+(l’objectif est de les utiliser pour calculer l’« intensité » des extrema climatique à chaque longitude)
+
+220.02.07.9.42.12
+220.02.07.9.43.28
+La regio est dotée de deux membres supp :
+thermos et pluvia.
+Ces données seront donc générées définitivement avec la création de carte, et non plus calculées à chaque lecture
+La complexité et le mode particulier, à venir, de leur calcul l’impose de façon évidente.
+
+
+220.02.07.12.22.24
+Rm.pluviaArray développé
+
+220.02.08.7.28.37
+extrema des latitudes pluviométriques variables selon la longitude
+
+220.02.08.9.10.54
+montagnes et fleuves rétablis
++ commentation
+
+220.02.09.7.23.54
+lissage déplacé après chainsCreate pour éliminer les « crevasses »
+montée à 4000 m avec une chance/2
+maj + clic sélectionne une regio && ouvre wRegio
+le déplacement avec la souris (mais pas avec le clavier) ferme wRegio
+
+220.02.09.9.11.29
+nettoyage et commentation
+
+220.02.18.18.3.34
+220.02.19.12.42.41
+MAJ rv.tegmen
+
+220.02.19.12.43.58
+MAJ Rv.tegmen
+
+220.02.28.9.23.54
+révision rv.ml
+rv.humanitas nous précise la forme et le degré de l’anthropisation de la regio (de façon abstraite)
+
+tegmen.t nous donne l'apparence concrète de la regio (produit du r.climax et de la rv.humanitas)
+
+220.03.02.9.13.5
+220.03.13.9.37.16
+Tegmen.is_farmable
+
+220.03.16.8.20.58
+MAJ Si.tegmen & Window.regio
+
+220.03.20.7.58.54
+carte couverte de nations, regiones en saltus
+
+220.03.20.8.59.27
+R.luxuria remplace R.physis (en prenant son nom)
+
+220.03.20.15.7.11
+Rv.luxuria supprimée
+
+220.03.20.15.56.55
+220.03.23.7.16.35
+220.03.23.9.5.24
+les agriculteurs néolithiques ne peuvent plus s’installer dans les forêts denses ni ds la taiga
+
+220.03.23.10.42.6
+affichage des villes comme une variation de couleur de la regio, en attendant mieux..
+
+220.03.23.13.3.20
+optimisation R.climax : les déserts et steppes en zone froide sont désormais possible (cas peu fréquent, mais
+rencontré)
+
+220.03.24.22.55.17
+super commit : on peut cliquer à travers le iRect
+
+220.03.26.9.17.27
+MAJ Civilizations.centers
+
+220.03.26.9.37.29
+bugfix
+
+220.03.26.11.33.19
+220.03.26.11.34.37
+bug taille police des tinybuttons résolu
+
+220.03.26.13.5.26
+luminosité accrue pour les petites polices 
+(réduction perdue pour les boutons appuyés, à restaurer)
+
+220.03.27.7.18.29
+création d’un module Co.Nil
+(plus standart + permettra de faire des opérations sur les triplets nil)
+
+220.03.27.8.20.30
+Co.Nil.lumadd
+variation de lum des font des buttons appuyés rétablie
+Le passage nil -> Co.t se fait au moment de l’appel de la fonction Widget.label
+
+220.03.27.8.53.6
+optimisation des polices utilisées
+avec emplacement normalisé (pour ubuntu)
+
+220.03.27.9.22.44
+optimisation graphisme button
++ bugfixes
+
+220.03.27.11.43.21
+MAJ restes de vieux code
+cm et ccm sont désormais transmis comme des Ria.t (et non des arrays, quelle horreur)
+
+220.03.30.7.38.19
+calcul correct de la population de chaque regio
+affichage correct de la densité de population
+
+220.03.30.7.45.51
+calcul correct de la population de chaque regio
+affichage correct de la densité de population
+le clavier ne répond presque plus ; je soupçonne la revision 699
+
+220.03.30.7.55.28
+clavier restauré
+
+220.03.30.9.9.30
+nettoyage et commentation de R et Rv.
+
+220.03.30.12.3.30
+W.Regio affiche la densité de pop au km2
+
+220.03.30.14.30.45
+les cases urbes aussi sont habitées
+
+220.04.10.7.34.52
+calcal de geographia restauré
+
+220.04.11.7.7.41
+embryon de contactusMx
+
+220.04.17.9.55.54
+chemin activé pour ouvrir la queen orbis, puis la queen ContactusMx
+
+220.04.18.9.5.25
+val Window.width
+
+220.04.18.9.31.46
+possibilité de créer une window de la largeur de l’écran
+cas de ContactusMx
+
+220.04.18.10.25.11
+début de contactusMx présentable
+
+220.04.18.10.32.37
+Si.shortNatioList
+
+220.04.21.9.34.49
+Window.contactusMx affiche les nationes réellement existantes uniquement, dans l’ordre de la Orbis.nil de la partie.
+
+220.04.21.11.37.12
+affichage complet de la matrice des contacts.
+plantage éventuel sur un map2 à voir
+
+220.04.24.15.33.0
+colonnes de couleurs différentes pour rendre les matrices plus lisibles
+test avec les contacts
+
+220.04.24.20.47.28
+lignes de couleur différentes pour les matrices
+
+220.04.25.12.36.40
+220.04.25.14.21.45
+amélioration couleur et alpha des matrices
+
+220.04.25.19.27.55
+le petit détail qui change tout
+
+220.04.25.19.43.55
+humanitas ne marchera pas en 1024*512.
+En 1024*768, par contre, oui.
+
+220.05.05.7.41.25
+Si.natio improved
+
+220.05.05.9.53.6
+embryon de fenêtre natio
+
+220.05.05.11.44.45
+un peu de contenu pour Win.natio
+
+220.05.05.14.33.42
+le calcul des chora/imperii a l’air ok.
+
+220.05.12.9.58.14
+calcul de g.facultas (somme des tegmen.facultas des regiones)
+facultas, qui tient compte de la mise en valeur de la regio, va se substituer à physis et copia
+
+220.05.12.12.33.49
+220.05.12.12.42.51
+tegmen devient regio
+tegmen.compute devient regio.tegmen
+
+220.05.12.13.48.46
+regio.t -> regio.tegmen
+ajout des lignes superficies, facultas et plebs à window.regio
+
+220.05.13.10.29.12
+Regio.hospitalitas
+
+220.05.15.7.23.21
+m
+
+220.05.15.8.52.22
+ménage
+
+220.05.15.9.1.56
+création d’un module Co.rvb
+rangement dans Co
+
+220.05.15.9.13.10
+Co.ml propre
+
+220.05.16.9.37.54
+G.efficienArray
+
+Comme chaque regio a désormais une plèbe propre, et comme la productivité du travail diffère dans chaque regio du
+fait des conditions naturelles (Regio.hospitalitas), la productivité nationale est désormais la moyenne des
+productivités régionales pondérée par leur plèbe respective.
+
+Affichage ds Window.natio : ça a l’air de marcher ; l’ordre de grandeur est bon.
+
+220.05.16.11.50.12
+Si.longInt
+Si.float
+transforment en string formatée un grand nombre ou un float avec la précision voulue.
+
+220.05.16.14.40.32
+Si.plebs
+Si.population
+utilisées par Window.regio et natio
+
+220.05.16.14.56.24
+rv.instrumentum 
+
+220.05.17.20.44.41
+Rv.instrumentum sera un float, parce qu’il peut croitre à une vitesse infime.
+hospitalitas déplacé dans R (plutôt que Regio), car ne concerne finalement que le côté physis (instrumentum gère le
+côté humain)
+
+220.05.18.21.14.10
+calcul dans G des hospitalitas, instrumentum, efficientia moyenne des nationes
+
+220.05.19.9.18.59
+augmentation de window.regio et natio
+
+220.05.19.11.34.21
+Tout bien réfléchi, si l’hospitalitas (bien sûr), l’instrumentum et la plèbe (parce que ce sont des réalités
+physiques qui peuvent être notamment affecté par le passage de la guerre sur la regio) sont régionales,
+la production, le partage de la production, et la productivité, sont nationales
+=> suppression de regio.efficientia
+natio.eff = 100 + g.hospit + g.instrum
+(ça revient aux mêmes chiffres)
+      
+220.05.19.14.57.27
+instrumentum, hospitalitas, efficientia et plebs passés partout en float
+
+220.05.22.9.2.11
+tous les types int de la partie humaine sont désormais des float.
+tous les calculs des fonctions update sont mis en commentaire en attendant leur remise en route.
+
+220.05.22.18.17.32
+affichage type longInt pour les grands float
+
+220.05.22.18.28.38
+calcul et affichage correct de efficientia
+
+220.05.23.9.22.36
+restauration de Dx ...
+
+220.05.23.9.38.22
+List.fsum
+
+220.05.23.11.59.0
+Dx.ndc
+
+220.05.23.14.43.37
+ddc
+
+220.05.23.19.43.20
+survie.coef
+
+220.05.23.19.52.28
+pyramide_create
+
+220.05.23.20.27.53
+v_pyramid
+
+220.05.24.20.32.10
+naissances_objectif
+
+220.05.24.20.53.27
+naissances
+
+220.05.25.17.6.49
+dx restauré
+
+220.05.26.18.45.22
+dx.create (plus standart)
+
+220.05.26.19.25.11
+m
+
+220.05.26.19.34.44
+amélioration de Gate Game
+
+220.05.27.20.47.24
+towerKeyAssList
+(* crée une liste associant au plus possible de topTowers le plus possible de topKeys *)
+(* sous la forme [ (tower0, ESC), (tower1, F1) ... ] *)
+
+220.05.29.5.43.15
+List.assRev
+W.keyTowerAssList
+
+220.05.29.6.2.15
+handler affecté par W.keyTowerAssList
+
+220.05.29.6.13.0
+Si.towerFkey associe la bonne touche à la bonne tower
+
+220.05.29.9.6.9
+création tower.ml
+
+220.05.29.9.40.45
+tower.create activé
+=> il suffit désormais de modifier l’ordre des towers dans tower.ml pour modifier simultanément leur emplacement et
+la funKey dédiée.
+
+220.05.29.9.47.35
+width ok
+
+220.05.29.10.7.59
+tower Natio OK
+
+220.05.29.10.12.2
+nettoyage
+
+220.05.29.10.18.38
+exceptions déplacées de display à tower
+
+220.05.29.10.58.26
+towerButton proprifié
+
+220.05.29.11.7.24
+rétablissement de la bottomBar newStyle
+
+220.05.29.11.16.0
+La tower Natio ouvre désormais la window natio du player
+
+220.05.29.11.25.49
+m
+
+220.05.29.13.19.25
+regio button en F5
+nation button en F6 placé au milieu de la topBar
+
+220.05.29.19.10.20
+towers qui s’adaptent par défaut en largeur en fonction de la string qu’elles doivent porter
+
+220.05.29.19.38.46
+220.05.29.19.46.2
+pas de regio sélectionnée par défaut
+"r" (ou clic sur le bouton regio) sélectionne une regio (la centrée) s’il n’en est pas, et ouvre la fenêtre regio
+
+220.05.29.19.50.32
+la tower regio a pour titre les coords de la regio sélectionnée s’il en est une, celles de la regio centrée à
+défaut.
+
+220.05.29.19.56.39
+quand escape supprime la sélection de regio, la fenetre regio est désormais également fermée
+
+220.05.30.7.53.3
+sheet format A3
+
+220.05.30.9.11.26
+gate pyramid
+
+220.05.30.11.24.53
+ébauche de pyramide
+
+220.05.30.12.53.53
+pyramide debout
+
+220.06.03.8.33.23
+m
+
+220.06.03.8.45.19
+restauration de P(artitio) ...
+
+220.06.03.8.51.11
+création p.mli
+
+220.06.03.10.28.0
+Ars.eff
+P.product_param
+
+220.06.03.11.33.45
+220.06.03.11.33.57
+m
+
+220.06.03.11.42.3
+P.alter_all
+
+220.06.03.13.45.45
+m
+
+220.06.03.13.53.49
+P.nextLuxus
+
+220.06.03.14.0.27
+P.primMil
+
+220.06.04.19.32.58
+P.copiaRatio
+
+220.06.04.19.48.29
+220.06.04.19.48.49
+P.primary
+
+220.06.10.7.50.49
+ajout dx.mli
+
+220.06.10.9.12.6
+sous module Dx.Pyramid
+
+220.06.10.10.13.22
+organisation code dans Dx
+
+220.06.13.9.9.48
+k.usus rétabli
+
+220.06.13.12.43.38
+P.natio remplace Nt.ntData (sur le modèle de J.natio etc.)
+P.usus = attributio*float remplace Nt.usus
+K.t remplace Nt.kapital
+K.make
+
+220.06.13.15.11.29
+p renommé partitio
+nt.partitio devient partitio.t
+Partitio.make
+suppression des open T
+
+220.06.13.19.58.51
+g.natio
+
+220.06.13.20.6.21
+G.nullNatio
+N.t.g
+
+220.06.14.9.20.29
+suppression de nt.computation.chora, imperium, hospitalitas et facultas
+(données désormais accessible dans natio.g)
+
+220.06.14.10.39.46
+efficientia et vis basculé dans k.t
+
+220.06.14.10.43.16
+suppression de nt.computation
+
+220.06.14.10.49.53
+nt.populatio devient n.populatio
+p.natio augmenté d’un membre populatio
+
+220.06.14.11.9.50
+Restant de nt moved en politeia.ml
+
+220.06.14.15.15.52
+module K.ususList
+
+220.06.14.19.37.33
+k.instrumentumFun
+
+220.06.14.19.48.36
+K.create
+
+220.06.15.7.48.23
+k.mli
+
+220.06.15.17.32.9
+mise en forme n.ml
+
+220.06.15.17.53.26
+ajout n.mli
+
+220.06.17.6.46.44
+k.plebs et k.instrumentum supprimés (figurent dans n.g)
+
+220.06.17.8.48.22
+window Partitio
+
+220.06.17.9.35.14
+Si.percent
+
+220.06.17.10.8.19
+partitio.actio, fructus, et factum
+
+220.06.17.11.42.44
+maj p.mli
+
+220.06.17.12.10.11
+window.partitio plus complète
+
+220.06.17.14.46.10
+switchage de player avec Ctrl+clic
+
+220.06.20.7.53.1
+[S ""    ; S "Window stack shortcuts"] );
+[S "Up & Down arrows" ; S "browse a window"] );
+[S "X"   ; S "Close window"] );
+[S "<-"  ; S "Previous sheet"] );
+[S "->"  ; S "Next sheet"] );
+[S "U"   ; S "Un-select stack / Undo"] );
+[S "H"   ; S "Hide stack"] );
+[S "Shift + X"; S "Close stack"] );
+
+220.06.20.9.6.24
+m
+
+220.06.20.9.22.1
+m
+
+220.06.24.9.45.35
+220.06.24.9.45.52
+date.ml
+
+220.06.24.9.52.5
+m
+
+220.06.24.12.10.50
+220.06.24.12.11.23
+Orbis.turn : Date.gregorian
+
+220.06.24.12.20.41
+Si.date
+
+220.06.24.12.32.24
+return -> end_of_turn 
+
+220.06.27.9.25.42
+affichage `nationes : bugfix densité de pop
+
+220.06.27.10.6.17
+window Natio : bugfix
+
+220.06.27.10.40.6
+civilizations -> i(mperii)create
+
+220.06.27.15.28.5
+Ars.AGR
+
+220.06.27.15.50.25
+W.artes
+
+220.06.28.7.57.14
+m
+
+220.06.28.8.14.54
+N.origo est désormais un Date.gregorian
+
+220.06.28.8.34.5
+Sle.optfun
+Sle.List.optLast
+Win.Natio.dernier ars découvert
+
+220.06.28.11.36.23
+n.tekhne : ars*float list
+
+220.06.28.11.52.31
+Si.arsLevel
+
+220.06.28.14.9.21
+Date.beginning etc.
+
+220.06.28.14.14.38
+proprification
+
+220.06.28.14.39.44
+Date.precedes
+
+220.06.28.14.45.43
+Date.add
+
+220.06.28.15.0.45
+icreate.civ_map renvoie les dates d’apparition de l’agriculture sur les regiones, et non plus l’ancienneté en année
+(int) de l’agriculture
+Beaucoup plus clair et durable.
+
+220.06.28.20.46.57
+icreate -> imd (imperiiMapDraft)
+imd.t
+
+220.06.28.21.8.31
+simplification
+
+220.06.28.21.27.22
+m
+
+220.06.29.20.56.4
+m
+
+220.06.29.21.11.27
+origo plus réalistes
+
+220.06.29.21.24.47
+imperii initiaux de taille plus réalistes
+
+220.07.01.7.6.23
+chora initiales réalistes (progression en fonction de l’hospitalitas des regiones)
+
+220.07.01.8.51.21
+Regio.is_farmable normalisé
+Rm.is_farmable pointe dessus
+utilisation dans imd
+
+220.07.01.9.23.51
+Ars.instMax
+
+220.07.01.10.11.23
+maj Im.make
+
+220.07.01.12.53.56
+maj K.instrumentumFun
+
+220.07.01.12.58.30
+m
+
+220.07.01.13.57.24
+Rv.instGrowth (n’a plus rien à faire dans k)
+
+220.07.01.15.10.42
+instGrowth ne fonctionne pas, mais de toutes façons son utilisation pour la génération est trop lente
+
+220.07.01.16.10.27
+origoDate des zones centrales des civs : bugfix
+
+220.07.01.16.23.49
+instrumentum initial réaliste
+
+220.07.02.6.26.22
+m
+
+220.07.02.20.30.57
+maj Regio.facultas : fn de hospitalitas (plutot que de physis) et de instrumentum
+
+220.07.02.22.22.34
+m
+
+220.07.08.7.37.30
+en début de partie, la scène est centrée sur la capitale du player
+
+220.07.08.10.10.32
+m
+
+220.07.08.12.39.37
+génération de chaînes à chaque stade de la projection de façon à avoir des formes aigues et des iles longilignes
+
+220.07.08.16.31.34
+calibrage génération
+
+220.07.08.18.49.10
+m
+
+220.07.08.20.52.58
+m
+
+220.07.10.21.7.45
+m
+
+220.07.11.11.9.38
+calibrage filtres montes et nationes
+
+220.07.11.12.2.40
+utilisation de Gn.make dans N.create
+
+220.07.11.12.4.10
+k.make correction
+
+220.07.11.12.14.28
+suppression de k.efficientia 
+=> N.efficientiaFun
+
+220.07.11.14.46.58
+Dx.copia
+
+220.07.12.9.30.20
+autoFocus intelligent en cas de fermeture de Sheet
+
+220.07.12.9.55.29
+Ctrl + right = `next_natio
+
+220.07.12.11.1.11
+`move_to_capitolium
+
+220.07.12.11.16.54
+dc move to capitolium
+ctrl+-> aussi
+
+220.07.12.13.15.50
+`previous_natio
+
+220.07.15.10.53.21
+calibrage génération et luminosité relief
+
+220.07.22.20.3.30
+220.07.22.21.22.14
+
+
+220.07.22.21.35.43
+std.squot et quote
+
+220.07.22.21.41.35
+std.euclid
+
+220.07.22.21.55.27
+std.couple
+
+220.07.23.22.43.22
+std.random
+
+220.07.27.18.49.31
+importation de qqs txt
+
+220.08.06.7.43.39
+220.08.06.9.46.58
+std.mli mis en forme pour obtenir une belle doc
+
+220.08.06.11.33.30
+List.optLast
+
+220.08.06.11.45.54
+List.min/max
+
+220.08.06.11.54.24
+List.champ
+
+220.08.06.14.16.52
+List.census
+
+220.08.06.14.24.32
+List.remove
+
+220.08.06.15.9.45
+meilleure mise en page std.mli (utilisation des [])
+
+220.08.09.9.1.18
+List.nRemove
+List.nFilter
+List.filter_n
+List.mem_n
+
+220.08.09.9.47.39
+List.following ...
+
+220.08.09.10.29.51
+Std.List.mli sections
+
+220.08.09.11.29.16
+Std.List.mli mis en forme
+
+220.08.09.14.32.54
+Doc pour les chapitres Various, Aliases et Iterations
+
+220.08.09.14.40.35
+Conversion functions
+
+220.08.09.14.53.45
+int / float operations
+
+220.08.10.11.27.10
+réécriture et commentation de la fun Switch.y (renommée swy, abandon du module Switch inutilisé pour le reste)
+
+220.08.10.14.3.54
+introduction et commentation sous-module Std.Map
+
+220.08.11.17.34.13
+Std.Array (mli comentationné provisoirement)
+
+220.08.11.20.46.54
+Std.fold_left
+Std.Matrix (ébauche)
+
+220.08.12.8.38.31
+joli module Std.Matrix (et qui plus est débuggé)
+
+220.08.12.10.14.4
+Std.Cube (3D-array)
+
+220.08.14.21.9.41
+module Std.Ilist (indexed list)...
+
+220.08.14.21.26.43
+Std.Ilist ...
+
+220.08.14.21.30.15
+Std.Ilist OK
+
+220.08.14.21.59.33
+module Array augmenté (mais méchant warning)
+
+220.08.16.11.23.52
+Std.FloatMode
+
+220.08.16.15.4.32
+ménage et commentation Color.Nuance
+Pour être implemenation-free, il faudra dorénavant s’en tenir à ces seules valeurs.
+220.08.16.16.45.34
+Color.Nil
+
+220.08.16.17.18.20
+m
+
+220.08.17.9.12.31
+refonte et mise en page color.mli
+
+220.08.17.10.25.29
+color.Nuance.to_rvb
+color.Nuance.lumina
+
+color.nuance pointe désormais vers Nuance.to_rvb
+
+220.08.17.14.48.40
+hum_devel primaire répondant clavier/souris repompé de hum-2D
+
+220.08.17.14.57.24
+cycle simplifié
+
+220.08.19.8.50.4
+intégration screen wip, hip dans status
+
+220.08.19.9.40.37
+screen_make
+screen_update
+
+220.08.19.9.47.26
+basculement et sortie propre du plein écran à volonté (f)
+
+220.08.19.13.15.15
+Screen.t : état de l’écran
+
+220.08.19.14.32.51
+Screen.is_full
+...
+
+220.08.19.14.42.19
+Task.t
+
+220.08.19.14.59.42
+Screen.note_update
+
+220.08.19.15.38.59
+débuggage et sécurisation
+F11 bascule en fullscreen
+
+220.08.19.16.49.43
+key FULLSCREEN 
+
+220.08.19.17.6.54
+renommage et commentation
+
+220.08.19.20.11.33
+220.08.19.20.17.56
+changement de la taille de la fenêtre avec KP7 et KP3
+
+220.08.23.9.27.9
+color.to_sdl
+
+220.08.23.10.43.6
+ajout interface pour utiliser la SDL
+
+220.08.24.8.20.14
+module type Video.VideoEnv
+module type Video.Draw
+
+220.08.24.9.18.12
+m
+
+220.08.24.11.5.19
+220.08.24.11.6.8
+module ColorMap.Display : functor (Draw : Video.Draw)
+
+220.08.24.11.9.47
+m
+
+220.08.24.11.24.19
+colorMap.champ
+colorMap.nuances
+
+220.08.24.11.44.40
+Video.Draw.scrWip et Hip
+(un module Draw écrit sur une surface dont il connait les wip et hip)
+
+220.08.24.11.51.44
+colorMap.Display utilise Draw.scrWip et Hip
+
+220.08.25.19.51.8
+FloatMode.arrondi
+Screen.ewip etc.
+
+220.08.25.21.1.46
+status.screen est fourni à Draw
+
+220.08.28.11.21.3
+apparemment, j’avais oublié de les adder.
+
+
+220.08.28.15.25.40
+Video.make_font
+
+220.08.28.16.4.42
+réécriture make_font : fournit désormais une police sdl avec ttes les tailles (qui sont donc générées une fois pour
+toutes)
+
+
+220.08.28.16.19.43
+Draw.strn
+
+220.08.28.18.9.1
+Draw.resolution()
+
+220.08.28.18.33.45
+Draw.resolution plus fournie
+
+220.08.29.8.17.39
+m
+
+220.08.29.8.38.50
+Video.make_font permet de créer plusieurs fonts différentes.
+
+220.08.29.16.14.24
+Video.Draw gère la liste de font fournie.
+
+220.08.29.16.27.31
+Font.idList
+
+220.08.29.16.36.49
+strnDim
+strnWip
+
+220.08.30.9.2.28
+Draw.strn gère alignements à droite etc.
+
+220.08.30.10.41.41
+Color.t est désormais un NIL Nil.t | RGB Rvb.t
+
+220.08.30.10.43.40
+Color.t est désormais un NIL Nil.t | RGB Rvb.t
+
+220.08.30.10.47.20
+Color.t est désormais un NIL Nil.t | RGB Rvb.t
+
+220.08.30.11.1.58
+Color.to_strn rétabli et renommé composition_strn
+
+220.08.30.12.10.15
+La circonférence du cercle chromatique vaut désormais 20. (au lieu de 1000)
+Plus intuitif et simple
+
+220.08.30.13.48.6
+m
+
+220.08.30.14.2.10
+nettoyage module Nuance
+
+220.08.30.14.24.54
+m
+
+220.08.30.14.37.39
+Strn.longInt, float, et percent
+
+220.08.30.14.49.12
+strn.mli
+
+220.08.30.15.5.46
+Nuance.name
+
+220.08.30.15.51.29
+colorMap.Display.nuances() affiche les *name des nuances
+
+220.08.30.16.2.29
+m
+
+220.08.30.16.27.8
+Draw.scale
+
+220.09.01.16.9.8
+colorMap.display plus complet
+
+220.09.01.16.26.0
+Draw.antiStrn écrit en blanc ou noir (à l’opposé de la luminosité donnée en argument)
+
+220.09.01.16.49.34
+m
+
+220.09.01.17.26.14
+réduction du nb de nuances à 18 + recalibrage avec un écran j’espère correct...
+
+220.09.01.17.42.3
+couleurs calibrées (pour un Acer Aspire 5000 et un protanope ;o)
+
+220.09.02.19.14.34
+calibrage emplacement des nuances
+
+220.09.02.20.6.1
+calibrage luminosité des nuances
+
+220.09.03.20.47.0
+deux nuances supp.
+
+220.09.04.11.26.21
+FloatMode.modulo peut calculer des modulos float ex : (-2.7) modulo 0.5 = 0.3
+Définition à la main de 20 nuances intermédiaires (soit 40 au total) pour lisser au max un dégradé éventuel
+On reste à 20 nuances pour l’utilisateur (avec possiblités de définir des customs avec des nombres à virgule)
+Affichage des 40 par colorMap.nuances
+
+220.09.04.16.37.38
+m
+
+220.09.04.16.59.59
+proprification
+
+220.09.04.17.3.59
+normalisation
+
+220.09.04.20.11.24
+m
+
+220.09.04.20.39.15
+calcul et affichage nuances de marron
+
+220.09.04.20.57.7
+MAJ documentation
+
+Ajout des modules relatifs à la géographie physique.
+r=regio
+rm=regioMap
+
+Les données consistent entièrement en un array de regio (Rm.t)
+Le module R(egio) fournit les fonctions phyiques d’une regio (climat local, végétation climacique, débit et
+orientation d’un fleuve éventuel etc.)
+
+Rid.t est un identifiant de regio
+
+Les modules flumen* et continentes sont des sous-modules nécessaires à l’initialisation de la Rm.t
+
+Géométrie sur laquelle repose la carte
+
+220.09.08.16.34.50
+MAJ des modules tabula pour qu’ils collent à la bibliothèque std remaniée.
+
+220.09.08.17.16.0
+MAJ Espace
+
+220.09.08.19.18.27
+MAJ modules tabula
+
+220.09.12.21.4.28
+déclaration d’une regioMap
+
+220.09.20.8.56.16
+maj dépendances _oasis
+
+220.09.24.20.1.30
+220.09.24.20.1.49
+devel_ui/regioMap :
+Synthèse des données cartographiable à afficher ; interface entre la partie tabula et l’affichage
+(approx. ancien module Cylinder.Map)
+
+220.09.25.9.1.20
+Std.FloatMode.swy
+Color.Nuance.cut
+RegioMap.climaxNuance 
+(le calcul de la couleur de la regio jadis dans Ci est intégré à UI.regioMap (et un de ses objets principaux))
+
+220.09.25.10.57.6
+m
+
+220.09.25.11.10.35
+importation rv.ml et modules dépendants.
+
+220.09.25.11.44.14
+220.09.25.11.44.43
+ui/regioMap.regioColor
+
+220.09.25.16.52.35
+importation de orbis
+
+220.09.25.19.12.44
+220.09.25.19.14.24
+ajout Library Game : corps du jeu, à l’exclusion du concept, et à l’exclusion des spécificités des UI développement
+et jeu_final
+
+220.09.25.19.20.36
+game_ui/game_main.game devient game/game.t
+
+bug fix
+
+220.09.26.18.14.11
+A    src/game/status.ml
+
+220.09.26.18.20.29
+contenu de hum_devel déplacé dans devel_main (à la manière de hum / game_main)
+
+220.09.26.18.23.1
+nettoyage _oasis
+
+220.09.26.18.25.44
+nettoyage _oasis (suite)
+
+220.09.26.18.29.59
+tentative de création d’une gamedoc, mais ça ne marche pas.
+
+220.09.26.19.50.15
+game devient un paramètre de main.cycle
+
+220.09.26.20.2.11
+Puisque tabula réunit les modules relatifs à la géographie physique, et qu’il y a d’autres cartes que la
+tabula.regioMap, la library tabula est renommée physis.
+
+220.09.26.20.9.37
+ui/regioMap déplacé en game/tabula, puisque la carte à afficher est commune aux deux interfaces
+
+Tabula est la carte à afficher, calculée à partir d’un game (une partie). Elle est calculée notamment à partir
+d’éléments d’une physis/regioMap (rm) et d’une orbis/imperiiMap (im).
+
+220.09.26.20.16.49
+nettoyage
+
+220.09.26.21.34.11
+game/tabula.make
+
+220.09.27.19.16.21
+A    src/devel_ui/scene2D.ml : affichage de la carte/scene en 2D, à base de SDL
+
+220.09.28.7.13.30
+module Tabula.Color
+
+220.09.28.8.23.25
+affichage effectif de tabula en 2D
+(code pompé dans hum-2D/carte.ml)
+
+220.09.28.8.59.30
+random
+
+220.09.28.9.28.47
+Scene2D :
+
+module type DisplayEnv = sig
+  module Draw : Video.Draw
+  val espace  : Espace.t
+end
+
+module Display : functor (DisplayEnv : DisplayEnv) -> sig
+  val regiones : Tabula.t -> unit
+end
+
+220.09.28.9.41.4
+proprification
+
+220.09.28.10.37.16
+proprification
+
+220.09.28.11.7.43
+Espace.forme = 
+| Cylinder of web
+| Sphere
+
+Espace.resolution
+
+220.09.28.11.34.5
+m
+
+220.09.28.12.11.59
+proprification
+
+220.09.28.12.24.27
+réécriture Espace.projNb
+
+fichiers oubliés
+(aucune garantie sur espace en cours de modif...)
+
+220.09.28.14.2.54
+version qui compile
+
+220.09.28.14.11.18
+Proximae.dirList
+
+220.09.28.14.39.13
+proprification
+
+220.09.28.14.52.43
+module Proximae.Cylinder et Proximae.Sphere
+
+220.09.28.15.18.55
+securisation des définitions des quatre et huit voisins en mode Cylinder
+
+220.09.28.17.3.28
+module Espace.Cylinder
+
+220.09.28.17.5.32
+suppression des reverse devenus inutiles
+
+220.09.28.17.13.5
+m
+
+220.09.28.17.24.38
+Cylinder.latitudeMax
+
+220.09.28.17.30.41
+m
+
+220.09.28.17.43.37
+Espace.Cylinder.rid_of_coords
+
+Soit dit en passant, je m’en sert en deux endroits : les projections, et la génération des latitudes
+
+220.09.28.18.17.2
+espace.randomRid plus lisible
+
+220.09.29.8.28.5
+gros commit qui pue.
+ça compile, mais il n’y a plus de génération de carte
+
+220.09.29.8.56.45
+rétablissement de la création de l’espace.
+(ça plante à Rm.create)
+
+220.09.29.9.29.42
+bugfix : Espace.height
+
+220.09.29.9.48.37
+Rid.legal
+
+220.10.02.7.18.24
+220.10.02.7.26.48
+retour à la r 1124
+(trop de bugs introduit)
+
+220.10.02.8.43.15
+Espace.lat et lon déplacé dans Cylinder et renommés Cylinder.y et x.
+=> Cylinder.yx_of_wrid
+Cylinder.rid_of_wyx
+sont les fonctions utilisées par la génération et spécifiques au cylindre, on les déplace donc ds ce module.
+On préfère y et x à lat et lon, qui seront utilisées pour désigner des fonctions rendant les lat et lon dans leur
+définition précise habituelle, et générale aux différentes formes d’espaces.
+Lat et lon seront en revanche utilisées pour l’affichage, pour rendre générique les parties de l’affichage qui pourront l’être.
+
+220.10.02.9.14.40
+distinguo Cylinder.width Cylinder.height Cylinder.size Sphere.size
+
+220.10.02.10.49.21
+randomRid déplacé dans E.Cylinder
+
+220.10.02.11.0.12
+toutes les fonctions de Cylinder ne prennent désormais qu’un seul argument, et le même : la résolution de l’espace.
+
+220.10.02.11.9.31
+E.latMax devient un float
+
+220.10.02.18.45.31
+m
+
+220.10.02.19.2.51
+Fonctions Cylinder.lat et lon (en ° de latitude et lon)
+
+220.10.02.19.12.19
+Strn.lat et lon
+
+220.10.05.9.22.46
+220.10.05.9.23.8
+Picking.element : element de l’écran que l’on peut cliquer
+Picking.color.t : couleur/identifiant (int) de l’élément sur une surface ad hoc
+Picking.Color.of_element
+Picking.Color.to_element
+
+220.10.05.11.13.33
+module Bitmap
+
+type t = {
+  screen  : Sdlvideo.surface;
+  picking : Sdlvideo.surface;
+  }
+
+val make : Status.t -> t
+(** initialisation de l’écran ; renvoie un Bitmap.t *)
+
+val update : t -> Status.t -> t*Status.t
+(** le cas échéant, mets à jour le bitmap en fonction du status, et annote le status de la mise à jour du bitmap*)
+
+
+220.10.05.13.53.9
+m
+
+220.10.05.14.2.51
+m
+
+220.10.05.14.14.14
+réécriture de Video.fill_rect
+
+220.10.05.14.34.45
+220.10.05.16.49.0
+Video.DrawEnv inclut un Picking.Color
+
+220.10.05.17.22.0
+Picking.color.t privé
+Picking.color.to_sdlgfx
+
+220.10.05.17.54.1
+Picking.No_element supprimé et géré par une option
+
+220.10.05.18.11.16
+m
+
+220.10.05.18.36.39
+tmp
+
+220.10.06.9.41.56
+construction en cours d’un blit SDL qui à tout objet à afficher et tout mode d’affichage SDL (video, gfx, ttf) blit
+correctement avec les bonnes couleurs sur les 2 bitmaps (screen et picking)
+
+220.10.06.10.0.54
+blit opérationnel pour sdlvideo et sdlgfx functions (reste sdlttf à implémenter)
+
+220.10.06.11.24.14
+type blitParam
+
+220.10.06.11.47.59
+blit utilise le blit_param
+
+220.10.06.11.50.46
+bugfix
+
+220.10.06.12.8.27
+blit complet
+
+220.10.06.14.10.41
+blit proprifié et commenté
+
+220.10.06.14.17.58
+m
+
+220.10.06.14.25.2
+m
+
+220.10.06.15.10.31
+fill_rect et strn accepte une element option en arg
+
+220.10.06.15.20.31
+m
+
+220.10.06.15.52.18
+affichage de la résolution avec le nouveau blit
+
+220.10.07.20.7.7
+Color.lumina
+(renvoie la luminosité d’une couleur nil ou rvb)
+
+220.10.07.20.24.12
+Draw.strnExtrema
+
+220.10.07.20.27.25
+Video.antiStrn analyse la luminosité de la situation courante du bitmap écran, et écrit au plus lisible en fonction
+(en blanc sur fond sombre ou en noir sur fond clair)
+
+220.10.07.20.56.8
+antiStrn regarde 16 positions pour déterminer si la zone est claire ou sombre.
+
+220.10.08.20.3.24
+Il m’a semblé que le module Screen, dont le type t est le Status.Screen.t, avait plus sa place dans Game, avec
+Status, que dans Tools.
+Cela pose un problème à Tools/UI.ml => partie problématique commentée en attendant avis de Philippe.
+
+220.10.09.7.37.35
+Video.Draw.element
+Video.Draw.get_element (from picking bitmap)
+
+Espace.coords
+Picking.Color.of_int32
+
+
+220.10.09.7.39.38
+m
+
+220.10.09.8.42.28
+tmp
+
+220.10.09.9.9.28
+au clic souris, affichage des coordonnées de la regio cliquée par utilisation du pickingBitmap
+
+220.10.09.12.41.23
+Draw.line
+
+220.10.09.13.11.17
+Draw.viseur
+
+220.10.09.18.42.48
+alignement left_or_right : left par défaut, right si nécessaire, pour afficher la string en entier sur l’écran
+
+220.10.10.20.43.24
+initialisation du bitmap picking à picking.color.none
+
+220.10.11.17.54.51
+video.element improved
+
+220.10.11.18.16.39
+picking.co ne dépend plus de espace
+video.draw.element non plus, et déplacé en scene2D.display.element
+
+220.10.12.8.56.11
+module tools/level repompé de trunk/level
+module game/scene repompé de trunk/status/scene (état courant de l’affichage de la carte)
+
+220.10.12.9.21.36
+m
+
+220.10.12.11.14.45
+220.10.12.11.53.41
+module Game.Player
+see also game.txt
+
+220.10.12.17.51.3
+module Status.Atelier
+(la partie sur laquelle on est en train de travailler)
+
+220.10.12.19.53.55
+m
+
+220.10.12.20.1.27
+suppression VideoEnv.PickingCo
+
+220.10.12.20.4.16
+m
+
+220.10.12.20.10.40
+status comprenant un éventuel atelier sur une partie, cycle ne prend plus de paramètre game
+
+220.10.12.20.23.46
+Dans cycle, distinction de la fonction display_atelier
+
+220.10.12.20.40.0
+"n" crée une nouvelle partie (je ne comprends même pas comment ça marche) 
+
+220.10.13.8.4.14
+Scene.update
+MAJ Status.update
+
+220.10.13.9.27.20
+correctif status
+Handler.NewTask : functor de Draw (car a besoin de Draw.get_element)
+
+
+220.10.13.11.0.27
+scene2D prend en param atelier.scene
+le clic droit recentre la scene2D
+
+220.10.13.11.29.26
+m
+
+220.10.13.13.4.37
+module Scene.scale
+
+220.10.13.14.23.11
+Scale.alt
+Scale.phik
+
+220.10.13.18.59.26
+m
+
+220.10.13.19.5.6
+m
+
+220.10.13.19.20.53
+m
+
+220.10.13.21.8.34
+m
+
+220.10.13.21.14.37
+220.10.13.21.15.45
+m
+
+220.10.14.20.44.17
+Comme on va raisonner le plus possible en km ou en degrés de longitude/latitude,
+les présentes Espace.width, height, size, et dim sont renommées wir, hir, sir, et dimir (width in regiones etc.)
+
+220.10.15.18.21.1
+Espace.wir : bugfix
+
+220.10.15.19.47.33
+Espace.adik
+
+220.10.16.7.44.14
+m
+
+220.10.16.9.19.0
+m
+
+220.10.16.9.41.11
+Scene2D.geoRect
+
+220.10.16.11.33.31
+importation module quadtree
+
+220.10.16.12.35.15
+m
+
+220.10.16.13.45.48
+type Tabula.t = Tabula.regio Qtree.set
+
+220.10.16.14.6.31
+Tabula.make
+
+220.10.16.15.7.21
+Qtree.set_iter
+
+220.10.16.15.19.38
+Tabula.pos
+
+220.10.16.15.41.35
+Scene2D.regiones considère Tabula comme un quadtree pour l’affichage
+calculs en latitudes et longitudes
+
+Ça tourne, mais ça n’affiche visiblement qu’une partie de la carte (ah mais oui, c’est peut-être que j’ai mis la scene en zoom
+intermédiaire par défaut)
+
+220.10.16.18.42.45
+m
+
+220.10.16.19.5.42
+il semble que le centrage soi mauvais
+
+220.10.16.19.14.35
+centrage scene2D débugué
+
+220.10.16.19.24.17
+m
+
+220.10.16.19.28.9
+affichage coordonnées géographiques au clic souris restauré en ajoutant un paramètre taskList à la fonction
+devel_main.display
+
+220.10.16.20.30.17
+m
+
+220.10.17.19.33.55
+handler clavier/souris rétabli
+utilisation de Status.update rétablie
+lancement de display remis dans le cycle (pourquoi compliquer ?)
+
+220.10.17.20.48.44
+rétablissement du redraws, qui sera utile, et qui doit avoir un nom pour ne pas être garbage collecté.
+
+220.10.18.21.3.34
+solution trouvée pour rétablir la possibilité d’avoir des affichages hors status (coordonnées regio cliquée)
+tout en maintenant le refresh en suivant les signaux plutôt que dans le cycle
+petit défaut : il y a un affichage en trop (refresh) avant l’affichage hors status
+
+220.10.18.21.11.36
+défaut précédent corrigé
+
+220.10.19.8.17.13
+Tabula.make sort désormais un qtree deux fois plus large (-360° à +360° de longitude)
+Du coup, on peut « faire le tour du cylindre » en cliquant.
+Sans rien toucher à Scene2D, magique, non ?
+
+220.10.19.9.28.28
+ocean bleu
+
+220.10.19.9.43.42
+commentation fonctions inutilisées de bitmap
+
+220.10.19.9.57.25
+Draw.clear_screen (brown)
+Draw.clear_picking (en remplacement du Bitmap.update abandonné)
+
+220.10.19.11.19.3
+m
+
+220.10.19.11.42.42
+Scene.phid regarde si on est en mode Scene.fullscreen ou pas
+
+220.10.19.11.46.30
+blocage de la latitude « centrée » en mode Scene.fullscreen
+
+220.10.19.14.8.17
+qtree.set_iter_rect
+=> affichage des seules parties utiles du quatree
+=> affichage en 0.4 sec au lieu de 0.6 pour la carte de la terre entière
+
+220.10.19.17.37.48
+trunk/src/handler repompé
+
+220.10.19.19.17.47
+zoom in et out à la roulette
+
+220.10.20.8.30.13
+Atelier inclut une tabula
+->le quadtree n’est plus calculé à chaque affichage
+->temps d’affichage réduit de 0.4 sec à 0.1 sec.
+
+220.10.20.10.41.13
+Scene.alpha
+
+220.10.20.14.41.51
+Scene.forme
+Scene.dimensions
+
+220.10.20.18.14.5
+Scene.dim
+
+220.10.20.19.10.38
+Scene.alpha debugué
+
+220.10.20.20.41.19
+meilleur scene.alpha
+
+220.10.20.21.15.0
+Scene.altdik
+
+220.10.21.18.25.59
+Scene.altdip
+affichage de l’altitude comme décalage en y
+
+220.10.21.21.1.15
+relief optimisé et régulier
+fond gris foncé
+
+220.10.23.9.44.6
+Tabula.t type somme de quadtree et octtree de Tabula.regio
+dégradés océan
+
+220.10.23.14.54.17
+documentation pour Level
+
+220.10.26.9.23.33
+dégradé côte
+
+220.10.26.9.35.28
+tools/std/FloatMode => tools/tfloat
+
+220.10.26.10.39.28
+tools/std/map -> tools/tmap
+
+220.10.26.10.44.38
+tools/std/ilist -> tools/ilist
+
+220.10.26.10.47.3
+std/cube -> tcube
+
+220.10.26.10.49.43
+std/matrix -> tmatrix
+
+220.10.26.10.56.51
+std.array -> tarray
+
+220.10.26.11.9.48
+std/list -> tlist
++ ajout nvx modules
+
+220.10.26.14.12.51
+Color.arithmean
+cotes couleur sable
+
+220.10.27.7.41.22
+fonction puissance pour la couleur de l’océan selon la latitude
+
+220.10.27.9.8.3
+nettoyage std
+
+220.10.27.9.24.39
+mise à jour _oasis
+opérations sur float (barycenter et logb) déplacées de std dans tfloat
+
+220.10.27.9.47.54
+m
+
+220.10.27.10.29.44
+module oublié
+
+220.10.27.10.46.23
+doc
+
+220.10.27.13.8.10
+signal sur taskList
+(ça a l’air de fonctionner)
+
+220.10.27.14.10.34
+check_agenda
+
+220.10.27.14.26.5
+follow_sdlevent
+
+220.10.27.20.33.21
+redraws encore supprimé (mais cette fois, au profit d’un follow_agenda à base de signaux)
+affaire à suivre...
+
+220.10.27.20.48.15
+suppressions de deux fonctions inutiles
+
+220.10.28.20.46.39
+documentation
+
+220.10.30.9.18.37
+accès aux documentations Physis et Game
+
+220.10.30.10.34.38
+quelques commentaires
+
+220.10.30.10.53.9
+documentation espace
+
+220.10.30.12.27.3
+documentation physis
+
+220.10.30.14.17.54
+altitude graphique déplacée de r dans tabula
+
+220.11.01.18.22.53
+R.river  = enregistrement qui indique la destination du fleuve comme une regio (plutot que comme une direction), et le débit
+R.hydros = hydrographie de la regio = River | Dry | Ocean etc.
+
+220.11.03.7.9.24
+Les formes Sea, SeaIce, et Glacier deviennent des formes d’hydros, et ne sont plus des formes de climax.
+Le climax de ces regiones sera le Desert.
+
+220.11.03.8.22.41
+nettoyage
+
+220.11.03.8.38.39
+Rm.create génère correctement le champ hydros
+
+220.11.03.8.55.29
+m
+
+220.11.03.9.25.59
+factorisation code climat/climax
+
+220.11.03.9.36.45
+commentation r.mli achevée
+
+220.11.04.8.16.11
+gestion du centrage sur l’équateur en zoom max extérieur déplacé de scene2D à scene
+
+220.11.04.9.25.52
+proprification
+
+220.11.04.10.38.52
+Draw.thick_line
+
+220.11.04.10.56.56
+m
+
+220.11.04.11.36.46
+visiblement on a besoin d’un rid.array en plus du quadtree
+
+220.11.04.12.36.25
+flumen.t.dest
+
+220.11.04.14.39.58
+affichage des seules cases, parmi les bonnes leafs du quatree, qui sont dans la zone exacte à afficher
+
+220.11.04.19.49.19
+affichage fleuves
+
+220.11.07.7.13.13
+Co.to_sdlgfx gère l’alpha
+
+220.11.07.8.0.0
+Draw.line et thick_line gèrent l’alpha
+
+220.11.07.8.38.8
+alpha des fleuves proportionnels à leur taille graphique
+=> alpha et largeur des fleuves évoluent donc notamment en fonction du niveau de zoom, ce qui « gère » le clipping au zoom avant.
+
+220.11.07.13.18.32
+gestion des glaciers et banquise par l’hydros dans Tabula.Color 
+
+221.01.02.9.25.20
+221.01.02.9.26.5
+import du module trunk/status/windows en refonte/game/windows
+les parties relatives à aux états spécifiques des boutons (enfoncé ou non) et des fenêtres (position du scrollage) sont mises en commentaires
+windows.mli est commenté, sans mise en forme
+button.mli et windowsID.ml sont importés car nécessaires en l’état à windows
+
+221.01.05.9.28.6
+documentation formatée apportée à windows.mli
+
+221.01.12.7.56.33
+Ajout d’un champ windows dans status
+
+221.02.11.7.58.31
+copie des données à fusionner
+
+221.02.11.9.20.6
+import game_ui/main dans devel_ui/main
++ suppression open
+
+221.02.13.8.14.39
+préparation de l’extraction du code d’écriture de l’interface du main (hum_devel)
+
+221.02.14.9.2.16
+tentative d’extraction du gui de hum_devel.ml
+erreur de type sur Sdlkey
+
+221.02.14.11.47.3
+nettoyage et renommage
+
+221.02.14.12.11.6
+m
+
+221.02.14.13.47.6
+découpage et récursivation du main loop
+MAJ status.update : attend une seule tâche. (L’agenda gère désormais l’aspect liste en amont).
+
+221.02.14.19.39.12
+préparation de l’expulsion de la gestion des événements SDL
+suppression des sources de warnings
+
+221.02.16.20.51.42
+sélection et traduction événements SDL déplacé dans Handler
+
+221.02.17.8.23.26
+souris rétablie
+
+221.02.17.12.46.45
+gestion des événements non-gui déplacé dans Handler
+Handler.next_event renvoie désormais un event, et pas une option (il relance le SDL.wait_event jusqu’à obtenir un event hum-significatif)
+
+221.02.17.15.0.11
+F11 switch fullscreen
+suppression du video.UI_Backend qui apparemment ne sert plus
+
+221.02.17.15.52.17
+rangement Video.Make préalable à fusion avec Video.Draw
+
+221.02.17.16.6.24
+début de fusion
+les font sont créé dans VideoMake et ne sont plus fournies par VideoEnv
+
+221.02.17.16.28.41
+screen et picking bitmap signaux
+
+221.02.17.19.30.25
+début de fusion Video.Draw / Video.Make
+(putain de signaux à la con;-)
+
+221.02.17.21.8.49
+drawing des strn
+
+221.02.17.21.31.26
+fusion Draw/Make achevée
+
+221.02.17.21.40.13
+Draw.resolution fonctionne (je n’en reviens pas)
+
+221.02.18.21.43.55
+affichage carte sous l’ui
+
+221.02.19.19.52.10
+221.02.19.20.10.32
+Scene2D.Display ne dépend plus que Draw, ce qui permet d’aligner son fonctionnement sur Gui et ne pas le recalculer à chaque affichage
+
+221.02.20.23.40.3
+bugfix : synthèse événement requête de focus
+bugfix : focus initial du gui
+création d’un frame towers, focussée par défaut
+
+221.02.21.13.4.58
+Frame style
+
+221.02.21.18.10.2
+En retirant le champ tabula de status.atelier, on supprime l’erreur « Fatal error: exception Invalid_argument("equal: functional value") »
+
+
+221.02.21.18.54.8
+réécriture de Frame.draw :
+1° on affiche la toile de fond de la frame : un fill_rect de la taille de la box
+2° on affiche dessus le focus : un empty_rect, d’épaisseur deux pixels, également de la taille de la box
+
+(que le graphisme du focus dépasse la taille de la box n’est pas une cata, je trouve, et c’est plus simple : le focus n’est pas un élément
+intérieur de la box, il la souligne)
+
+221.02.21.20.58.43
+couleur frame
+
+module nécessaire
+
+221.02.21.21.38.6
+Draw.fill_rect gère l’alpha
+
+221.02.22.21.33.29
+Video.fill_rect plus efficace pour un alpha de 1.
+boutons moins flashis
+
+221.02.23.20.21.42
+boutons plus larges
+
+221.02.24.9.35.41
+Gui.widget
+
+221.02.24.12.2.39
+Draw.ewip et ehip
+Utilisation dans Gui.button_std
+
+221.02.24.12.48.7
+positionnement des towers
+
+221.02.24.16.51.35
+Gui.queen_window
+
+221.02.25.14.27.50
+Esc ferme la queen
+
+221.02.25.15.24.52
+titleBar pour les queen
+
+221.02.25.21.26.51
+réforme de gui.main visant à ne pas avoir à créer une valeur par window
+gui.queenWindowData, de façon à isoler les contenus, voire les déplacer dans un autre module
+
+
+221.03.01.8.59.49
+221.03.01.9.0.10
+rétablissement window.ml (contenu des fenêtres)
+
+221.03.01.10.17.20
+windowID.queens_and_sheets
+
+221.03.01.10.50.4
+queen Game
+
+221.03.01.12.26.44
+221.03.01.12.39.52
+bugfix : on n’ouvre pas deux queens identiques
+
+221.03.01.18.37.38
+WindowID.queens
+WindowID.sheets
+
+221.03.01.19.47.42
+nettoyage
+
+221.03.01.22.2.5
+Windows.windowState
+
+221.03.04.11.3.10
+liste d’états de widget plus élaborée + algébre idoine
+
+221.03.04.20.0.25
+window state
+
+221.03.04.20.37.40
+collect plutot que RE.select
+
+221.03.05.17.18.48
+distinction queen / window 
+
+221.03.05.17.27.22
+queenTitleBar
+
+221.03.05.19.57.38
+sheet_title_bar
+
+221.03.05.20.30.31
+Window.t
+
+221.03.07.14.18.57
+ébauche de sheet keys
+
+221.03.08.7.21.31
+task_history rétablie
+
+221.03.08.8.48.56
+window.data fn de status
+
+221.03.08.12.3.17
+Window.signal
+
+221.03.08.14.29.51
+gui.window réformé pour pouvoir gérer des Window.t signal
+
+221.03.08.15.22.5
+solution alternative qui a l’air de moins mal marcher
+
+221.03.09.20.34.39
+fenetre task_history fonctionnelle
+
+221.03.11.8.39.31
+La première ligne de la window taskHistory renvoie en direct l’activeWindow.
+On voit que les sheets ne sont pas réellement focussées lorsqu’elles le sont aux termes de Status.Windows
+
+221.03.11.17.19.19
+221.03.11.17.20.49
+commit pour identifier un bug :
+Dans Gui.stacks,
+si le void entre les deux stacks est `fills, on voit que la sheet est plus large que ce qu’elle contient.
+si le void est `expands, la sheet "Task_history", ouverte par défaut, est repoussée à droite (ce qui est normal), mais aussi écrasée (ce qui est
+embêtant)
+
+221.03.12.8.39.9
+Draw.swip et ship
+Bug constaté : pas moyen d’avoir des stacks d’une hauteur constatée autre que `tight, avec des hauteur `fills ou `fixed demandées.
+
+221.03.12.10.0.25
+Gui.blist (voué à remplacer liste)
+
+221.03.12.10.29.4
+m
+
+221.03.12.10.40.55
+gestion correcte des signaux sur screen_geometry
+
+221.03.12.10.45.39
+finition
+
+221.03.12.10.53.14
+m
+
+221.03.12.12.38.0
+interface presque potable
+Mais le T.vpack ~layout:`justified_with_space plante
+
+221.03.12.13.0.17
+m
+
+221.03.12.13.29.3
+m
+
+221.03.12.15.18.41
+fusion Windows.stackStatus et WindowID.status
+Les stacks réagissent à la tâche hide
+
+221.03.13.19.38.14
+apparence des fenêtres
+
+221.03.23.23.18.25
+bug du trou noir à tabulation : deux fix mais le pb n'est toujours pas réglé
+
+221.03.23.23.40.36
+m
+
+221.04.02.17.51.27
+affichage de la carte en fonction de la screen_geometry, et par signaux
+(en cours de dvlpmt)
+baisse severe des performances observee suite à ces modifs (sur mon turion)
+
+221.04.02.18.2.34
+bien meilleure performances en ne créant pas 36 signaux à chaque affichage de regio
+bon centrage de la carte
+
+221.04.02.18.23.51
+encore moins de signaux
+
+221.04.02.18.38.23
+nettoyage
+
+221.04.03.9.7.7
+les touches + et - modifient la taille de l’écran (en mode fenetré)
+
+221.04.03.13.33.16
+fondations pour moduler l’affichage des fonts
+fonts proportionnées à la screen_geometry
+
+221.04.03.14.1.15
+la taille de font des buttons est ajustée si nécessaire à la largeur des buttons
+
+221.04.03.18.24.58
+déplacement sur la carte par clic droit
+
+221.04.03.18.41.41
++ et - pour zoomer/dezoomer (la wheel ne semble par gérée par l’UUI ?)
+* et / pour changer la taille de l’écran
+
+221.04.04.9.30.15
+commentation des lignes surannées
+
+221.04.04.10.44.44
+selection de case
+dessin de selection en dvlpmt
+
+221.04.04.11.22.13
+sélection de regio au clic gauche
+
+221.04.04.15.28.59
+gestion des shift, alt, ctrl
+ouverture de la fenetre regio au shift+clic gauche
+
+221.04.06.9.44.27
+les clics sur carte ne sont fonctionnels que lorsqu’un atelier est chargé dans le status
+
+221.04.06.10.0.26
+Handler.atelier_tasks
+
+221.04.06.11.0.14
+gestion des mouvements par le handler (mais pas encore par Scene)
+
+221.04.06.14.22.26
+déplacement sur la carte avec les flèches
+déplacement fin avec shift + flèches
+importance du déplacement évalué en km, proportionnellement à l’altitude (définie par le niveau de zoom)
+
+déplacement sur la carte avec les flèches
+déplacement fin avec shift + flèches
+importance du déplacement évalué en km, proportionnellement à l’altitude (définie par le niveau de zoom)
+
+221.04.06.17.39.23
+les flèches bougent la carte quand aucune regio n’est sélectionnée
+les flèches bougent la regio sélectionnée quand une l’est
+alt + flèches bougent la carte quand une regio est sélectionnée
+alt + flèche sélectionne une regio quand aucune ne l’est
+échap déselectionne une regio sélectionnée
+
+221.04.09.12.6.54
+Gui.modulation des tâches en fonction des mod(ifier)s
+
+221.04.10.9.31.37
+placement et taille des boutons de la topbar en fonction de la largeur de l’écran
+
+221.04.30.7.43.37
+221.04.30.7.45.25
+m
+
+221.04.30.10.4.8
+le button Regio ensures une regio est selected, puis ouvre la fenetre Regio
+
+221.04.30.10.28.44
+Regio affiche les coordonnées de la regio selected
+
+221.04.30.12.11.25
+ça plante aussi sans les exceptions
+
+221.04.30.13.31.20
+keypad fonctionnel (déplacement et zoom)
+
+221.04.30.14.50.53
+bugfix : parties de la carte à afficher qui manquaient
+
+221.05.01.8.42.57
+variation visant à supprimer la fatal error (vaine)
+
+221.05.01.11.14.5
+Nouvel essai : la window Regio ne serait créée que lorsque le status convient, sinon un UUI.void la remplace
+résultat : Fatal error: exception Failure("signal value undefined yet")
+
+221.05.01.13.9.41
+préparation de la fusion des deux map_s_e imbriqués (au cas ou ce serait la cause du pb de la version précédente)
+
+221.05.07.10.6.27
+début de fenêtre Regio qui ne génère pas de fatal error
+à chaque fois que je crée une stack, je regarde si on a un atelier et une selected_regio avant de faire une fenêtre regio
+il en résulte qu’il n’y a plus de RS.map sur une fonction dont un cas n’est pas prévu (ce qui était le problème ?)
+d’un autre coté, cela signifie que je recrée une fenetre regio à changement de selectio_regio (y a-t-il une autre solution ?)
+
+221.05.08.18.22.11
+fenetre Regio - altitude
+
+221.05.08.18.35.47
+suppression d'un type somme inutile
+
+221.05.08.20.51.54
+mise en forme
+
+221.05.11.11.55.1
+type window.t = title * frame,
+ou frame est une liste d'elements dont d'autres frames
+
+(de façon à pouvoir spécifier des plans de fenetres plus complexe qu’une simple liste)
+
+221.05.11.14.12.38
+nettoyage
+
+221.05.12.10.46.3
+gestion des layout et alignement
+manque de bol : le layout top n'est pas implémenté dans UUI
+
+221.05.14.8.35.0
+Window.Regio :
+il vaut mieux que chaque ligne soit divisée en 3 colonnes, plutôt que le contraire
+reste le pb de l'alignement des strings dans chacune des colonnes (alignement différent dans chacune)
+un UUI.widget ad hoc me semble de rigueur
+
+221.05.14.11.43.41
+La box permet l’alignement gauche/droite du contenu
+Draw.label.size fonctionne
+
+221.05.14.13.3.49
+restauration Win.Regio
+
+221.05.15.10.18.24
+autres windows rétablies
+
+221.05.21.9.38.59
+renaissance du temps
+
+221.05.21.10.3.15
+bottomBar
+
+bottomBar
+
+221.05.21.11.29.16
+cButton
+
+cButton
+
+221.05.21.12.4.2
+turn est une Date.t
+affichage tour en button
+aspect correct bottom bar perdu pour une raison inconnu
+
+221.05.21.19.2.34
+bouton time fonctionnel (mais seulement à la souris, le raccourci clavier ne fonctionne pas pour une raison inconnue)
+
+221.05.22.8.53.20
+game réagit aux tasks end_of_turn
+
+221.05.22.10.10.32
+221.05.22.10.12.23
+intégration imd, révision code à faire
+
+221.05.22.11.34.37
+commentation
+Date.unknown
+
+221.05.22.17.19.40
+Espace.srid_of_ryx
+
+221.05.22.17.28.5
+Date.to_int
+
+221.05.22.18.5.11
+221.05.22.18.5.51
+intégration im.ml
+
+m
+
+221.05.25.12.59.5
+221.05.25.13.0.8
+outils pour afficher des textures de vegetation
+
+221.05.25.15.1.40
+couleur transparente fonctionnelle (Int32.zero = noir absolu)
+texture appliquée avec un alpha différent en fonction de l'échelle de la carte
+
+221.05.27.19.43.27
+Level.smake
+Scene.ascale = échelle d'affichage effectif, en tenant compte qu'en mode scene.fullscreen, scene.scale est ignorée
+bugfix : plus de textures en mode fullscreen
+altitudes : échelle moins pentue et moins haute, plus réaliste (pas de zone de 100×100km au dessus 4000 m)
+
+221.05.29.10.13.39
+r.mountain : si une regio est montagneuse ou pas (le sont les lignes de cretes des chaines)
+texture mountain
+Draw.fill_bmp : possibilité de choisir quel morceau du bmp on veut afficher
+texture forest : rendue aléatoire par la découpe aléatoire (modulo sur rid) dans le bmp forest
+
+221.05.29.11.1.1
+augmentation très sensible des performances en supprimant l'affichage des textures d'alpha < 5%
+(cad suppression textures à une certaine échelle, variable selon la nature de la texture)
+
+221.05.29.11.19.15
+alphaMin pour voir les sommets à toutes les échelles
+
+221.05.29.12.52.25
+221.05.29.12.52.52
+affichage du tegmen dans Win.Regio
+texture grass
+
+221.05.29.15.12.44
+les montagnes étant désormais gérées autrement, l'hydros Glacier est renommé Inlandsis
+
+221.05.29.20.14.23
+bugfix : pas de grass dans le désert
+
+221.05.29.20.48.11
+texture woodland
+
+221.06.06.8.11.56
+couverture neigeuse progressive en fonction de la température
+fonction Win.Regio.tegmen améliorée
+
+221.06.06.8.37.24
+Regio.tegmen improved
+déselection regio au clic droit
+
+221.06.06.10.6.25
+button switch_filter fonctionnel
+
+221.06.06.17.15.46
+fusion
+
+221.06.06.17.42.47
+les regiones se sont pas cliquables à petite échelle
+(pas d'écriture sur le bitmap picking -> affichage plus rapide)
+
+221.06.06.22.35.6
+les couleurs ne sont plus bonnes, mais la valeur fonctionnelle Tabula.regio.color est remplacée par un record
+
+221.06.09.8.38.42
+topBar variable en fonction de status (map_s_e)
+bug signalé : la mise en page de la topBar se met à déconner
+
+221.06.09.10.22.59
+button filter pleinement fonctionnel
+
+221.06.09.10.33.59
+Tabula.Color.regio réparé et nettoyé
+
+221.06.09.10.59.9
+Début de window Display
+
+221.06.09.11.24.2
+Boutons Display.zoom_In, Out, et Earthmode
+
+221.06.09.12.53.10
+Window.Display affiche l'échelle courante
+au prix d'un n-ième map_s_e pour les queens..
+
+221.06.09.14.24.5
+réécriture scale pour que scale varie de 1 à n
+(avec 0 en mode earthMode, à venir)
+
+221.06.09.14.50.17
+Strn.percent improved
+Simplification gestion échelle : de l'extérieur, l'échelle est un float qui varie de 0. à 1.
+Affichage correct échelle dans Win.Display
+
+221.06.09.20.4.40
+restauration bonnes couleurs filtre montes
+
+221.06.10.20.13.30
+rétablissement de la bonne hauteur des stacks
+
+221.06.13.18.4.0
+fonctions pour avoir une carte qui ressemble plus à une carte (augmentation équivalente des distance vert et horiz aux poles)
+
+221.06.15.7.54.50
+Les regiones polaires représentant des trapèzes étirés, elles sont désormais représentées comme des rectangles plutot que des carrés.
+Résultat : la carte a des dimensions plus habituelles quant au rapport height/width
+Pour aller au bout, il faudrait que, dans le concept, les regiones polaires soient moins larges et d'une surface moindre.
+
+221.06.15.17.28.56
+je repars de la 1541 pas à pas
+
+retour à la 1541 + découpage yxrh/latdip
+
+221.06.15.17.38.19
+bugfix + rewriting + comment yxrh
+
+221.06.15.18.8.29
+Tfloat.next
+
+221.06.15.18.34.55
+optimisation + commentation
+
+221.06.16.8.19.4
+nettoyage + commentation regiones.pos
+
+221.06.16.9.31.59
+calcul des distances : petit bug fix (--1)
+dessin de la séléction : désormais en rapport avec la lat
+
+221.06.16.16.48.9
+meilleur calcul des positions (en restant en float jusqu'à l'affichage)
+
+221.06.16.19.18.22
+m
+
+221.06.16.19.31.25
+par défaut : carte en résolution Low (démarrage accéléré)
+
+221.06.16.19.45.10
+fenetre newGame fonctionnelle 
+
+221.06.17.21.52.30
+m
+
+221.06.23.10.42.31
+task.new_game fonctionnelle
+window newGame fonctionnelle
+
+221.06.27.8.45.40
+Picking amélioré :
+On regarde d'abord si un élément a été écrit sur le bitmap de picking.
+Si on ne trouve rien, alors on demande quelle est la regio qui se trouve sous le pointeur souris
+
+(du coup, le déplacement à la souris fonctionne à nouveau à petite échelle)
+
+221.06.27.19.18.9
+lonx
+laty
+
+221.06.27.19.47.48
+équateur
+
+221.06.28.9.24.3
+latitudes
+
+221.06.29.8.51.24
+indications en degrés de lat
+
+221.07.04.18.16.41
+Nid.tf
+Ci.natio
+(commitage depuis Tignes, avec un putain de portable nvidia optimus, notez l'exploi)
+
+221.07.04.20.56.39
+Ci : maj oasis et circular truc supprimé
+
+221.07.05.7.43.0
+221.07.05.13.8.54
+221.07.05.13.9.51
+nations visibles avec le filtre adapté et sur la fenetre regio
+
+221.07.08.8.0.6
+221.07.08.18.49.9
+m
+
+221.07.08.19.34.4
+m
+
+221.07.08.19.43.1
+bugfix
+
+221.07.09.7.42.1
+carte Low par défaut
+légère réévaluation à la hausse des résolutions possibles
+
+221.07.09.7.53.32
+m
+
+221.07.10.12.39.27
+m
+
+221.07.10.15.16.34
+déplacement de yxr dans espace
+
+221.07.10.16.10.2
+caractéristiques en km / km2 de la terre
+
+221.07.10.18.57.31
+m
+
+221.07.11.15.14.59
+Espace.regioWik et regioHik
+
+221.07.12.10.15.28
+bugfix
+Window.Regio : affichage des dimensions en km de la regio
+
+221.07.12.11.37.57
+le zoom_in recentre la carte quand une regio est sélectionnée (plus intuitif, je trouve)
+
+221.07.12.14.8.28
+Scene2D.latdid
+(l'objectif est de calculer correctement le georect en amont, dès scene)
+
+221.07.12.14.17.32
+move
+
+221.07.12.14.22.53
+commentation
+
+221.07.12.19.2.44
+221.07.12.19.3.3
+détachement geoRect de scene2D
+
+221.07.13.9.9.55
+geoRect déplacé en sous module de Scene
+
+221.07.13.9.14.40
+m
+
+221.07.13.9.32.43
+début de fusion Scene.dim Scene.geoRect
+
+221.07.13.9.39.57
+gros nettoyage
+
+221.07.13.11.1.5
+ébauche de fn Scene.GeoRect.mercator
+(corriger le geoRect en amont pour obtenir une déformation de type mercator, de façon à avoir un geoRect exact, valable pour l'affichage et le picking) 
+
+221.07.13.12.13.54
+nouveau geoRect fonctionnel
+
+221.07.13.13.33.59
+simplification
+
+221.07.13.13.45.15
+détachement Scene.geoRect.fittinglat
+
+221.07.13.13.53.6
+nettoyage
+
+221.07.13.14.10.58
+picking (enfin) fonctionnel en latitude
+(mais plantage au zoom sur latitude haute, à voir)
+
+221.07.13.18.5.53
+affichage des latMin latMax du geoRect pour debugage
+
+221.07.14.17.10.39
+picking calculé : bugfix
+
+221.07.14.18.53.49
+fittingLat et mercator débugués
+
+221.07.17.9.2.4
+MAJ game.txt
+
+221.07.18.8.3.19
+h hide la pile sélectionnée
+h hide les deux piles quand aucune n'est sélectionnée
+
+221.07.18.9.49.32
+fenetre newGame revue (affichage des résolutions disponibles)
+
+221.07.24.15.17.50
+Espace.lonEquals
+
+Scene2D : on n'affiche pas de fleuves sur les regio au bord de la carte en mode fullscreen (pour éviter facilement le bug embêtant du fleuve de
+360° de longitude de long)
+
+221.08.09.11.27.21
+bugfix
+
+221.08.12.12.15.39
+Tabula.regio.tegmen
+
+221.08.15.9.27.33
+221.08.19.7.37.7
+affichage villes et champs
+
+221.08.19.9.17.59
+verification capacité im.create à lire une imd.civmap
+conclusion : imd ne crée plus de nations actuellement
+
+221.08.19.14.45.5
+debugage en cours
+
+221.08.23.13.43.7
+221.08.23.20.12.56
+fun R.fluxus
+
+221.08.23.20.40.9
+Window.regio affiche le débit
+
+221.08.23.20.56.25
+le débit des fleuves évolue en fonction de la supericie réelle des regiones traversées.
+l'allure du réseau hydrographique devient en conséquence indépendante de la résolution de la carte (but recherché)
+
+221.08.30.20.13.27
+221.09.01.8.18.19
+Imd.civ_centers bugfixes et calibrage
+
+221.09.03.8.22.50
+tegmen fields_and_grass (stade saltus pour les prairies)
+
+221.09.03.18.26.2
+m
+
+221.09.03.20.20.32
+placement civ sur meilleurs emplacements en priorité, les moins bons au fur et à mesure des recherches
+
+221.09.05.21.4.46
+changement forme de zone de recherche => centre de civs moins alignés à l'horizontale
+
+221.09.06.9.15.54
+réécriture fonctionnelle de disque_potentiel, avec plus de sorties de boucle spécifiées
+aucun effet mesurable de performance néanmoins
+
+
+221.09.06.17.54.29
+fonction reservation : 1 seconde de gagnée en high res sur le placement des civs
+
+221.09.06.19.52.44
+réécriture, proprification civ_centers
+
+221.09.07.8.24.11
+hospitalitas : prise en compte des fleuves
+
+221.09.07.10.21.11
+reliefs équatoriaux moins pluvieux
+
+221.09.07.19.17.39
+options d'affichage de la carte
+
+221.09.07.19.31.56
+le raccourci A ajoute/enlève la vision de l'altitude
+
+221.09.13.9.36.6
+Tabula.regio.borders : frontières interimpériales
+
+221.09.13.10.18.4
+affichage des frontières interimpériales
+
+221.09.14.8.6.54
+visualisation borders avec le raccourci b
+calibrage
+
+221.09.14.9.21.31
+f => circulation entre tous les filters
+
+221.09.17.8.20.35
+raccourcis A/B/N fonctionnels
+
+221.09.18.19.55.31
+bugfix : georect.fittinglat
+les latMin et latMax sont désormais correctement calculées (aucune case ne manque quand on se rapproche des pôles, à peu près aucune n'est
+affichée en trop)
+
+221.09.20.9.56.42
+window.keys
+
+221.09.20.16.28.32
+mise à jour fenetre Keys
+à compléter au fur et à mesure des ajouts
+
+221.09.21.22.13.1
+hourglass of fate 
+
+221.10.01.12.39.46
+rétablissement du module G(eographia)
+
+221.10.05.13.34.59
+intégration Dx à refonte
+
+221.10.12.9.39.45
+221.10.12.9.40.14
+intégration Politeia
+
+221.10.12.9.43.55
+intégration Partitio
+
+221.10.12.9.47.0
+intégration Fructus
+
+221.10.12.10.10.2
+intégration Aedificium (anciennement K)
+
+221.10.15.8.8.39
+intégration Civitas, Prox(ima Natio), et Natio
+
+221.10.18.9.4.43
+intégration CivitasList et NatioList
+
+221.10.19.10.27.14
+activation orbis.natioList
+fenêtre natio vide
+
+221.11.13.9.25.31
+221.11.13.9.40.59
+suppression du conflit raccourci
+
+N : affichage des nations sur la carte
+P : ouverture de la fenetre Polis (qui se substitue à Natio)
+
+221.11.13.10.4.0
+À défaut de regio sélectionnée, la fenetre Polis affiche une polis par défaut (Rome, ici, à terme : celle du joueur)
+
+221.11.23.9.41.3
+in window Polis
+line origo
+
+221.11.23.9.47.48
+line politeia
+
+221.11.23.11.36.12
+line artes
+
+221.11.23.11.55.32
+window Polis ...
+
+221.11.23.12.5.30
+window Polis : partie affichage info terminée
+221.11.24.9.5.29
+bug identifié : la fenetre Polis affiche par défaut les romains, alors qu'ils ne sont pas forcément sur la carte
+
+221.11.27.11.16.5
+bugfix : Fenetre Polis : la natio par défaut est la premiere de la natioIdList
+
+221.11.28.8.46.48
+positionnement carte sur la premiere natio de la nidList
+
+221.11.29.12.35.19
+ajout membre area (superficie) à R(egio)
+
+221.11.29.12.48.50
+G : calcul correct des superficies
+
+221.11.30.10.2.0
+verification calcul de facultas
+la superficie de la regio est prise en appelant R.area
+
+221.11.30.11.9.54
+m
+
+221.11.30.14.35.55
+im.create : simplif
+
+221.12.01.10.5.58
+calibrage naissance et taille des civs
+
+221.12.02.10.52.22
+diverses modif mineures
+
+221.12.02.12.5.27
+... restauration window pyramid ...
+
+221.12.02.13.35.21
+Window.natio (meta window pour ttes les sheets nationales)
+
+221.12.02.19.18.57
+Win.SB et LB (small et large/line button)
+
+221.12.02.19.31.53
+m
+
+221.12.03.8.46.52
+Win.Rect (implémenté comme un bouton en attendant mieux)
+
+221.12.03.9.24.6
+Win.Fra renommé Win.List
+
+221.12.03.9.46.56
+simplification types Window
+une window ne contient plus nécessairement une liste de choses
+
+221.12.03.11.19.49
+Win.pyramid OK
+
+221.12.03.14.28.22
+Window : écriture plus légère
+
+221.12.03.17.18.27
+Video.Draw.strn_in_wh
+
+221.12.03.17.39.48
+les labels savent s'afficher dans l'espace imparti (il était temps)
+jolie Win.Pyramid
+
+221.12.04.17.2.30
+le bouton M(ove) permet de faire glisser une sheet de droite à gauche et inversement
+notez qu'il y a aussi le bouton H(ide) qui cache la stack entière
+
+221.12.07.11.44.14
+N.update restauré
+
+221.12.07.15.44.15
+la natio connaît son identifiant (nid)
+
+
+221.12.07.16.5.1
+Orbis.update : génération d'une partitio list
+
+221.12.07.16.10.28
+Nl.update lance N.update
+
+221.12.08.11.0.22
+Partitio.fructus_of_factum
+
+N.update : calcul du fructus
+
+221.13.05.8.12.34
+mise à jour annuelle dx
+
+222.01.08.10.57.49
+bugfix : tant qu'im n'est pas updaté, plebs doit être mesurée via dx et non G
+
+222.01.08.11.27.22
+m
+
+222.01.08.11.48.47
+m
+
+222.01.11.9.21.3
+fenetre Partitio vide
+
+222.01.11.10.52.37
+Win.Partitio
+
+222.01.11.11.22.57
+Win.Partitio
+Summa
+
+222.01.16.18.16.28
+affichage alimonium_ratio et facultas_ratio
+
+222.01.16.18.24.47
+alimonium_ratio : bugfix
+
+222.01.16.18.34.42
+Natio : sauvegarde de la partitio pour information
+
+222.01.21.9.3.42
+mise à jour d'aedificium
+
+222.01.21.9.25.45
+évolution apparemment bugfree avec naissances au maximum biologique
+
+222.01.21.21.33.45
+Dx.naissances objectif : bugfix (confusion copia et facultas)
+
+222.01.22.15.41.21
+Strn.rdblint (readable int) : string formatée avec le nb de chiffres significatifs voulus
+
+222.01.22.16.2.44
+factorisation et commentation
+
+222.01.22.16.37.24
+Strn.rdblfloat
+
+222.01.23.17.55.6
+Im.natio enrichie de plebsVar
+
+222.01.26.22.13.25
+rétablissement de Im.update
+
+222.01.28.10.17.29
+mise à jour annuelle des populations des regiones en fonction du taux de croissance démog calculé au niveau national
+
+222.01.29.9.31.58
+recalcul annuel de la plèbe nationale comme somme des plèbes régionales.
+
+222.01.29.10.3.28
+optimisation démographique ordre des calculs:
+1. calcul d'un nouveau dx, et donc d'un taux de croissance démog
+2. mise à jour des regiones en fonction
+3. calcul de la plèbe nationale (dans g)
+4. mise à jour de la natio.g
+
+222.01.29.12.16.23
+222.01.29.12.17.17
+évolution régionale et nationale d'instrumentum
+
+222.01.29.13.0.31
+taux de croissance d'instrumentum mieux calibré
+
+222.02.01.22.36.30
+optimisation instrumentum initial
+
+222.02.01.22.54.41
+meilleure évaluation des populations initiales
+
+222.02.06.18.31.38
+changement des saltus fields_and_grass en ager fields
+
+222.02.10.20.14.56
+222.02.10.20.25.55
+mise à jour de atelier.tabula quand nécessaire
+
+222.02.13.9.38.20
+raccourcis clavier pour passer les tours
+
+222.02.13.10.13.5
+task.ml
+
+222.02.13.10.57.24
+tentative vaine d'afficher une fenetre à un moment déterminé par l'ordre des taches à effectuer
+À revoir avec Philippe
+
+222.02.14.21.19.55
+module Junctiones
+
+222.02.14.21.30.9
+222.02.14.21.43.27
+rétablissement fonctionnalités module Junctiones
+
+222.02.14.21.54.53
+...
+
+222.02.14.22.58.13
+orbis.junctiones
+
+222.02.16.9.47.20
+décommentation fonctions im dépendant de j
+
+222.03.10.9.53.3
+Im dispose des junctiones pour se mettre à jour
+
+222.04.19.9.57.45
+module Stratiotikon
+
+222.04.19.10.36.58
+module Stratiotikon déplacé dans Strategica
+
+222.04.19.11.31.26
+m
+
+222.04.19.19.6.23
+mli
+
+222.04.19.22.37.45
+m
+
+222.04.19.22.54.32
+ajout membre "strategies" au Game.t
+
+
+222.04.21.20.19.38
+Game.cycle
+
+222.04.21.20.27.16
+Orbis.update prend en param la liste des stratégies
+
+222.04.26.11.10.17
+petite MAJ humanopaedia
+sophia tend très lentement vers sapientia * 1.20
+
+222.05.03.9.42.44
+limitation labor par la surface agricole disponible
+
+222.05.06.10.5.11
+agriCopia : abondance en ager
+occupatio : taux d'occupation de l'ager national (inverse du premier)
+
+222.05.06.20.1.46
+player.pov
+
+222.05.07.10.13.35
+Game.alter_player.pov
+
+222.05.07.10.44.5
+task alter_player_pov examinée par l'atelier
+
+222.05.07.11.4.53
+Game.get_player
+
+222.05.07.11.13.10
+Atelier.player renvoie les données du player courant, données situées dans atelier.game.players
+
+222.05.07.11.46.23
+bottom bar affiche le nom du player, son role, et son pov
+
+222.05.08.21.36.6
+Ctrl + clic sur une regio change le player.pov
+
+222.05.08.22.9.18
+la feneter Polis affiche la polis dont on a adopté le pov
+
+222.05.10.11.50.52
+suppression homonymie 
+T = Tools
+T = Toolkit 
+dans gui
+Gui.Tools renommé Gui.UI (à changer le cas échéant pour mieux)
+
+222.05.10.11.58.12
+déplacement dans Make.Gen de toutes les définitions qui ne sont requises qu'en ce module
+
+222.05.10.21.12.13
+déplacements de code et commentation
+
+222.05.13.15.49.47
+le bouton Polis n'est visible que lorsque le pov d'une nation est choisi.
+Ceci résout le bug de la fenetre mi-ouverte mi-fermée (ouverte comme windowID et invisible comme widget parce le widget n'affiche rien s'il ne sait
+pas quelle nation afficher) 
+
+222.05.13.17.32.40
+topBar : la taille des boutons et espaces interboutons évolue en fonction de la largeur de l'écran
+nettoyage
+commentation
+
+222.05.14.9.9.5
+même chose pour bottom bar
+
+222.05.14.15.51.52
+nettoyage
+
+222.05.14.18.23.55
+Attribution d'un pov initial à l'admin (la première natio de la liste)
+
+222.05.14.18.55.10
+player courant transmis à Scene.update
+fonction Scene.move_to_capitolium réactivée
+
+222.05.14.19.56.32
+initialisation de la scène sur la natio du pov initial
+Ctrl+C recentre la carte sur la capitale
+
+222.05.18.17.27.35
+militaria et imperium : MAJ humanopaedia
+
+222.05.18.17.53.15
+colonisation agricole anarchique : ébauche
+
+222.05.18.17.59.16
+window Regio : bugfix
+
+222.05.18.18.35.39
+Im.neo_dominus précise si le changement de pptaire s'accompagne d'une colonisation agricole
+
+222.05.20.21.8.27
+Im.nea_plebs (mise à jour plèbe régionale)
+
+222.05.20.21.36.54
+rv : changement de l'ordre des membres
+
+222.05.20.22.2.14
+nea_plebs : bugfix
+
+222.05.21.9.15.53
+222.05.21.9.16.40
+modulate_tasks déplacé dans Handler pour alléger Gui
+
+222.05.21.9.46.44
+mise à jour Rv.humanitas en fonction des nouvelles valeurs de plebs et instrumentum
+
+222.05.21.20.22.56
+colonization des seules regiones farmables
+
+222.05.21.21.28.39
+vitesse de colonisation agricole aléatoire et modulée par l'hospitalitas des regiones
+
+222.05.22.22.54.56
+rétablissement ordre des calculs : Im puis G puis Nl
+
+222.05.23.9.0.26
+Pyramid.normalize
+
+222.05.23.21.41.42
+suppression du lostRatio (les pertes civiles des guerres seront localisées dans les regiones)
+
+222.05.24.18.13.59
+distinction : 
+d  : démographie du tour (n) et de la période (n-1 .. n)
+fd : projection pour le tour (n+1) et la période (n .. n+1) 
+
+la projection permet de calculer l'évolution démog nationale qui sera appliquée aux regiones
+la démographie d finale est la projection, modulée par les évolutions de frontières
+
+222.05.25.21.42.12
+suppression warnings
+création module Std.Ext
+déplacement depuis Std vers Std.Ext de fonctions peu utilisées et à la signature trop commune
+
+222.05.25.21.48.35
+déplacement fonction Std -> Std.Ext
+
+222.05.25.21.56.37
+déplacement de fonctions vers Std.Ext
+
+222.05.25.22.6.46
+déplacements de squot et quote
+
+222.05.25.22.15.28
+déplacement iter, fold_left, et applique dans Std.Ext
+
+222.05.25.22.43.2
+Std : réécriture/lisibilité des définitions
+
+222.05.26.21.39.19
+Std.max3
+
+222.05.27.9.49.38
+222.05.27.9.50.4
+module Tid
+utilisation pour les game.id et les player.id
+
+222.06.26.8.32.42
+Tid.List.nth
+
+222.07.12.9.10.49
+Tid.List.t
+Tid.List.alter
+bugfix : pov initial de l'admin
+
+222.ger.16-09.54
+switchage de pov rétabli
+
+222.ger.17-09.05
+attribution d'une facultas "chasse cueillette" aux nouvelles regiones conquises, de façon à y permettre les migrations.
+blocage de la croissance démog dans les regiones "pleines", à affiner ultérieurement en fonction du degré de civ.
+=>colonisation effective du monde par les nationes
+
+222.ger.19-20.21
+évaluation correcte besoins en nourriture de la population d'une regio (comparaision facultas / alimonium_ratio)
+
+222.ger.19-20.33
+modulation du nombre des premiers colons d'une regio en fonction du carré du manque de terres de la natio
+
+222.ger.30.11H08
+proba de colonization agricole correcte (fonction de agricopia)
+population initiale des colons améliorée
+
+222.flo.01.10H17
+situation initiale des civs plus conforme à l'évolution ultérieure des tegmen
+
+222.flo.02.09H43
+Admin pov par défaut = plus ancienne civ
+Le switchage de pov au clavier recentre l'écran
+
+222.flo.03.22H10
+calcul de stats mondiales dans Nl
+
+222.flo.04.09H54
+fenetre Orbis : stats mondiales
+
+222.flo.04.21H17
+meilleur calibrage population au km2 et zones civilisées initiales
+efficientia de 80 requise pour mettre en cultures toutes les terres d'une regio
+
+222.flo.05.21H54
+Ars.instMax : révision
+
+222.flo.05.22H09
+raccourcis clavier liés à un atelier placés dans la fonction idoine
+
+222.flo.06.21H41
+Ars.to_nil
+Color.Rvb.add
+
+222.flo.07.10H14
+Ars.to_rvb
+filter artes
+
+222.flo.07.10H31
+affichage effectif des artes
+
+222.flo.07.20H24
+création de la liste des listes de proximae après la natioList
+
+222.flo.07.22H38
+transmission à Natio.update de la liste des Artes détenus par les nations voisines
+
+222.flo.08.09H47
+Orbis.create : bugfix
+
+222.flo.08.10H28
+N.n_artes restauré
+
+222.flo.10.21H50
+rétablissement liste des artes classique
+réécriture Natio.n_artes
+
+222.flo.10.22H17
+Color.lum_mult
+
+222.flo.19.12H40
+affichage des deux artes les plus avancés dans la fenetre Polis
+fenetre Artes pour avoir la liste complète
+
+222.pra.02.10H27
+on ne déboise en totalité les woods que lorsque l'agriCopia tombe en dessous 1.05
+(on colonise les meilleurs terres voisines avant d'exploiter les terres ingrates)
+
+222.pra.20.10H59
+Fusion Regio et Rv dans Rv (données humaines des regiones)
+
+sous-modules Rv.Fun (computation données actuelles) et Rv.Next (calcul valeurs année suivante)
+
+222.pra.23.00H08
+222.pra.23.00H18
+réécriture Politeia
+
+Les regni peuvent désormais être dirigés par un monarque ou bien une oligarchie.
+Le joueur peut être viré pour incompétence ou trahison.
+
+222.pra.24.07H45
+politeia déplacé en membre indépendant de natio (plus pratique)
+cadre pour Politeia.update
+
+222.pra.27.14H53
+Aedificium.libertas
+Partitio.civicMilitaria
+
+222.pra.28.20H35
+ébauche de calcul de vis
+
+222.pra.29.11H59
+filtres populatio et vis
+
+222.pra.29.12H00
+filtres populatio et vis
+
+222.pra.30.20H40
+amélioration filtre populatio
+
+222.pra.30.22H27
+suppression automatique de l’option nations quand on change de filtre (moins confusionnant)
+
+222.mes.03.16H22
+les nationes centralisées conquièrent préventivement les terres vierges quand l’abondance en terres passe en dessous 1.2
+
+222.mes.03.21H19
+embryon de module StrategicaList
+
+222.mes.03.21H21
+suppression module Regio (coquille vide)
+
+222.mes.03.21H57
+StrategicaList.Data
+
+222.mes.05.21H56
+Junctiones.jStrategies
+
+222.mes.14.08H48
+réforme du type rv
+plusieurs correctifs restent à effectuer
+
+222.mes.14.09H10
+m
+
+222.mes.14.09H38
+rv : bugfix
+
+222.mes.14.22H22
+Rv.humanitas (pas clair) renommé Rv.contents
+
+222.mes.16.20H47
+création module Rvi.Next
+
+222.mes.16.21H16
+Rvi.colonus
+
+222.mes.18.17H56
+graphie J.tactic
+
+222.mes.18.18H02
+graphie J.mutatio
+
+222.mes.18.18H12
+graphie J.relatio et J.rogatio
+
+222.mes.20.23H54
+m
+
+222.mes.23.22H44
+préparatifs Window.tactics
+
+222.mes.24.11H22
+cadre fenetre tactics
+
+222.mes.25.11H18
+window Tactics fonctionnelle
+
+222.mes.25.15H56
+révision ordre des nations dans nid -> alpha
+
+222.mes.25.16H17
+Nid : bugfix : l’id none n’est plus attribué à une nation
+Window.tactics : les nationes sont classées alpha
+
+222.mes.25.16H36
+Nid.Nia : bugfix
+Nid.nuance : on retrouve les couleurs des nationes
+
+222.mes.27.10H46
+La colonization anarchique ne peut se produire que si la regio n’appartient à personne, ou à la nation colonisatrice.
+
+222.mes.27.12H05
+regio_colonizability
+
+222.mes.27.21H54
+colonization possible (et aisée) de toutes les terres relevant de l’imperium
+
+222.mes.28.09H27
+Rv.dominium
+
+222.mes.28.10H07
+Rvi.dominium
+
+222.mes.28.21H03
+orbis.proximaeList transmise à strategicaList
+
+222.mes.29.22H08
+politeia en cours d’amélioration
+
+222.mes.30.22H19
+filter politeia
+
+222.the.05.09H52
+m
+
+222.the.22.09H25
+Scene : bugfix
+
+222.the.28.21H25
+222.the.28.21H26
+Rv.is_passable
+
+222.the.28.22H10
+seules les regiones passables peuvent être absorbées par un imperium
+
+222.the.28.22H11
+seules les regiones passables peuvent être absorbées par un imperium
+
+222.the.29.21H46
+distinction Sea / Ocean
+Les regiones de Sea peuvent être conquises avant la découverte de la navigation
+
+222.the.29.22H03
+Nid.Nil.key_list
+
+222.the.29.22H35
+Les Feudum envahissent autant qu’ils le peuvent le territoire de leurs voisins
+
+222.the.29.22H47
+Les feudum attaquent autant qu’ils le peuvent le territoire des nationes voisines
+
+222.the.29.23H01
+window tactics : on affiche que les tactiques envers les voisins existant
+
+222.the.30.14H11
+222.the.30.14H13
+222.the.30.14H19
+Nuance.arithmean et weighmean
+
+222.the.30.15H59
+filter imperii
+
+222.fru.06.20H18
+réforme module Tid
+conséquences pour Player.id et Game.id
+
+222.fru.08.21H22
+cadre de fentre Chora
+
+222.fru.10.17H45
+window Chora ...
+
+222.fru.10.18H05
+commentation des tableaux devenus inutiles de g
+
+222.fru.10.18H24
+222.fru.10.18H26
+G.Natio.choraImperii
+
+222.fru.10.21H21
+Window Chora : affichage des superficices des chora occupées par les autres empires
+
+222.fru.11.20H40
+nettoyage
+
+222.fru.11.20H44
+nettoyage
+
+222.fru.13.13H59
+Rv.gRegio
+
+222.fru.13.14H42
+type g.chora
+
+222.fru.13.16H05
+nettoyage
+
+222.fru.13.16H35
+Tmatrix.nIter
+
+222.fru.13.19H41
+finesDmx
+
+222.fru.13.23H29
+Nia.to_nil
+
+222.fru.14.14H49
+affichage des fines (ttes infos) dans la window chora
+
+222.fru.14.17H48
+window Chora : affichage complet des caractères des parties de notre chora selon le dominus
+
+223.mes.21.22H24
+Possibilité de renseigner la définition native de l’écran dans le humrc
+Au vu de ces valeurs, Screen peut calculer les valeurs ewip et ehip de façon à ne pas avoir de déformation de l’affichage lorsque
+l’affichage se fait, en plein écran, avec une résolution 4/3 (ex : 1024 / 768) sur un écran 16/10 ou 16/9.
+Actuellement, la modif de ewip et ehip affecte les fenetres et boutons, mais non la carte. 
+
+223.mes.21.23H18
+L’affichage de la carte non plus n’est plus déformé par l’utilisation d’une résolution 4/3 sur un écran 16/9 ou 16/10
+(l’affichage est déformé ad hoc lorsque les pixels ne sont pas carrés)
+
+223.mes.22.11H41
+scene2D : meilleure précision dans la non-déformation grace à Draw.ycorratio
+
+223.mes.23.12H37
+refonte du module Screen
+les valeurs fréquemment appelées telles que ewip ne sont plus recalculées à chaque appel
+
+223.mes.23.13H01
+distinction dans screen des paramètres stricto sensu et des paramètres calculés
+
+223.mes.23.16H32
+223.mes.23.19H13
+ruse de sioux pour éviter le bug de sélection de regio à la souris en zoom max extérieur non-earthmode
+
+223.the.14.11H12
+maj instrumentum
+précisions brouillard de guerre
+
+223.the.14.12H19
+brouillard de guerre : précisions
+
+223.the.14.12H33
+Natio.has_nav
+Natio.ter_rayon
+Natio.mer_rayon
+
+223.the.14.12H47
+natio : minor bugfix
+game : le pov est "calculé" en fonction du role du player
+
+223.the.14.15H25
+Scene.natio
+
+223.the.14.15H45
+suppression de l'écriture sur la carte de picking, qui n'est plus utilisée, il me semble
+
+223.the.14.18H23
+Espace.distance
+
+223.the.14.18H50
+Scene.regio
+
+223.the.17.22H39
+223.the.17.22H40
+223.the.17.22H41
+Brouillard de guerre : les régiones lointaines inconnues sont océanes
+Le bouton de changement de pov propre à l’administrateur permet de tester effectivement les différents brouillards de guerre;
+la sélection du pov "Nid.none" permet d’afficher toutes les regiones
+
+Techniqument : Natio.regio se substitue à Scene.regio (plus simple)
+
+223.the.19.23H16
+bug de sélection de regio aux hautes latitudes résolu pour un rapport y/x constant (1.1 en l'occurence)
+
+223.the.19.23H55
+bug de sélection de regio résolu pour un rapport y/x variable selon la latitude
+
+223.the.20.09H30
+suite à la résolution du bug de la sélection de regio, suppression du système de ruses visant à contourner le bug
+
+223.the.21.00H40
+affichage de la largeur de la scène en km (menu display)
+
+223.the.21.11H53
+affichage de la largeur de l’écran en km en haut à droite
+suppression de l’affachage des bords de l’écran en latitudes
+
+223.the.21.12H04
+clearscreen couleur incognita regio
+
+223.the.21.12H32
+affichage en gris sombre des terra_incognita
+
+223.the.25.22H59
+squelette pour réimplémenter fructus (ou comment l’on passe du produit au revenu en fonction des tributs)
+
+223.the.26.22H56
+Fructus : génération de la factumList
+
+223.the.27.11H56
+G : renommage général
+
+223.the.27.12H26
+G : nettoyage et commentation
+
+223.the.27.13H25
+G.natioList : liste des géographies nationales
+
+223.the.27.14H13
+tlist.map4
+nid.nil.map4
+orbis.update : calcul unique de la g.natio.t list pour transmission à fructus et natioList
+
+223.the.27.15H23
+Fructus : squelette de création de damnumMap
+
+223.the.28.11H28
+rétablissement calcul des damnumMap et tributumMap
+F.null
+fructus stocké dans orbis pour affichage
+
+223.the.28.11H42
+securisation du ctrl + arrow pour changer de pov depuis Nid.none
+
+223.the.28.12H13
+squelette de fenetre (nationale) tributum
+
+
+223.the.28.12H42
+fonctions pour lire le fructus
+
+
+223.fru.01.05H55
+223.fru.01.11H03
+tmaxtrix.column
+nix.column
+g.natio.funusList : la chora perdue
+g.natio.finesList : les chora occupées
+
+223.fru.01.11H19
+calcul de g.natio.centrum : bugfix
+
+223.fru.01.12H02
+window tributum :
+affichage des chora perdues et occupées (superficie et plèbe)
+
+223.fru.01.14H41
+changement de dénomination window tributum -> fines
+fines : affichage somme des chora perdues et occupées
+
+223.fru.04.11H18
+win fines : 
+- affichage damnum et tributum 
+- suppression warnings
+
+223.fru.04.11H47
+fructus calculé sur la matrice (g) : plus de plantage, et plus rapide
+
+223.fru.04.13H51
+win fines : réécriture d'un passage
+
+223.fru.04.14H01
+affichage damSum et tribuSum
+bug constaté : P.debug est systématiquement affiché
+
+223.fru.19.13H32
+bugfix : Nim.to_ll
+
+223.fru.19.17H52
+Fructus : debugage bien avancé
+
+224.bru.03.11H06
+correction hum.txt
+
+224.bru.03.12H06
+calcul et affichage correct des damnum en militaria et luxus infligé aux nations occupées
+
+224.bru.09.13H43
+calcul et affichage correct des tributs
+(sauf que le tribut ne sera effectif qu’en temps de paix)
+Nim.line
+
+224.bru.10.10H18
+nettoyage et commentation
+
+224.bru.10.13H49
+réécriture et commentation 
+
+224.bru.10.16H55
+Ars.eff_tab
+Partitio : réécriture
+
+224.bru.10.18H17
+Partitio : réécriture
+
+224.bru.11.22H30
+fructus changé de nom en lucrum (module de calcul des revenus des nations)
+
+224.bru.13.22H33
+Sous module Partitio.Fructus
+utilisation dans Window
+
+224.bru.13.22H57
+Orbis : le calcul des partitio est suivi du calcul des fructus
+
+224.bru.14.23H12
+Lucrum : calcul du lucrum par retrait des damnum et ajout des tributum
+
+224.bru.15.00H18
+Window Fines : affichage du lucrum (ligne imperium)
+
+224.bru.16.01H01
+en cours
+
+224.bru.16.11H15
+Window fines : réécriture
+
+224.fri.15.12H07
+m
+
+224.fri.15.17H37
+module Rv.Brouillards
+Std.Ext.fill_nth_bit etc.
+
+224.fri.15.17H44
+rv acquiert un membre de type Brouillards.t
+
+224.fri.15.18H05
+Rv.update
+
+224.fri.15.23H21
+brouillard de guerre fonctionnel
+== les regiones conquises apparaissent comme visible
+
+224.fri.19.22H44
+Ria.update
+
+224.niv.25.09H51
+bugfixes
+- il faut différencier la carte de lecture et la carte d’écriture quand on met à jour im
+- handler : suppression des raccourcis globaux "m" et "c" pour passer mille et cent tours
+
+224.niv.25.10H22
+simplification : calcul de lucrum à partir de fructus (créé à cet effet)
+
+224.niv.25.11H58
+transmission de fructusList et Lucrum à NatioList
+
+224.niv.25.14H09
+224.niv.25.14H19
+nettoyage Orbis.update
+
+224.niv.25.14H26
+bugfix : chargement du lucrum dans orbis.create
+l’affichage de la window polis devient possible au tour 0
+
+224.niv.25.17H16
+Nil.map devient mapi
+Nil.bmap devient map
+(normalisation)
+
+224.niv.25.17H25
+normalisation map2
+
+224.niv.25.17H43
+normalisation Nil.map3
+
+224.niv.25.17H51
+normalisation Nil.map4
+
+224.niv.26.09H13
+m
+
+224.niv.26.09H25
+commentation 
+
+224.niv.26.09H37
+renommage Partitio Fructus en Partitio.Record
+
+224.niv.26.10H33
+réduction de moitié du débit des fleuves
+réajustement adéquate de leur visibilité graphique
+
+224.niv.26.16H41
+suppression des regiones urbaines
+
+224.niv.30.09H21
+nettoyage scene2D
+bug fix : en mode pov national, le brouillard de guerre ne laisse plus apparaître fleuves et frontières
+
+224.plu.06.22H08
+les fleuves peuvent désormais naitre dans les hautes latitudes
+Néanmoins, ils ne peuvent couler dans la zone climatique arctique (et donc dans un inlandsis)
+
+224.plu.07.16H41
+m
+
+224.plu.07.17H11
+m
+
+224.plu.07.20H03
+m
+
+224.plu.08.23H05
+changement mode de calcul des précipitations en altitude
+
+224.plu.09.20H38
+m
+
+224.plu.10.09H43
+m
+
+224.plu.11.14H51
+m
+
+224.plu.18.09H41
+le caractère aristocratique d’une politeia cesse d’être un booléen, il est désormais un float égal à la proportion de regiones
+latifundiaires
+
+224.plu.18.11H29
+m
+
+224.plu.18.12H19
+La strategicaList est stockée dans game ; nul besoin d’en faire une copie dans orbis
+
+224.plu.18.16H57
+module des données stratégiques déplacé dans Strategica (pour permettre lecture des matrices du tour précédent)
+
+224.plu.25.16H34
+modulation de la tactic en fonction de la tactic étrangère de l’année précédente
+
+224.plu.25.16H39
+Ctrl + Esc pour passer en pov international
+
+224.plu.26.09H39
+m
+
+224.plu.26.11H11
+révision en cours de la fonction famine
+révision en cours du taux de naissances
+
+224.plu.26.15H28
+instrumentum maximum par tech réduit
+instrumentum initial réduit
+productivité du travail hors hosp et inst réduite à 0.6
+
+224.plu.26.18H41
+m
+
+224.plu.27.17H10
+calcul correct des migrations intranationales (en fonction des populations et facultas des regiones)
+
+224.plu.28.10H48
+l’origo d’une nation est désormais un couple rid,Date
+
+224.plu.28.11H05
+normalisation Nid.Nil.iter et NatioList.iter
+
+224.plu.28.11H24
+affichage des noms des natio à leur emplacement origine
+
+224.plu.28.11H31
+taille de la police des noms de nations fonction de l’échelle de la carte
+
+224.plu.28.11H41
+m
+
+224.plu.28.12H57
+ga pour passer en baby mode (==impossible de quitter humanitas)
+ctrl + ctrl + home pour retour en mode normal
+ou 
+ctrl + ctrl + pagedown pour exit 0
+
+224.plu.28.13H08
+m
+
+224.vnt.01.14H14
+quittage propre d’humanitas, y compris en mode baby,  par Ctrl+Ctrl+F12
+
+224.vnt.01.14H27
+mise à jour keyboards shortcuts sheet
+
+224.vnt.02.11H14
+imd : réduction du diamètre du disque interne : ++ proba civ incas
+réduction du diam du disque externe : civs un poil plus rapprochées
+
+224.vnt.02.12H02
+m
+
+224.vnt.02.13H25
+tid : correction d’une erreur? de type
+
+224.vnt.02.13H31
+La civitasList est désormais une Civitas.t Tid.Til.t (et non une Civitas.t Nid.Nil.t)
+En effet, on pourrait avoir 0, 1 ou pls civitas par natio suite aux conquêtes
+
+Une Civitas.t Nid.Nil.t est créée uniquement pour créer la NatioList (pour transmettre les infos sur la localisation initiale
+des nationes) ; elle n’est pas conservée
+
+224.vnt.02.15H32
+m
+
+224.vnt.05.11H28
+224.vnt.05.11H29
+Civitas.rank
+
+224.vnt.26.11H39
+m
+
+224.vnt.26.12H33
+taux de mortalité par maladie et taux de fécondité générale réduits (plus réalistes)
+
+224.vnt.26.16H30
+Les regiones dont la densité dépassent 4 hab/km2 bâtissent des cités
+
+224.vnt.26.18H59
+carré blanc pour les civitas
+
+224.flo.11.16H39
+Cités représentées par 4 maisons blanches
+
+224.flo.11.22H21
+noms des cités et princes
+
+224.flo.12.10H43
+mise au point Vicus/Civitas/Ring
+
+224.flo.12.10H58
+m
+
+224.flo.12.13H08
+m
+
+224.flo.12.13H12
+m
+
+224.flo.13.00H13
+noms des pays(regiones) d’origine des nations
+affichage à l’écran en lieu et place des noms des peuples (dont la géographie peut évoluer)
+
+224.flo.13.23H04
+Im.update enregistre les créations de Vicus
+
+224.flo.14.21H05
+orbis.create inclut un coup d’Im.update pour créer les vicus et mettre à jour la vicusList, afin de créer les premières cités
+dans la foulée (fonction à venir)
+
+224.flo.15.09H27
+Civitas.create
+CivitasList.create
+
+224.flo.15.10H55
+génération effective de la civitasList dans orbis.create
+la vicusList n’est plus stocké puisque chaque nouveau "vicus" est traité chaque tour
+
+224.flo.15.11H19
+affichage effectif des noms des cités sur la carte
+
+224.flo.15.21H51
+pos_of_rid (factorisation)
+
+224.flo.15.22H05
+factorisation
+
+224.flo.15.22H16
+factorisation
+
+224.flo.16.07H53
+draw_flumen : factorisation
+
+224.flo.16.08H46
+draw_regio : factorisation
+
+224.flo.16.08H52
+m
+
+224.flo.16.11H41
+centrage correct des nom de cités et de pays
+
+224.flo.16.18H06
+couleurs des noms de cités et pays
+
+224.flo.16.23H11
+m
+
+224.flo.17.08H31
+réécriture
+
+224.flo.17.09H11
+draw_flumen : réécriture et débugage du cas du fleuve qui passe la longitude 0.
+
+224.flo.17.10H27
+vor
+
+224.flo.17.10H45
+suppression fleuves et borders en terre inconnue
+
+224.flo.17.11H03
+vorid
+non affichage des cités et pays en terre inconnue
+
+224.flo.17.11H41
+m
+
+224.flo.17.11H50
+tri fonctions relevant de Scene2D et Scene2D.Display
+
+224.flo.17.13H13
+affichage sur tte la largeur de l’écran en fullscreen (en affichant la regio du bord en double)
+contrôle réussi du bug du fleuve circumterrestre
+bug des frontières à corriger
+
+224.flo.17.13H34
+fonction extremi_in_earth_mode
+bug des borders éliminé
+
+224.flo.17.16H41
+m
+
+224.flo.17.16H50
+suppression des oikos Vicus et Civitas devenus sans objet
+Les civitates reposent sur des oikos Ager
+
+224.flo.18.08H47
+en cours
+
+224.flo.18.16H41
+modulation fine du maximum des naissances en fonction de la pyramide des ages
+
+224.flo.19.16H04
+calcul de la descendance finale nette pour une génération ayant atteint l’âge de 11 ans
+
+224.flo.19.17H05
+distinction indice synthétique de fécondité / descendance finale
+
+224.flo.20.09H13
+calcul correct de isf et dfn
+
+224.flo.22.11H50
+mise à jour annuelle de la liste des civitas
+
+224.flo.23.11H32
+calcul de la date de fondation des cités
+
+224.flo.23.12H23
+Rv.Vicus renommé Rv.Incol
+
+224.flo.26.11H09
+224.flo.26.11H37
+Til.assoc
+Til.find
+Til.search
+CivitasList.get
+CivitasList.search
+
+224.flo.26.15H13
+Window Regio : affichage nom de cité et date de fondation
+
+224.flo.26.16H57
+Rv.contents
+Rv.plebs
+Rv.densitas
+
+224.flo.27.10H13
+calcul et affichage de la plèbe urbaine
+
+224.flo.27.11H18
+224.flo.27.11H41
+civitasList debugged
+les cités ne sont plus recréées chaque tour
+
+224.flo.27.14H28
+date de fondation des cités
+
+224.flo.28.19H45
+date de fondation des cités
+
+224.pra.02.18H46
+fenetre Dx
+
+224.pra.03.09H23
+taux de mortalité par ss-nutrition
+
+224.pra.04.17H29
+Tfloat.arrondi
+
+224.pra.04.17H44
+window Regio : affichage du dominium
+
+224.pra.06.08H45
+m
+
+224.pra.06.09H23
+transmission du partitio record à aedificium
+
+224.pra.07.08H58
+nettoyage 
+natio.update
+aedificium.natio
+aedificium.update
+
+224.pra.07.12H20
+K.compute_vis
+
+224.pra.08.21H05
+m
+
+224.pra.08.22H15
+transmission de g.natio à aedificium
+
+224.pra.08.22H34
+m
+
+224.pra.09.09H35
+le dommage en militaria ne devient tribut qu’en cas de paix
+
+224.pra.09.14H31
+les territoires occupés perdent 50% de leur production de nourriture
+affichage dans window fines
+
+224.pra.09.22H21
+P.cibus synonyme de P.labor (mais plus parlant s’agissant de lucrum)
+Taux de famine impacté par le lucrum (au lieu du fructus national)
+Il en résulte que les nations envahies subissent la famine
+
+224.pra.10.08H30
+le damnum en cibus (50%) devient tributum pour le conquérant, y compris en tant de guerre 
+
+224.pra.10.08H50
+l’agressivité des nations anarchiques dépend désormais de copia (en cibus) et non agricopia
+
+224.pra.10.16H17
+nettoyage Natio
+transmission gn à partitio
+
+224.pra.10.21H45
+m
+
+224.pra.10.23H43
+les distances et superficies sont désormais systématiqument des float
+
+224.pra.11.18H40
+résistance à l’occupation : augmentation de la militaria civique en cas d’invasion.
+résultat visible à l’écran : refoulement en balancier des invasions entre les nations voisines
+
+224.pra.26.21H48
+réécriture neo_dominus
+le dominus précédent est désormais considéré comme un competitor (sauf s’il choisit la tactique retreat)
+la comparaison des vis se fait regio par regio (nécessaire pour la prise en compte des avantages du terrain type)
+
+
+224.pra.27.23H38
+J.is_attacking
+réécriture Im.is_competitor
+
+224.pra.27.23H41
+nettoyage Junctiones
+
+224.pra.28.21H21
+type offensive
+is_attacking returns an offensive option
+
+224.pra.30.11H02
+224.pra.30.11H06
+réécriture is_attacking (performance)
+
+224.the.09.09H46
+224.the.20.10H03
+normalisation nMap -> mapi
+
+224.the.20.10H05
+nIter -> iteri
+
+224.the.20.10H17
+cmap -> mapi_to_list
+remove removed
+
+224.the.20.10H24
+nAlter removed
+
+224.the.20.10H34
+smap2 commentation
+
+224.the.20.10H38
+cmap3 removed (unused)
+
+224.fru.01.21H56
+suppression de la nation mongole et nettoyage
+
+224.fru.02.22H06
+classement chron. des nations en commençant par 0:none
+tableau associant l’int national à la nuance 
+on peut ajouter des nations facilement en agrandissant les deux tableaux et en modifiant Nid.nb
+
+224.fru.03.09H32
+redistribution partielle des nuances
+
+224.fru.03.11H08
+Ci.natio se substitue à Nid.nuance
+
+224.fru.03.11H54
+normalisation nid/tid
+Nil.null renommé Nil.empty
+
+224.fru.03.12H14
+bugfix : distinction Nil.length et Nil.max_id
+
+224.fru.03.13H32
+Nil.len
+Til.len
+
+224.fru.03.13H45
+normalisation Nil.nth Til.assoc
+
+224.fru.03.15H28
+Til.snth
+
+224.fru.03.15H31
+Til.to_list
+Til.key_list
+
+224.fru.03.16H43
+normalisation Tid.map et mapi
+
+224.fru.03.16H51
+Nim.nth normalisé 
+
+224.fru.03.17H04
+commentation Nim.bnth
+
+224.fru.03.17H07
+normalisation Nim.mapi
+
+224.fru.03.17H16
+suppression Nim.bsort
+
+224.fru.03.17H23
+suppression Nim.cmap2 (non utilisé)
+
+224.fru.04.09H09
+nettoyage
+
+225.bru.16.12H17
+maj INSTALL
+ajout tobedone.txt
+
+225.bru.16.12H22
+warning Failure "nth" évité
+
+225.bru.16.17H30
+bug de la sélection de regio enfin résolu par un traitement post et ad hoc (origine du bug non comprise)
+(lorsque la latitude +180/-180 était située dans la moitié gauche de l’écran, la sélection d’une regio de longitude positive
+(donc à gauche de la latitude +180 East) subissait un décalage de +1 regio vers l’ouest)
+
+225.bru.16.18H39
+le keypad bouge la carte.
+les arrows la case sélectionnée.
+ajouter alt inverse le comportement de chaque (en cas de clavier incomplet)
+les arrows sélectionne la case centrale si aucune n’est sélectionnée
+echap désélectionne la case sélectionnée
+shift bouge la carte à petit pas (case par case)
+
+225.bru.17.13H35
+Ctrl+Ctrl+End pour un quit --force
+Ctrl+Ctrl+k (kill)  pour un exit 0
+
+225.bru.17.14H22
+diminution de 20% du nombre de regiones de largeur de la carte afin d’avoir des regiones carrées en moyenne latitude plutôt qu’à
+l’équateur
+
+225.bru.17.14H32
+renommage des résolutions
+
+225.bru.17.14H57
+225.bru.17.14H58
+taille agglo de base rétablie en 45×24 (bien meilleur résultats qu’en 30x16)
+autorisation de la résolution Lower (90x48) pour les tests
+
+225.bru.21.10H03
+m
+
+225.bru.21.10H30
+fix : ordre des filtres
+
+225.bru.21.12H28
+m
+
+225.bru.21.13H03
+filtre tegAlt avec tegmen plus visible
+
+225.bru.22.07H25
+225.bru.22.08H16
+restore_default_display restored
+move_to_homeland with home key
+
+225.bru.22.11H23
+pgup/down pour parcourir les sheets
+(no more conflit avec le déplacement de la sr)
+
+225.bru.22.12H05
+date de fondation des cités
+- plus variable et réaliste pour les anciennes (fonction de l’ancienneté des civs)
+- bugfix pour les nouvelles : à la date du tour ou elles sont fondées (à tester)
+
+225.bru.22.15H27
+Color : les nuances sont dotées d’une intensité naturelle
+la création des couleurs en dépend désormais.
+les couleurs générée (nil) voient leur intensité en sortie augmentée au prorata de la faiblesse de leur intensité naturelle
+
+225.bru.22.17H42
+accès à la pyramide rétabli (y)
+
+225.bru.23.14H49
+225.bru.23.14H52
+deux bitmaps (graphismes) revus
+calibrage couleur
+
+225.niv.01.20H48
+paedia
+
+225.niv.02.23H52
+paedia
+
+225.niv.04.13H03
+m
+
+225.niv.06.09H44
+fusion humanopaedia
+
+225.niv.07.19H20
+refonte paedia
+
+225.niv.08.09H33
+paedia : alienatio
+
+225.niv.08.18H26
+location des bitmaps gérée via le .humrc
+
+225.niv.09.13H20
+politeia.poleis
+ordre calcul civitasList et NatioList
+
+225.niv.09.23H24
+Politeia.poleis
+CivitasList ne dépend plus de NatioList pour la création ; seule une Nil d’origo est requise
+
+225.niv.10.10H05
+Tid.Til.filter
+Civitas.incola
+CivitasList.filter
+
+225.niv.10.19H29
+NatioList.update requiert CivitasList
+
+225.niv.10.19H45
+Transmission à Natio.update de la liste des civitates de la natio
+
+225.niv.11.18H43
+225.niv.11.18H48
+stratiotikon.init
+
+225.niv.11.19H13
+Strategica.update : réécriture : une fonction par politeia
+
+225.niv.12.11H40
+Strategica.poleis
+
+225.niv.12.17H30
+stratiotikon.poleis
+
+225.niv.13.08H03
+module stratiotikon isolé
+Partitio.compute
+
+225.niv.26.16H47
+module stratiotikon isolé
+
+226.vnd.18.12H28
+boulê
+
+226.vnd.20.13H11
+calcul correct de otium, alien(atio), civicMil, et sapientia
+
+226.vnd.20.14H47
+politeia.to_string
+stratiotikon des poleis sans boule
+
+226.vnd.27.18H48

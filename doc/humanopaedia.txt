@@ -1,0 +1,1692 @@
+
+ ****************************** humanopaedia.txt ******************************
+
+
+ *  This file is part of Humanitas.
+
+ *  Humanitas is free software; you can redistribute it and/or modify it under
+ *  the terms of the GNU General Public License as published by the Free
+ *  Software Foundation; either version 2 of the License, or (at your option)
+ *  any later version.
+
+ *  Humanitas is distributed in the hope that it will be useful, but WITHOUT ANY
+ *  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ *  details.
+
+ *  You should have received a copy of the GNU General Public License along with
+ *  Humanitas; if not, write to the Free Software Foundation, Inc., 51 Franklin
+ *  St, Fifth Floor, Boston, MA  02110-1301 USA
+
+ *)
+
+
+*** 30 vendemiaire an 225
+DDM 3 brumaire an 225
+
+Bilan des acquis de Testart et alii:
+- la première utilisation des techniques agricoles 
+  - est nettement antérieure à l’adoption d’une économie agricole 
+  - est postérieure ou concomitante à l’adoption de la sédentarité
+  - est suivie d’une période d’économie mixte (agriculture + chasse/cueillette) sédentaire
+    - cas du proche orient : 12 000 BC -> 8500 BC
+    - Chine, Mésoamérique, Andes, Soudan : écart comparable
+  - l’économie mixte peut durer indéfiniment (Amazonie, Amérique du nord, Afrique équatoriale, Nouvelle guinée etc.)
+  - la chasse cueillette exclusive peut durer indéfiniment, y compris là ou l’agriculture est possible (Australie)
+- toutes les économies mixtes sont caractérisées par la propriété usufondée :
+  - la terre ne peut appartenir à une personne autre que celle qui la cultive, le loyer de la terre n’existe pas
+  - on ne peut acheter / vendre la terre
+  - la terre appartient à celui qui la cultive, sous réserve d’une redistribution des terres opérée par la puissance publique
+- les économies agricoles finissent par adopter (exception : Afrique noire) la propriété pleine et le loyer de la terre
+  - le monde des cités connait la propriété pleine
+  - les celtes l’ont déjà adopté à l’époque de la conquête romaine
+  - les peuples germaniques l’adoptent au plus tard au Ve siècle de notre ère
+- sur l’écriture, la ville et l’État
+  - l’État peut exister sans écriture : César ne fait pas face à un État, mais bien à des États gaulois (vote de la guerre, service militaire), sans écriture
+    ( en revanche l’absence d’écriture limite peut être la dimension spatiale de l’État )
+  - l’État apparaît avant l’écriture au moyen-orient
+  - l’existence de l’État précède toujours la formation de la ville
+  - l’esclavage précède l’État
+- l’adoption de l’économie agricole dans la région du Jourdain (9500 - 7500) voient le développement des villes (Jéricho)
+  - segmentation de la population par profession
+  - maisons rectangulaires non enterrées
+  - hiérarchie sociale (Jacques Cauvin) ==> l’État de Testart ?
+
+Conclusion :
+L’économie agricole permet d’augmenter la densité de population et la création d’agglomération humaine jamais vues auparavant.
+L’organisation politique et sociale anarchique des sociétés apparait insuffisante à la taille de la population de la ville.
+Face à ce défi, la puissance publique voit ses prérogatives augmenter progressivement ; elle devient plus permanente ; 
+un segment de la population forme un corps de fonctionnaires. Ils inventent l’écriture pour leurs besoins d’administration.
+C’est en ce sens qu’apparaissent l’État et de nouvelles hiérarchies sociales.
+
+La propriété lucrative - *latifundium - apparaît bien plus tard, entre 3000 et 2900BC à Sumer. Il s’agit d’une appropriation
+privative progressive d’une ferme d’État par le haut-fonctionnaire qui en est responsable.
+Il apparaît que ce processus a affecté sans exception toutes les civilisations ayant atteint le stade de l’économie agricole et
+de l’État.
+La propriété lucrative peut aussi être une conséquence de l’invasion d’une civilisation par des armées étrangères.
+
+Les premières dynasties sumériennes apparaissent vers 2900BC, soit en même temps ou bien juste après le latifundium.
+
+--- 18 Brumaire an 215 
+DDM  3 brumaire an 225
+
+Du vocabulaire.
+
+Regio : subdivision de la surface terrestre (env 100*100 km)
+
+Natio : partie géographique de la population mondiale.  
+Elle est une entité culturelle/civilisation.
+Elle peut être ou non une entité politique unifiée.
+Elle est caractérisée par des artes et des capitaux
+Elle peut donner naissance à des cités.
+La natio dispose d’un territoire.  
+Elle dispose chaque année d’une capacité sociale de production.
+
+La capacite sociale se repartit entre pls attributiones.  Les attributiones sont : 
+- [labor] : travail matériel primaire visant la survie de la population 
+- [sapientia] : activités supérieures visant le bien-être de la population
+  (sciences, arts, instruction, médecine, etc.) 
+- oppressio : extorsion directe du spolium par un appareil policier
+- [militaria] : entretien de l’appareil militaire (production armement et mise à
+disposition d'hommes aux armées) 
+- religio : production idéologique visant à accroître l'aptitude à la servitude
+- luxus : consommation et domesticité d’une éventuelle classe dominante 
+- otium : désoeuvrement
+
+On distingue : 
+- spolium : capacité sociale effectivement commandée par l’aristocratie ( oppressio + militaria + religio + luxus ) 
+- alienatio : capacité sociale spontanément consentie à l’aristocratie SIC
+- humanitas (civilisation) : sapientia + spolium SIC
+- stratiotikon : marge de manoeuvre du stratège : oppressio + militaria + religio + otium
+
+Les capitaux sont: 
+- politeia : organisation politique et sociale
+- plebs : nombre de citoyens
+- fides : aptitude à la servitude
+- [sophia] : niveau d’instruction
+- instrumentum : degré de développement économique
+
+Un capital est evalue à un tour/moment donne.  Une production est produite
+pendant une annee/duree, ie entre un tour/moment et le suivant.
+
+Une natio à un tour donne a pour membre ses capitaux au tour t et les
+productions de l'annee precedant le tour t.
+
+--- 29 Ventose an 217
+
+L’introduction de la pyramide des ages nous amène à distinguer, pour chaque type
+de production :
+- attributio : la part de la capacité sociale affectée à ce type de production
+
+- actio : l’activité réelle (par unité de plèbe).  = le produit attributio *
+  taux de capacité à produire de la population (résultant de la pyramide des
+  ages)
+
+- fructus : le produit de l’activité (par unité de plèbe).  = le produit actio
+  * facteurs de productivité
+  (usus et artes)
+
+- factum : le produit réel (en quintaux de blé par exemple).  = le produit
+  fructus * plebs
+
+- lucrum : le revenu, soit le produit réel, moins les pertes liées à l’état de
+  guerre, moins les tributs versés, plus les tribus perçus.
+
+Les 3 premières de ces 5 valeurs sont utilisées pour le calcul de la natio.  La
+quatrième n’a d’utilité qu’en matière de relations internationales, comparaison
+des puissances militaires, et transfert de factum (paiement de tribut).
+
+*******************
+* I. Des politeia *
+*******************
+
+*** 24 brumaire an 218
+DDM 29 frimaire an 225
+
+La politeia est l’organisation politique et sociale de la natio, elle peut être
+plus ou moins égalitaire ou aristocratique, anarchique ou centralisée.  
+
+La politeia est aristocratique en proportion du taux de latifundium.
+
+Les politeia centralisée sont dirigée par un conseil ou un monarque, lequel siège
+dans une capitale.
+Un gouvernement centralisé permet :
+1. de coordonner les forces armées nationales
+2. d’établir des traités de paix avec les gouvernements des autres nations
+
+Par ailleurs, une armée centralisée et permanente peut prendre de façon permanente
+le contrôle de territoire étranger à la nation.
+
+Le territoire sous le contrôle d’une telle armée est un empire. Le terme empire
+est également utilisé pour désigner l’ensemble de la superstructure politique 
+qui contrôle ce territoire.
+
+L’empire dispose d’un budget : le stratiotikon.
+L’empire mène la guerre et décide de la paix avec les autres nations.
+La regio ou siège le gouvernement impérial est appelée URBS/capitale.
+On appelle *empire la superstructure politique et militaire spécifique à ces politeia.
+
+Un empire est initialement dirigé par un conseil (oligarchie).
+Le pouvoir de commandement peut être confié à un seul (monarchie).
+Le rôle du joueur est donc la direction d’un empire.
+
+On utilisera parfois les termes suivants à propos des politeia :
+- anarchie (égalitaire et anarchique)
+- féodalisme (aristocratique et anarchique) 
+- oligarchie ou monarchie (aristocratique et centralisé)
+- république (égalitaire et centralisé)
+
+*** 11 floreal an 224
+
+Des cités
+
+Initialement, les nations néolithiques sont égalitaires (absence de latifundium)
+et anarchiques (absence de gouvernement national).  
+
+Les nations anarchiques disposent de forces armées, mais non d’une force
+armée centralisée.
+Ces forces armées sont nécessaires à :
+1. l’accaparement progressif des terres des populations voisines de chasseurs
+cueilleurs
+2. la défense du territoire contre les razzias des forces armées des autres 
+nations.
+
+Les nationes agricoles dépassant 4 hab/km2 construisent des cités. Les cités,
+qui ne peuvent être trop proches les unes des autres, sont limitées en nombre
+(par exemple : 4 par nation)
+
+La cité est premièrement une importante agglomération de population permise par
+une densité de population et une productivité du travail suffisantes.
+Elle est deuxièmement un lieu de division accrue du travail, dirigée par un 
+corps de fonctionnaire, un proto-État.
+
+Elle permet à la nation l’invention des artes, à commencer par la métallurgie et
+l’écriture.
+(En revanche, l’acquisation d’artes par transfert n’exige pas l’existence de cité)
+
+La cité peut se doter ou non d’une boulê, c’est-à-dire d’instutions organisant 
+l’exercice du pouvoir politique par le peuple.
+
+Dans les cités dépourvues de boulê, les élites dirigeantes développent l’affectatio
+religio et le capital fides pour conserver le pouvoir entre leurs mains.
+
+Lorsque fides atteint un niveau suffisant, les élites s’approprient les biens publics :
+la propriété lucrative - le latifundium - succède à la propriété collective - mir - 
+sur la chora.
+
+La cité n’est pas un gouvernement national ; elle ne doit pas être confondu avec
+l’empire.
+
+L’existence d’une cité n’est pas non plus un préalable pour qu’une natio adopte un
+gouvernement centralisé / se dote d’une capitale. Karakorum étant le contre-exemple.
+
+Un gouvernement central au dessus de cités démocratiques est toujours un conseil
+dépourvu du pouvoir de décider lui-même de la paix et de la guerre, ou encore du
+partage de la capacité sociale.
+
+En d’autres termes, la forme monarchique du gouvernement central est incompatible 
+avec les institutions poliades démocratiques.
+
+Lorsque les cités se dotent d’une boulê, le monarque éventuel perd donc son pouvoir.
+
+Inversement, la mise en place d’une monarchie supprime la boulê de pouvoir réel 
+pour la même raison.
+
+Les princes qui souhaitent durer devront par conséquent veiller à prévenir les
+révolutions démocratiques dans les cités.
+
+*** 8 nivose an 225
+
+De l’alienatio
+
+Alienatio est la partie de la capacité sociale enlevée à sapientia en proportion
+de fides.
+Elle est attribuée par défaut à l’otium ; elle peut avoir d’autres attributions
+en fonction de la politeia nationale.
+
+En régime anarchique, militaria produit un embryon de fides. L’alienatio en 
+résultant est réaffectée à 50% à militaria.
+
+En régime poliade et en l’absence de boulê, l’élite dirigeante s’empare d’alienatio.
+Elle peut l’affecter librement à religio et militaria.
+
+L’affectation à religio produit en retour une croissance démesurée de fides
+et d’alienatio.
+
+Lorsque fides atteint le niveau requis, l’élite invente le latifundium.
+Lequel latifundium prélève une part croissante d’alienatio : luxus.
+
+En régime impérial, le prince dispose librement d’une alienatio le cas échéant
+diminuée du luxus : le stratiotikon.
+
+***
+
+De l’origine des empires
+
+L’adoption d’un gouvernement centralisé exige la découverte préalable de
+l’écriture, et a pour objet d’augmenter l’effacité des forces armées, 
+et/ou bien de négocier un traité de paix avec une autre nation.
+
+Elle se produit lorsqu’une nation détentrice de l’écriture a des dépenses
+militaires importantes, soit parce que la production agricole ne répond plus
+aux besoins d’une population trop accrue, soit parce que la production fait
+l’objet de razzias d’une nation voisine.
+
+La conquête permanente de la chora étrangère permet avec une probabilité
+encore plus grande la constitution de latifundii.
+
+***
+
+--- 7 fructidor an 215 
+DDM 3 prairial an 224
+
+De la guerre & des politeia
+
+Les régimes égalitaires sont capables de produire une certaine quantité de
+militaria dans deux circonstances :
+- surpopulation, besoin de terres cultivables
+- guerre avec une autre natio Cette capacité est faible en l’absence de
+  gouvernement centralisé (ANARKHIA), plus importante pour les républiques.
+  Cette militaria est prise sur sapientia.  Elle n’est pas dépendante de fides.
+  Elle génère, comme toute militaria, un peu de fides, ce qui peut faire
+  basculer les ANARKHIA en FEUDUM, et, plus probablement, les RESPUBLICAE en
+  REGNI.
+
+--- 27 Brumaire An 212
+DDM 18 thermidor an 219
+
+Aucune nation impériale ne pourra parvenir dans le temps de jeu imparti au
+joueur humain à réaliser la conquête totale du monde.
+Les politeia aristocratiques sont caractérisées par le développement de
+l’affectatio luxus. Ceci tend à réduire les marges de manoeuvres des monarques
+et à augmenter le niveau de difficulté pour le joueur humain au cours de la
+partie.
+Inéluctablement, cela conduit à la chute du monarque, sous la forme soit de la
+chute de la capitale (défaite militaire, passage en FEUDUM), soit d’une
+révolution sociale (passage en RESPUBLICA).
+
+
+--- 6 Fructidor an 212
+
+Les républiques ainsi formées, parce qu’elles voient leur marge de manoeuvre
+augmentée de la suppression du luxus, sont des adversaires redoutables pour les
+monarchies voisines.
+
+--- 16 Nivôse an 213
+DDM 4 brumaire an 225
+
+Les nationes ne peuvent etre absorbees en un tour-annee. Mais, chaque annee, la
+frontiere peut evoluer d'une [regio]. Les cités peuvent donc s'etendre, mais
+lentement.
+
+--- 1er nivôse an 214
+
+Le monarque peut être dans une certaine mesure éclairé : il peut saboter le
+système aristocratique en réduisant oppressio et/ou religio. Il est à noter que
+ce faisant, il réduit ses marges de manoeuvres vis-à-vis d’éventuels empires
+ennemis.
+
+[Ce faisant, il prend de plus le risque d’être renversé par ses mandants, 
+qui lui préfèreront un gouvernement oligarchique]
+
+
+--- 18 Ventose an 214
+
+Sophia détermine la probabilité de découvrir les artes, mais ne détermine qu’une
+probabilité. Il en résulte que la découverte des artes constitue un élément de
+hasard considérable dans l’évolution de la partie.  Cependant, il ne s’agit pas
+d’un hasard total et permanent, mais d’un hasard ponctuel pouvant renverser le
+cours de la partie cinq ou six fois.
+
+--- 2 thermidor an 217
+
+De la précision de l’action du stratège
+
+Gérer des unités réelles de population ou d’investissements productifs ne serait
+pas conforme à l’objectif de non croissance exponentielle du nombre de choses à
+gérer. En effet, ces éléments croissent d’un facteur 100 du fait de la
+croissance de la population et de celle du spolium.
+
+Gérer des parts de capacité sociale supprime uniquement le premier de ces deux «
+problèmes ».
+
+La solution est donc la gestion de part du spolium disponible pour l’empire (ie
+luxus exclu).
+
+Rappel : le partage se fait entre 4 attributiones : oppressio, religio,
+militaria et otium.
+
+Quant à la la précision de l’action du stratège, le bon ordre de grandeur me
+semble être le dixième du spolium disponible.
+
+
+
+Lorsque fides atteint un niveau suffisant, ce sont les regiones de la chora
+qui tombent une à une en régime latifundiaire.
+
+L’aristocratie accroit son pouvoir au fur et à mesure de l’extension du régime
+latifundiaire à toutes les regiones.
+
+
+
+******************
+* III. Du spolium *
+******************
+
+---  6 Germinal an 216
+
+I. Le spolium potentiel ne doit pas dépendre de fides/(fides+libertas), mais de fides tout simplement.
+Ainsi : 1°) Pas d'effet boule de neige.
+2°) Obligation de maintenir religio à un niveau réaliste par la suite 
+3°) Plus besoin de maintenir une sapientia artificielle minimum de 1000 pour faire repartir libertas après une fin d'empire
+
+II. Oppressio ne doit pas pouvoir modifier [sophia] directement. 
+Sapientia doit être réduite par fides + e.oppressio.
+Cela suffit pour avoir une oppressio plus efficace à court terme.
+La production "Sapientia" est directement entravée par oppressio, et indirectement par religio, via fides.
+
+--- 16 germinal an 218
+
+Religio versus Oppressio
+
+Les empires disposent de deux moyens de produire du spolium.  Pls éléments
+peuvent les amener à préférer dans une certaine mesure religio ou oppressio.
+- Religio produit (plus que les autres affectatio) un capital : fides, sur
+  lequel on peut se reposer en cas de difficulté.
+- Oppressio est immédiatement efficace, ce qui est utile pour faire face à une
+  urgence, par exemple une guerre subie.
+- Une des deux affectatio peut être objectivement plus efficace du fait de
+  l’état des artes, voire du climat idéologique du moment.
+- Certains stratèges pourraient avoir des préférences a priori pour religio ou
+  oppressio.
+
+--- 29 prairial an 217
+
+Des limites du développement du spolium
+
+1. le spolium suppose une population en mesure de travailler, donc vivante, donc
+nourrie.  Tout développement aux dépens de labor est donc inefficace, mais
+néanmoins possible (famine «politique»).
+
+2. la valeur brute du spolium dépend de la productivité du travail/du capital
+instrumentum.  Celui-ci dépend à pls titres, ± directs, de sapientia.  Son
+développement en proportion de la capacité sociale, aux dépens de sapientia,
+peut donc lui être globalement dommageable quant à sa valeur absolue.  Au-delà
+d’un certain seuil, le spolium produit de la stagnation, voire de la régression
+économique.
+
+--- 24 Thermidor an 213 
+DDM  4 brumaire an 225
+
+De luxo
+
+Il avait ete prevu que luxus augmente au cours de la partie afin d'accroitre le
+niveau de diff. Par ailleurs, l'idee que luxus s'accroisse regulierement entre
+deux revolutions ne semblait pas absurde. La fonction d'accroissement n'avait
+cependant pas ete discutée. 
+
+Luxus est une partie croissante d’alienatio. Le prince développe alienatio à
+des fins possiblement autres (militaires notamment).  L’alienatio est
+progressivement affecté au luxus.
+
+Le prince peut réduire le taux de luxus dans la capacité sociale en réduisant
+alienatio, mais il ne peut réduire le taux de luxus dans alienatio.
+
+Le luxus est extrait dans les regiones latifundiaires seules. La progression
+du latifundium réduit les ressources impériales.
+
+
+*** 5 floreal an 224
+DDM 24 fructidor an 224
+
+De latifundium
+
+Le spolium est fixé par le niveau de fides et oppressio.
+C’est le niveau de latifundium qui décide directement du niveau de luxus.
+
+Aux guerres impérialistes, qui produisent du latifundium (cf infra), s’ajoute :
+
+le rapport fides/sophia décide de l’extension ou de la réduction à l’intérieur d’une 
+nation de l’importance du latifundium.
+
+S’agissant du régime social des empires initiaux, on a en Égypte, à Sumer, de grandes
+unités de production, en co-administration par la puissance publique, et sans propriétaire privé.
+L’État ne peut chasser les habitants, mais il finit par vendre ces unités à des propriétaires privés.
+Le passage de la propriété publique communale (mir) à la propriété publique étatique, et la mutation
+de la contribution en loyer est difficile à discerner.
+En revanche, l’appropriation privée est une rupture assez nette. 
+C’est aussi elle que l’on retiendra comme point de départ du luxus.
+
+La transformation du mir en latifundium permet l’attribution progressive du spolium au luxus.
+
+Étape 1 : L’obligation militaire de la cité développe fides
+Étape 2 : Les conquêtes et Fides permettent le développement du latifundium
+Étape 3 : La révolution sociale pratique la réforme agraire : le minifundium
+succède au latifundium. Le luxe est aboli. La république est une nouvelle
+machine de guerre.
+
+*** 24 fructidor an 224
+
+De la formation des latifundii par conquête
+
+Nous avons vu que les situations de famine peuvent entrainer la conquête de
+territoires étrangers par les nations affamées.
+La conquête d’une terre étrangère provoque le contact entre :
+- les conquérants : une population avide de terre et de nourriture et rompue à la 
+violence autant qu’à l’agriculture
+- une population paysanne étrangère, plus nombreuse.
+
+Le conquérant tient pour sienne la terre qu’il a conquise. Les précédents 
+occupants doivent choisir entre l’exil et le paiement d’un loyer au nouveau
+propriétaire.
+
+La conquête entraine donc immédiatement :
+- soit la conversion en latifundium.
+- soit la résistance/le massacre/l’émigration des autochtones
+
+Le choix de la servitude plutôt que l’exil est d’autant plus probable que 
+l’aptitude à la servitude (fides) est élevé chez l’autochtone.
+Il est pour cette raison très peu fréquent aux débuts de la civilisation, avant
+de devenir systématique quelques millénaires plus tard.
+
+Une occupation durable aboutira à la fusion lente des deux cultures, fusion lente
+qui ne remettra pas en question le régime social.
+
+
+Quelles sont les conséquences d’une libération d’une regio ?
+C’est l’aptitude à la servitude (fides) de la nation maitre d’elle meme qui
+va déterminer la probabilité de maintien du régime social ou de révolution sociale
+(passage en mir ou minifundium)
+
+
+*******************************
+* V. Du devenir des empires *
+*******************************
+
+--- 28 Nivôse an 217 DDM 6 Floréal an 217
+ 
+Fides & Seditio : le devenir de l’empire
+
+Fides mesure l’aptitude d’une natio à servir un empire.
+
+Deux processus génèrent fides : la production religio, pour toute la population,
+et le fait de servir l’empire, pour tous ses serviteurs.  Ainsi, toutes les
+productions impériales produisent de la fides, mais en diverses proportions.
+
+Toute *production impériale (religio,  militaria, oppressio et luxus) génère une
+demi-production effective de religio.  On remarque que cette production supp est
+affectée par le nombre de producteurs mais non par les facteurs de productivité
+de l’affectatio religio.
+
+Rappelons que le spolium vaut au plus fides, augmenté de l’oppressio effectve du
+tour précédent.
+
+Toute *affectatio impériale, parce qu’elle est un gaspillage de la capacité
+sociale, accroît également le capital seditio : l’aptitude à l’insurrection.
+Toute *affectatio impériale génère une demi-production effctive de capital
+seditio.  Enfin, l’oppressio effective génère une production effective
+équivalente de capital seditio.
+
+Il y a risque d’insurrection quand seditio dépasse 30%.  L’insurrection est
+victorieuse ssi seditio dépasse 50%.  La défaite éventuelle de l’insurrection
+vaut réduction de seditio et de plebs (massacre des insurgés).  L’existence
+d’une forte minorité séditieuse n’est donc pas sans coût.
+
+On remarque que religio est très nettement la production qui produit le plus de
+fides, et ce d’autant plus que la technologie est développée, et le moins de
+seditio.
+
+--- 30 prairial an 217
+*** 24 fructidor an 224
+
+Du devenir des empires
+
+Luxus est une proportion croissante de spolium, au fur et à mesure que le 
+latifundium s’étend.  Toutes les parties du spolium servent l’empire.
+Cependant, des parties du spolium, c’est la moins productive.
+Sa croissance met à terme en danger l’empire. 
+
+En effet, Face au luxus croissant,
+- soit le stratège réduit militaria, et expose l’empire à des défaites
+  militaires, une vassalisation, et à terme, la disparition de son hôte : sa
+  nation, donc la sienne.
+- soit il réduit religio ou oppressio. Dans ce cas, il réduit par voie de
+  conséquence le spolium, c’est un suicide de l’empire.
+
+Dans ces deux cas, luxus, qui est une part de spolium, diminue, est réduit en
+valeur brute (dans le premier parce que la surface nationale dimiune, dans le
+second parce que le taux de spolium diminue).  Dans ces deux cas, le stratège
+doit donc craindre une révolution de palais soutenue par la classe dominante,
+avant la disparition de l’empire.
+
+- soit il accroit le taux de spolium, aux dépens de sapientia, puis de labor.
+  Dans ce cas, il diminue les chances de progrès technique, puis réduit la
+  productivité, puis provoque la famine. À terme, la valeur brute du spolium,
+  donc de militaria, est menacée.  L’empire est donc également menacé par les
+  défaites militaires etc.
+
+Avant cette option, l’empire doit craindre une révolution politique. 
+
+*** 18 Messidor an 217
+
+De la révolution politique
+
+Seditio désigne la tentative d’anihilation de l’empire et, par extension, le
+capital rendant probable cette éventualité.
+
+Cette éventualité n’est jamais certaine. Elle est jouée aux dés chaque tour.
+Par contre, la génération du capital seditio répond à des critères certains :
+
+- le niveau du spolium
+- le mode de prélèvement (oppressio plutôt que religio) voire
+- le contenu du spolium (militaria moins que le reste)
+- la famine
+
+L’issue d’une seditio est également certaine. Elle est fructueuse ssi le capital
+seditio est supérieur à 50%.
+
+Les conditions favorisant la probabilité de sedito restent à débattre.  idée :
+capital seditio >30%
+
+--- 16 Nivose an 213
+DDM 6 ventose an 220
+
+Les caractéristiques matérielles du sol et du sous-sol sont attribuées aux
+regiones.
+. [is_farmable]: (son caractere arable ou non) 
+. hospitalitas : (Un indice de productivite de l'ager pour un instrumentum nul)
+. facultas : fructus maximum pouvant être tiré de la regio (pour une qté de labor infinie)
+. altitude et climat (visant à produire une carte réaliste des fertilitas)
+. ressources métalliques et fossiles
+
+Il est calculé chaque année les ressources dont dispose la natio, en fonction de
+son territoire (les regio qu’elle a colonisées) :
+. chora: Le nombre de regiones de la natio 
+. hospitalitas: la moyenne des fertilitas des regiones arables pondérée par leur
+plèbe. 
+. facultas : Capacité économique de la natio : Somme des facultas des regiones
+
+[facultas] constitue un plafond pour (luxus+industria)*plebs
+
+--- 9 Pluviose an 216
+
+Ordre des calculs
+
+Le pertinent me semble être de calculer les décisions à effet immédiat avant les
+décisions à long terme (sur la durée d'un tour).  
+Une strategie contient possiblement des rogationes (REGNI et RESPUBLICAE),
+des plans de guerre, et un [stratiotikon].
+L'effet des rogationes est immédiat.
+
+On calcule 
+(-1). les stratégies nationales définie en (n-1) pour n 
+0. la date du nouveau tour : n (emplacement symbolique : ce qui est calculé
+ensuite "a lieu" au tour n) 
+1. les relationes en fonction des rogationes 
+2. la carte politique en fonction des nouvelles relationes (les guerres
+modifient la carte) 
+3. les contacti en fonction de la nouvelle carte politique (l'évolution des
+frontières modifient les contacts) 
+4. les nationes en fonction de la nouvelle carte politique (l'évolution des
+frontières modifie la superficie et la population des nationes, et tout le reste
+par conséquent) et du plan de partitio défini en (n-1) 
+5. les vetera, événements nx et internx ayant eu lieu au tour n.
+
+On a un nouveau hum_turn calculé. Une nlle stratégie peut être définie.
+
+--- 17 Germinal an 215 DDM 5 Nivôse an 216
+
+De chronicis
+
+On etablit au fur et à mesure de la partie une liste d'evenements importants:
+naissance d'empire
+chute d'empire suite à revolution (seditio>50%)
+chute d'empire suite à capture de capitale
+declaration de guerre
+conclusion de paix
+decouverte de technique
+
+Il existe une chronique mondiale à laquelle on n'a pas acces en cours de partie,
+et qui sert de fil conducteur au replay.
+
+Il existe une chronique pour chaque nation. Elle n'enumere que les evenements
+qui la concerne.  Les evenements naissance, chute et decouverte ne figurent que
+sur une liste nationale.  Les evenements declaration de guerre et conclusion de
+paix figurent sur 2 listes nationales.  La chronique nationale permet à l'IA -
+voire au joueur humain
+- de se souvenir des attaques furtives menees par les nations voisines, donc de
+  mener une politique diplomatique adaptee.
+
+La chronique nationale ne debute qu'apres la decouverte de l'ecriture par la
+nation.  Elle ne cesse pas lors d'une seditio ; elle cesse ssi la natio
+disparait.
+
+De junctionibus
+
+Les nationes peuvent être en contact (géographique) ou non.  Les nationes
+peuvent avoir signé un traité de paix, se faire la guerre, ou ne pas se faire la
+guerre, sans avoir signé de traité de paix (N_RELATIO).
+
+L'absence de contact ne se confond pas avec l'absence de guerre et de paix.
+Deux nationes peuvent être en guerre ou en paix sans avoir de contact, dans le
+cas où l'évolution des frontières aurait rompu un contact géographique
+antérieur.  N_RELATIO est la relatio par défaut de deux nations qui rentrent en
+contact pour la première fois.
+
+Les relations engagent les nationes et non leurs seules institutions politiques,
+elles ne sont donc pas annulées par les naissances et chutes d'empires.  [Ceci
+étant, les stratégies diplomatiques évoluent en fonction des régimes des pays en
+relation.]
+
+--- 4 Pluviose an 216
+
+Contact, Diplomatie et opérations militaires
+
+Les déclarations de guerre et propositions de paix supposent le *contactus avec
+la natio destinataire du message. Le *contactus est la jonction géographique.
+Rappelons que les océans sont sujet à l'appropriation nationale une fois la
+navigation découverte.
+
+- le contactus ne peut dépendre de la seule distance : l'obstacle maritime
+  serait négligé.  On peut regretter l'impossibilité de traité avec des nations
+  proches d'une nation proche de nous et avec laquelle on est en paix - donc qui
+  laisserait passer des diplomates - , mais cette éventualité a peu
+  d'importance : quelle intérêt à déclarer la guerre ou signer une paix avec une
+  nation dont on n'est pas un voisin ? -
+
+Les opérations militaires, la conquête d'une case, ne dépend pas du *contactus
+en tant que tel, mais  directement des proximités inter- microcases (ce qui
+revient au même) et de la technologie (là il y a une différence : une natio
+dépourvue de la navigatio ne peut conquérir des cases océanes mais peut traiter
+avec une natio possédant le débouché maritime)
+
+---  6 Germinal an 216
+
+Contre chacune des nationes voisines, 3 tactiques peuvent être réalisées en cas
+de guerre : 
+défensive: ne pas essayer d'envahir ennemi 
+offensive: l'envahir si l'on en a la capacité 
+retraite : se retirer des éventuels territoires conquis
+
+L'intérêt de la défensive et la retraite tient à ce que l'occupation du
+territoire ennemi ne rapporte RIEN jusqu'à ce qu'il soit colonisé (qu'il intègre
+le territoire national) [ou qu'une paix inégale soit signée], mais qu'il coûte
+déjà le coût de l'occupation.  La puissance militaire est réduite par la
+superficie de l'empire.
+
+On distingue donc le territoire de la nation de celui de l'empire.
+
+L'introduction du concept de retraite permet de donner un coût à la conquête des
+déserts et océan. On peut leur attribuer un coût d'occupation minimal, ce qui
+est réaliste.  D'un autre côté, en cas de besoin, un empire peut renforcer sa
+puissance en abandonnant en priorité les terres non arables.  Dans ce cas, il
+faudra pouvoir établir une tactique militaire (mais pas rogationes possibles)
+vis à vis des territoires non appropriée par la [chora].
+
+--- 11 floréal an 216
+DDM 17 pluviose an 222
+
+Imperium & chora
+
+Les nationes maîtrisent toutes l'agriculture ou l'élevage.  Elles peuplent les
+terres adaptées à ces activités, à savoir toutes les terres émergées, à
+l'exception des déserts, glaciers/zone_arctique, forêt équatoriale et taïga. Les
+petites populations pratiquant la chasse/cueillette dans ces zones ne sont pas
+représentées.
+
+La surface initiale des nationes est une zone fertile limitée par des terres non
+fertiles [ou non cultivables : forêt dense], des océans, et la surface des
+autres nationes.
+
+On distingue la surface controlée militairement par une natio : l'imperium 
+de la surface peuplée (chora).  Toutes les nations, quelque soit leur politeia,
+ont des dépenses militaires et donc d'un imperium.
+
+Les nations anarchiques ne produisent des dépenses militaires qu'aux fins de
+la défense immédiate de la chora. Chez ces dernières, l'imperium ne peut dépasser
+les frontières de la chora. Les armées suivent la colonisation agricole.
+
+Les républiques, en revanche, disposent d'une armée unitaire capable d'organiser
+la conquête de terres lointaines. La conquête de terres peut précèder la
+colonisation. L'imperium peut excéder la chora.
+
+Enfin, les régimes aristocratiques peuvent occuper les terres vides et les
+chora étrangères, afin d'en tirer un tribut.
+
+
+***
+
+--- 10 Pluviose an 216 
+DDM 4 prairial an 224
+
+De la supériorité militaire
+
+Elle est évaluée par comparaison des puissances militaires nationales (vis)
+Vis dépend de la part de militaria dans la capacité sociale, des artes découvertes,
+de la population (facteurs positifs), et de la superficie arable de l'empire
+(facteur négatif).
+
+  let vis = ( militaria * indice d’actio  * plebs + tributs en militaria ) / chora
+
+Vis vaut 0.2 pour, par exemple, les valeurs théoriques suivantes :
+militaria = 20% de la capacité sociale && technologies militaires =
+aucune && plebs/arabalis = 1.0 hab/km2
+
+Vis vaut 32.0 pour exercitus = 50% de la capacité sociale && technologies
+militaires = MET, GUN, CMB && plebs/arabalis = 8.0
+
+A cela s'ajoute l'experience (usus) des soldats.
+
+--- 19 Thermidor an 216
+
+De l'expérience des soldats et prêtres
+
+L'expérience se mesure par un nombre compris entre 0 et 1 Chaque tour, elle
+(usus) est
+- augmentée de (1 - usus)/3 (acquisition d'expérience)
+- puis divisée par (max 1 (quot mil p_mil)) (baisse de l'expérience globale en
+  cas de recrutement de nouvelles troupes)
+- puis divisée par 2 lors de la découverte/application immédiate d'une
+  technologie militaire.
+
+Ce nombre (usus) ajouté à 1 (soit un nombre compris entre 1 et 2) est un nouveau
+facteur de vis.
+
+L'expérience croît ainsi de la façon suivante : an 0 = 10000 an 1 = 13333 an 2 =
+15555 an 3 = 17036 an 4 = 18024 an 5 = 18682 an 6 = 19121
+
+Lorsque militaria est triplée, l'expérience est divisée par trois (il y a 2/3 de
+nouvelles recrues) Lorsque militaria est augmentée d'un tiers, l'expérience est
+réduite d'un quart (il y a un quart de nouvelles recrues)
+
+Soit une expérience de 2 lors de la découverte d'une tech militaire.  La tech
+doublant vis, et l'expérience étant réduite de moitié, le gain final de
+puissance est limité à 50% à court terme. Il monte à 90% en 4 ans (le temps de
+la prise en main de la nouvelle technologie).
+
+Même schéma en tout point pour religio et oppressio.
+
+---
+
+Différences expérience / capital
+
+Expérience et capitaux sont tous deux un produit du temps.  Cependant,
+
+- Le capital est le produit de l'accumulation de production. Chacun des capitaux
+  (fides, libertas, instrumentum) caractérise la société toute entière.  Fides
+  et Sophia ne déterminent pas directement des productivités.  Instrumentum
+  détermine la productivité de deux attributiones différentes (ind et luxus).
+
+- L'expérience est un effet secondaire de la production.  L'expérience
+  caractérise une partie de la population : les spécialistes des tâches
+  impériales (militaria, religio, oppressio). Elle détermine et détermine
+  uniquement la productivité d'une attributio.
+
+---
+
+Conséquences de l'existence de l'expérience
+
+La stabilité des proportions de la capacité sociale affectée à chaque tâche
+impériale devient un facteur d'efficacité à long terme.
+
+
+--- 7 Fructidor an 212 
+DDM 26 nivose an 225
+
+De artibus
+
+Elles sont le produit des [nationes, unique entite sociale du jeu], et se
+diffusent depuis cette [natio] dans le monde.  Il peut y avoir plusieurs foyers.
+On ne peut acquerir une ars en conquerant une regio d'une natio voisine.  Une
+ars peut disparaitre en meme temps que la seule natio en disposant.
+
+L'acquisition d'une ars par une natio depend de la hauteur de truc dans cette
+natio, et de l'eventuelle connaissance de cette ars par une/des cites voisines.
+
+truc est l’accumulation des connaissances scientifiques sur plusieurs siècles.
+truc grandit chaque tour en proportion de sapientia. 
+truc se différencie de sophia qui plafonne à un niveau dépendant de sapientia.
+
+Le stratège ne peut planifier la découverte d’une ars particulière à un tour
+donnée.
+Il ne peut non plus s’assurer à 100% que sa nation sera la première à découvrir
+telle ou telle ars.
+Ceci permet de maintenir l’intéret du jeu : on doit s’attendre à tout moment à
+etre dépassé technologiquement par une autre nation.
+
+Cependant, le stratège peut augementer substanciellement ses chances de
+domination technologique en maintenant un faible niveau de fides, et donc
+un haut niveau de sapientia, tout au long de la partie.
+
+En somme, le stratège pourra choisir de préparer l’avenir en développant
+un capital territorial, ou bien un capital truc.
+
+
+
+--- 2 Messidor an 217
+
+De la situation initiale
+
+Le jeu s’intéresse aux empires. Ceux-ci requièrent les rendements de
+l’agriculture et les *populations en résultant.  Les petites populations de
+chasseurs cueilleurs ne peuvent créer d’empire, ni s’y opposer, ni contribuer
+substanciellement au progrès technique.  Elles sont donc négligées.  Par
+ailleurs, les empires sont postérieurs de pls millénaires à
+la révolution néolithique.  L’agriculture est généralisée à la quasi totalité de
+la surface de la planète la permettant, lorsque naissent les permiers empires.
+La situation initiale ne connaît donc que des nationes agricoles.
+
+L’agriculture est « donnée » à ttes les nationes initiales ; elle n’est pas une
+ars à découvrir.  Poterie et sédentarisation suivent ou précèdent généralement
+de près la révolution agricole. Elles sont donc aussi acquise à toutes.
+
+Les premières artes à découvrir sont donc la métallurgie et l’écriture.
+
+Les capacites offertes par les regiones en terme d’hospitalitas et facultas sont
+evaluees agriculture comprise et pour un tegmen particulier.
+
+---
+
+Les autres technologies - metallurgy, writing, gunpowder, steam engine,
+combustion, electricity - accroissent la productivite d'au moins un des trois
+groupes d'*affectatio.
+
+Les groupes d'affectatio sont les suivants: 
+- groupe 1: labor, luxus 
+- groupe 2: sapientia, religio 
+- groupe 3: exercitus, oppressio
+
+Metallurgy: Doublement immediat du rendement d'exercitus & oppressio
+Quadruplement potentiel d'instrumentum
+
+Writing: Doublement immediat du rendement de sapientia & religio
+
+Gunpowder: Doublement immediat du rendement d'exercitus & oppressio
+
+Steam_engine: Quadruplement potentiel d'instrumentum (sous condition de presence
+de reserves de charbon non epuisees sur le territoire national)
+
+Combustion: Quadruplement potentiel d'instrumentum (sous condition de presence
+de reserves de petrole non epuisees sur le territoire national) Doublement
+immediat du rendement d'exercitus (sous condition de presence de reserves de
+petrole non epuisees sur le territoire national)
+
+Electricity: Doublement immediat du rendement de sapientia & religio
+Quadruplement potentiel d'instrumentum
+
+Remarques: Les accroissements de productivite sont tous au maximum d'un facteur
+2 ou 4.  Ils sont immediats concernant sapientia, religio et exercitus.
+Concernant labor et luxus, ils sont soit soumis au developpement (lent)
+d'instrumentum.  Les quadruplement potentiel d'instrumentum permis par STE, CMB
+et ELE ne sont pas cumulatifs.
+
+--- 7 fructidor an 212 DDM 5 brumaire  an 217
+
+De l'acquisition des artes
+
+L'acquisition de chacune des ars requiert :
+- une sophia minimum : les prérequis intellectuels à la compréhension de l'ars
+- une sapientia non nulle : la production de l'ars
+
+La probabilité de découverte d’une ars par une natio est d'autant plus grande
+que :
+- sapientia est élevée
+- des nationes voisines disposent de l'ars
+- plebs est élevée (1)
+
+Sophia minimum requise: Metallurgy : 0.1 Writing    : 0.2 Navigation : 0.4
+Gunpowder : 0.4 Steamengine: 0.6 Combustion : 0.8 Electricity: 0.8
+
+(1) : le facteur ne peut être (log plebs * log (somme plebs de ttes les nations) /
+(somme des log des plebs de chaque nation) 
+[les chances d'une natio serait alors modifiée par l'absorbtion de la chora
+d'une autre natio par une troisième]
+
+
+--- 8 brumaire an 217
+
+De la taille réelle du monde et de sa pixellisation.
+
+A une population mondiale donnée correspond un rythme des découvertes. Or, on
+souhaite un rythme des découvertes comparable pour chaque partie, quelle que
+soit le degré de pixellisation (le nombre de microcases) utilisé pour
+représenter le monde.  Donc, on doit définir la superficie réelle (en km2) de
+chaque microcase en fonction de la pixellisation du monde, et la population
+réelle (en habitant) que peut accueillir chaque km2 de terre.
+
+- surface = 500 000 000 km2 
+- émergée = 150 000 000 km2 
+- initialement cultivable = 50 000 000 km2
+
+pop max avec agriculture && fertilitas de 1 et instrumentum nul = 200 M = 4hab/km2 
+pop max avec agriculture && instrumentum nul = 300 M = env 6hab/km2 
+pop max avec instrumentum max permis par la métallurgie = 800 M = 16hab/km2
+
+--- 9 brumaire an 217
+DDM 14 thermidor an 223
+
+De l'instrumentum
+
+Sa valeur initiale est 0.  
+Son développement est limité par les artes découverts.
+
+let instMaxFun = function
+  AGR ->  100.
+| MET ->  200.
+| STE ->  400.     
+| CMB ->  600.
+| ELE ->  800.
+
+De plus, instrumentum ne peut jamais augmenter au delà de 10 fois sophia.  Une
+diminution de sophia peut entraîner une diminution d'instrumentum.
+
+La productivité du travail vaut 
+100 + hospitalitas + instrumentum
+
+
+--- 11 brumaire an 217
+
+Du taux de croissance d'instrumentum
+
+La technique et sophia*10 déterminent un maximum pour un tour donné. Le taux de
+croissance dépend du rapport entre la valeur présente d'instrumentum et ce
+maximum.
+
+Si sophia*10 est inférieur à instrumentum, celui-ci diminue de 50% de la
+différence.
+
+--- 27 thermidor an 216 DDM 30 thermidor an 216
+
+De l'altération de la surface planétaire par l'homme
+
+Chaque regio est caractérisée par un tegmen (couverture).  type tegmen = |
+CLIMAX : veg° originelle | AGER | URBS
+
+Le climax dépend de la latitude et de l'altitude. On distingue : | JUNGLE |
+SAVANNA | DESERT | LIVE_OAK_FOREST | OAK_FOREST | FIR_FOREST | TUNDRA | GLACIER
+| SEA | SEA_ICE
+
+Les savanes et les forêts des latitudes méditerannéennes et tempérées peuvent
+être converties en AGER. L'ensemble des AGER constitue la chora.  Les forêts
+froides ne peuvent être convertis en AGER (à cause du climat et de l'acidité du
+sol). La jungle, non plus (parce que le travail de défrichement est
+insurmontable, à tout le moins aux époques reculées).
+
+Le tegmen URBS ne caractérise que les capitales des nations.
+
+L'imperium ne peut s'étendre que sur de cases *franchissables. Toutes les
+regiones sont franchissables, à l'exception des jungles, glaciers, banquise, et
+océans (jusqu'à la découverte de la navigation).
+
+Progressivement, l'imperium des nationes s'étend au dépens de la terra incognita
+et la terre est transformée en AGER.
+
+--- 1er fructidor an 216 DDM 1er messidor an 217
+
+De l'extension des imperii et du calcul de la puissance militaire
+
+L'extension des natio au-delà de la terra incognita (désert ou océan) est
+assurée par la maîtrise militaire de la terra incognita, par l'absorption de la
+terra incognita par l'imperium.
+
+Cette extension de l'imperium a un coût militaire.  Cependant, une augmentation
+importante de militaria ne doit pas être absorbée par la taille de l'imperium.
+
+Par conséquent, la puissance militaire doit se calculer de la façon suivante: On
+doit retirer de l'exercitus effectif un montant par case d'imperium non peuplé,
+puis diviser le restant par l'étendue de la chôra.
+
+La détention d'un imperium non peuplé implique un montant de dépenses militaires
+minimum (affecté au contrôle de cet imperium).  Le taux d'exercitus ne pourra
+donc être diminué en dessous de ce seuil, ou, s'il est, l'imperium devra
+régresser chaque tour.
+
+Les nationes consacrent une petite partie de leur capacité à militaria, afin de
+prévenir la surpopulation par la conquête de la terra incognita.  Cet effort est
+proportionnel au niveau de *populatio. Il est de 2% de la capacité sociale en
+cas de *populatio de 100%.  La *population est le degré de peuplement d'un
+territoire, relativement au maximum permis par la physis et l'instrumentum. Elle
+vaut plebs/copia.
+
+La conquête de la terra incognita par les nationes est régulée par *populatio,
+via militaria.
+
+--- 29 brumaire an 217
+
+Des régions polaires
+
+Les regiones de latitude polaire ne sont pas cultivables (fir forest, tundra ou
+glacier).  Cependant, les fir forest et tundra sont traversables (le caractère
+traversables des fir forest d'altitude des latitudes tempérées est nécessaire).
+Toute regio de latitude POLAIR (glacier, sea ice) est fermée à la conquête par
+un imperium.
+
+--- 29 brumaire an 217
+
+Effet sur la superficie des imperii de la tactique *RETREAT
+
+- *RETREAT vis à vis de la terra incognita : toute regio de l'imperium, non
+  peuplée, voisine de regiones hors-imperium est abandonnée.
+- *RETREAT vis à vis de la natio n : toute regio de l'imperium, peuplée par la
+  natio n, voisine de regiones hors-imperium est abandonnée.
+
+--- 2 frimaire an 217
+
+De la probabilité d'évolution du limes
+
+Il y a stabilité du limes pour une vis de 100, conquête au dessus, retraite en
+dessous.
+
+
+--- 9 floréal an 217 
+DDM 29 brumaire an 219
+
+Taille de la carte, altitude, graphismes.
+
+La carte doit être suffisamment précise pour pouvoir y faire jouer une vingtaine
+de nationes, et y dessiner du relief.  L’ordre de grandeur 256*128 (32 000
+cases) semble être un optimum. La génération de carte y donne ses meilleurs
+résultats.
+On peut parvenir sur une telle carte à 5 niveaux de relief.
+niv alt dénivelé 
+1   500m  500m
+2  1500m 1000m 
+3  3000m 1500m 
+4  5000m 2000m 
+5  7500m 2500m 
+
+---
+
+Du graphisme inférieur
+
+Le graphisme inférieur de la carte a vocation à représenter de façon réaliste la
+surface de la planète (océan/terre, relief, végétation). Le graphisme est fondu,
+le niveau d’information donné par le graphisme est délibérément faible, c’est le
+caractère réaliste et agréable du graphisme qui est visé prioritairement.
+
+Les cases sont des points ayant un relief.  Les différences d’altitude entre ces
+points donnent des triangles ou quadrilatères inclinés.  La nuance du
+quadrilatère (ou des deux triangles) est la moyenne du tegmen des 4 cases, ce
+qui permet de faire des dégradés, une infinité de couleurs, et de rendre la
+vision des cases impossible.
+
+Le nord est placé dans le coin haut gauche de l’écran.  La lumière est celle
+d’un soleil pas très haut dans le ciel et sud-sud-est.  Les cases (ou demi-cases
+triangulaires) sont éclairées ou assombries en fonction de leur inclinaison et
+orientation.
+
+Les situation d’inter-cases sont au nombre de 19.  1. 4 de même altitude (1 cas)
+2. 1 plus haute (4 cas) 3. 2 plus haute (6 cas) 4. 3 plus haute (4 cas) 5. 1
+plus haute, une plus basse (pente maxi) (4 cas)
+
+---
+
+Des graphismes supérieurs
+
+Les graphismes supérieurs visent, au contraire du graphisme inférieur,
+l’information du joueur, au dépens du réalisme. Ils sont constitués d’éléments
+géométriques simples, de couleur unie, au contour éventuellement souligné,
+aisément identifiables comme de nature différente du graphisme inférieur.  
+
+Sont représentés ainsi :
+- l’emplacement des capitales et des frontières
+- la puissance des empires et leurs relations diplomatiques
+- la valeur des terres : l’emplacement des ressources spéciales, le niveau de
+  peuplement.
+
+Proposition d’éléments graphiques :
+- grands cubes + string, pour les villes
+  la couleur donne la natio de la ville
+  la taille donne la taille de la ville (relative à la puissance éco de la
+  natio)
+- tétrahèdre éventuel, à coté des capitales de nationes indépendantes
+  la taille donne un aperçu de la puissance militaire de l’empire
+- lignes épaisses au frontières, couleur selon l’état de paix/guerre
+- sphère pour les ressources spéciales
+  la couleur permet d’identifier la ressource
+  la taille de la sphère : l’importance du gisement
+  (elles n’apparaissent que lorsque la technologie nécessaire à l’exploitation
+  est disponible)
+
+Il n’est pas pertinent de représenter les arbres distinctement, ie de
+représenter les forêts autrement que par un fond de carte vert et sombre. Cela
+alourdirait l’affichage : sa vitesse, autant que sa lisibilité, sans apporter
+d’information supplémentaire au joueur : le fond de carte permet aisément
+d’identifier les forêts.
+
+--- 1er frimaire an 219
+
+Des filtres
+
+- Tegmen : le couvert végétal, vue réaliste.
+  nuance = température
+  int = aridité
+  lum = caractère forestier
+- Nationes : les nations, leur étendue et population
+  nuance = nid
+  int/lum = densité de pop de la regio
+- Imperii : les empires, leur étendue et puissance
+  nuance = nid (du dominus de la regio)
+  int/lum = densité militaire de l’empire
+- Artes 
+  nuance : plus élevé ars connu
+  int/lum : sapientia nationale courante
+- Montes (altitude)
+
+
+--- 29 Messidor an 216
+
+Nations, empires, conquêtes et tribut.
+
+L'expérience historique nous démontre que les frontières des imperii peuvent
+évoluer très rapidement, contrairement aux chôra. Ceci implique qu'une microcase
+puisse appartenir à la chôra d'une nation et à l'imperium d'une autre nation.
+
+Il nous faut prendre en compte cette réalité intuitive tout en la gérant de la
+façon la plus simple possible.
+
+Il est exclu qu'un empire ait autant de partage de la capacité sociale que de
+nations (solution peu pratique).  Il est exclu de faire la moyenne des
+caractéristique sociale dès la conquête, en l'absence d'absorption par la chôra
+[et dans la mesure où celle-ci pourrait n’être que temporaire].  Par ailleurs,
+on peut considérer que l'empire ne peut exploiter un territoire appropriée par
+une nation ennemie.
+
+On peut par contre imaginer une exploitation inter-nationale. La chôra dominée
+par un empire étranger ne peut être (directement) exploitée par l'occupant ; on
+peut considerer qu'elle peut être exploité par l'empire refoulé si l'empire
+occupant est d'accord. 
+
+Tout gouvernement est donc plus ou moins fantoche/vassal/client en proportion de
+l'étendue des territoires qu'il gère pour le compte d'un empire
+
+Quelque soit la relatio (paix ou guerre), la zone floue est progressivement
+mangée par la nation conquérante. La zone litigieuse et le tribut s'éteignent
+progressivement avec le temps.
+
+On remarque qu'une natio et un gouvernement peuvent survivre quelques siècles
+alors que leur imperium est nul. 
+
+La population restant gérée par l'Etat-fantoche et la religion locale restant en
+place, c'est lui qui doit produire la religio nécessaire pour tenir la
+population. Par contre, il n'a plus a produire l'armée nécessaire pour défendre
+ces territoires (la puissance militaire est un rapport
+puissance_militaire/territoire) : il relève de l'imperium de l'Etat occupant.
+
+--- 19 vendemiaire an 218
+
+Des Pays occupés et vassaux
+
+Toute regio peut relever d’une natio et d’un imperium différent.  Dans ce cas,
+- la population est comptabilisé chez la natio indigène
+- la regio est comptabilisé dans la chora de la natio indigène
+- la regio est comptabilisé dans l’imperium de la natio occupante
+- les capitaux et la partitio en vigueur sont ceux de natio indigène
+
+Les conséquences dans les regiones occupées :
+- population civile perdue du fait de l’état de guerre
+- militaria et luxus sont perdues par la natio occupée : 
+ - annulée en situation de guerre
+ - versé en tribut à l’occupant en situation de paix ( religio est en revanche
+   toujours conservé par la natio et assure la perpétuation du capital fides )
+- labor est prélevé par 50% par l’occupant
+
+Geographia précise :
+- la matrice des territoires occupés, et leurs tailles relativement aux chora
+
+---
+
+De l’intérêt mutuel à proposer un cessez-le-feu
+
+La natio envahie cesse de perdre des territoires et d’avoir des pertes
+militaires.  La natio occupante tire mieux profit des territoires occupés
+
+--- 5 Thermidor an 216
+
+De l'évolution des imperii
+
+Une regio est conquise par un empire si
+- elle en est voisine
+- regiones terrestres ou navigation
+- les empires ne sont pas en paix 
+- l'empire a une tactique offensive
+
+--- 28 Nivose an 215 DDM 19 Vendemiaire an 218
+
+De bello
+
+L'etat de guerre entre des nationes a deux consequences :
+
+1. La modification chaque tour de la population des nationes en guerre.  .
+pertes militaires : une proportion de plebs égale à 1% de militaria, chaque
+tour, et proportionnée au nb de nationes voisines avec laquelle on en est en
+guerre.  .  modification de la structure par âge . pertes civiles : 2% de la
+population chaque année de guerre, dans chacune des regiones occupées.
+
+2. L'eventuelle modification des imperii
+ 
+Elle s'effectue si . la regio est frontaliere de cette imperium . les nationes
+sont en guerre . le rapport des densites militaires est d'au moins, disons 1.2
+(la natio peut, militairement, envahir la regio)
+
+*** 9 brumaire an 218
+
+De l’appropriation d’une regio déjà peuplée par une natio étrangère.
+
+Elle peut se produire lorsque le propriétaire et l’occupant d’une regio sont
+deux nationes différentes.  On distingue deux cas de figures :
+- les deux nationes sont en guerre : Dans ce cas, l’appropriation consiste en
+  une colonisation de peuplement et une dispersion de la population indigène.
+  Les facteurs en jeu sont la fides de la natio occupante et la densité de pop.
+- les deux nationes ne sont pas en guerre : Dans ce cas, l’appropriation
+  consiste en une assimilation de la population indigène. La probabilité est
+  fonction du rapport des *civilisations des deux nationes. 
+
+On observe que la guerre et la paix ont d’autres implications, et peuvent
+poursuivre d’autres objectifs que la conquête militaire de territoire.
+
+*** 17 brumaire an 218
+
+Des villes et colonies
+
+L’espace peuplé par une natio (sa chora) peut contenir une case URBS, une ville.
+Elle indique l’existence d’un gouvernement central, d’un stratège, d’une
+stratégie nationale en matière de diplomatie.
+
+En cas d’occupation de l’URBS par une puissance étrangère,
+- en temps de guerre : L’URBS peut être détruite sur décision du stratège.  Dans
+  ce cas, le tegmen de la regio devient RUINA, son incola N.None et ne peut plus
+  être modifié. La natio occupée perd son gouvernement central.  À défaut de
+  destruction, l’incola de l’URBS est intangible (contrairement aux AGER)
+- en temps de paix inégale / vassalisation : L’URBS peut être assimilée comme
+  n’importe quel AGER. Si cela se produit, le tegmen de la regio devient
+  COLONIA, l’incola la natio occupante.  La natio occupée perd son gouvernement
+  central.
+
+L’intérêt de détruire une capitale est de priver définitivement une natio
+concurrente d’une stratégie nationale.  L’intérêt de ne pas la détruire est de
+conserver un interlocuteur capable de signer une paix inégale.
+
+--- 15 nivose an 214 DDM 8 frimaire an 218
+
+Des junctiones
+
+Chaque natio dispose de la liste des ses voisines: les *proximae Chaque natio
+entretient avec chacune de ses proximae une *relatio type relatio = PAX | BELLUM
+| N_RELATIO La relatio par défaut, ie en l’absence de traité signé ou de
+déclaration de guerre faite, est N_RELATIO.
+
+Chaque junctio est redefini en fonction de l'etat precedent, et des rogationes :
+Par defaut, junctio reste identique Junctio devient BELLUM si une declaration de
+guerre a eu lieu Junctio devient PAX si deux proprositions de paix reciproques
+ont eu lieu
+
+***
+
+Des tactiques
+
+Chaque natio a une tactique envers les autres nations et la terra incognita.
+type tactic = DEFENSIVE | OFFENSIVE | RETREAT.  La tactic par défaut est
+DEFENSIVE.  L’invasion d’une natio étrangère ou de la terra incognita commence
+lorsque 1.  La tactique est offensive 2.  Aucune PAX n’est signée <=> (relatio =
+BELLUM ou N_RELATIO) (condition toutes deux nécessaires)
+
+Ceci implique que : 1. On peut être en paix et avoir (prévoir) une tactique
+offensive en cas de déclaration de guerre ennemie 2. On peut agresser un autre
+pays sans lui avoir déclarer la guerre. Il suffit de ne pas signer de traité de
+paix, et de décider au moment opportun d’une tactique offensive.  3.  On peut
+attaquer la terra incognita bien qu’on ne puisse ni lui déclarer la guerre, ni
+signer de traité de paix.
+
+--- 16 germinal an 218
+
+Un climat idéologique aléatoire ?
+
+La production religio pourrait être affectée d’un coefficient d’efficacité ayant
+une évolution imprévisible, quoique dessinant une courbe évoluant autour d’une
+efficacité moyenne constante sur le très long terme.  La courbe pourrait être
+affectée de tendances à plusieurs échelles temporelles.
+
+***
+
+De la politique intérieure du stratège
+
+- Le niveau de spolium optimal
+
+Une politique intérieure est avant tout le choix d’un niveau de spolium optimal.
+Un niveau de spolium élevé permet de financer des dépenses militaires plus
+importantes immédiatement, et ainsi renforcer l’empire en étendant son
+territoire, et en augmentant sa population.  Un territoire plus étendu retarde
+mécaniquement la disparition de l’empire du fait d’un écrasement militaire.
+Étendre sa population accroît la probabilité de découverte d’ars.
+
+Un niveau de spolium moins élevé accroît immédiatement la probabilité de
+découverte d’ars.  Or, une découverte accroît la productivité nationale, voire,
+immédiatement, la puissance militaire.
+
+Il est évident qu’un niveau de spolium nul ou trop élevé amène assez rapidement
+à la défaite : Un empire sans armée sera rapidement envahi.  Une nation restant
+ne réalisant aucun progrès technique le serait.  S’il existe un (ou pls) niveaux
+optimum de spolium, ils se situent nécessairement entre ces deux extrêmes.
+
+- L’idéologie du stratège
+
+On pourrait imaginer que chaque prince géré par l’IA ait une personnalité en la
+matière, on aurait des princes « fascistes » et des princes modérés.
+
+Le choix étant celui de la production militaire immédiate, ou bien la «
+recherche », le caractère du stratège pourrait être défini comme un objectif de
+ratio militaria / sapientia.  L’IA calculant à partir de ce ratio, et des
+impératifs que sont labor, luxus et les dépenses nécessaires à la réalisation du
+spolium, le niveau de spolium qui en résulte (tjrs comme objectif) et les
+dépenses nécessaires qu’il implique en termes d’oppressio et religio.
+
+- La modulation de l’objectif
+
+L’objectif « idéologique » devrait pouvoir être modulé au vu de ces éventualités
+:
+- au delà d’un certain niveau, le spolium réduit sapientia à ce point que la
+  productivité globale de la nation diminue.
+- au delà d’un certain niveau, le spolium engendre des révoltes de la plèbe,
+  dont la répression est coûteuse.  D’un autre côté, ces éventualités ne peuvent
+  dicter à elles-seules le niveau du spolium, car un minimum de militaria (à
+  apprécier précisément selon l’idéologie du prince) est nécessaire à la
+  défense, donc la survie de l’empire.  Bref, un barycentre doit être envisagé.
+  Notez que de telles contradictions n’apparaissent que chez les empires âgés,
+  dont le spolium est dévoré par le luxe.
+
+
+
+Liste des questions secondaires:
+* les migrations & deportations les artes militaires les niveaux de difficulte
+* les merveilles
+
+à coder : poids de luxus sur les terres arables
+
+Articles à recycler :
+
+--- 30 Pluviôse an 214
+
+La prod° materielle ((industria+luxus)*plebs) est limitee par ager.
+
+L'ordre d'attribution de l'ager est indentique à celui de la force de travail:
+1.  luxus, 2. industria.  Autrement dit, le latifundium limite industria &
+favorise donc l'apparition de la famine.  La disparition de luxus consecutive
+d'une chute de l'empire signifie en l'occurence reforme agraire totale &
+immediate.
+
+Militaria ne requiert pas d'ager.  Par contre, à terme, l'application de l'artes
+metallurgie à militaria requerra effectivement une composante physique:
+l'abondance en metal du sous-sol.
+
+--- 22 & 23 germinal an 210
+
+About the sphere, Puisque les pays n'ont pas de carac micro a priori, on
+pourrait (je dit bien pourrait, rien de necessaire le dedans) considerer que les
+pays sont des points d'une sphere (à defaut de pouvoir mettre des cases carrees
+toutes de meme taille).
+
+Il faut distinguer 2 types de deplacements interN de valeur: le Pillage du
+travail (l'exploitation interN proprement dite) & pillage des ressources rares
+(qui a surtout une importance du fait de la rarete de ces ressources, et de leur
+inegale repartition sur la planete).
+
+ABOUT TECHS Et oui ! il n'existe pas de civ qui accumule chacune dans son coin
+ses ampoule ou ses fioles de sciences ! ça n'existe pas ces conneries ! Les
+techs se diffusent sur tte la planete, sans qu'aucune frontiere de civ ne puisse
+les arreter, les civs n'existant pas !  [une trop faible sophia des nations
+concernees peut neanmoins empecher la diffusion, faiblesse resultant de siecles
+d'obscurantisme soigneusement planifies par le stratege.]
+
+Il n'y a au mieux que les techs militaires qui appartiennent en propre à
+l'empire, dans la mesure où elles ne servent pas le commun, et dont il peut en
+csqce esperer garder le secret.
+
+--- 11 germinal an 210
+DDM 18 thermidor an 219
+
+Le NIVEAU DE DIFFICULTÉ du jeu dépendra de façon très aléatoire des chances de
+découvertes des ARTES. S’il doit exister les niveaux de difficultés, ce devrait
+être une modification des probas de découvertes des ARTES.
+
+--- 21 Floreal an 210
+
+Le joueur se voit presenter le calendrier de sa civ et n'a un moyen de
+comparaison qu'au moment du replay. A cette fin, le joueur ne commence pas au
+meme moment (mais il ne sait pas quand). D'ou l'interet: il ne sait pas s'il est
+l'Europe ou l'Amerique des continents qu'il ne connaet pas. (gnark!)
+
+Le tour egal a une annee est extremement sympathique: l'annee est l'unite de
+temps economique, demographique, le rythme des campagnes militaires, des
+elections dans le monde poliade hellenique.  Et lui seul permet une
+representation realiste de la rapidite de la defaite ultime, tout en lui donnant
+une duree suffisante en nb de tours.
+
+--- 19 Ventôse An 212
+
+1. La difficulté augmente au cours de la partie. Le joueur finit par etre battu
+parce que 1.1 Il vaut mieux cela qu'une difficulté decroissante au cours de la
+partie.  Ca rend le jeu plus stimulant.  1.2 La defaite sûre permet
+l'etablissement d'un score dependant grosso modo du nb de tours tenu, ie rend
+infinie la duree de vie du jeu: on peut toujours faire un meilleur score.  1.3
+La chute de l'empire, conséquence de la menace conjointe de la defaite militaire
+et de la revolution sociale, est realiste, et plus realiste que la conquete du
+monde (autre alternative de la fin).  [1.4 La non conquete du monde facilite la
+non repetitivité du contenu du jeu]
+
+--- 22 thermidor an 213
+
+Arguments en faveur de la suppression des uts
+
+1. Meme reduites à l'aspect strategie (ie à l'echelle macro et sans diff° des
+uts), elles constituent un jeu dans le jeu, un autre jeu, et de surcroit moins
+interessant que le reste.  2. Leur suppression ne signifie pas la suppression de
+la strategie, mais sa restriction à l'echelle de la diplomatie, diplomatie que
+l'on maintient et accroit, puisque chaque cite a son stratege et des relations
+diplo.  3. L'existence des uts est conceptuellement discutable: elle suppose
+l'existence d'un commandement militaire unique en temps reel d'uts militaires
+distantes d'eventuellement pls milliers de km.  4.  L'echelle temporelle de la
+vie militaire à l'echelle des uts, meme macro uts, colle difficilement avec la
+rep° de quelques millenaires d'histoire.  5.  L'idee que chaque cite deplace ses
+uts chacune son tour est un peu bizarre, et ce d'autant plus qu'on a pas mal de
+cite (c'est moins genant avec 2 joueurs).  La suppression des uts permet la
+conception & la representation animee d'un ecoulement du temps "en temps reel".
+
+
+--- 24 Frimaire An 214
+
+La mise en place de la sphere & le systeme des poleis de taille variable m'amene
+aux conces suivantes: 1. Les poleis sont desormais des nationes.  2. La surface
+de la sphere est divisee en [~30.000] [regiones] 3. - 4.  [Les terres sont
+partagees en] une vingtaine de nationes (disposant d'un stratege et d'une
+polis/capitale) 5. Les nationes peuvent absorber des [regiones] de nationes
+voisines lors des guerres.
+
+Ce systeme a pour avantages: 1. La non-multiplication des cites à gerer en cas
+d'expansion de l'empire 2. La caractere limité dans sa vitesse et son etendue de
+l'extension de la natio, stricto sensu, relativement à celui l'imperium, stricto
+sensu, ie l'exploitation des autres nationes, fruit des relations
+inter*nationales.
+
+NB: Il n'est pas souhaitable d'attribuer une identité de type infra-nationale
+aux morceaux, encore moins une existence politique. Ceux-ci n'ont pour objectif
+qu'assurer e la fois: 1. la progressivite de l'extension des nations (par
+opposition à un systeme de Macrocases seules) 2. la non parfaite linearite dans
+le temps de cette progression et surtout la non rectitude dans l'espace des
+frontieres.
+
+--- 15 Nivose an 214
+
+Les morceaux prennent le nom regio, onis, f., la contree: c'est court, latin,
+non ambigu, et ça souligne le caractere geographique/naturel de cette entite
+vouee à ne pas avoir de caractere social/politique.
+
+De la localisation de l'exercitus
+
+1. l'exercitus stationne sur la totalite du territoire.  2.  la defense d'une
+frontiere n'est pas la defense d'une ligne, mais requiert une profondeur
+tactique 3. la paix inegale repose sur la menace de la guerre, elle ne tient pas
+si cette menace n'est plus reelle.  Une certaine paix inegale requiert une
+capacite de destruction disponible "correspondante".  4. il n'existe pas de
+deplacement instantane des troupes sur le territoire national 5. il n'existe pas
+de commandement instantane des troupes sur le territoire national 6. la
+representation de la possibilite de deplacer des troupes n'est pas pertinente e
+l'echelle temporelle que nous adoptons.
+
+Au vu de ces 6 arguments, on peut conclure qu'il n'est pas souhaitable de donner
+à l'exercitus une position geographique plus precise que celle deduite de son
+attribution à une natio.  L'exercitus n'est pas sur une regio, ni sur une
+frontiere.  Il est sur l'[imperium].  Si l'on apporte la possibilite de faire la
+paix avec une ou pls nations voisines, Cela ne change rien à la position de
+l'exercitus: L'exercitus garde la frontiere et maintient la menace sur les
+nations avec lesquelles on est en paix.
+
+--- 16 Nivôse
+
+De l'IA
+
+Il pourrait etre souhaitable d'attribuer un caractere predefini aux dirigeants
+les faisant preferer une "voie de developpement" imperiale.  Ie privilegier un
+facteur de developpement de leur empire: la surface la population le
+developpement technique le degre de submissio
+
+Et d'attribuer un des 6 caracteres suivants pour les relations internationales:
+fidele e ses traites rationnel prompt e declarer la guerre pacifiste  pacifiste
+.         .  rationnel  faible rationnel .  rancunier integre              fort
+guerrier
+
+explication: Le guerrier declare systematiquement la guerre et ne propose jamais
+la paix.  L'integre ne declare jamais la guerre, mais la poursuit jusqu'au bout
+si on la lui declare.  Le pacifiste ne declare jamais la guerre et propose
+systematiquement la paix e ses agresseurs.  Le rationnel agit en toute
+circonstance selon ce qu'il pense etre son interet.  Le faible ne declare jamais
+la guerre, et propose la paix s'il pense y avoir interet.  Le fort declare la
+guerre s'il pense y avoir interet et ne propose jamais la paix.
+
+
+--- 23 Pluviôse an 214
+DDM 14 thermidor an 223
+
+Du brouillard de guerre
+
+Sont affichees en toute hypothèse : 
+- la chora, y compris lorsqu’elle est occupée par l’ennemi
+- l’imperium
+
+Sont affichees sous diverses conditions : 
+- les regiones voisines de la natio (terrestre ou maritime), dont la
+  connaissance de la consistance est régulièrement rapportée à la polis 
+  (par des expéditions ad hoc ou aux fins de commerce etc.)
+- il en résulte une coincidence entre les regiones visibles et les poleis 
+  avec lesquelles nous pouvons communiquer
+
+- l’étendue de ces regiones est déterminée par instrumentum (variable
+  représentative tant des capacités productives en général que du niveau
+  technique, capital pour la rapidité des déplacements et communications)
+- la visibilité des regiones marines au delà d’une certaine distance de la 
+  cote suppose l’ars NAV
+- la visibilité est fonction de la distance à la capitale
+- ars     inst max  rayon de visibilité (km) (terre, mer ssi NAV)
+  AGR ->  100.      2000
+| MET ->  200.      4000, 20000 
+| STE ->  400.      8000, 40000
+| CMB ->  600.     12000, 60000
+| ELE ->  800.     16000, 80000
+- la visibilité des regiones marines implique la visibilité des cotes
+  adjacentes, mais non de l’intérieur des terres
+
+- on distingue deux zones de brouillard :
+- la zone absolument inconnue : hors rayon d’exploration. 
+  Cette zone est affichée comme océane.
+- les continents inexplorés, techniquement les regiones terrestres
+  au-delà de la zone d’exploration terrestre mais en deçà de la zone
+  d’exploration marine.
+  Cette zone est spécifiquement affichée comme terrestre inexplorée
+
+
+--- 1er Ventôse an 214
+
+De la natalite
+
+Peut-etre serait il souhaitable de rendre l'objectif de surplus de la natalite
+sur la mortalite variable en fonction du degre d'Autonomia de la natio. Cet
+objectif diminuant avec l'augmentation d'Autonomia.  Par ailleurs, dans ce cas
+(permettant des obj de natalite gigantesque), il faudrait etablir un plafond de
+natalite, fonction de la part des generations en ege de procreer. [fait]
+
+Edoxe te boule kai to demo de representer la repartition par classe d'ege, de la
+plebe, ce qui est un moyen complexe mais efficace d'en coder les consequences en
+terme de travail disponible relatif aux bouches e nourir, en terme de limitation
+de l'exercitus levable et de selectivite de la mortalite directe due e la
+guerre, en terme d'impact negatif d'une forte natalite sur le temps de travail
+disponible, et enfin de terme de plafonnement de la natalite en fonction de la
+part des generations en ege de procreer
+
+---
+
+De principis amicis
+
+Les associer à un domaine d'action: science, commerce etc. n'a plus de sens dans
+la mesure où la plupart de ces domaines n'existent plus en tant que domaine
+d'action directe. Il n'y a d'ailleurs rien à regretter ici, puisque les conseils
+de ce type sont soit bidon: "augmenter le taux de science" (pourquoi lui?), soit
+technique au mauvais sens du terme: "pensez e construire des caravanes" (c'est
+forcement bon, mais alors pourquoi ne pas le faire automatiquement?). Un vrai
+conseil est une strategie, donc une opinion sur l'ensemble du domaine d'action
+du stratege. Ce ne sera pas tres difficile e realiser, en tout cas, par plus que
+definir des types de strategies personnalisee pour les strateges IA.  Il ne
+reste plus qu'à definir precisement ces strategies.  && associer chacune à un
+nom de conseiller.
+
+--- 11 Brumaire an 215
+
+Du visible par le stratege
+
+Concernant sa natio, Il s'agit en premier lieu de l'immediatement modifiable par
+le stratege, à savoir la repartition de la capacite sociale.  Il s'agit aussi
+des capitaux.  Il s'agit aussi de la technologie.  Il s'agit aussi des capacites
+physiques.  Et ea s'arrete le. Il ne semble pas judicieux qu'il dispose des
+stats demographiques, ea ne serait ni realiste ni facile e representer de faeon
+synthetique. On peut par contre presenter les consequences demographiques des
+choix politiques dans l'humanopaedia. Enfin, il peut regarder, tour par tour,
+l'evolution de la population.  Le niveau de precision de l'information par
+defaut est faible, il est "pixellise" par une representation des grandeurs par
+des icônes. On peut imaginer cependant qu'apres la decouverte de l'ecriture, il
+puisse opter pour l'affichage sur les icônes du chiffre exact.
+
+Concernant les autres nationes, On ne dispose pas des stats (productions,
+capitaux, capacites physique nationales) des autres nationes parce que: 1e) On
+voit à peu pres ce qui se passe à la frontiere, beaucoup moins bien au delà.
+2e) Ces valeurs evoluent ou peuvent evoluer chaque tour.  L'information sur les
+autres nationes se limite e: Le visible sur la carte (le non couvert par le
+brouillard de guerre) par les 5 filtres (natio, alt, clim, demog, exerc) Les
+technologies
+
+Concernant les relations internationales On ne connaît que les relations entre
+notre nation et les nationes que nous connaissons.
+
+Concernant les regiones.  On voit tout ce qui n'est pas dans le brouillard de
+guerre.
+
+--- 5 Thermidor an 215
+
+De la determination de l'ocean visible par le joueur, et des continents qu'il
+peut conquerir par mer.
+
+On pourrait considerer que les oceans sont pour les nations disposant de la
+navigation des deserts. Autrement dit des cases que l['imperium] peut
+s'approprier, [mais] qui [n'entre pas dans la chora], dont la conquete n'exige
+Que la superiorite militaire.
+
+Alors les nations "conquerraient" les regiones oceanes a compter de la
+decouverte de la navigation, a raison d'une regio de profondeur chaque tour.
+Chaque regio oceane n'appartient qu'a une natio, et ne laisse passer qu'une
+flotte d'invasion.  La puissance militaire determine les evolutions de
+frontieres maritimes comme celles de deserts.  Les continents sur lesquels on
+peut debarquer sont mecaniquement ceux dont on est voisin par les cases oceanes
+dont on est proprietaire.  L'ocean visible, comme la terre, est celui que l'on a
+conquis au moins un tour durant.
+
+
+
+

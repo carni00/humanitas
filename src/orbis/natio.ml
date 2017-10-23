@@ -1,0 +1,348 @@
+(*
+
+ ****************************** Natio.ml ******************************
+
+
+ *  This file is part of Humanitas.
+
+ *  Humanitas is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License,
+ *  or (at your option) any later version.
+
+ *  Humanitas is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with Humanitas; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+ *)
+
+open Std
+open Tfloat
+
+module Nil = Nid.Nil
+module P   = Partitio
+module Pa  = Politeia
+module Gn  = G.Natio
+module K   = Aedificium
+
+type t = {
+  nid : Nid.t;
+  active: bool;
+  origo : Rid.t*Date.t; (* date de naissance *)
+  urbs  : bool*Rid.t;   (* caractérise la natio au tour(n) *)
+  artes : Ars.t list; (* le tour *)
+  g : G.Natio.t; (* geographie nationale *)
+  k : K.t;      (* idem *)
+  pa: Politeia.t;     
+  p : Partitio.t;       (* caractérise la période tour(n-1) à tour(n) *)
+  d : Dx.t; (* le tour (pyramid), la période(famine, tfg) *)
+  fd: Dx.t; (* le tour (n+1) (pyramid projetée), la période suivant le tour n (famine, tfg) *)
+  }
+
+let null =
+  {
+  nid = Nid.none;
+  active=false;
+  origo = Rid.none,Date.Unknown;
+  urbs  =(false,Rid.none);
+  artes =[];
+  g =G.Natio.null;
+  k =K.null;
+  pa=Pa.anarchy;
+  p =P.null;
+  d =Dx.null;
+  fd=Dx.null;
+  }
+
+(*let populatioFun plebs facultas = squot 2. plebs facultas*)
+(* *population (degré de peuplement) de la natio n *)
+
+let agriCopiaFun facultas (plebs,ar) (p,fr) =
+  let foodNeeds = plebs*ar
+  and luxus = plebs*fr*p.Partitio.luxus in (* "besoins" en ager de luxus à sa valeur courante *)
+  (squot 0. (facultas) (foodNeeds+luxus) )
+(* abondance en ager *)
+(* vaut normalement u. vaut moins quand la terre et l’instrumentum sont insuffisants pour assurer 
+la production matérielle (besoins primaires et luxe) *)
+
+
+let efficientiaFun hosp inst = 0.6 + 0.01 * floor hosp + 0.01 * floor inst
+(* productivité du travail *)
+
+let rec artesFun = function
+| [] -> []
+| (ars,i)::q -> if i=1. then ars::artesFun q else artesFun q
+(* artes maîtrisés *)
+
+
+(************************************ fonctions de lecture ********************************************)
+
+let nid          n = n.nid
+let is_active    n = n.active
+let origo        n = n.origo
+let has_urbs     n = fst       n.urbs 
+let urbsRid      n = snd       n.urbs 
+let artes        n = n.artes
+let has_nav      n = List.mem Ars.NAV (artes n)
+(*let ter_rayon    n = Gn.instrumentum n.g * 20.*)
+(*let mer_rayon    n = if has_nav n then Gn.instrumentum n.g * 100. else 0.*)
+let ter_rayon    n = Gn.instrumentum n.g * 100.
+let mer_rayon    n = if has_nav n then Gn.instrumentum n.g * 200. else 0.
+let partitio     n = n.p
+let kapital      n = n.k
+let politeia     n = n.pa
+let geographia   n = n.g
+let seditio      n = K.seditio       n.k
+let vis          n = K.vis           n.k
+let imperium     n = Gn.imperium     n.g
+let chora        n = Gn.choraAmp     n.g
+let facultas     n = Gn.facultas     n.g
+let plebs        n = Gn.plebs        n.g
+let hospitalitas n = Gn.hospitalitas n.g
+let instrumentum n = Gn.instrumentum n.g
+let pil          n = Gn.pil          n.g
+let efficientia  n = efficientiaFun (hospitalitas n) (instrumentum n)
+let famine       n = Dx.famine       n.d
+let copia        n = Dx.copia        n.d
+let tfg          n = Dx.tfg          n.d
+let isf          n = fst(Dx.isf      n.d)
+let dfn          n = snd(Dx.isf      n.d)
+let dxVar        n = Dx.var          n.d
+let alimonium_ratio n = Dx.alimonium_ratio n.d
+let facultas_ratio  n = Dx.facultas_ratio  n.d
+let pyramid      n = Dx.pyramid      n.d
+let sophia       n = K.sophia        n.k
+let fides        n = K.fides         n.k
+let libertas     n = K.libertas      n.k
+let ususList     n = K.ususList      n.k
+let agriCopia    n = agriCopiaFun (facultas n) (plebs n, alimonium_ratio n) (partitio n, facultas_ratio n)
+(*let populatio    n = populatioFun (plebs n) (facultas n)*)
+let densitas     n = Tfloat.squot 0. (plebs n) (chora n)
+(* densité de population en hab/km2 (sic) *)
+
+
+let kill n =
+  {
+  null with 
+  origo = n.origo
+  }
+
+(*************** fonctions de lecture spécialisées pour les modules antérieurs ****************)
+
+
+let aeNatio n cArtes pr luc = ( {
+  K.k = kapital n;
+  K.g = geographia n;
+  K.plebs = plebs n;
+  K.pArtes = artes n;
+  K.cArtes = cArtes;
+  K.pp = partitio n; (* previous partitio *)
+  K.pr = pr; (*current partitio record*)
+  K.luc = luc; (*current lucrum partitio *)
+  } : Aedificium.natio)
+
+
+let imNatio n = ( {
+  Im.centralized = Pa.is_centralized (politeia n);
+  Im.nav = has_nav n;
+  Im.pop = 0.; (*populatio n;*)
+  Im.densitas = densitas n;
+  Im.artes = artes n; 
+  Im.sophia = sophia n; 
+  Im.fides = fides n; 
+  Im.humanitas = 0. (*P.humanitas (P.alter_all n.p [PYRAMID(Dx.pyramid n.d,(iof n.k.plebs));
+  PRODUCT(n.k.usus,(iof n.c.efficientia),n.artes)] )*);
+  Im.instrumentum =  instrumentum n;
+  Im.plebs = plebs n;
+  Im.facultas = facultas n;
+  Im.plebsVar = Dx.var n.fd; (* les regiones vont évoluer en fonction de la variation projetée (fd) *)
+  Im.alimonium_ratio = alimonium_ratio n; (* pour calculer les besoins en nourriture des regiones *)
+  Im.agriCopia = agriCopia n;
+  Im.vis = vis n;
+  } : Im.natio )
+(* infos nationales dont Im a besoin*)
+
+
+let jNatio n = {
+  Junctiones.chora = chora n;
+  Junctiones.imperium = imperium n;
+  Junctiones.vis = vis n;
+  }
+(* infos nationales dont J a besoin*)
+
+let pNatio n =
+  {
+  P.g = geographia n;
+  P.pyramid = pyramid n;
+  P.pp = partitio n;
+  P.artes = artes n;
+  P.politeia = politeia n;
+  P.plebs = plebs n;
+  P.fides = fides n;
+  P.libertas = libertas n;
+  P.efficientia = efficientia n;
+  P.facultas = facultas n;
+  P.agriCopia = agriCopia n;
+  P.ususList = ususList n;
+  }
+
+
+let paNatio cl n = ( {
+  Politeia.p          = politeia n;
+  Politeia.poleis     = (match cl with e::q -> true | [] -> false) ;
+  Politeia.writing    = List.mem Ars.WRI (artes n);
+  Politeia.metallurgy = List.mem Ars.MET (artes n);
+  Politeia.agriCopia  = agriCopia n;
+  Politeia.sophia     = sophia n;
+  Politeia.pil        = pil n;
+  } : Politeia.natio )
+(* Politeia natio *)
+
+
+(************************************* BROUILLARD DE GUERRE ***************************************************)
+
+type regio =
+| Cognita
+| Terra_incognita
+| Incognita
+
+let regio n e lat lon alt coast brouillards = 
+  if Rv.Brouillards.read brouillards (nid n) then Cognita 
+  else
+    let urbsRid = urbsRid n in
+    let urbsLat = Espace.Regio.latitude  e urbsRid in
+    let urbsLon = Espace.Regio.longitude e urbsRid in
+    let d = Espace.distance (lat,lon) (urbsLat, urbsLon) in
+         if d< ter_rayon n        && alt >= (-1) then Cognita
+    else if has_nav n && d<mer_rayon n then (if alt < 0 || coast then Cognita else Terra_incognita)
+(*  else if d<(ter_rayon n * 1.33) && alt >= ( 0) then Terra_incognita*)
+    else Incognita
+(* la regio (lat,lon,alt,coast) est-elle connue de la natio n *)
+
+(******************************************* NATIO UPDATE ***************************************************)
+
+let n_artes pa(*previous artes*) sophia inst plebs e_sapientia proxArtes =
+  let rand x = Random.int (1 ++ iof x) = 0 in
+  let f ars =
+          let lev x = foi (Ars.level ars) * (10. ** x)  in
+          List.mem ars pa
+  || (    sophia * 100. > lev 0.
+       && ( ars=Ars.MET || ars=Ars.WRI || List.mem Ars.MET pa )
+       && (    (rand (lev 3. / e_sapientia / log plebs)) (*invention*)
+            || (List.mem ars proxArtes && rand (lev 2. / e_sapientia / inst)) (*diffusion*)
+               ) ) 
+  in List.filter f Ars.list
+(* techniques découvertes *)
+
+
+let update gn cl n(*natio*) pr luc p(*partitio*) pArtes = 
+  match G.Natio.choraAmp gn with
+  | 0. -> kill n
+  | _ -> 
+  let d  = Dx.update  n.fd (G.Natio.plebs gn) in
+  (* la nouvelle démographie est le « produit » de la forward demographie de l’année précédente et de la géographie nationale présente (perte de regiones ?) *)
+  let fd = Dx.preview d  (P.cibus luc) (sophia n) (fides n) (facultas n) (P.mil p) 0. in
+(*  let artes = n_artes (artes n) (sophia n) (instrumentum n) (plebs n) (P.sap fru) pArtes in*)
+  let artes = (artes n) in
+  let k  = Aedificium.update (aeNatio n artes pr luc) in
+  { 
+  n with
+  g = gn;
+  artes = artes;
+  k = k;
+  pa= Pa.update (paNatio cl n);
+  p = p;
+  d = d;
+  fd=fd;
+  }
+  
+
+(*let update (rm, rs, j, im, g, fr) id n(*natio*) p(*partitio*) prl = n
+(* revenus effectifs de l'année passée *)
+  and lostRatio = G.lostRatio g j id
+(* proportion de la chora occupée par des nationes ennemies *)
+  and warRatio = G.warRatio g j id in
+(* proportion de nationes ennemies parmi les proximae *)*)
+(*  let d = Dx.v n.d e.labor n.k.sophia n.k.fides n.c.copia (iof n.k.plebs) p.militaria warRatio lostRatio in*)
+(* situation démog au tour n, fonction des naissances et décès de l'année passée *)
+(*  let artes = artes (n.artes, n.k.sophia, (iof n.k.instrumentum), e.sapientia, (iof n.k.plebs), prl) in*)
+(* artes au tour n, fonction des découvertes faites l'année passée *)
+(*  let k = K.v (n.k, n.p, n.artes) (p, e) (Dx.pyramid d, artes, lostRatio) in*)
+(* capitaux au tour n *)
+(*  let c = computation rm rs im g id k.instrumentum e.militaria (iof k.plebs) in*)
+(* données supplémentaires *)
+(*  {
+  n with
+  p = p;
+  d = d;
+  artes = artes;
+  k = k;
+  c = c;
+  }*)
+(* Ordre des calculs : 
+
+1. Productions effectives de l'année précédente, en fonction des capitaux et technologies disponibles au tour (n-1), et de la partitio réalisée durant cette année.
+
+2. Naissances et Décès de l'année précédente, en fonction des productions effectives réalisées, et du capital sophia du tour (n-1)
+
+3. Découvertes (pas d'impact des découvertes faites pendant l'année précédente sur les productions de l'année précédente)
+
+4. Réactualisation des capitaux, en fonction des capitaux du tour précédent, des productions de l'année précédente, des naissances et décès de l'année précédente (calcul de plebs), et des découvertes faites l'année précédente (impact sur l'expérience)
+
+5. Calcul de la chora et de l'imperium, en fonction des invasions de l'année précédente. On note que les invasions n'ont pas d'impact sur les productions l'année où elles ont lieo. (Le moment exact de l'invasion dans l'année étant inconnu, l'impact ou le non-impact sont équiprobables. Le non-impact est préféré pour des raisons de prévisibilité/jouabilité et simplicité du code).
+
+Calcul de vis en fonction de l'imperium du tour présent, de militaria de l'année passée, et de la population du tour présent.
+
+*)
+
+(******************************* NATIO CREATE *******************************************)
+
+let create rm im g nid civitas =
+  let g = G.Natio.make g [] nid in
+(*  let plebs = G.plebs g nid in (* Depr. let plebs = physis * Dx.npc * 141/100 in*)*)
+  let efficientia = efficientiaFun (Gn.hospitalitas g) (Gn.instrumentum g) in
+  let sophia = u - 0.92 / efficientia in (* constaté réaliste *)
+  let d =Dx.create sophia (Gn.plebs g) in
+  let fd=d in
+(*  let d = Dx.update n.d (G.Natio.plebs gn) (P.lab e) (sophia n) (fides n) (facultas n) (P.mil p) 0. in*)
+  let labor = min u (u - sophia + 0.1) in 
+(*  let mil = (quot plebs (physis*Dx.npc) 0)/50 in*)
+  let mil = 0. in
+  let sap = 1. - labor - mil in
+  let p=P.make
+        ~labor: labor
+        ~sapientia: sap
+        ~religio: 0.
+        ~militaria: mil
+        ~oppressio: 0.
+        ~luxus: 0.
+        ~otium: 0.
+         in
+  let k=K.make 
+        ~seditio: 0.
+        ~fides: 0.
+        ~sophia: sophia
+        ~ususList: []
+        ~vis: 1. (*approximation*)
+         in
+  let artes = [Ars.AGR] in
+    {
+    nid = nid;
+    active = true;
+    origo = (Civitas.rid civitas, Civitas.origo civitas);
+    urbs = (true, Civitas.rid civitas);
+    artes = artes;
+    g = g;
+    k = k;
+    pa= Pa.anarchy;
+    p = p;
+    d = d;
+    fd=fd;
+    }
+
+
