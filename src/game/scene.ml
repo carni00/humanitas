@@ -208,7 +208,15 @@ module GeoRect = struct
    (* "rectangle" terrestre, en degrés de lon/lat, à afficher sur la surface-écran disponible *)
   
   
-  let is_visible gr (lat,lon) = lon>gr.lonMin && lon<gr.lonMax && lat >gr.latMin && lat<gr.latMax 
+  let is_visible     gr (lat,lon) = lon>gr.lonMin && lon<gr.lonMax && lat >gr.latMin && lat<gr.latMax 
+
+  let is_borderline  gr (crLat, crLon) (lat,lon) = 
+    let open Tfloat in
+    let latMin = gr.latMin + (crLat - gr.latMin) * 0.25
+    and lonMin = gr.lonMin + (crLon - gr.lonMin) * 0.20
+    and latMax = gr.latMax - (crLat - gr.latMax) * 0.25
+    and lonMax = gr.lonMax - (crLon - gr.lonMax) * 0.20 in
+    (lon>lonMin && lon<lonMax && lat >latMin && lat<latMax )
   
   
   let visibleCoords gr (lat,lon) =

@@ -75,6 +75,7 @@ end
 
 type t = {
   screen       : Screen.t;
+  geoRect      : Scene.GeoRect.t option;
   windows      : Windows.t;
   atelier      : Atelier.t option;
   running      : bool;
@@ -94,6 +95,7 @@ let create () =
   screen  = Screen.create();
   windows = Windows.create();
   atelier = None;
+  geoRect = None;
   running = true;
   baby_mode = false;
   task_history = Tlist.make 8 (`do_nothing); (*connerie pour que Window.task_history ne provoque pas une erreur de segmentation *)
@@ -108,13 +110,21 @@ let update status task =
     | _     , `new_game  laws           -> Some (Atelier.createb laws )
     | Some a,  _                        -> Some (Atelier.update a    task)
     | None  ,  _                        -> None in
-  let running = if task == `quit && status.baby_mode == false then false else status.running in
+  let running   = if task == `quit && status.baby_mode == false then false else status.running in
   let baby_mode = match task with `switch_baby_mode bool -> bool | _ -> status.baby_mode in
+  let geoRect   = match atelier with
+    | None         -> None 
+    | Some atelier -> 
+    let scene = Atelier.scene atelier in
+    let e = (Orbis.espace (Game.orbis (Atelier.game atelier)))in
+    let crLat, crLon = Espace.Regio.coords e (Scene.cr ~e scene) in
+    Some (Scene.GeoRect.make (crLat, crLon) scene screen) in
   {
   baby_mode;
   screen;
   windows;
   atelier;
+  geoRect;
   running;
   task_history = task :: status.task_history;
   }

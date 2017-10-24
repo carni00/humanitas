@@ -112,9 +112,10 @@ let move e scene m k =
     | KEY_KP4   -> E.West, true
     | _         -> E.West, false) in
   match Scene.sr scene, (both_or_none kp m.lalt) with
-    | Some sr, true -> `move_sr (dir, 1)
-    | None   , true -> `select_regio (Some (Scene.cr ~e scene))
-    | _             -> `map_move(dir, (if m.shift then 1 else 6))
+    | Some sr, true -> [ `move_sr (dir, 1)  ]
+    | Some sr, true -> [ `move_sr (dir, 1) ; `map_move(dir,1) ]
+    | None   , true -> [ `select_regio (Some (Scene.cr ~e scene)) ]
+    | _             -> [ `map_move(dir, (if m.shift then 1 else 6)) ]
 
 
 
@@ -167,7 +168,7 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_UP    
     | KEY_RIGHT
     | KEY_DOWN 
-    | KEY_LEFT  -> [ move orbis.Orbis.espace scene m k ]
+    | KEY_LEFT  -> ( move orbis.Orbis.espace scene m k )
     | KEY_RETURN   -> [`end_of_turn 1]
     | KEY_v        -> [`end_of_turn 5]
     | KEY_y        -> [`end_of_turn 10]
