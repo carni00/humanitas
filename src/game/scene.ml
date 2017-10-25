@@ -206,7 +206,8 @@ module GeoRect = struct
         latMax = crLat + hwid * secur / sr ;
         } 
    (* "rectangle" terrestre, en degrés de lon/lat, à afficher sur la surface-écran disponible *)
-  
+ 
+  let compute e scene screen = (make (Espace.Regio.coords e scene.cr) scene screen)
   
   let is_visible     gr (lat,lon) = lon>gr.lonMin && lon<gr.lonMax && lat >gr.latMin && lat<gr.latMax 
 

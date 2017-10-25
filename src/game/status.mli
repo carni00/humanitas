@@ -23,12 +23,12 @@
 
 module Atelier : sig
   type t
-  val create : Game.t -> Game.Player.id -> t
   val game   : t -> Game.t
   val tabula : t -> Tabula.t
   val pid    : t -> Game.Player.id
   val player : t -> Game.Player.t
   val scene  : t -> Scene.t
+  val geoRect: t -> Scene.GeoRect.t
 end
 
 type t 
@@ -36,7 +36,6 @@ type t
 val create : unit -> t
 val screen : t -> Screen.t
 val atelier: t -> Atelier.t option
-val geoRect: t -> Scene.GeoRect.t option
 val windows : t -> Windows.t
 val is_running : t -> bool
 val update : t -> Task.t -> t

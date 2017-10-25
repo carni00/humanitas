@@ -27,8 +27,9 @@ module Atelier = struct
     game   : Game.t; 
     tabula : Tabula.t;
     pid    : Game.Player.id;
-  (* un atelier affiche une partie (game) aux yeux d’un *player particulier *)
-    scene  : Scene.t
+  (* un atelier est une partie (game) affichée aux yeux d’un *player particulier sur un *screen particulier *)
+    scene  : Scene.t;
+    geoRect: Scene.GeoRect.t;
     }
 (** la partie actuellement affichée à l’écran *)
   let game    a = a.game
@@ -36,36 +37,50 @@ module Atelier = struct
   let pid     a = a.pid
   let player  a = Game.get_player a.game a.pid
   let scene   a = a.scene
-  
-  let createb laws =
+  let geoRect a = a.geoRect
+ 
+
+(*    let e = (Orbis.espace (Game.orbis (Atelier.game atelier)))in*)
+
+  let createb laws screen =
     let game = Game.create laws in
     let pid  = Game.first_pid game in
+    let orbis= Game.orbis game in
+    let scene= Scene.create (orbis) (Game.get_player game pid) in
     {
     game;
     tabula = Tabula.make game;
     pid;
-    scene  = Scene.create (Game.orbis game) (Game.get_player game pid) ;
+    scene;
+    geoRect = Scene.GeoRect.compute (Orbis.espace orbis) scene screen ;
     }
 
-  let create game pid    = {
+  let create game pid screen   =
+    let orbis= Game.orbis game in
+    let scene= Scene.create (orbis) (Game.get_player game pid) in
+    {
     game;
     tabula = Tabula.make game;
     pid;
-    scene = Scene.create (Game.orbis game) (Game.get_player game pid) ;
+    scene;
+    geoRect = Scene.GeoRect.compute (Orbis.espace orbis) scene screen ;
     }
 
-  let update atelier task = 
+  let update atelier task screen = 
     let game , tabula_need_update = match task with 
     | `end_of_turn int            -> Game.update_orbis (atelier.game) int, true
     | `alter_player_pov (pid,nid) -> Game.alter_player_pov (atelier.game) pid nid, false
     | _ -> atelier.game, false in
+    let orbis= Game.orbis game in
+    let scene = Scene.update game (atelier.scene) (player atelier) task in
     {
     atelier with
-    scene = Scene.update game (atelier.scene) (player atelier) task;
-    tabula= if tabula_need_update then Tabula.make game else atelier.tabula;
-    (* le calcul de tabula prend 0.3 secondes ; n'en abusons pas *)
     game;
     (* on procède ainsi pour éviter un circular build : la task `load_game prend en arg un game *)
+    scene;
+    tabula= if tabula_need_update then Tabula.make game else atelier.tabula;
+    (* le calcul de tabula prend 0.3 secondes ; n'en abusons pas *)
+    geoRect = Scene.GeoRect.compute (Orbis.espace orbis) scene screen ;
     }
 
 end
@@ -75,7 +90,6 @@ end
 
 type t = {
   screen       : Screen.t;
-  geoRect      : Scene.GeoRect.t option;
   windows      : Windows.t;
   atelier      : Atelier.t option;
   running      : bool;
@@ -86,7 +100,6 @@ type t = {
 
 let screen   s = s.screen
 let atelier  s = s.atelier
-let geoRect  s = s.geoRect
 let windows  s = s.windows
 let is_running  s = s.running
 let task_history  s = s.task_history
@@ -96,7 +109,6 @@ let create () =
   screen  = Screen.create();
   windows = Windows.create();
   atelier = None;
-  geoRect = None;
   running = true;
   baby_mode = false;
   task_history = Tlist.make 8 (`do_nothing); (*connerie pour que Window.task_history ne provoque pas une erreur de segmentation *)
@@ -108,24 +120,16 @@ let update status task =
   let windows = Windows.update status.windows task in
   let atelier = match status.atelier, task with
 (*    | _     , `load_game (game, player) -> Some (Atelier.create game player )*)
-    | _     , `new_game  laws           -> Some (Atelier.createb laws )
-    | Some a,  _                        -> Some (Atelier.update a    task)
+    | _     , `new_game  laws           -> Some (Atelier.createb laws screen)
+    | Some a,  _                        -> Some (Atelier.update a task screen)
     | None  ,  _                        -> None in
   let running   = if task == `quit && status.baby_mode == false then false else status.running in
   let baby_mode = match task with `switch_baby_mode bool -> bool | _ -> status.baby_mode in
-  let geoRect   = match atelier with
-    | None         -> None 
-    | Some atelier -> 
-    let scene = Atelier.scene atelier in
-    let e = (Orbis.espace (Game.orbis (Atelier.game atelier)))in
-    let crLat, crLon = Espace.Regio.coords e (Scene.cr ~e scene) in
-    Some (Scene.GeoRect.make (crLat, crLon) scene screen) in
   {
   baby_mode;
   screen;
   windows;
   atelier;
-  geoRect;
   running;
   task_history = task :: status.task_history;
   }

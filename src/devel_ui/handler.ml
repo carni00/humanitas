@@ -122,8 +122,9 @@ let move e scene gr m k =
 
 
 
-let atelier_tasks atelier geoRect pick (m, nextEvent) =
+let atelier_tasks atelier pick (m, nextEvent) =
   let scene = SA.scene atelier in
+  let geoRect = SA.geoRect atelier in
   let pid   = SA.pid atelier in (* player id *)
   let game  = SA.game atelier in
   let pov   = Game.get_player_pov game pid in
@@ -183,8 +184,8 @@ let atelier_tasks atelier geoRect pick (m, nextEvent) =
 
 let task_list status pick (m, nextEvent) = 
   let ws = Status.windows status in
-  let atelier_tasks = match Status.atelier status, Status.geoRect status with 
-  | Some atelier, Some geoRect -> atelier_tasks atelier geoRect pick (m, nextEvent) 
+  let atelier_tasks = match Status.atelier status with 
+  | Some atelier -> atelier_tasks atelier pick (m, nextEvent) 
   | _ -> []
   in match nextEvent, atelier_tasks with
   | Key (k, `release), [] ->
