@@ -64,6 +64,14 @@ let vecteur_of_direction = function
 | NW   -> (-1,-1)
 (* variations en (latitude, longitude) *)
 
+let dir_includes pos dir2 = 
+     ( pos == dir2 )
+  || ( dir2 == Nord && ( pos == NE || pos == NW ) )
+  || ( dir2 == East && ( pos == NE || pos == SE ) )
+  || ( dir2 == Sud  && ( pos == SW || pos == SE ) )
+  || ( dir2 == West && ( pos == SW || pos == NW ) )
+(** NE includes North etc. *)
+
 let latMax = 80. 
 let lonMax = 180.
 let latMin = -. latMax

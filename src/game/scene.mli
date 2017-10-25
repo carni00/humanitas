@@ -69,7 +69,7 @@ module GeoRect : sig
   val fittingLat : float -> float -> float -> float 
   val make : (float*float) -> scene -> Screen.t -> t
   val is_visible    : t -> (float*float) -> bool 
-  val is_borderline : t -> (float*float) -> (float*float) -> bool 
+  val is_borderline : t -> (float*float) -> (float*float) -> Espace.direction option 
   (** le point est-il proche du bord de l’écran *)
 
   val visibleCoords : t -> (float*float) -> (float*float) option

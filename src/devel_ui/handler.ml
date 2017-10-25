@@ -115,8 +115,8 @@ let move e scene gr m k =
     | _         -> E.West, false) in
   match Scene.sr scene, (both_or_none kp m.lalt) with
     | Some sr, true -> ( let ib = Scene.GeoRect.is_borderline gr (ER.coords e cr) (ER.coords e sr) in match ib with
-                         | false -> [ `move_sr (dir, 1)  ]
-                         | true  -> [ `move_sr (dir, 1) ; `map_move(dir,1) ] )
+                         | Some pos when ( Espace.dir_includes pos dir ) -> [ `move_sr (dir, 1) ; `map_move(dir,1) ]
+                         | _                                             -> [ `move_sr (dir, 1)  ] )
     | None   , true -> [ `select_regio (Some (Scene.cr ~e scene)) ]
     | _             -> [ `map_move(dir, (if m.shift then 1 else 6)) ]
 

@@ -212,11 +212,21 @@ module GeoRect = struct
 
   let is_borderline  gr (crLat, crLon) (lat,lon) = 
     let open Tfloat in
-    let latMin = gr.latMin + (crLat - gr.latMin) * 0.25
+    let latMin = gr.latMin + (crLat - gr.latMin) * 0.30
     and lonMin = gr.lonMin + (crLon - gr.lonMin) * 0.20
-    and latMax = gr.latMax - (crLat - gr.latMax) * 0.25
-    and lonMax = gr.lonMax - (crLon - gr.lonMax) * 0.20 in
-    not (lon>lonMin && lon<lonMax && lat >latMin && lat<latMax )
+    and latMax = gr.latMax - (gr.latMax - crLat) * 0.30
+    and lonMax = gr.lonMax - (gr.lonMax - crLon) * 0.20 in
+    match ( lat<latMin , lon<lonMin , lat>latMax , lon>lonMax ) with
+    | true , true , false, false-> Some E.NW
+    | false, true , true , false-> Some E.SW
+    | false, false, true , true -> Some E.SE
+    | true , false, false, true -> Some E.NE
+    | true , _    , _    , _    -> Some E.Nord
+    | _    , true , _    , _    -> Some E.West
+    | _    , _    , true , _    -> Some E.Sud
+    | _    , _    , _    , true -> Some E.East
+    | _                         -> None
+
   
   
   let visibleCoords gr (lat,lon) =

@@ -40,6 +40,9 @@ type direction =
 val vecteur_of_direction : direction -> int*int
 (** associe à Nord le couple (0,-1) etc. *)
 
+val dir_includes : direction -> direction -> bool
+
+
 type web =
 | Quadral
 | Octal
