@@ -86,6 +86,7 @@ type t = {
 
 let screen   s = s.screen
 let atelier  s = s.atelier
+let geoRect  s = s.geoRect
 let windows  s = s.windows
 let is_running  s = s.running
 let task_history  s = s.task_history

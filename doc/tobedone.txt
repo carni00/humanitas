@@ -7,7 +7,6 @@ pourquoi sapientia n’est pas réduite à zéro par religio
 calculer correctement alienatio en fonction de fides : oui : racine carrée
 bugfix : pas d’otium négatif
 calculer correctement fides : doit tendre vers religio: vérifié
-
 alienatio calculé sur u - labor
 créer un dépot git local pour commencer pour pouvoir surveiller les différences de versions
 

@@ -85,8 +85,8 @@ let display_atelier atelier screen =
 let pick get_element get_regio x y = match get_element x y with
   | Some pe  -> Some pe
   | None     -> (match get_regio (x,y) with
-  | Some rid -> Some (Picking.Regio rid)
-  | None     -> None)
+    | Some rid -> Some (Picking.Regio rid)
+    | None     -> None)
 (* fonction globale de picking : on regarde d'abord s'il y a un element sur la carte, puis, sinon, si une regio est visée *)
 
 

@@ -100,8 +100,10 @@ let rec next_event () =
 (* when a key is pressed, it is first sent to the UI, which answers if
    the UI used it. If not the following function is called *)
 
-let move e scene m k =
+let move e scene gr m k =
   let module E = Espace in
+  let module ER = Espace.Regio in
+  let cr = Scene.cr ~e scene in
   let dir, kp = K.(match k with
     | KEY_KP8   -> E.Nord, true
     | KEY_UP    -> E.Nord, false
@@ -112,14 +114,15 @@ let move e scene m k =
     | KEY_KP4   -> E.West, true
     | _         -> E.West, false) in
   match Scene.sr scene, (both_or_none kp m.lalt) with
-    | Some sr, true -> [ `move_sr (dir, 1)  ]
-    | Some sr, true -> [ `move_sr (dir, 1) ; `map_move(dir,1) ]
+    | Some sr, true -> ( let ib = Scene.GeoRect.is_borderline gr (ER.coords e cr) (ER.coords e sr) in match ib with
+                         | false -> [ `move_sr (dir, 1)  ]
+                         | true  -> [ `move_sr (dir, 1) ; `map_move(dir,1) ] )
     | None   , true -> [ `select_regio (Some (Scene.cr ~e scene)) ]
     | _             -> [ `map_move(dir, (if m.shift then 1 else 6)) ]
 
 
 
-let atelier_tasks atelier pick (m, nextEvent) =
+let atelier_tasks atelier geoRect pick (m, nextEvent) =
   let scene = SA.scene atelier in
   let pid   = SA.pid atelier in (* player id *)
   let game  = SA.game atelier in
@@ -168,7 +171,7 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_UP    
     | KEY_RIGHT
     | KEY_DOWN 
-    | KEY_LEFT  -> ( move orbis.Orbis.espace scene m k )
+    | KEY_LEFT  -> ( move orbis.Orbis.espace scene geoRect m k )
     | KEY_RETURN   -> [`end_of_turn 1]
     | KEY_v        -> [`end_of_turn 5]
     | KEY_y        -> [`end_of_turn 10]
@@ -180,7 +183,9 @@ let atelier_tasks atelier pick (m, nextEvent) =
 
 let task_list status pick (m, nextEvent) = 
   let ws = Status.windows status in
-  let atelier_tasks = match Status.atelier status with Some atelier -> atelier_tasks atelier pick (m, nextEvent) | _ -> []
+  let atelier_tasks = match Status.atelier status, Status.geoRect status with 
+  | Some atelier, Some geoRect -> atelier_tasks atelier geoRect pick (m, nextEvent) 
+  | _ -> []
   in match nextEvent, atelier_tasks with
   | Key (k, `release), [] ->
     K.(match k with

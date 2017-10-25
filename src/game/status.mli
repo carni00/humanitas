@@ -36,6 +36,7 @@ type t
 val create : unit -> t
 val screen : t -> Screen.t
 val atelier: t -> Atelier.t option
+val geoRect: t -> Scene.GeoRect.t option
 val windows : t -> Windows.t
 val is_running : t -> bool
 val update : t -> Task.t -> t
