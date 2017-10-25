@@ -216,7 +216,7 @@ module GeoRect = struct
     and lonMin = gr.lonMin + (crLon - gr.lonMin) * 0.20
     and latMax = gr.latMax - (crLat - gr.latMax) * 0.25
     and lonMax = gr.lonMax - (crLon - gr.lonMax) * 0.20 in
-    (lon>lonMin && lon<lonMax && lat >latMin && lat<latMax )
+    not (lon>lonMin && lon<lonMax && lat >latMin && lat<latMax )
   
   
   let visibleCoords gr (lat,lon) =
