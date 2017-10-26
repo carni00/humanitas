@@ -30,8 +30,8 @@ la camera au plan affiché
 plan de la sphère *)
 
 module Display : functor (Draw : Video.Draw) -> sig
-  val display_scene : Scene.t -> Game.t -> Game.Player.t -> Tabula.regio Rid.Array.t * Tabula.regio Qtree.set -> unit
+  val display_scene : Scene.t -> Scene.GeoRect.t -> Game.t -> Game.Player.t -> Tabula.regio Rid.Array.t * Tabula.regio Qtree.set -> unit
 (**  affichage de la carte *)
-  val regio_of_pos : Espace.t -> Scene.t -> int*int -> Rid.t option
+  val regio_of_pos : Espace.t -> Scene.t -> Scene.GeoRect.t -> int*int -> Rid.t option
 (** regio située au pixel x,y *)
 end

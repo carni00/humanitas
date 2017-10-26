@@ -78,7 +78,8 @@ let display_atelier atelier screen =
     let module SA = Status.Atelier in
     let espace = Orbis.espace (Game.orbis (SA.game atelier)) in
     match SA.tabula atelier with
-    | Tabula.Qtree qtree -> Earth.display_scene (SA.scene atelier) (SA.game atelier) (SA.player atelier) qtree ; Earth.regio_of_pos espace (SA.scene atelier)
+    | Tabula.Qtree qtree -> Earth.display_scene (SA.scene atelier) (SA.geoRect atelier) (SA.game atelier) (SA.player atelier) qtree ;
+                            Earth.regio_of_pos espace (SA.scene atelier) (SA.geoRect atelier)
 (* affiche la carte, et retourne une fonction de picking des regiones *)
 
 

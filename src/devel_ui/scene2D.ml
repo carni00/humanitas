@@ -129,10 +129,10 @@ let field_and_grass = D.load_bmp "field_and_grass2"
 let field_and_wood  = D.load_bmp "field_and_wood2"
 
 
-let regio_of_pos e scene (x,y) =
+let regio_of_pos e scene gr (x,y) =
   let earthMode    = Scene.earthMode  scene in
   let crLat, crLon = ER.coords e (Scene.cr ~e scene) in
-  let gr  = G.make (crLat, crLon) scene (rsv (D.screen_geometry)) in
+(*  let gr  = G.make (crLat, crLon) scene (rsv (D.screen_geometry)) in*)
   let wdip= rsf D.swip / (gr.G.lonMax - gr.G.lonMin) in (* largeur d’un degre de longitude en pixels *)
   let hdip= wdip * (rsv D.ycorratio) in (*** FIXME * ***)
   let res = E.resolution e in
@@ -318,13 +318,13 @@ let draw_borders vor pow por rw rh exiem v2 regio =
 
  
 
-let display_scene scene game player (ria, qtree) =
+let display_scene scene gr game player (ria, qtree) =
   let orbis = Game.orbis game in
   let e     = orbis.Orbis.espace in
   let povOpt  = NatioList.optGet (orbis.Orbis.natioList) (Game.Player.pov player) in
   let earthMode    = Scene.earthMode  scene in
   let crLat, crLon = ER.coords e (Scene.cr ~e scene) in
-  let gr      = G.make (crLat, crLon) scene (rsv (D.screen_geometry)) in
+(*  let gr      = G.make (crLat, crLon) scene (rsv (D.screen_geometry)) in*)
   let wdip    = rsf D.swip / (gr.G.lonMax - gr.G.lonMin) in (* largeur d’un degre de longitude en pixels *)
   let hdip lat= wdip * (rsv D.ycorratio)  * (yxrh lat) in
   let res     = E.resolution e in
