@@ -247,8 +247,8 @@ let update gn cl n(*natio*) pr luc p(*partitio*) pArtes =
   let d  = Dx.update  n.fd (G.Natio.plebs gn) in
   (* la nouvelle démographie est le « produit » de la forward demographie de l’année précédente et de la géographie nationale présente (perte de regiones ?) *)
   let fd = Dx.preview d  (P.cibus luc) (sophia n) (fides n) (facultas n) (P.mil p) 0. in
-(*  let artes = n_artes (artes n) (sophia n) (instrumentum n) (plebs n) (P.sap fru) pArtes in*)
-  let artes = (artes n) in
+  let artes = n_artes (artes n) (sophia n) (instrumentum n) (plebs n) (P.sap luc) pArtes in
+(*  let artes = (artes n) in*)
   let k  = Aedificium.update (aeNatio n artes pr luc) in
   { 
   n with
@@ -330,7 +330,7 @@ let create rm im g nid civitas =
         ~ususList: []
         ~vis: 1. (*approximation*)
          in
-  let artes = [Ars.AGR] in
+  let artes = Ars.beginList in
     {
     nid = nid;
     active = true;

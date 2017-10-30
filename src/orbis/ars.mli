@@ -54,5 +54,6 @@ val instMax : t list -> float
 
 val to_nil : t -> Color.Nil.t
 
-val to_rvb : t list -> Color.Rvb.t
+val artes_to_rvb : t list -> Color.Rvb.t
+val artes_to_nil : t list -> Color.Nil.t
 

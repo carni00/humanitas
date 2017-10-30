@@ -52,7 +52,8 @@ let next = function
 | N_ARS -> N_ARS
 
 
-let list = [AGR; MET; WRI; NAV; GUN; STE; CMB; ELE]
+(*let list = [AGR; MET; WRI; NAV; GUN; STE; CMB; ELE]*)
+let list = [AGR; MET]
 let beginList = [AGR]
 
 
@@ -103,6 +104,7 @@ let level = function
 
 
 let to_nil = function
+| AGR -> Color.Nil.make Color.Nuance.vert    400 200
 | MET -> Color.Nil.make Color.Nuance.rouge   500 200
 | WRI -> Color.Nil.make Color.Nuance.indigo  500 180
 | NAV -> Color.Nil.make Color.Nuance.bleu    600 200
@@ -110,10 +112,15 @@ let to_nil = function
 | STE -> Color.Nil.make Color.Nuance.corail  600 400
 | CMB -> Color.Nil.make Color.Nuance.vert    900 200
 | ELE -> Color.Nil.make Color.Nuance.jaune   900 400
-| _   -> Color.Nil.make Color.Nuance.none    0   0
+| _   -> Color.Nil.make Color.Nuance.none    100   0
 
 
-let rec to_rvb = function
+let artes_to_nil = function
+| []    -> Color.Nil.make Color.Nuance.none  0 0
+(*| artes -> to_nil (List.hd artes)*)
+| artes -> to_nil (Tlist.last artes)
+
+let rec artes_to_rvb = function
 | []        -> Color.Rvb.black
-| ars :: q  -> Color.Rvb.lum_mult (Color.Rvb.add (Color.Rvb.of_nil (to_nil ars)) (to_rvb q) ) 0.9
+| ars :: q  -> Color.Rvb.lum_mult (Color.Rvb.add (Color.Rvb.of_nil (to_nil ars)) (artes_to_rvb q) ) 0.9
 

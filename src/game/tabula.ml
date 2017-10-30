@@ -207,7 +207,8 @@ module Color = struct
                     | 4 -> co(N.corail   , iDef+40, lDef +150 + urbs) (* 2400 *)
                     | 5 -> co(N.cerise   , iDef+20, lDef +210 + urbs) (* 3200 *)
                     | _ -> co(N.violine  , iDef   , lDef +280 + urbs) (* 4000 *));
-             artes = Color.of_rvb (Ars.to_rvb artes);
+             artes = Color.of_nil (Ars.artes_to_nil artes);
+(*             artes = Color.white*)
              }
 
   (* la regioFun n’est calculé qu’une fois, avant l’affichage ; elle donne la couleur pour tous les filtres*)

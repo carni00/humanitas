@@ -247,6 +247,7 @@ let draw_cognita scene rw rh x y aos regio =
   | `tegmen   , _    , true-> regio.color.tegAlt
   | `tegmen   , _    , _   -> regio.color.tegmenF 
   | `artes    , _    , _   -> regio.color.artes 
+(*  | `artes    , _    , _   -> Co.white*)
   | `vis      , _    , true-> regio.color.visAlt 
   | `vis      , _    , _   -> regio.color.vis 
   in
