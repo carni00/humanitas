@@ -52,8 +52,8 @@ let next = function
 | N_ARS -> N_ARS
 
 
-(*let list = [AGR; MET; WRI; NAV; GUN; STE; CMB; ELE]*)
-let list = [AGR; MET]
+let list = [AGR; MET; WRI; NAV; GUN; STE; CMB; ELE]
+(*let list = [AGR; MET]*)
 let beginList = [AGR]
 
 
@@ -104,7 +104,7 @@ let level = function
 
 
 let to_nil = function
-| AGR -> Color.Nil.make Color.Nuance.vert    400 200
+| AGR -> Color.Nil.make Color.Nuance.vert    300 200
 | MET -> Color.Nil.make Color.Nuance.rouge   500 200
 | WRI -> Color.Nil.make Color.Nuance.indigo  500 180
 | NAV -> Color.Nil.make Color.Nuance.bleu    600 200
