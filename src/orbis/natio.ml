@@ -30,6 +30,29 @@ module Pa  = Politeia
 module Gn  = G.Natio
 module K   = Aedificium
 
+type key =
+  | Facultas     
+  | Plebs        
+  | Hospitalitas 
+  | Instrumentum 
+  | Efficientia  
+  | Famine       
+  | Copia        
+  | Tfg          
+  | Isf          
+  | Df
+  | DxVar        
+  | Alimonium_ratio 
+  | Facultas_ratio  
+  | Sophia       
+  | Fides        
+  | Libertas     
+  | AgriCopia    
+  | Populatio    
+  | Densitas     
+
+
+
 type t = {
   nid : Nid.t;
   active: bool;

@@ -40,6 +40,12 @@ let nil = Co.nil
 
 (************************* HUMANITAS COLORS ***************************)
 
+
+
+
+
+
+
 let politeia (p:Politeia.t) = 
   let open Politeia in
   match dominus p, arkhe p with
@@ -49,6 +55,7 @@ let politeia (p:Politeia.t) =
   | Aristoi, Council -> N.bleu
   | Aristoi, Monarch -> N.turquoise
   | _                -> N.vert
+
 (*
 let ars ars =
   let list = [
@@ -61,6 +68,7 @@ let ars ars =
   (Ars.CMB, N.emeraude); 
   (Ars.ELE, N.jaune);  ] in List.assoc ars list
 *)
+
 let natio (nid:Nid.t) = 
   let tab = [|
     Color.Nuance.celadon  ; (* 0:None     *)           
@@ -89,16 +97,35 @@ let natio (nid:Nid.t) =
 (*let natio (nid:Nid.t) = N.od(nid:>int)*)
 (*let natio (nid:Nid.t) = Co.Nuance.custom(Nid.tf nid)*)
 
-(*
-let attributio (a:P.attributio) (i:int) (l:int) = match a with
-  P.LAB -> rvb (360,    i,    l)
-| P.SAP -> rvb ( 90,    i,    l)
-| P.OPP -> rvb (300,    i,    l)
-| P.MIL -> rvb (  0,    i,    l)
-| P.REL -> rvb (500,    i,    l)
-| P.LUX -> rvb (200,    i,    l)
-| P.OTI -> rvb (0  , -100,    l)
-*)
+
+let affectatio ?(i=600) ?(lum=600) aff = match aff with
+  | Partitio.LAB -> Color.nil  N.corail       i lum                 
+  | Partitio.SAP -> Color.nil  N.turquoise    i lum                 
+  | Partitio.MIL -> Color.nil  N.cerise       i lum             
+  | Partitio.OPP -> Color.nil  N.indigo       i lum             
+  | Partitio.REL -> Color.nil  N.pomme        i lum             
+  | Partitio.LUX -> Color.nil  N.ble          i lum             
+  | Partitio.OTI -> Color.nil  N.none         0 lum             
+
+
+let natioKey ?(i=600) ?(lum=600) key = match key with
+  | Natio.Facultas        -> Color.nil  N.jaune         i lum
+  | Natio.Plebs           -> Color.nil  N.orange        i lum
+  | Natio.Hospitalitas    -> Color.nil  N.vert          i lum
+  | Natio.Instrumentum    -> Color.nil  N.corail        i lum
+  | Natio.Efficientia     -> Color.nil  N.jaune         i lum
+  | Natio.Famine          -> Color.nil  N.none          0 lum
+  | Natio.Copia           -> Color.nil  N.ble           i lum
+  | Natio.Tfg             -> Color.nil  N.magenta       i lum
+  | Natio.Isf             -> Color.nil  N.violet        i lum
+  | Natio.DxVar           -> Color.nil  N.rouge         i lum
+  | Natio.Sophia          -> Color.nil  N.turquoise     i lum
+  | Natio.Fides           -> Color.nil  N.pomme         i lum
+  | _                     -> Color.nil  N.none          0 lum
+ 
+
+
+
 (************************* GAME COLORS ***************************)
 let font             = nil N.ocean      200  720 
 let focus            = nil N.jaune      900  700 

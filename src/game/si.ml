@@ -256,6 +256,29 @@ let natioRegio    = natio Regio
 let civitas nid i = natio (Civitas i) nid
 
 
+let natioKey = function
+  | Natio.Facultas        -> "Facultas"           
+  | Natio.Plebs           -> "Plebs"           
+  | Natio.Hospitalitas    -> "Hospitalitas"           
+  | Natio.Instrumentum    -> "Instrumentum"           
+  | Natio.Efficientia     -> "Efficientia"           
+  | Natio.Famine          -> "Famine"           
+  | Natio.Copia           -> "Copia"           
+  | Natio.Tfg             -> "Tfg"           
+  | Natio.Isf             -> "Isf"           
+  | Natio.Df              -> "Df"    
+  | Natio.DxVar           -> "DxVar"           
+  | Natio.Alimonium_ratio -> "Alimonium_ratio"              
+  | Natio.Facultas_ratio  -> "Facultas_ratio"              
+  | Natio.Sophia          -> "Sophia"           
+  | Natio.Fides           -> "Fides"           
+  | Natio.Libertas        -> "Libertas"           
+  | Natio.AgriCopia       -> "AgriCopia"           
+  | Natio.Populatio       -> "Populatio"           
+  | Natio.Densitas        -> "Densitas"           
+  | _                     -> "natioKey"           
+              
+
 let ars = function
 | Ars.AGR -> "agriculture"
 | Ars.MET -> "metallurgy"
