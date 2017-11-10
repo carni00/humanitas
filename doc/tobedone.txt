@@ -11,8 +11,10 @@ alienatio calculé sur u - labor
 créer un dépot git local pour commencer pour pouvoir surveiller les différences de versions
 lorsque la case sélectionnée sort de l’écran, déplacer la case centrale d’une regio de longitude
 coder le is_competitor en fonction de la tactique release/conquest
-
 rétablir la découverte de la métallurgie et écriture
+
+la population s’effondre avec la découverte de l’écriture ??
+
 si occupation, coder les passages en latifundium en fonction de fides
 coder les pertes militaires et civiles consécutives des guerres
 à terme, réduire la proba de guerre anarchique
