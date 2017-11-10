@@ -40,7 +40,6 @@ type key =
   | Copia        
   | Tfg          
   | Isf          
-  | Df
   | DxVar        
   | Alimonium_ratio 
   | Facultas_ratio  
@@ -48,7 +47,6 @@ type key =
   | Fides        
   | Libertas     
   | AgriCopia    
-  | Populatio    
   | Densitas     
 
 
@@ -147,6 +145,28 @@ let agriCopia    n = agriCopiaFun (facultas n) (plebs n, alimonium_ratio n) (par
 (*let populatio    n = populatioFun (plebs n) (facultas n)*)
 let densitas     n = Tfloat.squot 0. (plebs n) (chora n)
 (* densité de population en hab/km2 (sic) *)
+
+
+let value n = function
+  | Facultas       -> facultas n      
+  | Plebs          -> plebs n      
+  | Hospitalitas   -> hospitalitas n      
+  | Instrumentum   -> instrumentum n      
+  | Efficientia    -> efficientia n      
+  | Famine         -> famine n      
+  | Copia          -> copia n      
+  | Tfg            -> tfg n      
+  | Isf            -> isf n      
+  | DxVar          -> dxVar n            
+  | Alimonium_ratio-> alimonium_ratio n         
+  | Facultas_ratio -> facultas_ratio n         
+  | Sophia         -> sophia n      
+  | Fides          -> fides n      
+  | Libertas       -> libertas n      
+  | AgriCopia      -> agriCopia n      
+  | Densitas       -> densitas n      
+
+
 
 
 let kill n =

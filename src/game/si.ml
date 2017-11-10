@@ -266,7 +266,6 @@ let natioKey = function
   | Natio.Copia           -> "Copia"           
   | Natio.Tfg             -> "Tfg"           
   | Natio.Isf             -> "Isf"           
-  | Natio.Df              -> "Df"    
   | Natio.DxVar           -> "DxVar"           
   | Natio.Alimonium_ratio -> "Alimonium_ratio"              
   | Natio.Facultas_ratio  -> "Facultas_ratio"              
@@ -274,7 +273,6 @@ let natioKey = function
   | Natio.Fides           -> "Fides"           
   | Natio.Libertas        -> "Libertas"           
   | Natio.AgriCopia       -> "AgriCopia"           
-  | Natio.Populatio       -> "Populatio"           
   | Natio.Densitas        -> "Densitas"           
   | _                     -> "natioKey"           
               

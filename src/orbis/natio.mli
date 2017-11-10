@@ -31,7 +31,6 @@ type key =
   | Copia        
   | Tfg          
   | Isf          
-  | Df
   | DxVar        
   | Alimonium_ratio 
   | Facultas_ratio  
@@ -39,7 +38,6 @@ type key =
   | Fides        
   | Libertas     
   | AgriCopia    
-  | Populatio    
   | Densitas     
 
 
@@ -53,6 +51,7 @@ type t
 
 val null   : t
 
+val value        : t -> key -> float
 val nid          : t -> Nid.t
 val is_active    : t -> bool
 val origo        : t -> Rid.t*Date.t
