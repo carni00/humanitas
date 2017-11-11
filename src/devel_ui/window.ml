@@ -77,6 +77,7 @@ let display atelier =
   LB( K.KEY_o       , "zoom Out (-)"            , [`zoom_out                               ] );
   LB( K.KEY_e       , "toggle Earth mode"       , [`toggle_earthMode                       ] );
   LB( K.KEY_f       , "switch Filter"           , [`switch_filter                          ] );
+  LB( K.KEY_g       , "switch backGround"       , [`switch_background                      ] );
   LB( K.KEY_a       , "filter Artes"            , [`select_filter `artes                   ] );
   LB( K.KEY_i       , "filter Imperii"          , [`select_filter `imperii                 ] );
   LB( K.KEY_m       , "filter Montes"           , [`select_filter `montes                  ] );

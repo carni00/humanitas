@@ -22,6 +22,8 @@
  *)
 
 module Atelier : sig
+  
+  type background = Tabula | Graphique
   type t
   val game   : t -> Game.t
   val tabula : t -> Tabula.t
@@ -29,6 +31,7 @@ module Atelier : sig
   val player : t -> Game.Player.t
   val scene  : t -> Scene.t
   val geoRect: t -> Scene.GeoRect.t
+  val background: t -> background
 end
 
 type t 

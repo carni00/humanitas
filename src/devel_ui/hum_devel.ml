@@ -77,11 +77,12 @@ let handle_next_event ws pick =
 let display_atelier atelier screen =
     let module SA = Status.Atelier in
     let espace = Orbis.espace (Game.orbis (SA.game atelier)) in
-    match SA.tabula atelier with
-    | Tabula.Qtree qtree -> Earth.display_scene (SA.scene atelier) (SA.geoRect atelier) (SA.game atelier) (SA.player atelier) qtree ;
-                            Earth.regio_of_pos espace (SA.scene atelier) (SA.geoRect atelier)
-(* affiche la carte, et retourne une fonction de picking des regiones *)
-
+    match SA.background atelier, SA.tabula atelier with
+    | SA.Tabula, Tabula.Qtree qtree -> Earth.display_scene (SA.scene atelier) (SA.geoRect atelier) (SA.game atelier) (SA.player atelier) qtree ;
+                                       Earth.regio_of_pos espace (SA.scene atelier) (SA.geoRect atelier)
+    | _ -> (fun (x,y) -> None)
+  (* affiche la carte, et retourne une fonction de picking des regiones *)
+  
 
 let pick get_element get_regio x y = match get_element x y with
   | Some pe  -> Some pe

@@ -23,6 +23,7 @@
 
 module Atelier = struct
   
+  type background = Tabula | Graphique
   type t = {
     game   : Game.t; 
     tabula : Tabula.t;
@@ -30,6 +31,7 @@ module Atelier = struct
   (* un atelier est une partie (game) affichée aux yeux d’un *player particulier sur un *screen particulier *)
     scene  : Scene.t;
     geoRect: Scene.GeoRect.t;
+    background : background;
     }
 (** la partie actuellement affichée à l’écran *)
   let game    a = a.game
@@ -38,6 +40,7 @@ module Atelier = struct
   let player  a = Game.get_player a.game a.pid
   let scene   a = a.scene
   let geoRect a = a.geoRect
+  let background a = a.background
  
 
 (*    let e = (Orbis.espace (Game.orbis (Atelier.game atelier)))in*)
@@ -53,6 +56,7 @@ module Atelier = struct
     pid;
     scene;
     geoRect = Scene.GeoRect.compute (Orbis.espace orbis) scene screen ;
+    background = Tabula;
     }
 
   let create game pid screen   =
@@ -64,6 +68,7 @@ module Atelier = struct
     pid;
     scene;
     geoRect = Scene.GeoRect.compute (Orbis.espace orbis) scene screen ;
+    background = Tabula;
     }
 
   let update atelier task screen = 
@@ -81,6 +86,9 @@ module Atelier = struct
     tabula= if tabula_need_update then Tabula.make game else atelier.tabula;
     (* le calcul de tabula prend 0.3 secondes ; n'en abusons pas *)
     geoRect = Scene.GeoRect.compute (Orbis.espace orbis) scene screen ;
+    background = ( match task with 
+                 | `switch_background -> (Tlist.following_or_first atelier.background [Tabula; Graphique] )
+                 | _                  -> atelier.background )
     }
 
 end

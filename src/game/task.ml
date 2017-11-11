@@ -50,6 +50,7 @@ type t = [
 | `map_move of (Espace.direction*int)
 | `move_sr  of (Espace.direction*int)
 | `switch_filter
+| `switch_background
 | `select_filter of Tabula.filter
 | `defaultDisplay
 | `toggle_earthMode
