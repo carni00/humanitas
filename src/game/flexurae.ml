@@ -34,7 +34,7 @@ module Flexura = struct
     yList  : float list;
     }
 (** une courbe. le nombre de points de la courbe est len
-    les coordonnées du point nº n sont ( x0 + n, List.nth list n ) *)
+    les coordonnées du point nº n sont ( x0 + n, List.nth list (len - n) ) *)
 
   let make = 
     {
@@ -42,6 +42,14 @@ module Flexura = struct
     x0  = 0;
     yList = [];
     }
+
+  let update n key f = 
+    {
+    f with
+    len   = f.len + 1;
+    yList = ( N.value n key ) :: f.yList;
+    }
+
 
 end
 
@@ -55,6 +63,6 @@ let key_list = [ N.Sophia ; N.Tfg ; N.DxVar ]
 
 let make = Ilist.init (fun k -> Flexura.make) key_list
 
-
+let update natio flexurae = Ilist.nMap (fun key flexura -> Flexura.update natio key flexura) flexurae
 
 

@@ -46,4 +46,5 @@ val key_list : Natio.key list
 
 val make     : t
 
+val update : Natio.t -> t -> t
 
