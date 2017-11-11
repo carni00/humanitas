@@ -36,6 +36,7 @@ type t = (* monde : ne change qu'en cas de end_of_turn ou new_game ou load_game 
   proximaeList : Proxima.t Nid.Nil.t Nid.Nil.t;
   junctiones : Junctiones.t;
   sd : Strategica.Data.d;
+  flexuraeList : Flexurae.t Nid.Nil.t;
 (*  vetera : Vetera.t;*)
 (* données variable du monde *)
   }

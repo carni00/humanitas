@@ -47,6 +47,7 @@ type t = (* monde : ne change qu'en cas de end_of_turn *)
   proximaeList : Proxima.t Nil.t Nil.t;
   junctiones : Junctiones.t;
   sd         : Strategica.Data.d;
+  flexuraeList : Flexurae.t Nil.t;
 (*  vetera : Vetera.t;*)
 (* données variable du monde *)
   }
@@ -78,19 +79,20 @@ let update orbis (sl:StrategicaList.t) =
   let pal  = Nil.map Proxima.proxArtes o.proximaeList in
   let n_nl = NatioList.update gnl cl nl rl luc pl pal in
   let n_pl = Nid.Nil.init (fun i -> Proxima.proximae n_nl (G.pil nil n_g i)) nil in
-  {
-  orbis with
-  turn        = n_turn;
-  junctiones  = n_j;
-  imperiumMap = n_im;
-  natioList   = n_nl;
-  proximaeList= n_pl;
-  geographia  = n_g;
-  lucrum      = luc;
-  civitasList = cl;
-  sd          = sd;
+    {
+    orbis with
+    turn        = n_turn;
+    junctiones  = n_j;
+    imperiumMap = n_im;
+    natioList   = n_nl;
+    proximaeList= n_pl;
+    geographia  = n_g;
+    lucrum      = luc;
+    civitasList = cl;
+    sd          = sd;
+    flexuraeList = Nid.Nil.map2 (Flexurae.update) (n_nl :> Natio.t Nil.t) o.flexuraeList ;
 (*  vetera = Vetera.cat o.vetera n_vetera;*)
-  }
+    }
 (* mise à jour de l'humanité résultant de l'écoulement d'une année *)
 
 let create forme size =
@@ -127,6 +129,7 @@ let create forme size =
     junctiones  = j;
     natioIdList = nil;
     sd = SD.of_nil nil;
+    flexuraeList = Nid.Nil.init (fun i -> Flexurae.make) nil ;
 (*    vetera = [];*)
     }
   in orbis
