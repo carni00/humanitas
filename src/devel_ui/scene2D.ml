@@ -358,6 +358,7 @@ let display_scene scene gr game player (ria, qtree) =
   let vor   = fun regio -> vorid (regio.Tabula.rid) in
   let exiem = extremi_in_earth_mode rw (rsf D.swip) earthMode in
   (************************************************************** AFFICHAGE *************************************************************)
+  let _ = Draw.clear_screen ~color:(Tabula.Color.incognita)  () in
   let _ = qiter (draw_regio  vor pow rw rh scene aos) in
   let _ = qiter (draw_flumen vor pow por rw exiem scene res) in
   let _ = if Scene.borders scene then

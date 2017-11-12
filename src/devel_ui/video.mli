@@ -51,7 +51,7 @@ module type Draw = sig
   val ewip : float React.signal
   val ehip : float React.signal
 
-  val clear_screen : unit -> unit
+  val clear_screen : ?color:Color.t -> unit -> unit
   val clear_picking: unit -> unit
   val get_element: int -> int -> Picking.element option
 

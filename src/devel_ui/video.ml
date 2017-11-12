@@ -95,7 +95,7 @@ module type Draw = sig
   val ewip : float React.signal
   val ehip : float React.signal
 
-  val clear_screen : unit -> unit
+  val clear_screen : ?color:Color.t -> unit -> unit
   val clear_picking: unit -> unit
   val get_element: int -> int -> Picking.element option
 
@@ -166,8 +166,7 @@ module Draw(X : sig end) = struct
   let ehipi= rsm (iof) ehip
   let sWie = rsm (Screen.wie) screen
   let sHie = rsm (Screen.hie) screen
-(*  let clear_screen () = SV.fill_rect (rsv screenBS)  (Co.to_sdlvideo (Co.gray 240) )*)
-  let clear_screen () = SV.fill_rect (rsv screenBS)  (Co.to_sdlvideo (Tabula.Color.incognita) )
+  let clear_screen ?(color=Co.black) () = SV.fill_rect (rsv screenBS)  (Co.to_sdlvideo color )
   let clear_picking() = SV.fill_rect (rsv pickingBS) (PiCo.to_int32 (PiCo.none) )
   
   type blit_param =

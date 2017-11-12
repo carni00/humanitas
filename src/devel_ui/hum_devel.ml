@@ -82,7 +82,7 @@ let display_atelier atelier screen =
     | SA.Tabula, Tabula.Qtree qtree -> Earth.display_scene (SA.scene atelier) (SA.geoRect atelier) (SA.game atelier) (SA.player atelier) qtree ;
                                        Earth.regio_of_pos espace (SA.scene atelier) (SA.geoRect atelier)
     | SA.Graphique, _               -> Graph.display_graphique (SA.game atelier) (SA.player atelier) ; (fun (x,y) -> None)
-    | _ -> (fun (x,y) -> None)
+  (*  | _ -> (fun (x,y) -> None)*)
   (* affiche la carte, et retourne une fonction de picking des regiones *)
   
 
@@ -96,7 +96,7 @@ let pick get_element get_regio x y = match get_element x y with
 
 let rec cycle () =
   let s = RS.value status in
-  Draw.clear_screen();
+(*Draw.clear_screen();*)
   Draw.clear_picking();
   let get_regio = match Status.atelier s with
   | None         -> (fun (x,y) -> None)

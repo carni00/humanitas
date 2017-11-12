@@ -40,6 +40,7 @@ let rsf  = rsv |- foi
 let display_graphique game player =
   let orbis = Game.orbis game in
   let e     = orbis.Orbis.espace in
+  let _ = Draw.clear_screen ~color:(Color.black)  () in
 
 (*  let _ = D.antiStrn ~xAlign:D.Right ~yAlign:D.Top ("wik="^wik^"("^scale^")") (rsv D.swip) (iof(rsv D.ehip)) in*)
    ()
