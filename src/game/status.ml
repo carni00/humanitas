@@ -22,6 +22,7 @@
  *)
 
 module Atelier = struct
+
   
   type background = Tabula | Graphique
   type t = {
