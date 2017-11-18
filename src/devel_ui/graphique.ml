@@ -24,6 +24,7 @@
 open Std
 module RS = React.S
 module Co = Color
+module SA = Status.Atelier
 
   
 module Display = functor (Draw : Video.Draw) -> struct
@@ -35,11 +36,21 @@ let rsm  = RS.map
 let rsv  = RS.value
 let rsf  = rsv |- foi
 
- 
+let swip = rsf D.swip
+let ship = rsf D.ship
 
-let display_graphique game player =
-  let orbis = Game.orbis game in
-  let e     = orbis.Orbis.espace in
+   
+let display_graphique atelier =
+
+  let graph = SA.graph  atelier in
+  let game  = SA.game   atelier in
+  let player= SA.player atelier  in
+
+
+(*  let pos turn value =*)
+
+(*  let orbis = Game.orbis game in*)
+(*  let e     = orbis.Orbis.espace in*)
   let _ = Draw.clear_screen ~color:(Color.black)  () in
 
 (*  let _ = D.antiStrn ~xAlign:D.Right ~yAlign:D.Top ("wik="^wik^"("^scale^")") (rsv D.swip) (iof(rsv D.ehip)) in*)

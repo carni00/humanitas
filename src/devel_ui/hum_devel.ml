@@ -81,7 +81,7 @@ let display_atelier atelier screen =
     match SA.background atelier, SA.tabula atelier with
     | SA.Tabula, Tabula.Qtree qtree -> Earth.display_scene (SA.scene atelier) (SA.geoRect atelier) (SA.game atelier) (SA.player atelier) qtree ;
                                        Earth.regio_of_pos espace (SA.scene atelier) (SA.geoRect atelier)
-    | SA.Graphique, _               -> Graph.display_graphique (SA.game atelier) (SA.player atelier) ; (fun (x,y) -> None)
+    | SA.Graphique, _               -> Graph.display_graphique atelier ; (fun (x,y) -> None)
   (*  | _ -> (fun (x,y) -> None)*)
   (* affiche la carte, et retourne une fonction de picking des regiones *)
   

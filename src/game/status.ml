@@ -32,6 +32,7 @@ module Atelier = struct
   (* un atelier est une partie (game) affichée aux yeux d’un *player particulier sur un *screen particulier *)
     scene  : Scene.t;
     geoRect: Scene.GeoRect.t;
+    graph  : Graph.t;
     background : background;
     }
 (** la partie actuellement affichée à l’écran *)
@@ -41,6 +42,7 @@ module Atelier = struct
   let player  a = Game.get_player a.game a.pid
   let scene   a = a.scene
   let geoRect a = a.geoRect
+  let graph   a = a.graph  
   let background a = a.background
  
 
@@ -57,6 +59,7 @@ module Atelier = struct
     pid;
     scene;
     geoRect = Scene.GeoRect.compute (Orbis.espace orbis) scene screen ;
+    graph = Graph.make;
     background = Tabula;
     }
 
@@ -69,6 +72,7 @@ module Atelier = struct
     pid;
     scene;
     geoRect = Scene.GeoRect.compute (Orbis.espace orbis) scene screen ;
+    graph = Graph.make;
     background = Tabula;
     }
 

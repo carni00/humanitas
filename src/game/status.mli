@@ -31,6 +31,7 @@ module Atelier : sig
   val player : t -> Game.Player.t
   val scene  : t -> Scene.t
   val geoRect: t -> Scene.GeoRect.t
+  val graph  : t -> Graph.t
   val background: t -> background
 end
 
