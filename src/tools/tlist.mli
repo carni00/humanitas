@@ -61,6 +61,7 @@
   (** [nMap f [a0; ...; an]] builds the list [f 0 a0; ...; f n an]*)
   val iteri : (int -> 'a -> unit) -> 'a list -> unit
   (** [nIter f [a0; ...; an]] is equivalent to [begin f 0 a0; f 1 a1; ...; f n an; () end].*)
+  val fold_lefti : (int -> 'a -> 'b -> 'a) -> 'a -> 'b list -> 'a
 
   val map3 : ('a->'b->'c->'d) -> 'a list -> 'b list -> 'c list -> 'd list
   val map4 : ('a->'b->'c->'d->'e) -> 'a list -> 'b list -> 'c list -> 'd list -> 'e list

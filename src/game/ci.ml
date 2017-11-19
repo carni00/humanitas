@@ -108,7 +108,7 @@ let affectatio ?(i=600) ?(lum=600) aff = match aff with
   | Partitio.OTI -> Color.nil  N.none         0 lum             
 
 
-let natioKey ?(i=600) ?(lum=600) key = match key with
+let natioKey ?(i=900) ?(lum=500) (key : Natio.key) = match key with
   | Natio.Facultas        -> Color.nil  N.jaune         i lum
   | Natio.Plebs           -> Color.nil  N.orange        i lum
   | Natio.Hospitalitas    -> Color.nil  N.vert          i lum

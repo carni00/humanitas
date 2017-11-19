@@ -33,10 +33,14 @@ type t = {
 let make = {
   xMin =   0. ;
   yMin =   0. ;
-  xppt = 100. ;
-  yppu =   4. ;
+  xppt =   1. ;
+  yppu = 400. ;
   }
   
+let xMin g = g.xMin 
+let yMin g = g.yMin 
+let xppt g = g.xppt 
+let yppu g = g.yppu 
 
 
 (*

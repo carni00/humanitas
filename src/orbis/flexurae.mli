@@ -26,13 +26,12 @@
 
 module Flexura : sig
   
-  type t = {
-    len   : int;
-    x0    : int;
-    yList  : float list;
-    }
+  type t
   (** une courbe. le nombre de points de la courbe est len
       les coordonnées du point nº n sont ( x0 + n, List.nth list n ) *)
+  val len   : t -> int
+  val x0    : t -> int
+  val yList : t -> float list
 
 end
 

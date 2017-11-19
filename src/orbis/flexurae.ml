@@ -36,6 +36,10 @@ module Flexura = struct
 (** une courbe. le nombre de points de la courbe est len
     les coordonnées du point nº n sont ( x0 + n, List.nth list (len - n) ) *)
 
+  let len f   = f.len
+  let x0  f   = f.x0 
+  let yList f = f.yList
+
   let make = 
     {
     len = 0;

@@ -29,3 +29,7 @@ type t
 
 val make : t
 
+val xMin : t -> float (** plus petite valeur de x affichée à l’écran *)
+val yMin : t -> float (** plus petite valeur de y affichée à l’écran *)
+val xppt : t -> float (** x pixel per turn, nombre de pixels pour chaque tour *)
+val yppu : t -> float (** y pixel per unit, nombre de pixels pour chaque Tfloat.u *)

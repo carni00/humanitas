@@ -80,6 +80,14 @@ let mapi g l =
   f 0 l
 (* comme List.map g l, sauf que g utilise le numéro des éléments de la liste *)
 
+
+let rec fold_lefti g s l =
+  let rec f n s = function
+  | [] -> s
+  | e::q -> f (n+1) (g n s e) q in
+  f 0 s l
+
+
 let iteri g l =
   let rec f n = function
   | [] -> ()

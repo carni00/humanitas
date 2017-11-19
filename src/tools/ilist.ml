@@ -28,7 +28,7 @@
   let to_list l  = List.map (fun (key,a)-> a) l
   let init f nil = List.map (fun key-> (key,f key)) nil
   let nMap f l = List.map (fun (key, a)->(key, f key a)) l
-  let iter f l = List.iter(fun (key, a)-> f key a ) l
+  let iteri f l = List.iter(fun (key, a)-> f key a ) l
   let fold_left f s l = List.fold_left (fun s (key,a) -> f s a) s l
 (*  let add l e    = e :: l*)
   let rec remove list a = match list with

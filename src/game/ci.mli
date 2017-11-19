@@ -41,5 +41,6 @@ val bpb : Color.t
 
 
 val natio    : Nid.t      -> Color.Nuance.t
+val natioKey : ?i:int     ->  ?lum:int  ->  Natio.key -> Color.t
 val politeia : Politeia.t -> Color.Nuance.t
 
