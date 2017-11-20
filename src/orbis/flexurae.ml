@@ -62,8 +62,29 @@ end
 type t = (Natio.key, Flexura.t) Ilist.t
 (** les courbes d’une natio *)
 
-let key_list = [ N.Sophia ; N.Tfg ; N.DxVar ]
+let key_list =
+
+[
+(*  N.Facultas     ;*)
+(*  N.Plebs        ;*)
+(*  N.Hospitalitas ;*)
+  N.Instrumentum ;
+(*  N.Efficientia  ;*)
+  N.Famine       ;
+  N.Copia        ;
+  N.Tfg          ;
+  N.Isf          ;
+  N.DxVar        ;
+  N.Alimonium_ratio ;
+  N.Facultas_ratio  ;
+  N.Sophia       ;
+  N.Fides        ;
+(*  N.Libertas     ;*)
+(*  N.AgriCopia    ;*)
+(*  N.Densitas     ;*)
+]
 (** la liste des id des courbes *)
+
 
 let make = Ilist.init (fun k -> Flexura.make) key_list
 
