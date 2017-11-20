@@ -7771,3 +7771,7 @@ module game/graph
 atelier.graph
 
 226.bru.29.17H27
+Graphique.draw_graphique fonctionnel
+
+226.bru.30.20H30
+226.bru.30.20H31

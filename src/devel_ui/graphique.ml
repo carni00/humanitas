@@ -40,51 +40,35 @@ let rsf  = rsv |- foi
 let swip = rsf D.swip
 let ship = rsf D.ship
 
-(*type pos = { x : int; y : int }*)
    
 let display_graphique atelier =
 
-let _     = Draw.clear_screen ~color:(Color.black)  () in
-let graph = SA.graph  atelier in
-let game  = SA.game   atelier in
-let orbis = Game.orbis game in
-let pov   = (Game.Player.pov ( SA.player atelier )) in
-if pov == Nid.none then () 
-else
-  let flexurae = Nid.Nil.nth orbis.Orbis.flexuraeList pov in
+  let _     = Draw.clear_screen ~color:(Color.black)  () in
+  let graph = SA.graph  atelier in
+  let orbis = Game.orbis      ( SA.game   atelier ) in
+  let pov   = Game.Player.pov ( SA.player atelier ) in
+  if  pov  == Nid.none then () 
+  else
+    let flexurae = Nid.Nil.nth orbis.Orbis.flexuraeList pov in
 
-(*  let pos graph = fun turn value ->*)
-(*    let y = iof ( ship - value * Graph.yppu graph ) in ( x, y ) in*)
+    let x turn   = iof ( (foi turn) * (Graph.xppt graph) ) in
+    let y value  = iof ( ship - value * Graph.yppu graph ) in
 
-(*  let draw_segment color orig fin = Draw.line  color  orig.x  orig.y  fin.x  fin.y in*)
+    let draw_flexura key (flexura : Flexurae.Flexura.t) = 
+      let color   = Ci.natioKey key in
+      let g n s e = Draw.line color (x n) (y s) (x (n ++ 1)) (y e) ; e in (** affiche un segment *)
+      let yList   = List.rev (F.yList flexura) in
+      let _ = match yList with
+      | []            -> 0.
+      | y0 :: []      -> 0.
+      | y0 :: y1 :: q -> 
+        Draw.strn ~yAlign:Draw.Top ~co:color (Si.natioKey key) 0 (y y0) ;
+        Tlist.fold_lefti g y0 (y1 :: q) in () in
+    (** affiche d’une courbe *)
 
+    let _ = Ilist.iteri draw_flexura flexurae in ()
+    (** affiche de toutes les courbes d’une natio *)
 
-  let x turn  = iof ( (foi turn) * (Graph.xppt graph) ) in
-  let y value = iof ( ship - value * Graph.yppu graph ) in
-
-  let draw_flexura key (flexura : Flexurae.Flexura.t) = 
-    let color = Ci.natioKey key in
-(*    let color = Color.white in*)
-    let g n s e = Draw.line color (x n) (y s) (x (n ++ 1)) (y e) ; e in
-    let yList = List.rev (F.yList flexura) in
-    let _ = match yList with
-    | []            -> 0.
-    | y0 :: []      -> 0.
-    | y0 :: y1 :: q -> Tlist.fold_lefti g y0 (y1 :: q) in
-
-(*  val fold_lefti : (int -> 'a -> 'b -> 'a) -> 'a -> 'b list -> 'a*)
-
-    () in
-    
-(*  val iter     : ('k->'a-> unit) -> ('k, 'a) t -> unit*)
-
-
-(*  let orbis = Game.orbis game in*)
-(*  let e     = orbis.Orbis.espace in*)
-  let _ = Ilist.iteri draw_flexura flexurae in
-
-(*  let _ = D.antiStrn ~xAlign:D.Right ~yAlign:D.Top ("wik="^wik^"("^scale^")") (rsv D.swip) (iof(rsv D.ehip)) in*)
-   ()
 
 end
 

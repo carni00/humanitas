@@ -111,7 +111,7 @@ let rec cycle () =
 let () =
   Random.self_init();
   send_agenda [
-    `new_game { Game.resolution = Espace.Low } ;
+    `new_game { Game.resolution = Espace.Lower } ;
 (*   `wOpen (W.TaskHistory, W.Right) ;*)
 (*    `sFocus None ;*)
   ] ;
