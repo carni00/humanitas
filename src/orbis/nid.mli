@@ -60,6 +60,7 @@ module Nil : sig
   val map3  : ('a->'b->'c->'d) -> 'a t -> 'b t -> 'c t -> 'd t
   val map4  : ('a->'b->'c->'d->'e) -> 'a t -> 'b t -> 'c t -> 'd t -> 'e t
   val set  : 'a t -> (nid*'a) -> 'a t
+  val add  : 'a t -> (nid*'a) -> 'a t
   end
 
 module Nim : sig

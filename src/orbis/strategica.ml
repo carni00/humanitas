@@ -114,27 +114,32 @@ let anarchy d n pil =
   (* les nations anarchiques attaquent lorsqu’elles ont faim (copia) *)
   }
 
-let poleis s d n pil = 
-  {
-  stratiotikon = s;
-  rogatio_list = Nil.empty;
-  tactic_list  = 
+let basic_tactic_list d n pil =
     let tactic pid = 
       if N.copia n < 0.95 then J.Offensive J.Conquest
       else if N.copia n < 1.  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
       else J.Defensive in
     Nil.init (fun pid -> tactic pid) pil
   (* les cités attaquent lorsqu’elles ont faim (copia) *)
+
+let poleis s d n pil = 
+  {
+  stratiotikon = s;
+  rogatio_list = Nil.empty;
+  tactic_list  = basic_tactic_list d n pil;
   }
 
 let a_poleis d n pil = poleis ( Stratiotikon.init 5 5 0 ) d n pil
 let d_poleis d n pil = poleis ( Stratiotikon.init 9 1 0 ) d n pil
 
-let republic n s = 
+let republic d n pil = 
   {
   stratiotikon = Stratiotikon.init 9 1 0;
-  tactic_list  = Nil.set s.tactic_list (Nid.none, if N.agriCopia n < 1.2 then J.Offensive J.Conquest else J.Defensive); 
   rogatio_list = Nil.empty;
+  tactic_list  = 
+    let btl = basic_tactic_list d n pil in
+    let tti = (Nid.none, J.Offensive J.Conquest) in
+    Nil.add btl tti
   }
 (*** FIXME : créer une IA républicaine  ***)
 
@@ -148,7 +153,7 @@ let update d n prl s =
   | false, false, true  -> feudum pil
   | true , false, false -> d_poleis  d n pil
   | true , false, true  -> a_poleis  d n pil
-  | _    , true , _     -> republic n s
+  | _    , true , _     -> republic  d n pil
 (* strategie initiale *)
 
 

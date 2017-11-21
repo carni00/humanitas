@@ -80,6 +80,7 @@ module Nil =
   | []                  -> [ (nid,x) ]
   | (n,a)::q when n=nid -> (n,x) :: q
   | (n,a)::q            -> (n,a) :: set q (nid,x)
+  let add l (nid,x) = (nid,x) :: l
   end 
 
 
