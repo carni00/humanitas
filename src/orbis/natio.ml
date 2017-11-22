@@ -50,7 +50,6 @@ type key =
   | Densitas     
 
 
-
 type t = {
   nid : Nid.t;
   active: bool;

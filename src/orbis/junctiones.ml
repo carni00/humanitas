@@ -148,4 +148,49 @@ let update j nl sd =
 (* mise à jour des matrices relatio_map et finiumMutatio après établissement des stratégies par les joueurs *)
 
 
+module Natio = struct
+  type j = t
+  type t = {
+    relatio_list  : relatio Nid.Nil.t ;
+  (* liste de nos relations diplomatiques *)
+  (* seules les valeurs différentes de N_relatio sont enregistrées *)
+    theirTactic_list : tactic  Nid.Nil.t ;
+  (* liste des tactiques des autres nations envers nous *)
+  (* la liste de nos tactiques envers les autres nations est dans notre strategica *)
+  }
+
+  open Tfloat
+
+(*  let make j nil nid = *)
+
+  let compute_theirTactic_list j our_id =
+    let rec filter = function
+    | [] -> []
+    | ( (sujet,objet), t ) :: q when objet == our_id -> (sujet,t) :: filter q
+    | ( (sujet,objet), t ) :: q                      -> filter q in
+    filter j.tacticMap
+    (* liste des tactiques des autres nations envers nous *)
+
+  let compute_relatio_list j our_id =
+    let rec filter = function
+    | [] -> []
+    | ( (nid1,nid2), t ) :: q when nid1 == our_id -> (nid2,t) :: filter q
+    | ( (nid1,nid2), t ) :: q when nid2 == our_id -> (nid1,t) :: filter q
+    | ( (nid1,nid2), t ) :: q                     -> filter q in
+    filter j.relatioMap
+  (* liste de nos relations diplomatiques *)
+  (* seules les valeurs différentes de N_relatio sont enregistrées *)
+
+
+  let make j nid =
+    {
+    relatio_list     = compute_relatio_list j nid;
+    theirTactic_list = compute_theirTactic_list j nid;
+    }
+
+  let relatio_list     nj = nj.relatio_list
+  let theirTactic_list nj = nj.theirTactic_list
+  
+end
+(*ce que la natio connait des relations internationales*)
 

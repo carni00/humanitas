@@ -73,3 +73,18 @@ val update    : t -> natio Nid.Nil.t -> strategies -> t
 
 val newRelationes : rogatio Nid.Nim.t -> relatio Nid.Nim.t
 
+module Natio : sig
+  type j = t
+  type t
+  val make : j -> nid -> t 
+
+  val relatio_list  : t -> relatio Nid.Nil.t 
+  (** liste de nos relations diplomatiques *)
+  (** seules les valeurs différentes de N_relatio sont enregistrées *)
+
+  val theirTactic_list : t -> tactic  Nid.Nil.t 
+  (** liste des tactiques des autres nations envers nous *)
+  (** la liste de nos tactiques envers les autres nations est dans notre strategica *)
+
+end
+
