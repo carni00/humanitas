@@ -122,6 +122,17 @@ let basic_tactic_list d n pil =
     Nil.init (fun pid -> tactic pid) pil
   (* les cités attaquent lorsqu’elles ont faim (copia) *)
 
+let tti d n pil =
+  let open Tfloat in
+  let rci = N.chora n / N.imperium n in
+
+  
+
+(Nid.none, J.Offensive J.Conquest)
+
+
+
+
 let poleis s d n pil = 
   {
   stratiotikon = s;
@@ -138,7 +149,8 @@ let republic d n pil =
   rogatio_list = Nil.empty;
   tactic_list  = 
     let btl = basic_tactic_list d n pil in
-    let tti = (Nid.none, J.Offensive J.Conquest) in
+    let tti = tti d n pil in
+
     Nil.add btl tti
   }
 (*** FIXME : créer une IA républicaine  ***)
