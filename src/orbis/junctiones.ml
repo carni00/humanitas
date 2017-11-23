@@ -163,6 +163,12 @@ module Natio = struct
 
 (*  let make j nil nid = *)
 
+  let null = {
+    relatio_list     = Nid.Nil.empty ;
+    theirTactic_list = Nid.Nil.empty ;
+    }
+
+
   let compute_theirTactic_list j our_id =
     let rec filter = function
     | [] -> []

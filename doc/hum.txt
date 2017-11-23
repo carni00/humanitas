@@ -7784,3 +7784,6 @@ ttes les coubres
 Nil.add
 
 226.fri.02.18H57
+module Junctiones.Natio : junctiones relatives à notre natio
+
+226.fri.03.12H56

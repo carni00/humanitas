@@ -57,6 +57,7 @@ type t = {
   urbs  : bool*Rid.t;   (* caractérise la natio au tour(n) *)
   artes : Ars.t list; (* le tour *)
   g : G.Natio.t; (* geographie nationale *)
+  junctiones : Junctiones.Natio.t; (* junctiones relatives à une natio (vision nationale) *)
   k : K.t;      (* idem *)
   pa: Politeia.t;     
   p : Partitio.t;       (* caractérise la période tour(n-1) à tour(n) *)
@@ -72,6 +73,7 @@ let null =
   urbs  =(false,Rid.none);
   artes =[];
   g =G.Natio.null;
+  junctiones = Junctiones.Natio.null;
   k =K.null;
   pa=Pa.anarchy;
   p =P.null;
@@ -382,6 +384,7 @@ let create rm im g nid civitas =
     urbs = (true, Civitas.rid civitas);
     artes = artes;
     g = g;
+    junctiones = Junctiones.Natio.null;
     k = k;
     pa= Pa.anarchy;
     p = p;

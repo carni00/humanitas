@@ -76,6 +76,7 @@ val newRelationes : rogatio Nid.Nim.t -> relatio Nid.Nim.t
 module Natio : sig
   type j = t
   type t
+  val null : t
   val make : j -> nid -> t 
 
   val relatio_list  : t -> relatio Nid.Nil.t 
