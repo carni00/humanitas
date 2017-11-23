@@ -33,7 +33,7 @@ val iter   : (natio -> unit) -> t -> unit
 val optGet : t -> nid -> natio option
 val nf     : (natio->'a) -> t -> nid -> 'a
 val create : Rm.t -> Im.t -> G.t -> Civitas.t Nid.Nil.t -> t
-val update   : G.Natio.t Nid.Nil.t -> CivitasList.t -> t -> Partitio.Record.t Nid.Nil.t -> Lucrum.t -> Partitio.t Nid.Nil.t -> Ars.t list Nid.Nil.t -> t
+val update   : G.Natio.t Nid.Nil.t -> Junctiones.Natio.t Nid.Nil.t -> CivitasList.t -> t -> Partitio.Record.t Nid.Nil.t -> Lucrum.t -> Partitio.t Nid.Nil.t -> Ars.t list Nid.Nil.t -> t
 
 val politeia : t -> nid -> Politeia.t
 val artes    : t -> nid -> Ars.t list
