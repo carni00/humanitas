@@ -89,3 +89,5 @@ module Natio : sig
 
 end
 
+val natioList : t -> nid list -> Natio.t Nid.Nil.t
+(** liste des Junctiones.Natio.t *)

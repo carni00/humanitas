@@ -200,3 +200,8 @@ module Natio = struct
 end
 (*ce que la natio connait des relations internationales*)
 
+
+let natioList j nil = Nid.Nil.init (fun nid -> Natio.make j nid) nil
+
+
+(*EOF*)
