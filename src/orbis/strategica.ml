@@ -114,6 +114,7 @@ let anarchy d n pil =
   (* les nations anarchiques attaquent lorsqu’elles ont faim (copia) *)
   }
 
+
 let basic_tactic_list d n pil =
     let tactic pid = 
       if N.copia n < 0.95 then J.Offensive J.Conquest

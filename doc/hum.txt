@@ -7796,3 +7796,7 @@ J.natioList
 NatioList.update mis à jour
 
 226.fri.04.08H01
+Natio.update mis à jour
+Tlist.map5
+Nil.map5
+
