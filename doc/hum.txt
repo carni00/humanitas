@@ -7804,3 +7804,6 @@ Nil.map5
 Junctiones.Natio.am_i_under_attack
 
 226.fri.04.13H50
+mise à jour humanopaedia
+
+226.fri.04.14H07

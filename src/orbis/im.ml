@@ -84,7 +84,7 @@ let facultas rm im (i:Rid.t) = Rv.facultas (Rm.get rm i) (get im i)
 
 
 let is_competitor pass j na dom (i:nid) =
-  match J.is_attacking j i dom with
+  match J.is_attacking j i dom with (* dont worry : le compilateur gère ça mieux que toi (testé) *)
   | Some offensive -> pass == Rv.Passable || ( pass = Rv.Navigable && nav na i )
   | None -> false
 (* L'empire n°i veut et peut-il conquérir la régio r ? *)

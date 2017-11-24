@@ -80,10 +80,7 @@ let relatio j y x = Nim.bnth (N_relatio) j.relatioMap y x
 let is_attacking j = 
   let mx = Nix.empty() in
   let set_mx y x a = ( match a with
-    | Offensive off -> (
-      match relatio j y x with
-      | Pax -> ()
-      | _   -> Nix.set mx y x (Some off) )
+    | Offensive off -> Nix.set mx y x (Some off)
     | _ -> () ) in
   Nim.iteri set_mx j.tacticMap;
   fun y x -> Nix.get mx y x 
