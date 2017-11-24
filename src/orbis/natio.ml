@@ -271,14 +271,16 @@ let regio n e lat lon alt coast brouillards =
 
 (******************************************* NATIO UPDATE ***************************************************)
 
-let n_artes pa(*previous artes*) sophia inst plebs e_sapientia proxArtes =
+let n_artes pa(*previous artes*) politeia sophia inst plebs e_sapientia proxArtes =
   let rand x = Random.int (max 1 (iof x)) = 0 in
   let v = 4. in (* vitesse de découverte *)
   let f ars =
           let lev x = foi (Ars.level ars) * (10. ** x)  in
           List.mem ars pa
   || (    sophia * 100. > lev 0.
-       && ( ars=Ars.MET || ars=Ars.WRI || List.mem Ars.MET pa )
+       && (      ars =Ars.MET (* pas de prérequis pour découvrir la métallurgie *)
+            || ( ars =Ars.WRI && Politeia.is_civilized politeia ) 
+            || ( ars!=Ars.WRI && List.mem Ars.MET pa ) )
        && ( 
                  (rand (lev (7. - v) / e_sapientia / log plebs)) (*invention*)
             || (List.mem ars proxArtes && rand (lev (6. - v) / e_sapientia / inst)) (*diffusion*)
@@ -294,7 +296,7 @@ let update gn jn cl n(*natio*) pr luc p(*partitio*) pArtes =
   let d  = Dx.update  n.fd (G.Natio.plebs gn) in
   (* la nouvelle démographie est le « produit » de la forward demographie de l’année précédente et de la géographie nationale présente (perte de regiones ?) *)
   let fd = Dx.preview d  (P.cibus luc) (sophia n) (fides n) (facultas n) (P.mil p) 0. in
-  let artes = n_artes (artes n) (sophia n) (instrumentum n) (plebs n) (P.sap (P.Record.fructus pr)) pArtes in
+  let artes = n_artes (artes n) (politeia n) (sophia n) (instrumentum n) (plebs n) (P.sap (P.Record.fructus pr)) pArtes in
 (*  let artes = (artes n) in*)
   let k  = Aedificium.update (aeNatio n artes pr luc) in
   { 

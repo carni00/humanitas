@@ -7819,3 +7819,6 @@ elles passent en tactic retreat vis à vis des terres vides quand elles sont att
 
 
 226.fri.04.15H01
+retrait du is_attacking compliqué (en fait moins performant)
+
+226.fri.04.16H58
