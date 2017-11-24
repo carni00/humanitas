@@ -286,7 +286,7 @@ let n_artes pa(*previous artes*) sophia inst plebs e_sapientia proxArtes =
 (* techniques découvertes *)
 
 
-let update gn cl n(*natio*) pr luc p(*partitio*) pArtes = 
+let update gn jn cl n(*natio*) pr luc p(*partitio*) pArtes = 
   match G.Natio.choraAmp gn with
   | 0. -> kill n
   | _ -> 
@@ -299,6 +299,7 @@ let update gn cl n(*natio*) pr luc p(*partitio*) pArtes =
   { 
   n with
   g = gn;
+  junctiones = jn;
   artes = artes;
   k = k;
   pa= Pa.update (paNatio cl n);

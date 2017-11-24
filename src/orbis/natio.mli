@@ -98,7 +98,7 @@ val jNatio  : t -> Junctiones.natio
 val imNatio : t -> Im.natio
 val pNatio  : t -> Partitio.natio
 
-val update   : G.Natio.t -> Civitas.t list -> t -> Partitio.Record.t -> Partitio.t -> Partitio.t -> Ars.t list -> t
+val update   : G.Natio.t -> Junctiones.Natio.t -> Civitas.t list -> t -> Partitio.Record.t -> Partitio.t -> Partitio.t -> Ars.t list -> t
 
 val create : Rm.t -> Im.t -> G.t -> Nid.t -> Civitas.t -> t
 

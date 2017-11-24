@@ -76,6 +76,7 @@ module Nil =
   (** smap2 suppose que al et bl sont classées dans le même ordre (selon les k(eys)) *)
   let map3  f l1 l2 l3 = Tlist.map3 (fun (nid,a) (nid,b) (nid,c) ->(nid, f a b c)) l1 l2 l3
   let map4  f l1 l2 l3 l4 = Tlist.map4 (fun (nid,a) (nid,b) (nid,c) (nid,d) ->(nid, f a b c d)) l1 l2 l3 l4
+  let map5  f l1 l2 l3 l4 l5 = Tlist.map5 (fun (nid,a) (nid,b) (nid,c) (nid,d) (nid,e) ->(nid, f a b c d e)) l1 l2 l3 l4 l5
   let rec set l (nid,x) = match l with
   | []                  -> [ (nid,x) ]
   | (n,a)::q when n=nid -> (n,x) :: q

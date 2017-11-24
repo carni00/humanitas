@@ -65,6 +65,7 @@
 
   val map3 : ('a->'b->'c->'d) -> 'a list -> 'b list -> 'c list -> 'd list
   val map4 : ('a->'b->'c->'d->'e) -> 'a list -> 'b list -> 'c list -> 'd list -> 'e list
+  val map5 : ('a->'b->'c->'d->'e->'f) -> 'a list -> 'b list -> 'c list -> 'd list -> 'e list -> 'f list
   val fold_left3 : ('d->'a->'b->'c->'d) -> 'd -> 'a list -> 'b list -> 'c list -> 'd
   val applique   : 'a -> ('a -> 'a ) list -> 'a
   (** [applique a [f0; f1; ...; fn]] returns [fn( ...(f1 (f0 a)))] *)

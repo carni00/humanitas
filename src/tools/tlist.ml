@@ -109,6 +109,15 @@ let map4 f al bl cl dl =
   | _ -> [] in
   g al bl cl dl
 
+let map5 f al bl cl dl el = 
+  if len al<>len bl || len al<>len cl || len al<>len dl || len al<>len el then raise (Invalid_argument "Tlist.map5")
+  else let rec g al bl cl dl el = match al,bl,cl,dl,el with
+  | a::aq,  b::bq, c::cq, d::dq, e::eq -> f a b c d e :: g aq bq cq dq eq
+  | _ -> [] in
+  g al bl cl dl el
+(*  fixme*)
+
+
 let rec fold_left3 f arg l1 l2 l3 =
   match l1, l2, l3 with
   | h1 :: t1, h2 :: t2, h3 :: t3 -> fold_left3 f (f arg h1 h2 h3) t1 t2 t3
