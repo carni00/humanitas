@@ -58,6 +58,7 @@ type t = {
 (* seules les valeurs différentes de N_relatio sont enregistrées *)
   tacticMap   : tactic  Nid.Nim.t ;
 (* copie de la matrice des tactiques (importée depuis stratégies) *)
+(*  tacticMx    : tactic  Nid.Nim.t ;*)
   }
 
 type natio = {
@@ -76,32 +77,24 @@ type strategies = {
 
 let relatio j y x = Nim.bnth (N_relatio) j.relatioMap y x 
 
+let tactic  j y x = Nim.bnth (Defensive) j.tacticMap y x 
 
+
+let is_attacking j y x = 
+  match (tactic j y x) with
+    | Offensive off -> (Some off)
+    | _ -> None
+
+(*
 let is_attacking j = 
   let mx = Nix.empty() in
   let set_mx y x a = ( match a with
     | Offensive off -> Nix.set mx y x (Some off)
     | _ -> () ) in
   Nim.iteri set_mx j.tacticMap;
-  fun y x -> Nix.get mx y x 
+  fun y x -> Nix.get mx y x *)
 (** is y attacking x *)
 (** performance : dès l’obtention de j, on calcule la matrice des résultats, et on renvoie la fonction qui pique dans cette matrice *)
-
-(*
-let warNb j n = 
-  let f ((n1,n2),re) = (n1=n || n2=n) && re=Bellum in
-  Tlist.census f j.relatioMap
-(* nombre de guerres actuellement menées par la nation n*)
-
-let warNatioList j n =
-  let rec f = function
-  | [] -> []
-  | ((n1,n2),re)::q when n1=n && re=Bellum -> n2::f q
-  | ((n1,n2),re)::q when n2=n && re=Bellum -> n1::f q
-  | _::q -> f q in f j.relatioMap
-(* liste des nationes avec lesquelles n est en guerre *)
-fixme : relève de junctiones.natio
-*)
 
 
 (*****************************************************************************************)

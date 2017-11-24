@@ -7813,3 +7813,9 @@ mise à jour junctiones.is_attacking : peu importe qu’on ait signé ou non un 
 J.Nation.am_i_at_war
 
 226.fri.04.14H46
+les républiques limite à 2/1 leur rapport imperium/chora
+elles passent en tactic retreat vis à vis des terres vides quand elles sont attaquées
+à faire : rendre effective la tactique retreat == se retirer des regiones
+
+
+226.fri.04.15H01
