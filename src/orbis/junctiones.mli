@@ -87,6 +87,11 @@ module Natio : sig
   (** liste des tactiques des autres nations envers nous *)
   (** la liste de nos tactiques envers les autres nations est dans notre strategica *)
 
+  val am_i_at_war       : t -> bool
+  (** suis-je en guerre (bellum) avec une quelconque autre natio *)
+  val am_i_under_attack : t -> bool
+  (** suis-je attacké (offensive x) par une quelconque autre natio *)
+
 end
 
 val natioList : t -> nid list -> Natio.t Nid.Nil.t

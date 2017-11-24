@@ -7807,3 +7807,6 @@ Junctiones.Natio.am_i_under_attack
 mise à jour humanopaedia
 
 226.fri.04.14H07
+mise à jour junctiones.is_attacking : peu importe qu’on ait signé ou non un traité de paix
+
+226.fri.04.14H34

@@ -197,8 +197,12 @@ module Natio = struct
   let am_i_under_attack nj = 
     let f t = match t with Offensive x -> true | _ -> false in
     Nil.exists f  (nj.theirTactic_list) 
-    (* suis-je attacké par une autre natio *)
+    (** suis-je attacké par une quelconque autre natio *)
 
+  let am_i_at_war nj = 
+    let f r = match r with Bellum -> true | _ -> false in
+    Nil.exists f  (nj.relatio_list) 
+    (** suis-je en guerre avec une quelconque autre natio *)
 
 
 
