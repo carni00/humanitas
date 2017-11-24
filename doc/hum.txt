@@ -7822,3 +7822,6 @@ elles passent en tactic retreat vis à vis des terres vides quand elles sont att
 retrait du is_attacking compliqué (en fait moins performant)
 
 226.fri.04.16H58
+seules les nations poliades/civilized peuvent pratiquer (inventer ou acquérir) l’écriture
+
+226.fri.04.17H18

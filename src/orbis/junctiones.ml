@@ -77,16 +77,16 @@ type strategies = {
 
 let relatio j y x = Nim.bnth (N_relatio) j.relatioMap y x 
 
-let tactic  j y x = Nim.bnth (Defensive) j.tacticMap y x 
+let tactic  j y x = Nim.snth (Defensive) j.tacticMap y x 
 
-(*
+
 let is_attacking j y x = 
   match (tactic j y x) with
     | Offensive off -> (Some off)
     | _ -> None
-*)
 
 
+(*
 let is_attacking j = 
   let mx = Nix.empty() in
   let set_mx y x a = ( match a with
@@ -96,7 +96,7 @@ let is_attacking j =
   fun y x -> Nix.get mx y x 
 (** is y attacking x *)
 (** performance : dès l’obtention de j, on calcule la matrice des résultats, et on renvoie la fonction qui pique dans cette matrice *)
-
+*)
 
 (*****************************************************************************************)
 
