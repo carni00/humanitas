@@ -27,6 +27,7 @@ module Nim = Nid.Nim
 module N   = Natio
 module Pa  = Politeia
 module J   = Junctiones
+module Jn  = Junctiones.Natio
 
 type nid = Nid.t
 
@@ -125,14 +126,14 @@ let basic_tactic_list d n pil =
 
 let tti d n pil =
   let open Tfloat in
-(*  let ric = N.imperium n / N.chora n in*)
-(*  let j = N.junctiones n in*)
-
-  
-
-(Nid.none, J.Offensive J.Conquest)
-
-
+  let j = N.junctiones n in
+  let under_attack = Jn.am_i_under_attack j in
+  let ric = N.imperium n / N.chora n in
+  if under_attack == true
+  then (Nid.none, J.Retreat)
+  else if ric < 2. 
+  then (Nid.none, J.Offensive J.Conquest)
+  else (Nid.none, J.Defensive)
 
 
 let poleis s d n pil = 
