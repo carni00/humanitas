@@ -661,10 +661,13 @@ La chronique nationale ne debute qu'apres la decouverte de l'ecriture par la
 nation.  Elle ne cesse pas lors d'une seditio ; elle cesse ssi la natio
 disparait.
 
+***
+DDM 4 frimaire an 226
+
 De junctionibus
 
 Les nationes peuvent être en contact (géographique) ou non.  Les nationes
-peuvent avoir signé un traité de paix, se faire la guerre, ou ne pas se faire la
+peuvent avoir signé un traité de paix, être en guerre, ou ne pas se faire la
 guerre, sans avoir signé de traité de paix (N_RELATIO).
 
 L'absence de contact ne se confond pas avec l'absence de guerre et de paix.
@@ -700,7 +703,8 @@ revient au même) et de la technologie (là il y a une différence : une natio
 dépourvue de la navigatio ne peut conquérir des cases océanes mais peut traiter
 avec une natio possédant le débouché maritime)
 
----  6 Germinal an 216
+--- 6 Germinal an 216
+DDM 4 frimaire an 226
 
 Contre chacune des nationes voisines, 3 tactiques peuvent être réalisées en cas
 de guerre : 
@@ -709,10 +713,10 @@ offensive: l'envahir si l'on en a la capacité
 retraite : se retirer des éventuels territoires conquis
 
 L'intérêt de la défensive et la retraite tient à ce que l'occupation du
-territoire ennemi ne rapporte RIEN jusqu'à ce qu'il soit colonisé (qu'il intègre
+territoire ennemi rapporte peu jusqu'à ce qu'il soit colonisé (qu'il intègre
 le territoire national) [ou qu'une paix inégale soit signée], mais qu'il coûte
-déjà le coût de l'occupation.  La puissance militaire est réduite par la
-superficie de l'empire.
+déjà le coût de l'occupation, tandis que La puissance militaire est réduite par
+la superficie de l'empire.
 
 On distingue donc le territoire de la nation de celui de l'empire.
 
@@ -723,36 +727,15 @@ puissance en abandonnant en priorité les terres non arables.  Dans ce cas, il
 faudra pouvoir établir une tactique militaire (mais pas rogationes possibles)
 vis à vis des territoires non appropriée par la [chora].
 
---- 11 floréal an 216
-DDM 17 pluviose an 222
+Concernant la stratégie offensive, deux options peuvent être définies :
+- conquest : aucune limite à l’offensive
+- release : conquête limitée à la reconquête de la chora perdue
 
-Imperium & chora
-
-Les nationes maîtrisent toutes l'agriculture ou l'élevage.  Elles peuplent les
-terres adaptées à ces activités, à savoir toutes les terres émergées, à
-l'exception des déserts, glaciers/zone_arctique, forêt équatoriale et taïga. Les
-petites populations pratiquant la chasse/cueillette dans ces zones ne sont pas
-représentées.
-
-La surface initiale des nationes est une zone fertile limitée par des terres non
-fertiles [ou non cultivables : forêt dense], des océans, et la surface des
-autres nationes.
-
-On distingue la surface controlée militairement par une natio : l'imperium 
-de la surface peuplée (chora).  Toutes les nations, quelque soit leur politeia,
-ont des dépenses militaires et donc d'un imperium.
-
-Les nations anarchiques ne produisent des dépenses militaires qu'aux fins de
-la défense immédiate de la chora. Chez ces dernières, l'imperium ne peut dépasser
-les frontières de la chora. Les armées suivent la colonisation agricole.
-
-Les républiques, en revanche, disposent d'une armée unitaire capable d'organiser
-la conquête de terres lointaines. La conquête de terres peut précèder la
-colonisation. L'imperium peut excéder la chora.
-
-Enfin, les régimes aristocratiques peuvent occuper les terres vides et les
-chora étrangères, afin d'en tirer un tribut.
-
+À noter : les notions de relatio et tactic sont indépendantes.
+On peut adopter toute tactique (y compris offensive) en toute relatio (y compris peace)
+La combinaison peace - offensive vaut attaque effective sans déclaration de guerre.
+(on peut s’attendre dans ce cas à une perte de réputation et à subir une déclaration de
+guerre en retour)
 
 ***
 
@@ -1242,14 +1225,14 @@ La natio envahie cesse de perdre des territoires et d’avoir des pertes
 militaires.  La natio occupante tire mieux profit des territoires occupés
 
 --- 5 Thermidor an 216
+DDM 4 frimaire an 226
 
 De l'évolution des imperii
 
 Une regio est conquise par un empire si
 - elle en est voisine
 - regiones terrestres ou navigation
-- les empires ne sont pas en paix 
-- l'empire a une tactique offensive
+- l'empire a une tactique offensive (y compris en violation d’un traité de paix)
 
 --- 28 Nivose an 215 DDM 19 Vendemiaire an 218
 
@@ -1323,19 +1306,18 @@ ont eu lieu
 
 ***
 
+DDM 4 frimaire an 226
+
 Des tactiques
 
 Chaque natio a une tactique envers les autres nations et la terra incognita.
 type tactic = DEFENSIVE | OFFENSIVE | RETREAT.  La tactic par défaut est
 DEFENSIVE.  L’invasion d’une natio étrangère ou de la terra incognita commence
-lorsque 1.  La tactique est offensive 2.  Aucune PAX n’est signée <=> (relatio =
-BELLUM ou N_RELATIO) (condition toutes deux nécessaires)
+lorsque La tactique est offensive
 
-Ceci implique que : 1. On peut être en paix et avoir (prévoir) une tactique
-offensive en cas de déclaration de guerre ennemie 2. On peut agresser un autre
-pays sans lui avoir déclarer la guerre. Il suffit de ne pas signer de traité de
-paix, et de décider au moment opportun d’une tactique offensive.  3.  On peut
-attaquer la terra incognita bien qu’on ne puisse ni lui déclarer la guerre, ni
+Ceci implique que : 
+1. On peut attaquer une autre nation sans déclaration de guerre
+2. On peut attaquer la terra incognita bien qu’on ne puisse ni lui déclarer la guerre, ni
 signer de traité de paix.
 
 --- 16 germinal an 218
