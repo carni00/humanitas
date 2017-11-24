@@ -67,6 +67,7 @@ val partitio     : t -> Partitio.t
 val kapital      : t -> Aedificium.t
 val politeia     : t -> Politeia.t
 val geographia   : t -> G.Natio.t
+val junctiones   : t -> Junctiones.Natio.t
 val seditio      : t -> float
 val vis          : t -> float
 val imperium     : t -> float

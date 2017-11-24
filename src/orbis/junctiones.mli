@@ -63,9 +63,9 @@ val relatio : t -> nid -> nid -> relatio
 val is_attacking : t -> nid -> nid -> offensive option
 (** is y attacking x ? if y is attacking, returns if the offensive is Some conquest or release, else returns None *)
 
-val warNb   : t -> nid -> int
+(*val warNb   : t -> nid -> int*)
 
-val warNatioList : t -> nid -> nid list
+(*val warNatioList : t -> nid -> nid list*)
 
 val make      : t 
 

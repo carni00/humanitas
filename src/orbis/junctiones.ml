@@ -90,7 +90,7 @@ let is_attacking j =
 (** is y attacking x *)
 (** performance : dès l’obtention de j, on calcule la matrice des résultats, et on renvoie la fonction qui pique dans cette matrice *)
 
-
+(*
 let warNb j n = 
   let f ((n1,n2),re) = (n1=n || n2=n) && re=Bellum in
   Tlist.census f j.relatioMap
@@ -103,8 +103,8 @@ let warNatioList j n =
   | ((n1,n2),re)::q when n2=n && re=Bellum -> n1::f q
   | _::q -> f q in f j.relatioMap
 (* liste des nationes avec lesquelles n est en guerre *)
-
-
+fixme : relève de junctiones.natio
+*)
 
 
 (*****************************************************************************************)
@@ -196,7 +196,15 @@ module Natio = struct
 
   let relatio_list     nj = nj.relatio_list
   let theirTactic_list nj = nj.theirTactic_list
-  
+
+  let am_i_under_attack nj = 
+    let f t = match t with Offensive x -> true | _ -> false in
+    Nil.exists f  (nj.theirTactic_list) 
+    (* suis-je attacké par une autre natio *)
+
+
+
+
 end
 (*ce que la natio connait des relations internationales*)
 

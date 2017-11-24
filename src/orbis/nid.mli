@@ -47,6 +47,7 @@ module Nil : sig
   val key_list : 'a t -> nid list
 (** returns the liste of keys (nation id) (values are lost) *)
   val init : (nid->'a) -> nid list -> 'a t
+  val exists : ('a -> bool) -> 'a t -> bool
   val iter : ('a->unit) -> 'a t -> unit 
   val fold_left : ('a -> 'b -> 'a) -> 'a -> 'b t -> 'a
   val map  : ('a->'b) -> 'a t -> 'b t

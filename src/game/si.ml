@@ -274,7 +274,7 @@ let natioKey = function
   | Natio.Libertas        -> "Libertas"           
   | Natio.AgriCopia       -> "AgriCopia"           
   | Natio.Densitas        -> "Densitas"           
-  | _                     -> "natioKey"           
+(*  | _                     -> "natioKey"           *)
               
 
 let ars = function

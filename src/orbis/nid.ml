@@ -48,7 +48,8 @@ module Nil =
   let nth l n    = try (List.assoc n l) with Not_found -> failwith ("Nil.nth : nation with nid = "^(Std.soi n)^" not found")
   let snth a l n = try (List.assoc n l) with Not_found -> a
   let len = List.length
-  let max_id = function [] -> 0 | (nid,a)::q -> List.fold_left (fun maxFound (newNid,a) -> max maxFound newNid) nid q +1
+
+let max_id = function [] -> 0 | (nid,a)::q -> List.fold_left (fun maxFound (newNid,a) -> max maxFound newNid) nid q +1
   let to_list  l =  List.map  (fun (nid,a)-> a  ) l
   let key_list l =  List.map  (fun (nid,a)-> nid) l
   let init f nil =  List.map  (fun nid-> (nid,f nid)) nil
@@ -77,6 +78,9 @@ module Nil =
   let map3  f l1 l2 l3 = Tlist.map3 (fun (nid,a) (nid,b) (nid,c) ->(nid, f a b c)) l1 l2 l3
   let map4  f l1 l2 l3 l4 = Tlist.map4 (fun (nid,a) (nid,b) (nid,c) (nid,d) ->(nid, f a b c d)) l1 l2 l3 l4
   let map5  f l1 l2 l3 l4 l5 = Tlist.map5 (fun (nid,a) (nid,b) (nid,c) (nid,d) (nid,e) ->(nid, f a b c d e)) l1 l2 l3 l4 l5
+  let rec exists f = function
+  | []       -> false
+  | (n,a)::q -> f a || exists f q
   let rec set l (nid,x) = match l with
   | []                  -> [ (nid,x) ]
   | (n,a)::q when n=nid -> (n,x) :: q

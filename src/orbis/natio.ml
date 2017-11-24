@@ -119,6 +119,7 @@ let partitio     n = n.p
 let kapital      n = n.k
 let politeia     n = n.pa
 let geographia   n = n.g
+let junctiones   n = n.junctiones
 let seditio      n = K.seditio       n.k
 let vis          n = K.vis           n.k
 let imperium     n = Gn.imperium     n.g

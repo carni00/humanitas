@@ -125,7 +125,8 @@ let basic_tactic_list d n pil =
 
 let tti d n pil =
   let open Tfloat in
-  let rci = N.chora n / N.imperium n in
+(*  let ric = N.imperium n / N.chora n in*)
+(*  let j = N.junctiones n in*)
 
   
 
