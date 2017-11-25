@@ -54,6 +54,7 @@ val get  : t -> Rid.t -> Rv.t
 (*val tegmen  : t -> Rid.t -> Rv.Regio.t*)
 val facultas : Rm.t -> t -> Rid.t -> float
 val incola   : t -> Rid.t -> Rv.Incola.t option
+val incola_id: t -> Rid.t -> nid
 val dominus  : t -> Rid.t -> nid
 
 val create : Espace.t -> Rm.t -> (nid*Date.t) Rid.Array.t -> nid Rid.Array.t -> t

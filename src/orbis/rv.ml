@@ -226,6 +226,10 @@ let contents    rv = rv.contents
 let incola      rv = match rv.contents with
   | Desertum_for n -> None 
   | Incol        i -> Some i
+let incola_id   rv = match rv.contents with
+  | Desertum_for n -> Nid.none 
+  | Incol        i -> Incola.nid i
+
 let plebs       rv = match rv.contents with
   | Desertum_for n -> 0. 
   | Incol        i -> Incola.plebs i

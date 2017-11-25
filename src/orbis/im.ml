@@ -78,16 +78,18 @@ let length (im:t) = Ria.length(im)
 let nIter f rm = Ria.nIter f rm
 
 let get         im (i:Rid.t) = Ria.get im i
-let incola      im (i:Rid.t) = Rv.incola (get im i)
-let dominus     im (i:Rid.t) = Rv.dominus (get im i)
-let facultas rm im (i:Rid.t) = Rv.facultas (Rm.get rm i) (get im i)
+let incola      im (i:Rid.t) = Rv.incola    (get im i)
+let incola_id   im (i:Rid.t) = Rv.incola_id (get im i)
+let dominus     im (i:Rid.t) = Rv.dominus   (get im i)
+let facultas rm im (i:Rid.t) = Rv.facultas  (Rm.get rm i) (get im i)
 
 
 let is_competitor pass j na dom (i:nid) =
   match J.is_attacking j i dom with (* dont worry : le compilateur gère ça mieux que toi (testé) *)
   | Some offensive -> pass == Rv.Passable || ( pass = Rv.Navigable && nav na i )
   | None -> false
-(* L'empire n°i veut et peut-il conquérir la régio r ? *)
+(* L'empire voisin de la regio n°i veut et peut-il conquérir la régio r ? *)
+
 
 
 let regio_colonizability e r rv =
@@ -111,10 +113,25 @@ let local_colonization na nid r rv rcy =
   && is_natio_colonizatrice na nid r (Rv.dominus rv)
 (* colonization d’une terre dont on est déjà propriétaire *)
 
+
+
+
+let deminutio im j dom inc lesQuatre =
+  let rec is_finium = function
+  | []   ->  false
+  | e::q -> (dominus im e <> dom) || is_finium q in
+  (*regio frontalière*)
+  ( dom != Nid.none  &&  J.tactic j dom inc = J.Retreat  &&  is_finium lesQuatre) 
+  (* abandon de la regio par son dominus *)
+
+
 let competitores e rm im j na (rid:Rid.t) rcy =
+  let r   = Rm.get  rm rid in
+  let rv  =    get  im rid in
   let dom = dominus im rid in
-  let r  = Rm.get rm rid in
-  let rv =    get im rid in
+  let inc = incola_id im rid in
+  let lesQuatre      = ER.lesQuatre e rid in
+  let deminutio      = deminutio im j dom inc lesQuatre in
   let is_colonizable = Random.int 1000 < rcy in
   let is_passable    = Rv.is_passable r rv in
   (* colonization progressive des regiones adjacentes : 10 fois plus lente que la local_colonization *)
@@ -133,26 +150,13 @@ let competitores e rm im j na (rid:Rid.t) rcy =
                 then f(q,((i,true )::il)) (* colonization anarchique *)
            else f(q,il) )
     else f(q,il) in
-  let proximae_competitores = f(ER.lesQuatre e rid,[]) in
-  if dom == Nid.none then proximae_competitores 
+  let proximae_competitores = f(lesQuatre, []) in
+  if ( dom == Nid.none || deminutio ) then proximae_competitores 
   else (dom,false) :: proximae_competitores
 (* Liste des imperium en compétition pour être le dominus au tour à venir *)
 (*(* Liste des imperium en mesure d'absorber la régio r *)*)
 (* on précise s'il y a colonisation agricole simultanée (true) ou non (false) *)
-(*
-let deminutio e rm im j r =
-  let dom = dominus im r
-  and inc = incola im r
-  and prox = ER.lesQuatre e r in
-  let rec is_finium = function
-  | [] -> false
-  | e::q -> (dominus im e <> dom) || is_finium q in
-  let mutatio,proba = J.mutatio j dom inc in
-     (mutatio=J.Deminutio) (*retraite des terres de la natio rn*)
-  && (proba = 100 || (Random.int 100)<proba)
-  && (is_finium prox) (*regio frontalière*)
-(* abandon de la regio par son dominus *)
-*)
+
 
 
 let neo_dominus e rm im j na r rcy =

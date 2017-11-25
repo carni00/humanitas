@@ -59,6 +59,7 @@ type strategies = {
 (* données stratégiques à partir desquelles on met à jour les junctiones *)
 
 val relatio : t -> nid -> nid -> relatio
+val tactic  : t -> nid -> nid -> tactic
 
 val is_attacking : t -> nid -> nid -> offensive option
 (** is y attacking x ? if y is attacking, returns if the offensive is Some conquest or release, else returns None *)

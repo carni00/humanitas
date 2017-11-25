@@ -7825,3 +7825,6 @@ retrait du is_attacking compliqué (en fait moins performant)
 seules les nations poliades/civilized peuvent pratiquer (inventer ou acquérir) l’écriture
 
 226.fri.04.17H18
+Junctiones.tactic : bugfix
+
+226.fri.05.18H19

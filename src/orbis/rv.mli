@@ -94,6 +94,7 @@ val update : t -> nid -> contents -> t
 val dominus         : t -> nid
 val contents        : t -> contents
 val incola          : t -> Incola.t option
+val incola_id       : t -> nid
 val plebs           : t -> float
 val contents        : t -> contents
 val brouillards     : t -> Brouillards.t
