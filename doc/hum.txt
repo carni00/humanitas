@@ -7828,3 +7828,6 @@ seules les nations poliades/civilized peuvent pratiquer (inventer ou acquérir) 
 Junctiones.tactic : bugfix
 
 226.fri.05.18H19
+retraite effective sur im rétablie (à tester)
+
+226.fri.06.09H28

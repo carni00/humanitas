@@ -116,15 +116,15 @@ let anarchy d n pil =
   }
 
 
-let basic_tactic_list d n pil =
-    let tactic pid = 
-      if N.copia n < 0.95 then J.Offensive J.Conquest
-      else if N.copia n < 1.  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
-      else J.Defensive in
-    Nil.init (fun pid -> tactic pid) pil
-  (* les cités attaquent lorsqu’elles ont faim (copia) *)
+let tactic_tw_nationes d n pil =
+  let tactic pid = 
+    if N.copia n < 0.95 then J.Offensive J.Conquest
+    else if N.copia n < 1.  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
+    else J.Defensive in
+  Nil.init (fun pid -> tactic pid) pil
+  (* les cités attaquent lorsqu’elles manquent de terres (copia) *)
 
-let tti d n pil =
+let tactic_tw_natives d n pil =
   let open Tfloat in
   let j = N.junctiones n in
   let under_attack = Jn.am_i_under_attack j in
@@ -134,13 +134,17 @@ let tti d n pil =
   else if ric < 2. 
   then (Nid.none, J.Offensive J.Conquest)
   else (Nid.none, J.Defensive)
+  (* les cités attaquent lorsqu’elles manquent de terres (copia) *)
+
+
+let poleis_tactic d n pil = Nil.add (tactic_tw_nationes d n pil) (tactic_tw_natives d n pil)
 
 
 let poleis s d n pil = 
   {
   stratiotikon = s;
   rogatio_list = Nil.empty;
-  tactic_list  = basic_tactic_list d n pil;
+  tactic_list  = poleis_tactic d n pil;
   }
 
 let a_poleis d n pil = poleis ( Stratiotikon.init 5 5 0 ) d n pil
@@ -150,11 +154,8 @@ let republic d n pil =
   {
   stratiotikon = Stratiotikon.init 9 1 0;
   rogatio_list = Nil.empty;
-  tactic_list  = 
-    let btl = basic_tactic_list d n pil in
-    let tti = tti d n pil in
+  tactic_list  = poleis_tactic d n pil;
 
-    Nil.add btl tti
   }
 (*** FIXME : créer une IA républicaine  ***)
 
