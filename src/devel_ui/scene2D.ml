@@ -94,7 +94,8 @@ let vorid e povOpt ria qiter =
   let _ = match povOpt with
   | None   -> ()
   | Some n -> qiter (fun v2 regio -> f n v2 regio) in
-  (fun rid -> Ria.get ba rid )
+(*  (fun rid -> Ria.get ba rid )*)
+  (fun rid -> Natio.Cognita )
 (* caractère connu ou non d’une regio appelée par son rid *)
 (* qiter = parcours de toutes les regiones à afficher, stockage des données calculées dans un array *)
 
@@ -281,7 +282,7 @@ let draw_cognita scene rw rh x y aos regio =
 let draw_regio vor pow rw rh scene aos v2 regio =
   match pow v2 with None -> () | Some (lat, lon, x, y) ->
   let open Tabula in
-  let rh          = rh lat in
+  let rh          = rh lat in 
   match vor regio with
               | Natio.Incognita -> ()
               | Natio.Terra_incognita -> draw_terra_incognita rw rh x y

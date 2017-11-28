@@ -108,8 +108,8 @@ let anarchy d n pil =
   rogatio_list = Nil.empty;
   tactic_list  = 
     let tactic pid = 
-      if N.copia n < 0.9 then J.Offensive J.Conquest
-      else if N.copia n < 1.  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
+      if N.copia n < 0.8 then J.Offensive J.Conquest
+      else if N.copia n < 0.9  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
       else J.Defensive in
     Nil.init (fun pid -> tactic pid) pil
   (* les nations anarchiques attaquent lorsqu’elles ont faim (copia) *)

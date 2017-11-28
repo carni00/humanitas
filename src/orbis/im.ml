@@ -84,11 +84,12 @@ let dominus     im (i:Rid.t) = Rv.dominus   (get im i)
 let facultas rm im (i:Rid.t) = Rv.facultas  (Rm.get rm i) (get im i)
 
 
-let is_competitor pass j na dom (i:nid) =
+let is_competitor pass j na dom inc (i:nid) =
   match J.is_attacking j i dom with (* dont worry : le compilateur gère ça mieux que toi (testé) *)
-  | Some offensive -> pass == Rv.Passable || ( pass = Rv.Navigable && nav na i )
   | None -> false
-(* L'empire voisin de la regio n°i veut et peut-il conquérir la régio r ? *)
+  | Some J.Release  -> ( inc = i )
+  | Some J.Conquest -> pass = Rv.Passable || ( pass = Rv.Navigable && nav na i )
+(* L'empire "i" veut et peut-il conquérir la régio de dominus dom et d’incola inc ? *)
 
 
 
@@ -141,7 +142,7 @@ let competitores e rm im j na (rid:Rid.t) rcy =
     if i<>Nid.none
     && i<>dom
     && List.mem_assoc i il=false 
-    then (      if is_competitor is_passable j na dom i = true   
+    then (      if is_competitor is_passable j na dom inc i = true   
                 then f(q,((i,false)::il)) (* conquete militaire *)
            else if is_colonizable
                 && ( match incola im pid with Some inc -> Rvi.nid inc = i | _ -> false )

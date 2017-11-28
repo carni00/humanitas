@@ -7831,3 +7831,8 @@ Junctiones.tactic : bugfix
 retraite effective sur im rétablie (à tester)
 
 226.fri.06.09H28
+poleis_tactic fonctionnelle
+tactic retreat fonctionnelle
+
+
+226.fri.08.22H54
