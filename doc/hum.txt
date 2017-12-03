@@ -7853,3 +7853,6 @@ perte de militaria de 50% dans les zones occupées
 tribut de militaria de 50% en paix
 
 226.fri.13.17H32
+Les fields_and_woods basculent en ager quand instrumentum dépasse 80
+
+226.fri.13.22H16

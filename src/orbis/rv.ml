@@ -113,12 +113,12 @@ module Incola = struct
     let oikos r oikos tegmen plebs inst agriCopia =
       let hosp     = R.hospitalitas r in
       let facultas = facultas (R.area r) hosp inst tegmen in
-      let deboisement c = c < 1.05 && Random.int (1 lsl (max 1 (iof((c-u)*100.)))) = 0 in
+      let deboisemt c = c < 1.05 && Random.int (1 lsl (max 1 (iof((c-u)*100.)))) = 0 in
            if plebs < facultas then (oikos, false)
       else if oikos==Ager && ( plebs / (R.area r) >= 4. ) then (Ager, true)
       else ((match tegmen with
       | Fields_and_pasture -> if (hosp + inst)>=100. then Ager else oikos
-      | Fields_and_woods   -> if         inst >= 80. && deboisement agriCopia then Ager else oikos
+      | Fields_and_woods   -> if (hosp + inst)>=120. && deboisemt agriCopia then Ager else oikos
       | Pasture            -> (match R.hydros r with R.River _ -> if inst>=40. then Ager else oikos | _ -> oikos)
       | Desertum _         -> Saltus (* colonization *)
       | _ -> oikos ),false)
@@ -271,8 +271,8 @@ module Fun = struct
 
   let chorability ?inst:(inst=0.) tegmen = match tegmen with
     | Desertum (R.Forest   R.Deciduous) 
-    | Desertum (R.Forest   R.TropicalF) -> ((Std.cut 0. 100. (inst - 100.)) / 2.)
-    | Desertum (R.Forest   R.RainF    ) -> ((Std.cut 0. 100. (inst - 200.)) / 2.)
+    | Desertum (R.Forest   R.TropicalF) -> ((Std.cut 0. 100. (inst -  50.)) / 2.)
+    | Desertum (R.Forest   R.RainF    ) -> ((Std.cut 0. 100. (inst - 100.)) / 2.)
     | Desertum (R.Woodland R.TropicalF) (* Mexique et Nouvelle Guinée sont agricoles en 4000 BCE *)
     | Desertum (R.Woodland R.Deciduous) (* Europe et Plateau andin sont agricoles en 4000 BCE *)
     | Desertum (R.Grassland _)
