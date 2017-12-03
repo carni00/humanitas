@@ -7843,3 +7843,9 @@ mise à jour humanopaedia
 needed_labor : prise en compte du surcroît de travail nécessaire que représentent les pillages subis
 
 226.fri.13.09H12
+conformisation des damnum et tributum à l’humanopaedia
+cibus : 33%
+militaria : pas de damnum en war (résistance)
+luxus : 100% y compris en war
+
+226.fri.13.12H49

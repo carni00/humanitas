@@ -1187,10 +1187,12 @@ En l’absence de traité de paix (ou de traité de facto rompu), situation init
 de la conquête, la situation des regiones occupées est la suivante :
 - pillage de la regio par l’occupant
 - résistance de l’occupé
-Il en résulte un transfert au profit de l’occupant de :
+Il en résulte un transfert/pillage au profit de l’occupant de :
 - 33% de labor/cibus
 - 100% de luxus
 Auxquels s’ajoutent
+- 50% de militaria perdue (perte de contrôle de la zone occupée, mais résistance à
+l’occupant)
 - une probabilité élevée de transformation en latifundium (le conquérant s’approprie 
 la terre occupée)
 - une probabilité élevée de colonisation de peuplement (autochtones chassés ou
@@ -1204,7 +1206,7 @@ coloniser / exproprier l’occupé.
 - le pillage est maintenu sous forme de tribut accru :
 - 33% de labor/cibus
 - 100% de luxus
-- 100% de militaria
+- 50% de militaria (mercenaires fournis comme tribut à l’occupant)
 
 On remarque qu'une natio et un gouvernement peuvent survivre quelques siècles
 alors que leur imperium est nul. 

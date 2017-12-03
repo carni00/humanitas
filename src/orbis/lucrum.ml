@@ -62,8 +62,10 @@ let compute g j nil fl (*pl nl*) =
   let damnumList= Nil.mapi (fun y l -> P.listSum l) (Nim.to_ll damnumMap) in
 (*  let tributumMap = Nim.sym (Nim.nfilter (fun (y,x)->(Junctiones.relatio j y x=Junctiones.Pax)) damnumMap) in*)
   
-  let tributumFun inc dom damnum = damnum in
-(* le tribut est exactement égal au damnum *)
+  let tributumFun inc dom damnum =
+    let relatio = Junctiones.relatio j inc dom in
+    (P.tributum_of_damnum damnum relatio)  in
+(* le tribut prélevé par l’occupant est une partie du damnum dépendante de la situation de paix/guerre *)
 
   let tributumMap = Nim.sym_mapi tributumFun damnumMap in
 (* la map des tributs est la map symétrique des dommages, corrigée par la tributumFun *)

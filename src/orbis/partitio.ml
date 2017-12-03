@@ -230,27 +230,28 @@ module Record =
 
 
 let cibusDamnumRatio = 0.33
+let militDamnumRatio = 0.50
 
 
 let damnum_of_factum p (funus,chora) relatio =
   let ratio = ( funus.Rv.plebs /. chora.Rv.plebs ) in
   let f a v = match a with
   | LAB -> v * ratio * cibusDamnumRatio
-  | MIL -> (if relatio=Junctiones.Pax then v else 0.)
+  | MIL -> v * ratio * militDamnumRatio
   | LUX -> v * ratio
   | _   -> 0. in
   alter p [FUN f]
 (* ce que l’occupé perd *)
 
 
-(*
+
 let tributum_of_damnum p relatio =
   let f a v = match a with
   | LAB -> v
-  | MIL -> v
+  | MIL -> (if relatio=Junctiones.Pax then v else 0.)
   | LUX -> v
   | _   -> 0. in
-  alter p [FUN f] *)
+  alter p [FUN f]
 (* ce que l’occupant reçoit *)
 
 
