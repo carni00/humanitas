@@ -46,7 +46,7 @@ module Incola = struct
   open Tfloat
 
   type oikos =
-    | Saltus   (* terre peu mise en valeur (meilleures terres uniquement, élevage) *)
+    | Saltus   (* terre peu ou inégalement mise en valeur (élevage et/ou bien agri sur les meilleures terres uniquement) *)
     | Ager     (* terre intégralement mise en valeur *)
     | Mine     (* exploitation des ressources du sous-sol *)
     | Urbs     (* grande cité *)
@@ -92,7 +92,7 @@ module Incola = struct
     | Turbs             -> hosp + 80. * instFactor
     | _                 -> 0.
     (* fructus maximum (annuel) pouvant être extrait d'une superficie de 50 km2 *)
-    in (base*rs/50.)
+    in (base * rs / 50.)
     (* fructus maximum (annuel) pouvant être extrait d'une regio, l'année prochaine, avec une plèbe infinie *)
     (* facultas se distingue d'hospitalitas en ce qu'elle prend en considération les transformations humaines du territoire, l'instrumentum de
     la nation, et la superficie de la regio *)
@@ -118,7 +118,7 @@ module Incola = struct
       else if oikos==Ager && ( plebs / (R.area r) >= 4. ) then (Ager, true)
       else ((match tegmen with
       | Fields_and_pasture -> if (hosp + inst)>=100. then Ager else oikos
-      | Fields_and_woods   -> if         inst >=100. && deboisement agriCopia then Ager else oikos
+      | Fields_and_woods   -> if         inst >= 80. && deboisement agriCopia then Ager else oikos
       | Pasture            -> (match R.hydros r with R.River _ -> if inst>=40. then Ager else oikos | _ -> oikos)
       | Desertum _         -> Saltus (* colonization *)
       | _ -> oikos ),false)

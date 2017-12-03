@@ -109,7 +109,7 @@ let duty = function
 | Towers -> Tower
 | Computing
 | Quit
-| Time
+(*| Time*)
 | Help
 | NewGame
 | Display

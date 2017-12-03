@@ -7849,3 +7849,7 @@ militaria : pas de damnum en war (résistance)
 luxus : 100% y compris en war
 
 226.fri.13.12H49
+perte de militaria de 50% dans les zones occupées
+tribut de militaria de 50% en paix
+
+226.fri.13.17H32

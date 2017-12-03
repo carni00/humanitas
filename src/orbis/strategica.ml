@@ -108,21 +108,23 @@ let anarchy d n pil =
   rogatio_list = Nil.empty;
   tactic_list  = 
     let tactic pid = 
-      if N.copia n < 0.8 then J.Offensive J.Conquest
-      else if N.copia n < 0.9  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
+      if N.copia n < 0.80 then J.Offensive J.Conquest (* manque de terre grave *)
+      else if N.copia n < 1.0  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
+      (* attaque venant de l’étranger + manque de terre *)
       else J.Defensive in
     Nil.init (fun pid -> tactic pid) pil
-  (* les nations anarchiques attaquent lorsqu’elles ont faim (copia) *)
   }
+(* tactique des nations anarchiques *)
 
 
 let tactic_tw_nationes d n pil =
   let tactic pid = 
-    if N.copia n < 0.95 then J.Offensive J.Conquest
-    else if N.copia n < 1.  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
+    if N.copia n < 0.90 then J.Offensive J.Conquest
+    else if N.copia n < 1.0  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
     else J.Defensive in
   Nil.init (fun pid -> tactic pid) pil
-  (* les cités attaquent lorsqu’elles manquent de terres (copia) *)
+(* tactique des cités envers les autres nations *)
+
 
 let tactic_tw_natives d n pil =
   let open Tfloat in
@@ -134,7 +136,7 @@ let tactic_tw_natives d n pil =
   else if ric < 2. 
   then (Nid.none, J.Offensive J.Conquest)
   else (Nid.none, J.Defensive)
-  (* les cités attaquent lorsqu’elles manquent de terres (copia) *)
+(* tactique des cités envers les natives *)
 
 
 let poleis_tactic d n pil = Nil.add (tactic_tw_nationes d n pil) (tactic_tw_natives d n pil)
