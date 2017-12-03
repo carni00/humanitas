@@ -281,11 +281,17 @@ let civicMilitaria gn lab alien libertas politeia agriCopia warCoef =
 (*  défense anarchique des récoltes et des terres, et conquete de nouvelles terres vierges (républiques) *) 
 
 
-let primary (n:natio) = 
-  let ar = Dx.Pyramid.alimonium_ratio n.pyramid n.plebs
-  and fr = Dx.Pyramid.facultas_ratio n.pyramid n.plebs in
-  let nl (*needed_labor*) = min u (squot u (ar) (fr*n.efficientia)) in
+let needed_labor n =
+  let ar = Dx.Pyramid.alimonium_ratio n.pyramid n.plebs in
+  let fr = Dx.Pyramid.facultas_ratio n.pyramid n.plebs in
+  let fsp= G.Natio.fineSumPle (n.g) in (* somme de la plèbe frontalière == occupée *)
+  let pr = 0.33 * fsp / n.plebs in (* pillage ratio *)
+  let nc = ar * (u+pr) in (* needed cibus *)
+  (min u (squot u nc (fr*n.efficientia)))
 (* indice : labor nécessaire à la satisfaction des besoins scx primaires *)
+
+let primary (n:natio) = 
+  let nl = needed_labor n in
   let eo (*e_oppressio*) = n.pp.oppressio * Ars.eff n.artes Ars.MET * Ars.eff n.artes Ars.GUN in
 (* valeur : oppressio effective / fructus.oppressio *)
 (*  let cr (*copia_ratio*) = copiaRatio n.facultas n.plebs ar fr n.pp in*)

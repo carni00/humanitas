@@ -7836,3 +7836,6 @@ tactic retreat fonctionnelle
 
 
 226.fri.08.22H54
+bugfix : effectivité de la tactique release
+
+226.fri.13.08H52

@@ -214,7 +214,7 @@ Lorsque fides atteint un niveau suffisant, les élites s’approprient les biens
 la propriété lucrative - le latifundium - succède à la propriété collective - mir - 
 sur la chora.
 
-La cité n’est pas un gouvernement national ; elle ne doit pas être confondu avec
+La cité n’est pas un gouvernement national ; elle ne doit pas être confondue avec
 l’empire.
 
 L’existence d’une cité n’est pas non plus un préalable pour qu’une natio adopte un
@@ -442,7 +442,8 @@ DDM 24 fructidor an 224
 De latifundium
 
 Le spolium est fixé par le niveau de fides et oppressio.
-C’est le niveau de latifundium qui décide directement du niveau de luxus.
+Le niveau de luxus dépend de la proportion des terres latifundiaires,
+et du niveau d’alienatio (produit).
 
 Aux guerres impérialistes, qui produisent du latifundium (cf infra), s’ajoute :
 
@@ -459,9 +460,10 @@ C’est aussi elle que l’on retiendra comme point de départ du luxus.
 
 La transformation du mir en latifundium permet l’attribution progressive du spolium au luxus.
 
-Étape 1 : L’obligation militaire de la cité développe fides
-Étape 2 : Les conquêtes et Fides permettent le développement du latifundium
-Étape 3 : La révolution sociale pratique la réforme agraire : le minifundium
+Étape 1 : La cité permet l’accaparement du pouvoir par une aristocratie
+Étape 2 : Développement de religio/fides
+Étape 3 : Les conquêtes et Fides permettent le développement du latifundium
+Étape 4 : La révolution sociale pratique la réforme agraire : le minifundium
 succède au latifundium. Le luxe est aboli. La république est une nouvelle
 machine de guerre.
 
@@ -1158,6 +1160,7 @@ Des filtres
 
 
 --- 29 Messidor an 216
+DDM 12 frimaire an 226
 
 Nations, empires, conquêtes et tribut.
 
@@ -1171,21 +1174,37 @@ façon la plus simple possible.
 Il est exclu qu'un empire ait autant de partage de la capacité sociale que de
 nations (solution peu pratique).  Il est exclu de faire la moyenne des
 caractéristique sociale dès la conquête, en l'absence d'absorption par la chôra
-[et dans la mesure où celle-ci pourrait n’être que temporaire].  Par ailleurs,
-on peut considérer que l'empire ne peut exploiter un territoire appropriée par
-une nation ennemie.
+[et dans la mesure où celle-ci pourrait n’être que temporaire]. 
 
-On peut par contre imaginer une exploitation inter-nationale. La chôra dominée
-par un empire étranger ne peut être (directement) exploitée par l'occupant ; on
-peut considerer qu'elle peut être exploité par l'empire refoulé si l'empire
-occupant est d'accord. 
+La regio occupée restée dans la natio d’origine continue donc de participer 
+à la vie de sa natio d’origine (partitio, capitaux) moyennant quelques
+modifications :
 
-Tout gouvernement est donc plus ou moins fantoche/vassal/client en proportion de
-l'étendue des territoires qu'il gère pour le compte d'un empire
+Deux situations se présentent : selon que les nations occupantes et occupées 
+ont signé ou non un traité de paix.
 
-Quelque soit la relatio (paix ou guerre), la zone floue est progressivement
-mangée par la nation conquérante. La zone litigieuse et le tribut s'éteignent
-progressivement avec le temps.
+En l’absence de traité de paix (ou de traité de facto rompu), situation initiale
+de la conquête, la situation des regiones occupées est la suivante :
+- pillage de la regio par l’occupant
+- résistance de l’occupé
+Il en résulte un transfert au profit de l’occupant de :
+- 33% de labor/cibus
+- 100% de luxus
+Auxquels s’ajoutent
+- une probabilité élevée de transformation en latifundium (le conquérant s’approprie 
+la terre occupée)
+- une probabilité élevée de colonisation de peuplement (autochtones chassés ou
+exterminés)
+
+En cas de paix (inégale) signée :
+- les regiones occupées restent occupées, mais la natio occupée acquiert le
+statut d’état vassal / client
+- la résistance cesse en échange du renoncement par l’occupant du droit de
+coloniser / exproprier l’occupé.
+- le pillage est maintenu sous forme de tribut accru :
+- 33% de labor/cibus
+- 100% de luxus
+- 100% de militaria
 
 On remarque qu'une natio et un gouvernement peuvent survivre quelques siècles
 alors que leur imperium est nul. 
@@ -1206,23 +1225,10 @@ Toute regio peut relever d’une natio et d’un imperium différent.  Dans ce c
 - la regio est comptabilisé dans l’imperium de la natio occupante
 - les capitaux et la partitio en vigueur sont ceux de natio indigène
 
-Les conséquences dans les regiones occupées :
-- population civile perdue du fait de l’état de guerre
-- militaria et luxus sont perdues par la natio occupée : 
- - annulée en situation de guerre
- - versé en tribut à l’occupant en situation de paix ( religio est en revanche
-   toujours conservé par la natio et assure la perpétuation du capital fides )
-- labor est prélevé par 50% par l’occupant
-
 Geographia précise :
 - la matrice des territoires occupés, et leurs tailles relativement aux chora
 
----
 
-De l’intérêt mutuel à proposer un cessez-le-feu
-
-La natio envahie cesse de perdre des territoires et d’avoir des pertes
-militaires.  La natio occupante tire mieux profit des territoires occupés
 
 --- 5 Thermidor an 216
 DDM 4 frimaire an 226
