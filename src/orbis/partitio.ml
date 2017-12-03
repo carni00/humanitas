@@ -229,24 +229,29 @@ module Record =
   end
 
 
+let cibusDamnumRatio = 0.33
 
 
-let damnum_of_factum p (funus,chora) =
+let damnum_of_factum p (funus,chora) relatio =
   let ratio = ( funus.Rv.plebs /. chora.Rv.plebs ) in
   let f a v = match a with
-  | LAB -> v * ratio * 0.50
-  | MIL -> v * ratio * 0.75
+  | LAB -> v * ratio * cibusDamnumRatio
+  | MIL -> (if relatio=Junctiones.Pax then v else 0.)
   | LUX -> v * ratio
   | _   -> 0. in
   alter p [FUN f]
+(* ce que l’occupé perd *)
 
+
+(*
 let tributum_of_damnum p relatio =
   let f a v = match a with
   | LAB -> v
-  | MIL -> if relatio=Junctiones.Pax then v else 0.
-  | LUX -> if relatio=Junctiones.Pax then v else 0.
+  | MIL -> v
+  | LUX -> v
   | _   -> 0. in
-  alter p [FUN f]
+  alter p [FUN f] *)
+(* ce que l’occupant reçoit *)
 
 
 
@@ -285,7 +290,7 @@ let needed_labor n =
   let ar = Dx.Pyramid.alimonium_ratio n.pyramid n.plebs in
   let fr = Dx.Pyramid.facultas_ratio n.pyramid n.plebs in
   let fsp= G.Natio.fineSumPle (n.g) in (* somme de la plèbe frontalière == occupée *)
-  let pr = 0.33 * fsp / n.plebs in (* pillage ratio *)
+  let pr = cibusDamnumRatio * fsp / n.plebs in (* pillage ratio *)
   let nc = ar * (u+pr) in (* needed cibus *)
   (min u (squot u nc (fr*n.efficientia)))
 (* indice : labor nécessaire à la satisfaction des besoins scx primaires *)

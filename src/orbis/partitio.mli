@@ -122,9 +122,9 @@ val factum  : t -> natio -> t
 val fructus_of_factum : t -> float -> t
 (** factum -> plebs -> fructus *)
 
-val damnum_of_factum : t -> (G.chora*G.chora) -> t
+val damnum_of_factum : t -> (G.chora*G.chora) -> Junctiones.relatio -> t
 (** factum -> g.natio -> factum *)
-val tributum_of_damnum : t -> Junctiones.relatio -> t
+(*val tributum_of_damnum : t -> Junctiones.relatio -> t*)
 (** factum -> relatio -> factum *)
 
 module Record : sig

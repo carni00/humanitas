@@ -7839,3 +7839,7 @@ tactic retreat fonctionnelle
 bugfix : effectivité de la tactique release
 
 226.fri.13.08H52
+mise à jour humanopaedia
+needed_labor : prise en compte du surcroît de travail nécessaire que représentent les pillages subis
+
+226.fri.13.09H12

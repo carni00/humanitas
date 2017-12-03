@@ -54,14 +54,16 @@ let compute g j nil fl (*pl nl*) =
   let damnumFun inc dom =
     let chora = G.chora g inc in
     let funus = G.fines g inc dom in (* la zone occupée de *inc, par *dom *)
-    P.damnum_of_factum (Nil.nth factumList inc) (funus, chora) in
+    let relatio = Junctiones.relatio j inc dom in
+    P.damnum_of_factum (Nil.nth factumList inc) (funus, chora) relatio in
     (* le dommage (partitio) subi par *inc du fait de *dom *)
 
   let damnumMap = Nim.init (fun i j -> damnumFun i j) nil in
   let damnumList= Nil.mapi (fun y l -> P.listSum l) (Nim.to_ll damnumMap) in
 (*  let tributumMap = Nim.sym (Nim.nfilter (fun (y,x)->(Junctiones.relatio j y x=Junctiones.Pax)) damnumMap) in*)
   
-  let tributumFun inc dom damnum = P.tributum_of_damnum damnum (Junctiones.relatio j inc dom) in
+  let tributumFun inc dom damnum = damnum in
+(* le tribut est exactement égal au damnum *)
 
   let tributumMap = Nim.sym_mapi tributumFun damnumMap in
 (* la map des tributs est la map symétrique des dommages, corrigée par la tributumFun *)
