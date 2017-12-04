@@ -26,6 +26,7 @@ open Tfloat
 
 module Nil = Nid.Nil
 module P   = Partitio
+module PR  = Partitio.Record
 module Pa  = Politeia
 module Gn  = G.Natio
 module K   = Aedificium
@@ -60,7 +61,7 @@ type t = {
   junctiones : Junctiones.Natio.t; (* junctiones relatives à une natio (vision nationale) *)
   k : K.t;      (* idem *)
   pa: Politeia.t;     
-  p : Partitio.t;       (* caractérise la période tour(n-1) à tour(n) *)
+  p : Partitio.Record.t;       (* caractérise la période tour(n-1) à tour(n) *)
   d : Dx.t; (* le tour (pyramid), la période(famine, tfg) *)
   fd: Dx.t; (* le tour (n+1) (pyramid projetée), la période suivant le tour n (famine, tfg) *)
   }
@@ -76,7 +77,7 @@ let null =
   junctiones = Junctiones.Natio.null;
   k =K.null;
   pa=Pa.anarchy;
-  p =P.null;
+  p =P.Record.null;
   d =Dx.null;
   fd=Dx.null;
   }
@@ -115,7 +116,7 @@ let has_nav      n = List.mem Ars.NAV (artes n)
 (*let mer_rayon    n = if has_nav n then Gn.instrumentum n.g * 100. else 0.*)
 let ter_rayon    n = Gn.instrumentum n.g * 100.
 let mer_rayon    n = if has_nav n then Gn.instrumentum n.g * 200. else 0.
-let partitio     n = n.p
+let partitio     n = P.Record.attrib n.p
 let kapital      n = n.k
 let politeia     n = n.pa
 let geographia   n = n.g
@@ -306,7 +307,7 @@ let update gn jn cl n(*natio*) pr luc p(*partitio*) pArtes =
   artes = artes;
   k = k;
   pa= Pa.update (paNatio cl n);
-  p = p;
+  p = pr;
   d = d;
   fd=fd;
   }
@@ -364,7 +365,7 @@ let create rm im g nid civitas =
 (*  let mil = (quot plebs (physis*Dx.npc) 0)/50 in*)
   let mil = 0. in
   let sap = 1. - labor - mil in
-  let p=P.make
+  let aff=P.make
         ~labor: labor
         ~sapientia: sap
         ~religio: 0.
@@ -381,19 +382,25 @@ let create rm im g nid civitas =
         ~vis: 1. (*approximation*)
          in
   let artes = Ars.beginList in
+  let natio =
     {
-    nid = nid;
-    active = true;
-    origo = (Civitas.rid civitas, Civitas.origo civitas);
-    urbs = (true, Civitas.rid civitas);
-    artes = artes;
-    g = g;
-    junctiones = Junctiones.Natio.null;
-    k = k;
-    pa= Pa.anarchy;
-    p = p;
-    d = d;
-    fd=fd;
+      nid = nid;
+      active = true;
+      origo = (Civitas.rid civitas, Civitas.origo civitas);
+      urbs = (true, Civitas.rid civitas);
+      artes = artes;
+      g = g;
+      junctiones = Junctiones.Natio.null;
+      k = k;
+      pa= Pa.anarchy;
+      p = Partitio.Record.null;
+      d = d;
+      fd=fd;
+    } in
+    {
+      natio
+      with
+      p = Partitio.Record.compute aff (pNatio natio)
     }
 
-
+(* EOF *)

@@ -130,6 +130,7 @@ val tributum_of_damnum : t -> Junctiones.relatio -> t
 module Record : sig
   type partitio = t
   type t
+  val null    : t
   val compute : partitio -> natio -> t
   val attrib  : t -> partitio
   val actio   : t -> partitio

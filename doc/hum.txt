@@ -7859,3 +7859,6 @@ Les fields_and_woods basculent en ager quand instrumentum dépasse 80
 correctif déboisement
 
 226.fri.14.22H06
+calcul correct de needed_labor et labor
+
+226.fri.14.22H26

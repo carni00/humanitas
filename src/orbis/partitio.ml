@@ -213,6 +213,12 @@ module Record =
     fructus: partitio;
     factum : partitio;
     }
+  let null = {
+    attrib = null;
+    actio  = null;
+    fructus= null;
+    factum = null;
+    }
   let compute p(*partitio*) n(*pnatio*) =
     let actio   = alter p       [actioFcons   n.pyramid n.plebs] in
     let fructus = alter actio   [fructusFcons n.efficientia n.artes n.ususList ] in
