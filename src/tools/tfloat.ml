@@ -32,6 +32,7 @@
   let ( *  ) = ( *. )
   let u = 1.
   let abs x = if x<0. then -. x else x
+  let inv x = u / x
 
   let next x = floor x + u
 

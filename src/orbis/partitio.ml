@@ -288,21 +288,23 @@ let civicMilitaria gn lab alien libertas politeia agriCopia warCoef =
 
 
 let needed_labor n =
-  let ar = Dx.Pyramid.alimonium_ratio n.pyramid n.plebs in
   let fr = Dx.Pyramid.facultas_ratio n.pyramid n.plebs in
-  let fsp= G.Natio.fineSumPle (n.g) in (* somme de la plèbe frontalière == occupée *)
+  let ar = Dx.Pyramid.alimonium_ratio n.pyramid n.plebs in
+  let fsp= G.Natio.funuSumPle (n.g) in (* somme de la plèbe perdue *)
   let pr = cibusDamnumRatio * fsp / n.plebs in (* pillage ratio *)
-  let nc = ar * (u+pr) in (* needed cibus *)
+  let nc = ar * ( inv ( u-pr ) ) in (* needed cibus *)
   (min u (squot u nc (fr*n.efficientia)))
-(* indice : labor nécessaire à la satisfaction des besoins scx primaires *)
+(* indice : labor nécessaire à la satisfaction des besoins scx primaires (sans considération des terres disponibles) *)
+
 
 let primary (n:natio) = 
+  let fr = Dx.Pyramid.facultas_ratio n.pyramid n.plebs in
   let nl = needed_labor n in
+  let max_labor = n.facultas / ( n.plebs * fr * n.efficientia ) in
+  (* valeur max de labor de fait de l’insufisance possible des terres disponibles (sans considération de la main d’œuvre disponible *)
+  let lab (*labor*) = min3 u (nl*1.1) (max_labor) in
   let eo (*e_oppressio*) = n.pp.oppressio * Ars.eff n.artes Ars.MET * Ars.eff n.artes Ars.GUN in
-(* valeur : oppressio effective / fructus.oppressio *)
-(*  let cr (*copia_ratio*) = copiaRatio n.facultas n.plebs ar fr n.pp in*)
-  let lab (*labor*) = min3 u (nl*1.1) (nl*n.agriCopia) in
-(* indice : labor est limitée par l'insuffisance relative de terres arables *)
+  (* valeur : oppressio effective / fructus.oppressio *)
   let alien = (u-lab) * (cut 0. u ( n.fides ** 0.5 )) in
   let mil = civicMilitaria n.g lab alien n.libertas n.politeia n.agriCopia 0. in
   let sap (*sapientia*) = max 0. (u - lab - max (nl-lab) (alien + mil + eo) ) in

@@ -37,6 +37,8 @@
 (** float unity. [u] is equal to [1.] *)
   val abs    : float -> float
 (** absolute value : [abs x] returns [-x] if [x] is negative *)
+  val inv    : float -> float
+(** [inv x] returns 1/x *)
   val next   : float -> float
 (** [next x] returns the least integer value strictly greather than [x], whereas [ceil x] returns the least integer value greater than or equal to [x].
   For example, [next 1.] returns [2.] whereas [ceil 1.] returns [1.] *)

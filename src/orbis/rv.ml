@@ -317,7 +317,6 @@ type passability =
 let is_passable r rv = 
   match R.hydros r with
   | R.Ocean     -> Navigable
-(*  | R.Dry       -> (match contents rv with Incol _ -> true | _ -> false) (* zone habitée *) || R.pluvia r < 2000 (* pas rain forest *)*)
   | R.Dry       -> if   (match contents rv with Incol _ -> true | _ -> false) (* zone habitée *) 
                    ||   (R.pluvia r < 2000) (* pas rain forest *)
                    then Passable else Not_passable
