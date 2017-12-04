@@ -85,13 +85,14 @@ let null =
 (*let populatioFun plebs facultas = squot 2. plebs facultas*)
 (* *population (degré de peuplement) de la natio n *)
 
-let agriCopiaFun facultas (plebs,ar) (p,fr) =
-  let foodNeeds = plebs*ar
-  and luxus = plebs*fr*p.Partitio.luxus in (* "besoins" en ager de luxus à sa valeur courante *)
-  (squot 0. (facultas) (foodNeeds+luxus) )
+let agriCopiaFun facultas pr =
+  let factum = PR.factum pr in
+  let cibus = P.cibus factum in
+  let luxus = P.lux factum in
+  (squot 0. (facultas) (cibus+luxus) )
 (* abondance en ager *)
-(* vaut normalement u. vaut moins quand la terre et l’instrumentum sont insuffisants pour assurer 
-la production matérielle (besoins primaires et luxe) *)
+(* vaut normalement plus que u. vaut moins quand la terre et l’instrumentum sont insuffisants pour assurer 
+la production matérielle (cibus (dont pillage/tribut) et luxe) *)
 
 
 let efficientiaFun hosp inst = 0.6 + 0.01 * floor hosp + 0.01 * floor inst
@@ -144,8 +145,7 @@ let sophia       n = K.sophia        n.k
 let fides        n = K.fides         n.k
 let libertas     n = K.libertas      n.k
 let ususList     n = K.ususList      n.k
-let agriCopia    n = agriCopiaFun (facultas n) (plebs n, alimonium_ratio n) (partitio n, facultas_ratio n)
-(*let populatio    n = populatioFun (plebs n) (facultas n)*)
+let agriCopia    n = agriCopiaFun (facultas n) (n.p)
 let densitas     n = Tfloat.squot 0. (plebs n) (chora n)
 (* densité de population en hab/km2 (sic) *)
 

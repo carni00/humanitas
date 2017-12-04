@@ -7862,3 +7862,6 @@ correctif déboisement
 calcul correct de needed_labor et labor
 
 226.fri.14.22H26
+partitio.record stocké dans natio (au lieu de partitio seule)
+
+226.fri.14.22H36
