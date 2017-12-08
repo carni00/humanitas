@@ -766,25 +766,31 @@ A cela s'ajoute l'experience (usus) des soldats.
 
 De l'expérience des soldats et prêtres
 
-L'expérience se mesure par un nombre compris entre 0 et 1 Chaque tour, elle
+L'expérience se mesure par un nombre compris entre 0 et 0.50 Chaque tour, elle
 (usus) est
-- augmentée de (1 - usus)/3 (acquisition d'expérience)
+- augmentée de 0.50 × (1 - usus)/3 (acquisition d'expérience)
 - puis divisée par (max 1 (quot mil p_mil)) (baisse de l'expérience globale en
   cas de recrutement de nouvelles troupes)
 - puis divisée par 2 lors de la découverte/application immédiate d'une
   technologie militaire.
 
-Ce nombre (usus) ajouté à 1 (soit un nombre compris entre 1 et 2) est un nouveau
+Ce nombre (usus) ajouté à 0.50 (soit un nombre compris entre 0.50 et 1) est un nouveau
 facteur de vis.
 
-L'expérience croît ainsi de la façon suivante : an 0 = 10000 an 1 = 13333 an 2 =
-15555 an 3 = 17036 an 4 = 18024 an 5 = 18682 an 6 = 19121
+L'expérience croît ainsi de la façon suivante : 
+an 0 = 0 
+an 1 = 0.16 
+an 2 = 0.28
+an 3 = 0.35 
+an 4 = 0.40
+an 5 = 0.43
+an 6 = 0.45
 
 Lorsque militaria est triplée, l'expérience est divisée par trois (il y a 2/3 de
 nouvelles recrues) Lorsque militaria est augmentée d'un tiers, l'expérience est
 réduite d'un quart (il y a un quart de nouvelles recrues)
 
-Soit une expérience de 2 lors de la découverte d'une tech militaire.  La tech
+Soit une expérience de 0.50 lors de la découverte d'une tech militaire.  La tech
 doublant vis, et l'expérience étant réduite de moitié, le gain final de
 puissance est limité à 50% à court terme. Il monte à 90% en 4 ans (le temps de
 la prise en main de la nouvelle technologie).

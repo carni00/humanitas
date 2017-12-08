@@ -92,11 +92,11 @@ module UsusList = struct
     let pp(*previous prod*) = attrib pP a in
     let p (*current prod*)  = attrib cP a in
     let is_ars_new (a) = not(List.mem a pa) && (List.mem a ca) in
-    let de (a) = if (is_ars_new a) then 0.5 else 1. in (*discovery effect*)
+    let de (a) = if (is_ars_new a) then 0.50 else 1. in (*discovery effect*)
     let de = Tlist.fprod (List.map de ia)
     and re = max u (squot u p pp) (*recruitment effect*)
     and iu = (if p=0. then 0. else (pu + (u - pu) * 0.33) )(*increased usus*) in
-    (squot 0. iu re) * de
+    ( 0.50 + 0.50 * (squot 0. iu re) * de )
   (* expérience d'une catégorie de spécialiste *)
 
   let create pul(*prev ususList*) pP(*prev partitio*) cP(*curr partitio*) pa(*prev artes*) ca(*curr artes*) =
@@ -216,10 +216,10 @@ let fructusFcons eff artes ususList =
     match a with
       LAB -> v *  eff
     | SAP -> v *  et.Ars.sap 
-    | OPP -> v * (*u+usus.mil) *) et.Ars.opp
-    | MIL -> v * (*u+usus.mil) *) et.Ars.mil
-    | REL -> v * (u + UsusList.rel ususList) * et.Ars.sap
-    | LUX -> v *  eff
+    | OPP -> v * (UsusList.opp ususList) * et.Ars.opp
+    | MIL -> v * (UsusList.mil ususList) * et.Ars.mil
+    | REL -> v * (UsusList.rel ususList) * et.Ars.sap
+    | LUX -> v
     | OTI -> v in
   (* incidence des facteurs de productivité sur la production *)
   FUN fun_eff

@@ -7868,3 +7868,6 @@ partitio.record stocké dans natio (au lieu de partitio seule)
 bugfix : agriCopia
 
 226.fri.18.17H50
+déplacement du module UsusList dans Partitio
+
+226.fri.18.21H34
