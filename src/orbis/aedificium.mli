@@ -38,13 +38,14 @@ val sophia   : t -> float
 val fides    : t -> float
 val libertas : t -> float
 val seditio  : t -> float
-val ususList : t -> Partitio.usus list
+val ususList : t -> Partitio.UsusList.t
 val vis      : t -> float
+
 
 val null : t
 
 val make : sophia:float -> fides:float -> seditio:float ->
-ususList:(Partitio.usus list) -> vis:float -> t 
+ususList:(Partitio.UsusList.t) -> vis:float -> t 
 
 val update : natio -> t
 (*let create k pArtes cArtes pp p e = *)

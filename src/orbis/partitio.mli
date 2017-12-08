@@ -23,7 +23,8 @@
 
 (** répartition du produit (ou du revenu) national *)
 
-type t = {
+
+type partitio = {
   labor     : float;
   sapientia : float;
   religio   : float;
@@ -32,6 +33,8 @@ type t = {
   luxus     : float;
   otium     : float;
   }
+
+type t = partitio
 
 type attributio = 
 | LAB
@@ -45,6 +48,16 @@ type attributio =
 type usus = attributio*float
 (** expérience des spécialistes *)
 
+module UsusList : sig
+  type t
+  val null : t
+  val mil  : t -> float
+  val rel  : t -> float
+  val opp  : t -> float
+  val create : t -> partitio -> partitio -> Ars.t list -> Ars.t list -> t
+end
+
+
 type natio = {
   g           : G.Natio.t;
   pyramid : Dx.Pyramid.t;
@@ -56,7 +69,7 @@ type natio = {
   efficientia : float;
   facultas : float;
   agriCopia : float;
-  ususList : usus list;
+  ususList : UsusList.t;
   pp : t;
   }
 (** données de la natio qui déterminent le calcul d’une partitio *)

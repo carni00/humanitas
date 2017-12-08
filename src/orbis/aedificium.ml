@@ -29,12 +29,10 @@ module Pa = Politeia
 
 
 type t = {
-(*  instrumentum : float;*)
   sophia   : float;
   fides    : float;
   seditio  : float;
-  ususList : P.usus list;
-(*  efficientia : float;*)
+  ususList : Partitio.UsusList.t;
   vis      : float;
   }
 (* capitaux = données affectées par un processus d'accumulation *)
@@ -66,7 +64,7 @@ let null =
   seditio= 0.;
   fides  = 0.;
   sophia = 0.;
-  ususList = [] ;
+  ususList = Partitio.UsusList.null ;
   vis = 0.;
   }
 
@@ -78,28 +76,6 @@ let make ~sophia ~fides ~seditio ~ususList ~vis = {
   vis;
   }
 
-let ususFun (pu(*previous usus*), pp(*previous prod*), p(*current prod*), pa(*prev artes*), ca(*current artes*), ia(*involved artes*)) =
-  let is_ars_new (a) = not(List.mem a pa) && (List.mem a ca) in
-  let de (a) = if (is_ars_new a) then 0.5 else 1. in (*discovery effect*)
-  let de = Tlist.fprod (List.map de ia)
-  and re = max u (squot u p pp) (*recruitment effect*)
-  and iu = (if p=0. then 0. else (pu + (u - pu) * 0.33) )(*increased usus*) in
-  (squot 0. iu re) * de
-(* expérience d'une catégorie de spécialiste *)
-
-module UsusList = struct
-  type t = P.usus list
-  let f attrib list = match Tlist.optAssoc attrib list with Some v  -> v | None -> 1.
-  let mil = f P.MIL
-  let rel = f P.REL
-  let opp = f P.OPP
-  let create (pul(*prev ususList*), pp(*prev partitio*), p(*curr partitio*), pa(*prev artes*), ca(*curr artes*)) =
-    let mil = ususFun(mil pul, P.mil pp, P.mil p, pa, ca, [Ars.MET;Ars.GUN;Ars.CMB])
-    and rel = ususFun(rel pul, P.rel pp, P.rel p, pa, ca, [Ars.WRI;Ars.ELE])
-    and opp = ususFun(opp pul, P.opp pp, P.opp p, pa, ca, [Ars.MET;Ars.GUN]) in
-    [ (P.MIL,mil); (P.REL,rel); (P.OPP,opp) ]
-  end
-(* ensemble des usus *)
 
 (*
 let vis g nid eMil plebs =
@@ -131,7 +107,7 @@ let update n =
   fides    = f (n.k.fides)   0.90 ( (P.rel fru )) ;
   sophia   = g 0.99 + g 0.999 + g 0.9999 ;
   (* sophia tend très lentement vers sapientia * 1.20 *)
-  ususList = UsusList.create (n.k.ususList, n.pp, atr, n.pArtes, n.cArtes);
+  ususList = Partitio.UsusList.create n.k.ususList n.pp atr n.pArtes n.cArtes;
   vis      = compute_vis n ;
   }
 (* capitaux = données affectées par un processus d'accumulation *)

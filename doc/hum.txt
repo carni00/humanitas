@@ -7865,3 +7865,6 @@ calcul correct de needed_labor et labor
 partitio.record stocké dans natio (au lieu de partitio seule)
 
 226.fri.14.22H36
+bugfix : agriCopia
+
+226.fri.18.17H50

@@ -378,7 +378,7 @@ let create rm im g nid civitas =
         ~seditio: 0.
         ~fides: 0.
         ~sophia: sophia
-        ~ususList: []
+        ~ususList: Partitio.UsusList.null
         ~vis: 1. (*approximation*)
          in
   let artes = Ars.beginList in

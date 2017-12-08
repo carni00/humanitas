@@ -26,7 +26,7 @@ open Tfloat
 
 module Nil = Nid.Nil
 
-type t = {
+type partitio = {
   labor     : float;
   sapientia : float;
   religio   : float;
@@ -35,6 +35,8 @@ type t = {
   luxus     : float;
   otium     : float;
   }
+
+type t = partitio
 
 type attributio = 
 | LAB
@@ -46,7 +48,70 @@ type attributio =
 | OTI
 
 type usus = attributio*float
-(* expérience des spécialistes *)
+(** expérience des spécialistes *)
+
+
+let attrib p a = match a with
+| LAB -> p.labor
+| SAP -> p.sapientia
+| MIL -> p.militaria
+| OPP -> p.oppressio
+| REL -> p.religio
+| LUX -> p.luxus
+| OTI -> p.otium
+
+
+let lab p = p.labor
+let sap p = p.sapientia
+let mil p = p.militaria
+let opp p = p.oppressio
+let rel p = p.religio
+let lux p = p.luxus
+let oti p = p.otium
+
+
+let cibus        p = p.labor (* nourriture *)
+let periti       p = p.militaria + p.oppressio + p.religio
+let spolium      p = p.militaria + p.oppressio + p.religio + p.luxus
+let stratiotikon p = p.militaria + p.oppressio + p.religio + p.otium
+let alienatio    p = p.militaria + p.oppressio + p.religio + p.luxus + p.otium
+let humanitas    p = p.militaria + p.oppressio + p.religio + p.luxus + p.sapientia
+let servitium    p = spolium p * 0.1
+let summa        p = p.militaria + p.oppressio + p.religio + p.luxus + p.sapientia + p.labor + p.otium
+
+
+
+
+module UsusList = struct
+  type t = usus list
+  let null = []
+  let f attrib list = match Tlist.optAssoc attrib list with Some v  -> v | None -> 1.
+
+  let compute_usus pul pP cP pa ca a(*attributio*) ia(*involved artes*) =
+    let pu(*previous usus*) = f a pul in
+    let pp(*previous prod*) = attrib pP a in
+    let p (*current prod*)  = attrib cP a in
+    let is_ars_new (a) = not(List.mem a pa) && (List.mem a ca) in
+    let de (a) = if (is_ars_new a) then 0.5 else 1. in (*discovery effect*)
+    let de = Tlist.fprod (List.map de ia)
+    and re = max u (squot u p pp) (*recruitment effect*)
+    and iu = (if p=0. then 0. else (pu + (u - pu) * 0.33) )(*increased usus*) in
+    (squot 0. iu re) * de
+  (* expérience d'une catégorie de spécialiste *)
+
+  let create pul(*prev ususList*) pP(*prev partitio*) cP(*curr partitio*) pa(*prev artes*) ca(*curr artes*) =
+    let compute_usus = compute_usus pul pP cP pa ca in
+    let mil = compute_usus MIL [Ars.MET;Ars.GUN;Ars.CMB]
+    and rel = compute_usus REL [Ars.WRI;Ars.ELE]
+    and opp = compute_usus OPP [Ars.MET;Ars.GUN] in
+    [ (MIL,mil); (REL,rel); (OPP,opp) ]
+
+  let mil = f MIL
+  let rel = f REL
+  let opp = f OPP
+end
+(* ensemble des usus *)
+
 
 type natio = {
   g           : G.Natio.t;
@@ -59,10 +124,12 @@ type natio = {
   efficientia : float;
   facultas    : float;
   agriCopia   : float;
-  ususList    : usus list;
+  ususList    : UsusList.t;
   pp          : t;
   }
 (* données de la natio qui déterminent le calcul d’une partitio *)
+
+
 
 
 let make ~labor ~sapientia ~religio ~militaria ~oppressio ~luxus ~otium = {
@@ -97,35 +164,6 @@ let debug =
         luxus     = 6000.;
         otium     = 7000.;
         }
-
-let attrib p a = match a with
-| LAB -> p.labor
-| SAP -> p.sapientia
-| MIL -> p.militaria
-| OPP -> p.oppressio
-| REL -> p.religio
-| LUX -> p.luxus
-| OTI -> p.otium
-
-let lab p = p.labor
-let sap p = p.sapientia
-let mil p = p.militaria
-let opp p = p.oppressio
-let rel p = p.religio
-let lux p = p.luxus
-let oti p = p.otium
-
-
-let cibus        p = p.labor (* nourriture *)
-let periti       p = p.militaria + p.oppressio + p.religio
-let spolium      p = p.militaria + p.oppressio + p.religio + p.luxus
-let stratiotikon p = p.militaria + p.oppressio + p.religio + p.otium
-let alienatio    p = p.militaria + p.oppressio + p.religio + p.luxus + p.otium
-let humanitas    p = p.militaria + p.oppressio + p.religio + p.luxus + p.sapientia
-let servitium    p = spolium p * 0.1
-let summa        p = p.militaria + p.oppressio + p.religio + p.luxus + p.sapientia + p.labor + p.otium
-
-
 
 let set_att p (a,v) = match a with
 | LAB -> { p with labor=v }
@@ -180,7 +218,7 @@ let fructusFcons eff artes ususList =
     | SAP -> v *  et.Ars.sap 
     | OPP -> v * (*u+usus.mil) *) et.Ars.opp
     | MIL -> v * (*u+usus.mil) *) et.Ars.mil
-    | REL -> v * (*u+usus.rel) *) et.Ars.sap
+    | REL -> v * (u + UsusList.rel ususList) * et.Ars.sap
     | LUX -> v *  eff
     | OTI -> v in
   (* incidence des facteurs de productivité sur la production *)
