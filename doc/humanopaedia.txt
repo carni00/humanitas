@@ -416,7 +416,7 @@ d’un certain seuil, le spolium produit de la stagnation, voire de la régressi
 économique.
 
 --- 24 Thermidor an 213 
-DDM  4 brumaire an 225
+DDM 19 frimaire an 226
 
 De luxo
 
@@ -429,43 +429,41 @@ Luxus est une partie croissante d’alienatio. Le prince développe alienatio à
 des fins possiblement autres (militaires notamment).  L’alienatio est
 progressivement affecté au luxus.
 
+Luxus ne peut jamais dépasser alienatio, il est par conséquent exprimé comme
+un taux d’alienatio.
+
 Le prince peut réduire le taux de luxus dans la capacité sociale en réduisant
 alienatio, mais il ne peut réduire le taux de luxus dans alienatio.
 
 Le luxus est extrait dans les regiones latifundiaires seules. La progression
 du latifundium réduit les ressources impériales.
 
+Le taux de luxus dans la capacité nationale est par conséquent égal au produit
+de trois valeurs :
+- l’alienatio nationale au tour t
+- le taux de latifundium : la part des regiones caractérisée par le latifundium,
+pondérée par leur plebs.
+- l’indice de luxus : le taux de luxus dans alienatio dans les regiones latifundiaires.
+
+L’indice de luxus est national. Il vaut initialement zéro, et peut croître jusqu’à 1.
+Il croît à partir du moment ou le latifundium existe (dans la chora nationale).
+Il croît chaque année de la façon suivante :
+i(n) = i(n-1) + ( u - i(n-1) ) × ( min u fides )
+Il est annulé si le latifundium disparait dans toute la nation (révolution sociale).
+
+
 
 *** 5 floreal an 224
-DDM 24 fructidor an 224
+DDM 19 frimaire an 226
 
 De latifundium
 
-Le spolium est fixé par le niveau de fides et oppressio.
-Le niveau de luxus dépend de la proportion des terres latifundiaires,
-et du niveau d’alienatio (produit).
+Lorsque fides dépasse 0.20 dans les cités aristocratiques, l’aristocratie 
+s’approprie les biens publics, la regio sur laquelle repose la cité
+passe en dominium 'latifundium'.
 
-Aux guerres impérialistes, qui produisent du latifundium (cf infra), s’ajoute :
+Le latifundium s’étend ensuite peu à peu aux regiones voisines.
 
-le rapport fides/sophia décide de l’extension ou de la réduction à l’intérieur d’une 
-nation de l’importance du latifundium.
-
-S’agissant du régime social des empires initiaux, on a en Égypte, à Sumer, de grandes
-unités de production, en co-administration par la puissance publique, et sans propriétaire privé.
-L’État ne peut chasser les habitants, mais il finit par vendre ces unités à des propriétaires privés.
-Le passage de la propriété publique communale (mir) à la propriété publique étatique, et la mutation
-de la contribution en loyer est difficile à discerner.
-En revanche, l’appropriation privée est une rupture assez nette. 
-C’est aussi elle que l’on retiendra comme point de départ du luxus.
-
-La transformation du mir en latifundium permet l’attribution progressive du spolium au luxus.
-
-Étape 1 : La cité permet l’accaparement du pouvoir par une aristocratie
-Étape 2 : Développement de religio/fides
-Étape 3 : Les conquêtes et Fides permettent le développement du latifundium
-Étape 4 : La révolution sociale pratique la réforme agraire : le minifundium
-succède au latifundium. Le luxe est aboli. La république est une nouvelle
-machine de guerre.
 
 *** 24 fructidor an 224
 

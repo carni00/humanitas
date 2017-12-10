@@ -7871,3 +7871,7 @@ bugfix : agriCopia
 déplacement du module UsusList dans Partitio
 
 226.fri.18.21H34
+usus : la productivité est réduite de moitié en cas d’inexpérience (plutôt que doublée en cas d’expérience),
+la situation la plus fréquente étant l’expérience
+
+226.fri.20.10H31
