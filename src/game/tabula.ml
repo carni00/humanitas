@@ -27,8 +27,9 @@ module N=Color.Nuance
 module Rvi=Rv.Incola
 
 type filter = [
-| `imperii
 | `artes
+| `dominium
+| `imperii
 | `montes
 | `nationes
 | `politeia
@@ -38,6 +39,8 @@ type filter = [
   ]
 
 type color = {
+  artes    : Color.t;
+  dominium : Color.t;
   tegmenF  : Color.t;
   tegAlt   : Color.t;
   imperii  : Color.t;
@@ -52,7 +55,6 @@ type color = {
   vis      : Color.t;
   visAlt   : Color.t;
   montes   : Color.t;
-  artes    : Color.t;
   }
 
 
@@ -131,6 +133,8 @@ module Color = struct
  
   let constantColor co =
     {
+    artes    = co;
+    dominium = co;
     tegmenF  = co;
     tegAlt   = co;
     montes   = co;
@@ -145,7 +149,6 @@ module Color = struct
     popNat   = co;
     vis      = co;
     visAlt   = co;
-    artes    = co;
     }
 
   let regio rs r rv artes politeia vis =
@@ -161,31 +164,33 @@ module Color = struct
          let altitude = R.altitude r in
          let altLum = (Ext.weighmean (4*alt) ((min 4400 altitude)/100) 0 1) * 8 - 50 in 
          let dominus= Rv.dominus rv in
-         let incola, populatio, urbs = match Rv.contents rv with
+         let incolaNid, populatio, urbs = match Rv.contents rv with
          | Rv.Desertum_for n -> Nid.none, 0., 0
          | Rv.Incol   incola -> 
            let populatio = max 0. (1. +. log ((Rvi.plebs incola) /. (rs))) in
            let urbs      = if Rvi.oikos incola=Rvi.Urbs then 0 else 0 in
            (Rvi.nid incola, populatio, urbs) in
-         let incLum = if incola=Nid.none then (-40) else 0 in
+         let incLum = if incolaNid=Nid.none then (-40) else 0 in
          let nuance   = function
+         | `dominium -> Ci.dominium rv
          | `imperii  -> Ci.natio dominus 
-         | `nationes -> Ci.natio incola 
+         | `nationes -> Ci.natio incolaNid 
          | `vis      -> N.custom           (2.  *. vis)
          | `populatio-> N.add    N.celadon (1.  *. populatio)
          | `politeia -> Ci.politeia politeia
          | _         -> if boi urbs then N.orange else climaxNuance thermos hugros in
          let intens   = function 
-         | `imperii  -> (if dominus<>Nid.none then (if incola=dominus then 500 else 300) else 0)
+         | `imperii  -> (if dominus<>Nid.none then (if incolaNid=dominus then 500 else 300) else 0)
          | `politeia 
-         | `nationes -> (if incola=Nid.none then 0   else 400)
-         | `vis      -> (if incola=Nid.none then 0   else 300 + iof (vis       *. 100.))
+         | `nationes -> (if incolaNid=Nid.none then 0   else 400)
+         | `vis      -> (if incolaNid=Nid.none then 0   else 300 + iof (vis       *. 100.))
          | `populatio-> (                                 400 + iof (populatio *. 100.))
          | _         ->  iDef + 100 - (ariditasIntens(R.ariditas r)) - urbs in
          let lumina    l = min 640 (lDef + urbs + l ) in
          let color n   l = co(nuance n, intens n, lumina l) in
          let colos n i l = co(nuance n, intens i, lumina l) in
              {
+             dominium  = color `dominium              (tegLum/4 + incLum) ;
              tegmenF   = color `tegmen                (tegLum+altLum/4);
              tegAlt    = color `tegmen                (altLum+tegLum/2);
              imperii   = color `imperii               (tegLum/4 + incLum);

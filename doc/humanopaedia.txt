@@ -459,8 +459,9 @@ DDM 19 frimaire an 226
 De latifundium
 
 Lorsque fides dépasse 0.20 dans les cités aristocratiques, l’aristocratie 
-s’approprie les biens publics, la regio sur laquelle repose la cité
-passe en dominium 'latifundium'.
+s’approprie progressivement les biens publics.
+En particulier, les regiones caractérisées par les oikos urbs et irrigation
+sont susceptibles de passer en dominium 'latifundium'.
 
 Le latifundium s’étend ensuite peu à peu aux regiones voisines.
 

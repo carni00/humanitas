@@ -25,6 +25,7 @@
 
 type filter = [
 | `imperii
+| `dominium
 | `artes
 | `montes
 | `nationes
@@ -35,6 +36,8 @@ type filter = [
   ]
 
 type color = {
+  artes    : Color.t;
+  dominium : Color.t;
   tegmenF  : Color.t;
   tegAlt   : Color.t;
   imperii  : Color.t;
@@ -49,7 +52,6 @@ type color = {
   vis      : Color.t;
   visAlt   : Color.t;
   montes   : Color.t;
-  artes    : Color.t;
   }
 
 type regio = {

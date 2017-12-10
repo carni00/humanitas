@@ -72,13 +72,14 @@ let display atelier =
   c "Display menu", List(Lines juce, [
   S( "zoom level    : "^scale );
   S( "scene width   : "^wik^" km" );
-  LB( K.KEY_d       , "restore Default display" , [`defaultDisplay                         ] );
+  LB( K.KEY_y       , "restore default displaY" , [`defaultDisplay                         ] );
   LB( K.KEY_z       , "Zoom in (+)"             , [`zoom_in                                ] );
   LB( K.KEY_o       , "zoom Out (-)"            , [`zoom_out                               ] );
   LB( K.KEY_e       , "toggle Earth mode"       , [`toggle_earthMode                       ] );
   LB( K.KEY_f       , "switch Filter"           , [`switch_filter                          ] );
   LB( K.KEY_g       , "switch backGround"       , [`switch_background                      ] );
   LB( K.KEY_a       , "filter Artes"            , [`select_filter `artes                   ] );
+  LB( K.KEY_d       , "filter Dominium"         , [`select_filter `dominium                   ] );
   LB( K.KEY_i       , "filter Imperii"          , [`select_filter `imperii                 ] );
   LB( K.KEY_m       , "filter Montes"           , [`select_filter `montes                  ] );
   LB( K.KEY_n       , "filter Nationes"         , [`select_filter `nationes                ] );

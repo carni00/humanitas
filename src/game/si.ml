@@ -187,6 +187,7 @@ let date = function
 
 let filter = function
 | `artes    -> "artes"       
+| `dominium -> "dominium"       
 | `nationes -> "nationes"          
 | `imperii  -> "imperii"         
 | `montes   -> "montes"        

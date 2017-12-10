@@ -124,6 +124,12 @@ module Incola = struct
       | _ -> oikos ),false)
       (* returns the next oikos and a boolean : wether it is a new possible civitas *)
 
+    let dominium fides tegmen d = match d with
+      | Mir when fides > 0.20 && tegmen == Irrigation -> Latifundium
+      | _ -> d
+    (** next dominium *)
+
+
   end
 
   let make nb nid oikos dominium instrumentum = {

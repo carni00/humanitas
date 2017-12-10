@@ -27,6 +27,7 @@ open Std
 (*module Ws  = Windows*)
 module Co  = Color
 module N   = Color.Nuance
+module Rvi = Rv.Incola
 
 (* couleurs des différents éléments du jeu *)
 (* ce module les calcule une fois pour toutes, et permet d'y accéder facilement *)
@@ -40,9 +41,12 @@ let nil = Co.nil
 
 (************************* HUMANITAS COLORS ***************************)
 
-
-
-
+let dominium rv = match Rv.contents rv with
+  | Rv.Desertum_for n -> N.celadon
+  | Rv.Incol incola -> match Rv.Incola.dominium incola with
+    | Rvi.Mir          -> N.vert
+    | Rvi.Latifundium  -> N.jaune
+    | Rvi.Minifundium  -> N.orange
 
 
 
