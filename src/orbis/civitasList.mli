@@ -33,6 +33,7 @@ val filter : t -> Nid.t           -> Civitas.t list
 
 val create : Espace.t -> ((Rid.t * Date.t) Nid.Nil.t) -> (Rid.t*Rv.Incola.t) list -> t
 val update : Espace.t -> Date.t -> Im.t -> t -> (Rid.t*Rv.Incola.t) list -> t
+(** Attention : l’im est mise à jour par effet de bord (regiones urbs) par cette fonction *)
 
 
 val create_nil : Imd.origo Nid.Nia.t -> Nid.t list -> Civitas.t Nid.Nil.t

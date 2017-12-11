@@ -68,7 +68,8 @@ let update orbis (sl:StrategicaList.t) =
   let sd   = SD.make (sl:> Strategica.t Nid.Nil.t) in
   let n_j  = Junctiones.update j (NatioList.jNatioList nl) (SD.jStrategies sd) in
   let n_im, vl = Im.update e rm im n_j (NatioList.imNatioArray nl) in
-  let cl = CivitasList.update e n_turn n_im (o.civitasList) vl in
+  let cl   = CivitasList.update e n_turn n_im (o.civitasList) vl in
+  (** Attention : l’im est mise à jour par effet de bord (regiones urbs) par CivitasList.update *)
   let n_g  = G.create  e rm n_im in
   let gnl  = G.natioList n_g nil in
   let jnl  = Junctiones.natioList n_j nil in

@@ -70,13 +70,15 @@ let rec add e origo (cl:t) vl = match vl with
 let create e  ol  vl = (add e (OrigoList ol) Til.empty vl)
 
 
+
 let update e turn im cl vl =
   let f cvt =
     let rid = Civitas.rid cvt in match Im.incola im rid with 
     | None        -> print_endline "CivitasList.update : une cité sans incola ???"; cvt
     | Some incola -> Civitas.update cvt (Espace.Regio.superficie e rid) incola in
   let cl = Til.map f cl in (* mise à jour cités existantes *)
-  (add e (Date turn) cl vl) (* ajout nouvelles cités *)
+  let cl = add e (Date turn) cl vl in (* ajout nouvelles cités *)
+  Im.set_oikos_urbs im (List.map (fun (cid,c) -> Civitas.rid c) cl) ; cl
 
 (******************************************************************************************************************************)
 

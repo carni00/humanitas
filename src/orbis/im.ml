@@ -220,10 +220,11 @@ let update e rm im j (na:natio Nia.t) =
     | Rv.Incol incola ->  
       let i     = Rvi.nid incola in
       let p_oik = Rvi.oikos incola in
+      let tegmen= Rv.tegmen r ~rv in
       let plebs = nea_plebs (R.area r) (Rvi.plebs incola) (Rv.facultas r rv) na i colonize in
       let ins   = Rvi.Next.instrumentum (Rv.instrumentum rv) (artes na i) (sophia na i) in
-      let oikos, new_vicus = Rvi.Next.oikos r (p_oik) (Rv.tegmen r ~rv)  plebs ins (agriCopia na i) in
-      let dominium = Rvi.dominium incola in
+      let oikos, new_vicus = Rvi.Next.oikos r (p_oik) tegmen  plebs ins (agriCopia na i) in
+      let dominium = Rvi.Next.dominium (fides na i) tegmen (Rvi.dominium incola) in
       let incola = Rvi.make plebs i oikos dominium ins in
       if new_vicus then vlr := ( (rid,incola)::(!vlr) ) ;
       Rv.Incol (incola) in
@@ -231,6 +232,15 @@ let update e rm im j (na:natio Nia.t) =
   Ria.init (s) (f), (!vlr)
 (*  Ria.update f im; im : ne fonctionne pas correctemment : il faut différencier la carte de lecture et celle d’écriture*)
 (* mise à jour de l'imperiumMap *)
+
+
+let set_oikos_urbs im ridList = 
+  let f rid = 
+    let rv = get im rid in
+    let nrv= Rv.set_oikos_urbs rv in
+    Ria.set im rid nrv in
+  List.iter f ridList
+(** mise à jour de l’oikos en urbs pour les rid fournies *)
 
 
 let create e rm cm(*civilizations map*) ccm = 

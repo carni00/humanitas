@@ -44,7 +44,7 @@ let nil = Co.nil
 let dominium rv = match Rv.contents rv with
   | Rv.Desertum_for n -> N.celadon
   | Rv.Incol incola -> match Rv.Incola.dominium incola with
-    | Rvi.Mir          -> N.vert
+    | Rvi.Mir          -> N.pomme
     | Rvi.Latifundium  -> N.jaune
     | Rvi.Minifundium  -> N.orange
 

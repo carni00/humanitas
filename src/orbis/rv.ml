@@ -125,7 +125,7 @@ module Incola = struct
       (* returns the next oikos and a boolean : wether it is a new possible civitas *)
 
     let dominium fides tegmen d = match d with
-      | Mir when fides > 0.20 && tegmen == Irrigation -> Latifundium
+      | Mir when fides > 0.20 && tegmen == Turbs -> Latifundium
       | _ -> d
     (** next dominium *)
 
@@ -150,7 +150,7 @@ module Incola = struct
     nb   = facultas * (log (foi age) / 6.); (* approximation temporaire faute de tegmen *)
     nid  = nid;
     oikos= oikos;
-    dominium = Mir;
+    dominium = Mir ;
     instrumentum = inst;
     }
  
@@ -225,6 +225,14 @@ let update rv dominus contents =
 (* on récupère seulement la valeur du brouillard (le brouillard doit être mis à jour chaque tour d’un bit par natio et par regio découverte *)
 (* en l’occurence, chaque rv est marké chaque tour du bit du dominus du tour *)
 (*appelé par Im.update uniquement*)
+
+let set_oikos_urbs rv = 
+  {
+  rv with
+  contents = ( match rv.contents with
+  | Desertum_for n  -> rv.contents
+  | Incol incola -> (Incol { incola with Incola.oikos = Incola.Urbs }) );
+  }
 
 
 let dominus     rv = rv.dominus

@@ -175,13 +175,14 @@ module Color = struct
          | `dominium -> Ci.dominium rv
          | `imperii  -> Ci.natio dominus 
          | `nationes -> Ci.natio incolaNid 
-         | `vis      -> N.custom           (2.  *. vis)
+         | `vis      -> N.custom           (1.5 *. vis)
          | `populatio-> N.add    N.celadon (1.  *. populatio)
          | `politeia -> Ci.politeia politeia
          | _         -> if boi urbs then N.orange else climaxNuance thermos hugros in
          let intens   = function 
          | `imperii  -> (if dominus<>Nid.none then (if incolaNid=dominus then 500 else 300) else 0)
          | `politeia 
+         | `dominium 
          | `nationes -> (if incolaNid=Nid.none then 0   else 400)
          | `vis      -> (if incolaNid=Nid.none then 0   else 300 + iof (vis       *. 100.))
          | `populatio-> (                                 400 + iof (populatio *. 100.))

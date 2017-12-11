@@ -68,6 +68,7 @@ module Incola : sig
   module Next : sig
     val instrumentum : float -> Ars.t list -> float -> float
     val oikos        : R.t -> oikos -> tegmen -> float -> float -> float -> oikos * bool
+    val dominium     : float -> tegmen -> dominium -> dominium
   end
 
 end
@@ -90,6 +91,8 @@ type t
 val null : t
 val make : nid -> contents -> t
 val update : t -> nid -> contents -> t
+val set_oikos_urbs : t -> t
+(** mise à jour de l’oikos en urbs pour les rid fournies *)
 
 val dominus         : t -> nid
 val contents        : t -> contents
