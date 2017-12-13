@@ -26,6 +26,7 @@ open Std
 module Ria = Rid.Array
 module E = Espace
 module ER= Espace.Regio
+module ED= Espace.Direction
 module F = Flumen
 
 (******************************* MODULE LATITUDE *************************************)
@@ -70,15 +71,15 @@ let pluviaConstantes =
   [   50;   40;     55]  (*stabilité list*)
 (* constantes pour une génération de latitudes de température *)
 
-let hl = [Espace.Nord; Espace.Sud] (*hem list*)
+let hl = [ED.nord; ED.sud] (*hem list*)
 
 let yve vm =
   {
-  sud60 = - Tmap.nth vm E.Sud TEMPER ;
-  sud30 = - Tmap.nth vm E.Sud ARID ;
-  equat = ( (Tmap.nth vm Espace.Nord EQUAT)-(Tmap.nth vm Espace.Sud EQUAT) /2) ;
-  nord30 = Tmap.nth vm E.Nord ARID ;
-  nord60 = Tmap.nth vm E.Nord TEMPER;
+  sud60 = - Tmap.nth vm ED.sud TEMPER ;
+  sud30 = - Tmap.nth vm ED.sud ARID ;
+  equat = ( (Tmap.nth vm ED.nord EQUAT)-(Tmap.nth vm ED.sud EQUAT) /2) ;
+  nord30 = Tmap.nth vm ED.nord ARID ;
+  nord60 = Tmap.nth vm ED.nord TEMPER;
   }
 
 (* on récupère les valeurs pour calculer ensuite les intensités des latitudes climatiques frontières *)
@@ -94,18 +95,16 @@ let arrayCreate e (ll, dl, rl, sl) =
   let asd vm hem lat = (* actual superior degré *) 
     let rl = (lat=ARCTIC => TEMPER) lat in (*reference lat*)
     ( syd lat + Tmap.nth vm hem rl ) in
-  let asy vm hem lat = (* actual superior y (ie en partant de 0 au pole Nord *)
-    let latitude hem y = match hem with
-    | Espace.Sud -> h/2+y
-    | _          -> h/2-y in
+  let asy vm hem lat = (* actual superior y (ie en partant de 0 au pole nord *)
+    let latitude hem y = if hem = ED.sud then h/2+y else h/2-y in
     latitude hem (asd vm hem lat) in (*latitude of actual limit*)
-  let equatLat vm = (asy vm Espace.Nord EQUAT + asy vm Espace.Sud EQUAT)/2 in
+  let equatLat vm = (asy vm ED.nord EQUAT + asy vm ED.sud EQUAT)/2 in
   let rvll = List.rev ll in
   let code vm y lat = 
     let equatLat = equatLat vm in
     let latMin, latMax = if y<equatLat 
-                         then asy vm Espace.Nord lat, asy vm Espace.Nord (Tlist.following lat rvll)
-                         else asy vm Espace.Sud  (Tlist.following lat rvll), asy vm Espace.Sud lat in
+                         then asy vm ED.nord lat, asy vm ED.nord (Tlist.following lat rvll)
+                         else asy vm ED.sud  (Tlist.following lat rvll), asy vm ED.sud lat in
     let ryPos = u * (y-latMin) / (latMax-latMin) in
     let yPos = (y>=equatLat => ryPos) (u-ryPos) in
     let plsrd = (srd (Tlist.following lat rvll )) in (*previous lat srd*)
@@ -115,8 +114,8 @@ let arrayCreate e (ll, dl, rl, sl) =
     let g y =
       let rec f = function
       | [] -> 0 (*EQUAT*)
-      | lat::q when (y < asy vm Espace.Nord (Tlist.following lat rvll)
-                  || y > asy vm Espace.Sud  (Tlist.following lat rvll)) -> code vm y lat 
+      | lat::q when (y < asy vm ED.nord (Tlist.following lat rvll)
+                  || y > asy vm ED.sud  (Tlist.following lat rvll)) -> code vm y lat 
       | lat::q -> f q in
       Ria.set a (E.Cylinder.rid_of_ryx (E.resolution e) y x) (f (Tlist.remove rvll EQUAT)) in (* objet de la fonction *)
     let _ = Ext.iter h g in
@@ -129,11 +128,10 @@ let arrayCreate e (ll, dl, rl, sl) =
       | _     -> 0)
     | _   -> (v>0 => -1) 1 in (*jointures au bord du cylindre*)
     let ss lat = List.assoc lat (List.combine rl sl) in 
-(*    let orl rl hem = (hem=Espace.Nord => List.rev rl) rl in (*ordered reference lat*)*)
     let iv h l = Tmap.nth vm h (Tlist.previous_or_first l rl) (* inferior variation *)
     and sv h l = Tmap.nth vm h (Tlist.following_or_last l rl) in (* superior variation *)
     let var h l e =
-      if h=Espace.Sud && l=EQUAT then -(Tmap.nth vm Espace.Nord EQUAT)
+      if h=ED.sud && l=EQUAT then -(Tmap.nth vm ED.nord EQUAT)
 (* Ainsi, les deux équateurs se suivent à la trace *)
       else e + alea l (ss l) (e) (iv h l) (sv h l) in
     Tmap.nMap (fun h l e -> var h l e) vm in

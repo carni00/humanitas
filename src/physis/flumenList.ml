@@ -26,6 +26,7 @@ open Std
 
 module E = Espace
 module ER= Espace.Regio
+module ED= Espace.Direction
 module F = Flumen
 module Ria = Rid.Array
 
@@ -33,7 +34,7 @@ type t = Flumen.t list
 
 let (%) = Ext.modulo
 
-let dir o = match (o%4) with 0->E.Nord |1->E.East |2->E.Sud |_->E.West
+let dir o = match (o%4) with 0->ED.nord |1->ED.east |2->ED.sud |_->ED.west
 (*les dirs doivent se « suivre », pour que les virages fonctionnent*)
 
 

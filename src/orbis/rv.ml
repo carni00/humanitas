@@ -126,6 +126,9 @@ module Incola = struct
 
     let dominium fides tegmen d = match d with
       | Mir when fides > 0.20 && tegmen == Turbs -> Latifundium
+(*      | Mir when fides > 0.20 -> *)
+(*        let chances = ( iof (fides * 5.) ) in*)
+        
       | _ -> d
     (** next dominium *)
 

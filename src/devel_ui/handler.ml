@@ -103,19 +103,20 @@ let rec next_event () =
 let move e scene gr m k =
   let module E = Espace in
   let module ER = Espace.Regio in
+  let module ED = Espace.Direction in
   let cr = Scene.cr ~e scene in
   let dir, kp = K.(match k with
-    | KEY_KP8   -> E.Nord, true
-    | KEY_UP    -> E.Nord, false
-    | KEY_KP6   -> E.East, true
-    | KEY_RIGHT -> E.East, false
-    | KEY_KP2   -> E.Sud , true
-    | KEY_DOWN  -> E.Sud , false
-    | KEY_KP4   -> E.West, true
-    | _         -> E.West, false) in
+    | KEY_KP8   -> ED.nord, true
+    | KEY_UP    -> ED.nord, false
+    | KEY_KP6   -> ED.east, true
+    | KEY_RIGHT -> ED.east, false
+    | KEY_KP2   -> ED.sud , true
+    | KEY_DOWN  -> ED.sud , false
+    | KEY_KP4   -> ED.west, true
+    | _         -> ED.west, false) in
   match Scene.sr scene, (both_or_none kp m.lalt) with
     | Some sr, true -> ( let ib = Scene.GeoRect.is_borderline gr (ER.coords e cr) (ER.coords e sr) in match ib with
-                         | Some pos when ( Espace.dir_includes pos dir ) -> [ `move_sr (dir, 1) ; `map_move(dir,1) ]
+                         | Some pos when ( ED.includes pos dir ) -> [ `move_sr (dir, 1) ; `map_move(dir,1) ]
                          | _                                             -> [ `move_sr (dir, 1)  ] )
     | None   , true -> [ `select_regio (Some (Scene.cr ~e scene)) ]
     | _             -> [ `map_move(dir, (if m.shift then 1 else 6)) ]

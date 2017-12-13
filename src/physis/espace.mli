@@ -23,24 +23,33 @@
 
 (** Propriétés géométriques de l’espace sur lequel orbis repose *)
 
-open Std
 
 type t 
 
-type direction =
-| Nord
-| NE
-| East
-| SE
-| Sud
-| SW
-| West
-| NW
+module Direction : sig
+  type t
+  val nord : t
+  val ne   : t
+  val east : t
+  val se   : t
+  val sud  : t
+  val sw   : t
+  val west : t
+  val nw   : t
+  val lesQuatre : t list
+  val lesHuit   : t list
+  val random4   : unit -> t
+  val random8   : unit -> t
+  val next4     : t -> t
+  val next8     : t -> t
+  val to_vecteur: t -> (int*int)
+  val includes  : t -> t -> bool
+  (** NE includes North etc. *)
+end
+
+type direction = Direction.t
 
 val vecteur_of_direction : direction -> int*int
-(** associe à Nord le couple (0,-1) etc. *)
-
-val dir_includes : direction -> direction -> bool
 
 
 type web =

@@ -23,6 +23,7 @@
 
 open Std
 module E = Espace
+module ED = Espace.Direction
 
 type forme =
 | Plan
@@ -218,14 +219,14 @@ module GeoRect = struct
     and latMax = gr.latMax - (gr.latMax - crLat) * 0.30
     and lonMax = gr.lonMax - (gr.lonMax - crLon) * 0.20 in
     match ( lat<latMin , lon<lonMin , lat>latMax , lon>lonMax ) with
-    | true , true , false, false-> Some E.NW
-    | false, true , true , false-> Some E.SW
-    | false, false, true , true -> Some E.SE
-    | true , false, false, true -> Some E.NE
-    | true , _    , _    , _    -> Some E.Nord
-    | _    , true , _    , _    -> Some E.West
-    | _    , _    , true , _    -> Some E.Sud
-    | _    , _    , _    , true -> Some E.East
+    | true , true , false, false-> Some ED.nw
+    | false, true , true , false-> Some ED.sw
+    | false, false, true , true -> Some ED.se
+    | true , false, false, true -> Some ED.ne
+    | true , _    , _    , _    -> Some ED.nord
+    | _    , true , _    , _    -> Some ED.west
+    | _    , _    , true , _    -> Some ED.sud
+    | _    , _    , _    , true -> Some ED.east
     | _                         -> None
 
   

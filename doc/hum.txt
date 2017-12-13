@@ -7881,3 +7881,6 @@ mise à jour luxus et latifundium
 filter dominium
 
 226.fri.21.22H45
+Les regiones portant une cité passent en oikos 'urbs', puis, si fides dépasse 0,2 en dominium 'latifundium' 
+
+226.fri.23.23H11

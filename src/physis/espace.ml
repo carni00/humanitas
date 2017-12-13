@@ -43,34 +43,39 @@ type resolution =
 | Agglo   (*résolution optimale pour l’agglomération initiale de continents*)
 
 
-type direction =
-| Nord
-| NE
-| East
-| SE
-| Sud
-| SW
-| West
-| NW
+module Direction = struct
+  type t = int
+  let nord = 0
+  let ne   = 1
+  let east = 2
+  let se   = 3
+  let sud  = 4
+  let sw   = 5
+  let west = 6
+  let nw   = 7
+  let lesQuatre  = [ nord;     east;     sud;     west     ]
+  let lesHuit    = [ nord; ne; east; se; sud; sw; west; nw ]
+  let random4 () = 2 * Random.int 4
+  let random8 () =     Random.int 8
+  let next4   d  = ( d+2 ) mod 8
+  let next8   d  = ( d+1 ) mod 8
+  let to_vecteur d =
+    let tab = [| (-1, 0); (-1, 1); ( 0, 1); ( 1, 1); ( 1, 0); ( 1,-1); ( 0,-1); (-1,-1); |] in
+    Array.get tab d
+  (* variations en (latitude, longitude) *)
+  let includes pos dir2 = 
+       ( pos == dir2 )
+    || ( dir2 == nord && ( pos == ne || pos == nw ) )
+    || ( dir2 == east && ( pos == ne || pos == se ) )
+    || ( dir2 == sud  && ( pos == sw || pos == se ) )
+    || ( dir2 == west && ( pos == sw || pos == nw ) )
+  (** NE includes North etc. *)
+end
 
-let vecteur_of_direction = function
-| Nord -> (-1, 0) 
-| NE   -> (-1, 1)
-| East -> ( 0, 1)
-| SE   -> ( 1, 1)
-| Sud  -> ( 1, 0)
-| SW   -> ( 1,-1)
-| West -> ( 0,-1) 
-| NW   -> (-1,-1)
-(* variations en (latitude, longitude) *)
+type direction = Direction.t
 
-let dir_includes pos dir2 = 
-     ( pos == dir2 )
-  || ( dir2 == Nord && ( pos == NE || pos == NW ) )
-  || ( dir2 == East && ( pos == NE || pos == SE ) )
-  || ( dir2 == Sud  && ( pos == SW || pos == SE ) )
-  || ( dir2 == West && ( pos == SW || pos == NW ) )
-(** NE includes North etc. *)
+
+let vecteur_of_direction = Direction.to_vecteur
 
 let latMax = 80. 
 let lonMax = 180.
@@ -223,13 +228,13 @@ module Proximae = struct
 
 (******************************   MODULE PROXIMAE.CYLINDER   *************************************)
   module Cylinder = struct 
-    let quatreDirList = [Nord; East; Sud; West]
+(*    let quatreDirList = [Nord; East; Sud; West]*)
     (* dorsaleCreate exige que les 4 dirs soient « à la suite » dans le sens d’une rotation *)
-    let huitDirList   = [Nord; NE; East; SE; Sud; SW; West; NW]
+(*    let huitDirList   = [Nord; NE; East; SE; Sud; SW; West; NW]*)
   
     let dirList = function 
-    | Quadral -> quatreDirList
-    | Octal   -> huitDirList
+    | Quadral -> Direction.lesQuatre
+    | Octal   -> Direction.lesHuit
     let toutes p = function
     | Quadral -> Opt.value p.lesQuatre
     | Octal   -> Opt.value p.lesHuit
@@ -246,13 +251,13 @@ module Proximae = struct
           if py>=0 && py<h then (dir, Cylinder.rid_of_ryx r py px) :: list 
           else list in
         List.fold_left f [] dirList in
-      let lesQuatre = cylinderSelection quatreDirList in match web with
+      let lesQuatre = cylinderSelection Direction.lesQuatre in match web with
       | Quadral -> {
                    lesQuatre = Some lesQuatre;
                    lesHuit   = None;
                    toutes    = Tlist.valueList lesQuatre;
                    }
-      | Octal   -> let lesHuit = cylinderSelection huitDirList in
+      | Octal   -> let lesHuit = cylinderSelection Direction.lesHuit in
                    {
                    lesQuatre = Some lesQuatre;
                    lesHuit   = Some lesHuit;
