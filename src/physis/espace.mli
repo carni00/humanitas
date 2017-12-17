@@ -162,6 +162,9 @@ val lesHuit  : t -> Rid.t -> Rid.t list
 val proxima  : t -> Rid.t -> direction -> Rid.t
 (** regio voisine d’une regio dans une direction *)
 
+val random_fold_left : t -> Rid.t -> 'a -> ( 'a -> Rid.t -> 'a ) -> float -> 'a
+(** fold_left sur une sélection aléatoire de proximae d’une regio *)
+
 val distance : t -> Rid.t -> Rid.t -> float
 (** distance en km entre 2 points définis par lat et lon *)
 

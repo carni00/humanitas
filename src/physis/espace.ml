@@ -226,6 +226,15 @@ module Proximae = struct
   let lesHuit   p = Tlist.valueList(Opt.value p.lesHuit)
   let toutes    p = p.toutes
 
+  let random_fold_left p s f rate = 
+    let len = List.length p.toutes in
+    let intList    = ref [] in
+    let intListLen = 1 + iof (rate *. foi len) in
+    let () = Ext.iter intListLen (fun _ -> let i = Random.int len in if (List.mem i !intList == false) then intList:= (i :: !intList)) in
+    List.fold_left f s (List.map (List.nth p.toutes) !intList)
+
+
+
 (******************************   MODULE PROXIMAE.CYLINDER   *************************************)
   module Cylinder = struct 
 (*    let quatreDirList = [Nord; East; Sud; West]*)
@@ -373,6 +382,8 @@ module Regio = struct
   let lesHuit        e rid = Proximae.lesHuit   (proximaeRecord  e rid)
   let proximae       e rid = Proximae.toutes    (proximaeRecord  e rid)
   (** liste des proximae d’une regio *)
+  let random_fold_left e rid s f rate = Proximae.random_fold_left (proximaeRecord e rid) s f rate
+
   
   let proxima   e rid dir = Proximae.proxima (forme e) (proximaeRecord e rid) dir
   (** trouver une proxima en particulier en fonction de sa position, dans une liste de 4 ou 8 *)

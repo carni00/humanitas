@@ -223,6 +223,15 @@ let previous_or_last  a l = following_or_first a (rev l)
 (* précédent de a dans la liste l, avec tour complet *)
 
 
+
+let rec uniques = function
+  | [] -> []
+  | e :: q when List.mem e q -> uniques q
+  | e :: q -> e :: uniques q
+(** list of uniques elements of l *)
+
+
+
 (****************************** Once used and not actually used *******************************)
 
 (*let rec search f = function
