@@ -7890,3 +7890,6 @@ module Espace.Direction
 ER.random_fold_left
 
 226.ger.04.11H38
+MAJ humanopaedia + tobedone
+
+226.ger.04.12H46

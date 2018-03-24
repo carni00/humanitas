@@ -415,6 +415,23 @@ peut donc lui être globalement dommageable quant à sa valeur absolue.  Au-del�
 d’un certain seuil, le spolium produit de la stagnation, voire de la régression
 économique.
 
+
+*** 5 floreal an 224
+DDM 19 frimaire an 226
+
+De latifundio
+
+Lorsque fides dépasse 0.20 dans les cités aristocratiques, l’aristocratie 
+s’approprie progressivement les biens publics de la cité.
+Les regiones caractérisées par les oikos urbs et irrigation, caractérisées
+par une grande division du travail, sont alors susceptibles de passer en dominium
+'latifundium'.
+
+Le latifundium permet à l’aristocratie d’accroître considérablement ses revenus
+(luxus) et par voie de conséquence son pouvoir, ce qui lui permet de s’approprier
+progressivement les regiones voisines.
+
+
 --- 24 Thermidor an 213 
 DDM 19 frimaire an 226
 
@@ -447,24 +464,15 @@ pondérée par leur plebs.
 - l’indice de luxus : le taux de luxus dans alienatio dans les regiones latifundiaires.
 
 L’indice de luxus est national. Il vaut initialement zéro, et peut croître jusqu’à 1.
+(la pente de l’aristocratie est de prendre toute l’alienatio, ce qui ne préjuge pas
+du consentement de la population à cette évolution)
 Il croît à partir du moment ou le latifundium existe (dans la chora nationale).
-Il croît chaque année de la façon suivante :
-i(n) = i(n-1) + ( u - i(n-1) ) × ( min u fides )
+Il est égal au taux de latifundium :
+Lorsque le taux de latifundium est de 50%,
+-> l’indice de luxus vaut 50%,
+-> le taux de luxus dans l’alienation nationale vaut 50% × 50% = 25%
 Il est annulé si le latifundium disparait dans toute la nation (révolution sociale).
 
-
-
-*** 5 floreal an 224
-DDM 19 frimaire an 226
-
-De latifundium
-
-Lorsque fides dépasse 0.20 dans les cités aristocratiques, l’aristocratie 
-s’approprie progressivement les biens publics.
-En particulier, les regiones caractérisées par les oikos urbs et irrigation
-sont susceptibles de passer en dominium 'latifundium'.
-
-Le latifundium s’étend ensuite peu à peu aux regiones voisines.
 
 
 *** 24 fructidor an 224
