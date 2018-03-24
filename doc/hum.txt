@@ -7896,3 +7896,6 @@ MAJ humanopaedia + tobedone
 MAJ paedia : luxus et latifundium
 
 226.ger.04.22H39
+G.Natio.latifundium
+
+226.ger.04.22H45

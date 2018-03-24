@@ -264,8 +264,9 @@ let polis atelier nid =
     line "hospitalitas" (sof   0  N.hospitalitas   ) ;
     line "instrumentum" (sof   0  N.instrumentum   ) ;
     line "efficientia"  (sof (-2) N.efficientia   ) ;
-    line "fides"        (sof (-2) N.fides   ) ;
     line "sophia"       (sof (-2) N.sophia   ) ;
+    line "fides"        (sof (-2) N.fides   ) ;
+    line "latifundium"  (sof (-2) N.latifundium   ) ;
     ])
 
 let dx atelier nid =

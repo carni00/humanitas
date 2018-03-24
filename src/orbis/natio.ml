@@ -130,6 +130,7 @@ let facultas     n = Gn.facultas     n.g
 let plebs        n = Gn.plebs        n.g
 let hospitalitas n = Gn.hospitalitas n.g
 let instrumentum n = Gn.instrumentum n.g
+let latifundium  n = Gn.latifundium  n.g
 let pil          n = Gn.pil          n.g
 let efficientia  n = efficientiaFun (hospitalitas n) (instrumentum n)
 let famine       n = Dx.famine       n.d

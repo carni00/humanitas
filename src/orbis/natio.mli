@@ -77,6 +77,7 @@ val plebs        : t -> float
 val hospitalitas : t -> float
 val efficientia  : t -> float
 val instrumentum : t -> float
+val latifundium  : t -> float
 val copia        : t -> float
 val famine       : t -> float
 val tfg          : t -> float
