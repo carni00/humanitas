@@ -12,8 +12,18 @@ créer un dépot git local pour commencer pour pouvoir surveiller les différenc
 lorsque la case sélectionnée sort de l’écran, déplacer la case centrale d’une regio de longitude
 coder le is_competitor en fonction de la tactique release/conquest
 rétablir la découverte de la métallurgie et écriture
+seules les nations poliades devraient pouvoir inventer ou acquérir l’écriture : ok
 
-la population s’effondre avec la découverte de l’écriture ??
+la population s’effondre avec la découverte de l’écriture -> gvnment central -> conquête (exagérée) des 
+terres libres -> en cas d’attaque par un voisin, la vis est gaspillée à occuper les terres libres tandis
+que la chora est occupée -> récoltes sont prélevées -> famine
+solution : 
+rester à un rapport imperium/chora inf à 2. -> fait
+
+se retirer des terres vides en cas d’agression et de rapport imp/chora sup à 1.1 -> coder l’effect de la tactic retreat dans le
+module im -> le dominus n’est pas systématiquement competitor. Si la case a des voisins étrangers (ou nid.none) et si le dominus
+est en retraite, alors il n’est pas competitor. 2. S’il n’y a aucun competitor, nid.none l’emporte.
+
 
 si occupation, coder les passages en latifundium en fonction de fides
 coder les pertes militaires et civiles consécutives des guerres

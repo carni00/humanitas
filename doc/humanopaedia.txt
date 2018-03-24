@@ -164,7 +164,6 @@ qui contrôle ce territoire.
 L’empire dispose d’un budget : le stratiotikon.
 L’empire mène la guerre et décide de la paix avec les autres nations.
 La regio ou siège le gouvernement impérial est appelée URBS/capitale.
-On appelle *empire la superstructure politique et militaire spécifique à ces politeia.
 
 Un empire est initialement dirigé par un conseil (oligarchie).
 Le pouvoir de commandement peut être confié à un seul (monarchie).
@@ -180,8 +179,8 @@ On utilisera parfois les termes suivants à propos des politeia :
 
 Des cités
 
-Initialement, les nations néolithiques sont égalitaires (absence de latifundium)
-et anarchiques (absence de gouvernement national).  
+Initialement, les nations néolithiques (agricoles) sont égalitaires (absence
+de latifundium) et anarchiques (absence de gouvernement national).  
 
 Les nations anarchiques disposent de forces armées, mais non d’une force
 armée centralisée.
@@ -202,7 +201,8 @@ corps de fonctionnaire, un proto-État.
 
 Elle permet à la nation l’invention des artes, à commencer par la métallurgie et
 l’écriture.
-(En revanche, l’acquisation d’artes par transfert n’exige pas l’existence de cité)
+(En revanche, l’acquisation de la métallurgie par diffusion n’exige pas l’existence
+de cité)
 
 La cité peut se doter ou non d’une boulê, c’est-à-dire d’instutions organisant 
 l’exercice du pouvoir politique par le peuple.
@@ -218,11 +218,11 @@ La cité n’est pas un gouvernement national ; elle ne doit pas être confondue
 l’empire.
 
 L’existence d’une cité n’est pas non plus un préalable pour qu’une natio adopte un
-gouvernement centralisé / se dote d’une capitale. Karakorum étant le contre-exemple.
+gouvernement centralisé / se dote d’une capitale. Karakorum, ville-capitale fondée par 
+l’empereur, étant le contre-exemple.
 
 Un gouvernement central au dessus de cités démocratiques est toujours un conseil
-dépourvu du pouvoir de décider lui-même de la paix et de la guerre, ou encore du
-partage de la capacité sociale.
+dépourvu du pouvoir de partage de la capacité sociale.
 
 En d’autres termes, la forme monarchique du gouvernement central est incompatible 
 avec les institutions poliades démocratiques.
@@ -425,9 +425,10 @@ niveau de diff. Par ailleurs, l'idee que luxus s'accroisse regulierement entre
 deux revolutions ne semblait pas absurde. La fonction d'accroissement n'avait
 cependant pas ete discutée. 
 
-Luxus est une partie croissante d’alienatio. Le prince développe alienatio à
-des fins possiblement autres (militaires notamment).  L’alienatio est
-progressivement affecté au luxus.
+Luxus est une partie croissante d’alienatio. La cité aristocratique, puis le 
+prince développent alienatio afin d’accroître leur emprise sur la capacité 
+sociale.
+L’alienatio est progressivement affecté au luxus.
 
 Luxus ne peut jamais dépasser alienatio, il est par conséquent exprimé comme
 un taux d’alienatio.

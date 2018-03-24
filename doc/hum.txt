@@ -7887,3 +7887,6 @@ Les regiones portant une cité passent en oikos 'urbs', puis, si fides dépasse 
 module Espace.Direction
 
 226.fri.27.23H10
+ER.random_fold_left
+
+226.ger.04.11H38
