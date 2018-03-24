@@ -351,19 +351,21 @@ type gRegio = {
   hospitalitas   : float;
   instrumentum   : float;
   plebs          : float;
+  latifundium    : float;
 }
 
 let gRegio rs r rvi = 
   let hospitalitas = R.hospitalitas r in
+  let tegmen       = Incola.tegmen (R.climax r) (Incola.oikos rvi) in
   let instrumentum = Incola.instrumentum rvi in
   let plebs        = Incola.plebs rvi in
-  let tegmen       = Incola.tegmen (R.climax r) (Incola.oikos rvi) in
   {
   superficies = rs;
   facultas = Incola.facultas rs hospitalitas instrumentum tegmen;
   hospitalitas;
   instrumentum;
   plebs;
+  latifundium = (if Incola.dominium rvi == Incola.Latifundium then plebs else 0.) ;
   }
 
 (*EOF*)

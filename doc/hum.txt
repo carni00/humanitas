@@ -7893,3 +7893,6 @@ ER.random_fold_left
 MAJ humanopaedia + tobedone
 
 226.ger.04.12H46
+MAJ paedia : luxus et latifundium
+
+226.ger.04.22H39

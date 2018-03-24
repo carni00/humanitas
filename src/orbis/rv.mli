@@ -127,6 +127,7 @@ type gRegio = {
   hospitalitas   : float;
   instrumentum   : float;
   plebs          : float;
+  latifundium    : float;
 }
 
 val gRegio : float -> R.t -> Incola.t -> gRegio

@@ -7,7 +7,7 @@
 
  *  Humanitas is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License,
+ *  the Free Software Foundation; either version 3 of the License,
  *  or (at your option) any later version.
 
  *  Humanitas is distributed in the hope that it will be useful,
@@ -22,7 +22,6 @@
  *)
 
 open Std
-(*open Pseudo_float*)
 
 module E=Espace
 module Rvi=Rv.Incola
@@ -36,8 +35,6 @@ type t = {
   imperiumArray:   float Nid.Nia.t; (* superficie des imperii *)
   choraArray   : chora Nid.Nia.t; (* array des chora (ttes données des chora) *)
   finesMx      : chora Nid.Nix.t; (* matrice des marges == zones occupées *)
-(*  vicusList    : Rv.t  list;      (* liste des villages *)*)
-(*  civitasList  : Rv.t  list;      (* liste des cités *)*)
 }
 (* des arrays parcequ’on tire ces données de la lecture de l’imperiumMap : carte de 30 000 regiones.
 L’efficacité s’impose, et elle passe par une lecture unique de l’imperiumMap. *)
@@ -58,6 +55,7 @@ let choraAmp     g   x = (Nia.get g.choraArray   x).Rv.superficies
 let facultas     g   x = (Nia.get g.choraArray   x).Rv.facultas
 let hospitalitas g   x = (Nia.get g.choraArray   x).Rv.hospitalitas
 let instrumentum g   x = (Nia.get g.choraArray   x).Rv.instrumentum
+let latifundium  g   x = (Nia.get g.choraArray   x).Rv.latifundium 
 let plebs        g   x = (Nia.get g.choraArray   x).Rv.plebs
 
   
@@ -86,6 +84,7 @@ let nullChora = {
   Rv.hospitalitas= 0.;
   Rv.instrumentum= 0.;
   Rv.plebs       = 0.;
+  Rv.latifundium = 0.;
   }
 
 let addRegio chora regio = 
@@ -96,6 +95,7 @@ let addRegio chora regio =
   Rv.hospitalitas= chora.Rv.hospitalitas +. regio.Rv.hospitalitas *. regioPlebs;
   Rv.instrumentum= chora.Rv.instrumentum +. regio.Rv.instrumentum *. regioPlebs;
   Rv.plebs       = chora.Rv.plebs        +. regioPlebs;
+  Rv.latifundium = chora.Rv.latifundium  +. regio.Rv.latifundium; (*somme des plèbes latifundiaires*)
   }
   
 let finalizeChora chora plebs =
@@ -103,6 +103,7 @@ let finalizeChora chora plebs =
   chora with
   Rv.hospitalitas = chora.Rv.hospitalitas /. plebs;
   Rv.instrumentum = chora.Rv.instrumentum /. plebs;
+  Rv.latifundium  = chora.Rv.latifundium  /. plebs; (* plèbe en régime latifundiaire / plèbe totale *)
   }
 
 
@@ -115,6 +116,7 @@ let substractChora chora chorb =
   Rv.hospitalitas=(chora.Rv.hospitalitas *. pleas -. chorb.Rv.hospitalitas *. plebs) /. (pleas -. plebs);
   Rv.instrumentum=(chora.Rv.instrumentum *. pleas -. chorb.Rv.instrumentum *. plebs) /. (pleas -. plebs);
   Rv.plebs       = chora.Rv.plebs        -. chorb.Rv.plebs;
+  Rv.latifundium = chora.Rv.latifundium  -. chorb.Rv.latifundium;
   }
  
 
@@ -127,9 +129,7 @@ let make() =
   finesAmpMx    = Nix.make 0. ; 
   finesMx       = Nix.make nullChora ; 
   imperiumArray = Nia.make 0. ;
-  choraArray   = Nia.make nullChora ;
-(*  vicusList    = [];*)
-(*  civitasList  = [];*)
+  choraArray    = Nia.make nullChora ;
   }
 
 
@@ -183,6 +183,7 @@ module Natio = struct
     facultas       : float;  (* potentiel de production de la chora, tegmen compris *)
     hospitalitas   : float;  
     instrumentum   : float; 
+    latifundium    : float;  (* plèbe latifundiaire / plèbe totale : [0..1] *)
     plebs          : float;  (* population nationale *)
     imperium       : float;    (* superficie de l’imperium *)
     chora          : chora;  (* données relative au total de notre chora *) 
@@ -208,6 +209,7 @@ module Natio = struct
     facultas       = facultas g nid;   (* potentiel de production des chora, tegmen compris *)
     hospitalitas   = hospitalitas g nid;
     instrumentum   = instrumentum g nid;
+    latifundium    = latifundium g nid;
     plebs          = plebs g nid;   (* population de chaque natio*)
     imperium       = imperium g nid;   (* superficie des imperii *)
     chora          = chora ;
@@ -223,6 +225,7 @@ module Natio = struct
   let facultas       n = n.facultas 
   let hospitalitas   n = n.hospitalitas   
   let instrumentum   n = n.instrumentum 
+  let latifundium    n = n.latifundium  
   let plebs          n = n.plebs   
   let imperium       n = n.imperium 
   let chora          n = n.chora 
@@ -242,17 +245,6 @@ module Natio = struct
 
   let impAmp         n = choraAmp n - funuSumAmp n + fineSumAmp n
   let impPle         n = plebs    n -  funuSumPle n +  fineSumPle n
-(*
-  let total choraList = 
-    let f (amp,ple) c = (amp++c.Rv.superficies, ple+c.Rv.plebs) in
-    Nil.fold_left f (0,0.) choraList in
-  let chora, plebs = G.Natio.choraAmp g, Gn.plebs g in
-  let damnAmp, damnPle = total (G.Natio.funusList g) in
-  let tribAmp, tribPle = total (G.Natio.finesList g) in
-  let impAmp = chora -- damnAmp ++ tribAmp in
-  let impPle = plebs -  damnPle +  tribPle in
-*)
-
 
 
   let null =
@@ -260,6 +252,7 @@ module Natio = struct
     facultas       = 0.;   (* potentiel de production des chora, tegmen compris *)
     hospitalitas   = 0.;   
     instrumentum   = 0.; 
+    latifundium    = 0.; 
     plebs          = 0.;   (* population de chaque natio*)
     imperium       = 0.;   (* superficie des imperii *)
     chora          = nullChora ;   

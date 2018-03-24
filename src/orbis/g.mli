@@ -78,6 +78,8 @@ module Natio : sig
   (** hospitalitas de la chora *)
   val instrumentum   : t -> float 
   (** instrumentum moyen de la chora *)
+  val latifundium    : t -> float 
+  (** taux de latifundium de la chora = rapport plèbe latifundiaire / plèbe totale *)
   val plebs          : t -> float 
   (** plèbe totale de la chora *)
   val chora          : t -> chora 
