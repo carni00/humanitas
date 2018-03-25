@@ -67,6 +67,7 @@ type natio = {
   fides : float;
   libertas : float;
   efficientia : float;
+  latifundium : float;
   facultas : float;
   agriCopia : float;
   ususList : UsusList.t;

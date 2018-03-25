@@ -7899,3 +7899,6 @@ MAJ paedia : luxus et latifundium
 G.Natio.latifundium
 
 226.ger.04.22H45
+N.latifundium : affichage dans la window Polis
+
+226.ger.05.14H37

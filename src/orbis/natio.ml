@@ -233,6 +233,7 @@ let pNatio n =
   P.fides = fides n;
   P.libertas = libertas n;
   P.efficientia = efficientia n;
+  P.latifundium = latifundium n;
   P.facultas = facultas n;
   P.agriCopia = agriCopia n;
   P.ususList = ususList n;

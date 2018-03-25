@@ -122,6 +122,7 @@ type natio = {
   fides       : float;
   libertas    : float;
   efficientia : float;
+  latifundium : float;
   facultas    : float;
   agriCopia   : float;
   ususList    : UsusList.t;
@@ -302,14 +303,6 @@ let tributum_of_damnum p relatio =
 
 (************************ CALCUL DE LA NLE PARTITIO ******************************)
 
-let nextLuxus politeia p alien =
-  match Politeia.is_aristocratic politeia with
-  | false -> 0.
-  | true -> let plr (* previous luxus rate *) = squot 0. p.luxus (alienatio p) in
-            alien * (min 1. (plr + 0.001))
-(* le luxe augmente d’un millième d’alienatio chaque tour *)
-
-
 let resistance_a_l_occupation g centralCoef =
   let module Gn = G.Natio in
   let occupation_taux = squot 0. (max 0. (Gn.choraAmp g - Gn.centrAmp g)) (Gn.choraAmp g) in
@@ -350,12 +343,12 @@ let primary (n:natio) =
   let eo (*e_oppressio*) = n.pp.oppressio * Ars.eff n.artes Ars.MET * Ars.eff n.artes Ars.GUN in
   (* valeur : oppressio effective / fructus.oppressio *)
   let alien = (u-lab) * (cut 0. u ( n.fides ** 0.5 )) in
-  let mil = civicMilitaria n.g lab alien n.libertas n.politeia n.agriCopia 0. in
-  let sap (*sapientia*) = max 0. (u - lab - max (nl-lab) (alien + mil + eo) ) in
-  let lux = nextLuxus n.politeia n.pp (u-lab-sap-mil) in
-  let oti = max 0. (u-lab-sap-mil-lux) in (* soustraction de float, on vérifie que résultat >= 0 *)
+  let cMil = civicMilitaria n.g lab alien n.libertas n.politeia n.agriCopia 0. in
+  let sap (*sapientia*) = max 0. (u - lab - max (nl-lab) (alien + cMil + eo) ) in
+  let lux = alien * ((cut 0. u n.latifundium) ** 2.) in
+  let oti = max 0. (u-lab-sap-cMil-lux) in (* soustraction de float, on vérifie que résultat >= 0 *)
 (* désoeuvrement primaire : ie à moins que l’empire n’en fasse qqchose *)  
-  List.fold_left set_att null [(LAB,lab);(SAP,sap);(LUX,lux);(MIL,mil);(OTI,oti)]
+  List.fold_left set_att null [(LAB,lab);(SAP,sap);(LUX,lux);(MIL,cMil);(OTI,oti)]
 (* découpage primaire : ie avant stratiotikon,  de la capacité sociale *)
 
 let compute n (s:Stratiotikon.t) =
