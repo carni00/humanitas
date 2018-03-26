@@ -431,6 +431,14 @@ Le latifundium permet à l’aristocratie d’accroître considérablement ses r
 (luxus) et par voie de conséquence son pouvoir, ce qui lui permet de s’approprier
 progressivement les regiones voisines.
 
+Le passage en latifundium requiert 
+- efficienta regionale > 1.40
+- fides > 0.2
+Et est favorisé par :
+- taux de luxus national élevé (rapporté au fructus)
+- superficie regio faible (adaptation résolution)
+
+
 
 --- 24 Thermidor an 213 
 DDM 19 frimaire an 226

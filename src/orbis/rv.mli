@@ -119,6 +119,7 @@ module Fun : sig
   val tegmen     : R.hydros -> R.climax -> contents -> tegmen
   val chorability: ?inst:float -> tegmen -> float
   val isFarmable : ?inst:float -> tegmen -> bool
+  val efficientia: float -> float -> float
 end
 
 type gRegio = {

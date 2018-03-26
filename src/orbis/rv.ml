@@ -253,6 +253,8 @@ let plebs       rv = match rv.contents with
 let brouillards rv = rv.brouillards
 
 module Fun = struct
+
+
   let tegmen hydros climax contents = match contents, hydros with 
     | Incol i, _                -> Incola.tegmen climax (Incola.oikos i)
     | Desertum_for t, R.Dry
@@ -305,6 +307,8 @@ module Fun = struct
   let isFarmable ?inst:(inst=0.) tegmen = (chorability ~inst tegmen > 0.)
   (* == la regio est-elle susceptible d’appartenir à la chora ? *)
   (* Oui, is_farmable dépend du tegmen : couvert végétal réel, et non du climax *)
+
+  let efficientia hosp inst = 0.6 + 0.01 * floor hosp + 0.01 * floor inst
 
 end
 

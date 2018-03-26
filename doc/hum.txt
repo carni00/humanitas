@@ -7902,3 +7902,6 @@ G.Natio.latifundium
 N.latifundium : affichage dans la window Polis
 
 226.ger.05.14H37
+calcul de luxus en fonction du taux de latifundium
+
+226.ger.06.21H43

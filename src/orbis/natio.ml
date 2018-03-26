@@ -95,8 +95,9 @@ let agriCopiaFun facultas pr =
 la production matérielle (cibus (dont pillage/tribut) et luxe) *)
 
 
-let efficientiaFun hosp inst = 0.6 + 0.01 * floor hosp + 0.01 * floor inst
+let efficientiaFun = Rv.Fun.efficientia
 (* productivité du travail *)
+
 
 let rec artesFun = function
 | [] -> []
