@@ -206,6 +206,7 @@ let imNatio n = ( {
   Im.humanitas = 0. (*P.humanitas (P.alter_all n.p [PYRAMID(Dx.pyramid n.d,(iof n.k.plebs));
   PRODUCT(n.k.usus,(iof n.c.efficientia),n.artes)] )*);
   Im.instrumentum =  instrumentum n;
+  Im.luxus = 0. ; (*FIXME*)
   Im.plebs = plebs n;
   Im.facultas = facultas n;
   Im.plebsVar = Dx.var n.fd; (* les regiones vont évoluer en fonction de la variation projetée (fd) *)

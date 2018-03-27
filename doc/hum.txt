@@ -7905,3 +7905,6 @@ N.latifundium : affichage dans la window Polis
 calcul de luxus en fonction du taux de latifundium
 
 226.ger.06.21H43
+déplacement de la fun efficientia dans Rv.Fun
+
+226.ger.07.02H51

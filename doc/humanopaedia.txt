@@ -435,7 +435,7 @@ Le passage en latifundium requiert
 - efficienta regionale > 1.40
 - fides > 0.2
 Et est favorisé par :
-- taux de luxus national élevé (rapporté au fructus)
+- taux de luxus national élevé (lucrum.luxus rapporté à la plèbe)
 - superficie regio faible (adaptation résolution)
 
 

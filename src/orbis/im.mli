@@ -38,6 +38,7 @@ type natio = {
   densitas : float;
   humanitas : float;
   instrumentum : float;
+  luxus : float;
   plebs : float;
   facultas : float;
   plebsVar : float;

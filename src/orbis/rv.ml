@@ -124,10 +124,8 @@ module Incola = struct
       | _ -> oikos ),false)
       (* returns the next oikos and a boolean : wether it is a new possible civitas *)
 
-    let dominium fides tegmen d = match d with
+    let dominium fides lux rs tegmen eff d = match d with
       | Mir when fides > 0.20 && tegmen == Turbs -> Latifundium
-(*      | Mir when fides > 0.20 -> *)
-(*        let chances = ( iof (fides * 5.) ) in*)
         
       | _ -> d
     (** next dominium *)

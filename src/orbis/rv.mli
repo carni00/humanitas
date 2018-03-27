@@ -68,7 +68,7 @@ module Incola : sig
   module Next : sig
     val instrumentum : float -> Ars.t list -> float -> float
     val oikos        : R.t -> oikos -> tegmen -> float -> float -> float -> oikos * bool
-    val dominium     : float -> tegmen -> dominium -> dominium
+    val dominium     : float -> float -> float -> tegmen -> float -> dominium -> dominium
   end
 
 end

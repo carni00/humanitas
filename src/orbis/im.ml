@@ -43,6 +43,7 @@ type natio = {
   densitas : float; (** densité en hab/km2 *)
   humanitas :float;
   instrumentum : float;
+  luxus : float;
   plebs : float;
   facultas : float;
   plebsVar : float;
@@ -65,6 +66,7 @@ let fides         na i = (Nia.get na i).fides
 let densitas      na i = (Nia.get na i).densitas
 let humanitas     na i = (Nia.get na i).humanitas
 let instrumentum  na i = (Nia.get na i).instrumentum
+let luxus         na i = (Nia.get na i).luxus       
 let natioPlebs    na i = (Nia.get na i).plebs
 let natioFacultas na i = (Nia.get na i).facultas
 let plebsVar      na i = (Nia.get na i).plebsVar
@@ -221,10 +223,12 @@ let update e rm im j (na:natio Nia.t) =
       let i     = Rvi.nid incola in
       let p_oik = Rvi.oikos incola in
       let tegmen= Rv.tegmen r ~rv in
-      let plebs = nea_plebs (R.area r) (Rvi.plebs incola) (Rv.facultas r rv) na i colonize in
+      let rs    = R.area r in
+      let plebs = nea_plebs rs (Rvi.plebs incola) (Rv.facultas r rv) na i colonize in
       let ins   = Rvi.Next.instrumentum (Rv.instrumentum rv) (artes na i) (sophia na i) in
       let oikos, new_vicus = Rvi.Next.oikos r (p_oik) tegmen  plebs ins (agriCopia na i) in
-      let dominium = Rvi.Next.dominium (fides na i) tegmen (Rvi.dominium incola) in
+      let eff   = Rv.Fun.efficientia (R.hospitalitas r) ins in
+      let dominium = Rvi.Next.dominium (fides na i) (luxus na i) rs tegmen eff (Rvi.dominium incola) in
       let incola = Rvi.make plebs i oikos dominium ins in
       if new_vicus then vlr := ( (rid,incola)::(!vlr) ) ;
       Rv.Incol (incola) in
