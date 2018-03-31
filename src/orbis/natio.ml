@@ -57,13 +57,14 @@ type t = {
   origo : Rid.t*Date.t; (* date de naissance *)
   urbs  : bool*Rid.t;   (* caractérise la natio au tour(n) *)
   artes : Ars.t list; (* le tour *)
-  g : G.Natio.t; (* geographie nationale *)
+  g  : G.Natio.t; (* geographie nationale *)
   junctiones : Junctiones.Natio.t; (* junctiones relatives à une natio (vision nationale) *)
-  k : K.t;      (* idem *)
-  pa: Politeia.t;     
-  p : Partitio.Record.t;       (* caractérise la période tour(n-1) à tour(n) *)
-  d : Dx.t; (* le tour (pyramid), la période(famine, tfg) *)
-  fd: Dx.t; (* le tour (n+1) (pyramid projetée), la période suivant le tour n (famine, tfg) *)
+  k  : K.t;      (* idem *)
+  pa : Politeia.t;     
+  p  : Partitio.Record.t;       (* caractérise la période tour(n-1) à tour(n) *)
+  luc: Partitio.t;   
+  d  : Dx.t; (* le tour (pyramid), la période(famine, tfg) *)
+  fd : Dx.t; (* le tour (n+1) (pyramid projetée), la période suivant le tour n (famine, tfg) *)
   }
 
 let null =
@@ -73,13 +74,14 @@ let null =
   origo = Rid.none,Date.Unknown;
   urbs  =(false,Rid.none);
   artes =[];
-  g =G.Natio.null;
+  g  = G.Natio.null;
   junctiones = Junctiones.Natio.null;
-  k =K.null;
-  pa=Pa.anarchy;
-  p =P.Record.null;
-  d =Dx.null;
-  fd=Dx.null;
+  k  = K.null;
+  pa = Pa.anarchy;
+  p  = P.Record.null;
+  luc= P.null;
+  d  = Dx.null;
+  fd = Dx.null;
   }
 
 (*let populatioFun plebs facultas = squot 2. plebs facultas*)
@@ -309,11 +311,12 @@ let update gn jn cl n(*natio*) pr luc p(*partitio*) pArtes =
   g = gn;
   junctiones = jn;
   artes = artes;
-  k = k;
-  pa= Pa.update (paNatio cl n);
-  p = pr;
-  d = d;
-  fd=fd;
+  k   = k;
+  pa  = Pa.update (paNatio cl n);
+  p   = pr;
+  luc = luc;
+  d   = d;
+  fd  = fd;
   }
   
 
@@ -398,6 +401,7 @@ let create rm im g nid civitas =
       k = k;
       pa= Pa.anarchy;
       p = Partitio.Record.null;
+      luc = Partitio.null;
       d = d;
       fd=fd;
     } in

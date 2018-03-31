@@ -7908,3 +7908,7 @@ calcul de luxus en fonction du taux de latifundium
 déplacement de la fun efficientia dans Rv.Fun
 
 226.ger.07.02H51
+calcul correct de dominium (en cours)
+Reste à transmettre lucrum.luxus
+
+226.ger.12.01H45
