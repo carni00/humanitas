@@ -38,6 +38,52 @@ type tegmen =
   | Turbs
 (* couvert regional effectif = produit cartésien des conditions naturelles et de la mise en valeur humaine *)
 
+(************************* MODULE Fun *******************************)
+
+module Fun = struct
+
+  let silva physis tegmen = match tegmen with
+    | Turbs
+    | Tmine                   ->  0
+    | Pasture 
+    | Desertum R.Steppe       ->  4 + physis
+    | Fields_and_pasture
+    | Fields                 
+    | Irrigation              -> 10 + physis / 2
+    | Desertum (R.Grassland _)-> 10 + physis
+    | Fields_and_woods        -> 12 + physis 
+    | Desertum (R.Woodland _) -> 16 + physis
+    | Desertum (R.Forest _)   -> 20 + physis
+    | _                       ->  0 + physis
+  (* densité forestière *)
+
+  open Tfloat
+
+  let chorability ?inst:(inst=0.) tegmen = match tegmen with
+    | Desertum (R.Forest   R.Deciduous) 
+    | Desertum (R.Forest   R.TropicalF) -> ((Std.cut 0. 100. (inst -  50.)) / 2.)
+    | Desertum (R.Forest   R.RainF    ) -> ((Std.cut 0. 100. (inst - 100.)) / 2.)
+    | Desertum (R.Woodland R.TropicalF) (* Mexique et Nouvelle Guinée sont agricoles en 4000 BCE *)
+    | Desertum (R.Woodland R.Deciduous) (* Europe et Plateau andin sont agricoles en 4000 BCE *)
+    | Desertum (R.Grassland _)
+    | Desertum R.Steppe
+    | Fields
+    | Fields_and_woods
+    | Fields_and_pasture 
+    | Irrigation
+    | Pasture     
+    | Turbs        -> 100.
+    | _           ->   0.
+
+  let isFarmable ?inst:(inst=0.) tegmen = (chorability ~inst tegmen > 0.)
+  (* == la regio est-elle susceptible d’appartenir à la chora ? *)
+  (* Oui, is_farmable dépend du tegmen : couvert végétal réel, et non du climax *)
+
+  let efficientia hosp inst = 0.6 + 0.01 * floor hosp + 0.01 * floor inst
+
+end
+
+
 
 (************************* MODULE INCOLA *******************************)
 
@@ -175,12 +221,7 @@ module Incola = struct
 
 end
 
-(*****************************************************************************)
-
-type contents =
-  | Desertum_for of int
-  | Incol        of Incola.t
-
+(******************** MODULE BROUILLARDS *************************)
 
 module Brouillards = struct
   type t = int
@@ -193,6 +234,13 @@ module Brouillards = struct
 end
 
 (** brouillards de guerre == visibilité de cette regio pour chacune des natio *)
+
+(**************************** MODULE RV **************************************)
+
+type contents =
+  | Desertum_for of int
+  | Incol        of Incola.t
+
 
 type t = {
   dominus   : nid;      (* propriétaire *)
@@ -250,10 +298,11 @@ let plebs       rv = match rv.contents with
   | Incol        i -> Incola.plebs i
 let brouillards rv = rv.brouillards
 
-module Fun = struct
+let instrumentum rv = match rv.contents with
+| Desertum_for n -> 0.
+| Incol        i -> Incola.instrumentum i
 
-
-  let tegmen hydros climax contents = match contents, hydros with 
+let tegmenFun hydros climax contents = match contents, hydros with 
     | Incol i, _                -> Incola.tegmen climax (Incola.oikos i)
     | Desertum_for t, R.Dry
     | Desertum_for t, R.River _ ->  ( match climax with
@@ -269,54 +318,9 @@ module Fun = struct
     | _                                              -> Hydros hydros
     (* tegmen function*)
 
-  let silva physis tegmen = match tegmen with
-    | Turbs
-    | Tmine                   ->  0
-    | Pasture 
-    | Desertum R.Steppe       ->  4 + physis
-    | Fields_and_pasture
-    | Fields                 
-    | Irrigation              -> 10 + physis / 2
-    | Desertum (R.Grassland _)-> 10 + physis
-    | Fields_and_woods        -> 12 + physis 
-    | Desertum (R.Woodland _) -> 16 + physis
-    | Desertum (R.Forest _)   -> 20 + physis
-    | _                       ->  0 + physis
-  (* densité forestière *)
-
-  open Tfloat
-
-  let chorability ?inst:(inst=0.) tegmen = match tegmen with
-    | Desertum (R.Forest   R.Deciduous) 
-    | Desertum (R.Forest   R.TropicalF) -> ((Std.cut 0. 100. (inst -  50.)) / 2.)
-    | Desertum (R.Forest   R.RainF    ) -> ((Std.cut 0. 100. (inst - 100.)) / 2.)
-    | Desertum (R.Woodland R.TropicalF) (* Mexique et Nouvelle Guinée sont agricoles en 4000 BCE *)
-    | Desertum (R.Woodland R.Deciduous) (* Europe et Plateau andin sont agricoles en 4000 BCE *)
-    | Desertum (R.Grassland _)
-    | Desertum R.Steppe
-    | Fields
-    | Fields_and_woods
-    | Fields_and_pasture 
-    | Irrigation
-    | Pasture     
-    | Turbs        -> 100.
-    | _           ->   0.
-
-  let isFarmable ?inst:(inst=0.) tegmen = (chorability ~inst tegmen > 0.)
-  (* == la regio est-elle susceptible d’appartenir à la chora ? *)
-  (* Oui, is_farmable dépend du tegmen : couvert végétal réel, et non du climax *)
-
-  let efficientia hosp inst = 0.6 + 0.01 * floor hosp + 0.01 * floor inst
-
-end
 
 
-let instrumentum rv = match rv.contents with
-| Desertum_for n -> 0.
-| Incol        i -> Incola.instrumentum i
-
-
-let tegmen ?rv:(rv=null) r = Fun.tegmen  (R.hydros r) (R.climax r) (contents rv)
+let tegmen ?rv:(rv=null) r = tegmenFun  (R.hydros r) (R.climax r) (contents rv)
 let silva  ?rv:(rv=null) r = Fun.silva (R.physis r) (tegmen ~rv r ) 
 let is_farmable ?rv:(rv=null) r = Fun.isFarmable ~inst:(instrumentum rv) (tegmen ~rv r )
 let facultas r rv = Incola.facultas (R.area r) (R.hospitalitas r) (instrumentum rv) (tegmen ~rv r ) 

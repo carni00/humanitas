@@ -7912,3 +7912,6 @@ calcul correct de dominium (en cours)
 Reste à transmettre lucrum.luxus
 
 226.ger.12.01H45
+natio.luc
+
+226.ger.12.11H39
