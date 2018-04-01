@@ -7915,3 +7915,6 @@ Reste à transmettre lucrum.luxus
 natio.luc
 
 226.ger.12.11H39
+Rv : déplacement du module Fun
+
+226.ger.12.14H10

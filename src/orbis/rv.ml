@@ -170,8 +170,11 @@ module Incola = struct
       | _ -> oikos ),false)
       (* returns the next oikos and a boolean : wether it is a new possible civitas *)
 
-    let dominium fides lux rs tegmen eff d = match d with
-      | Mir when fides > 0.20 && tegmen == Turbs -> Latifundium
+    let dominium natioPlebs fides lux rs tegmen eff d = 
+      let luxRate = lux / natioPlebs in (* lucrum.lux / plebs = env [0..1] *)
+      match d with
+      | Mir when fides > 0.20 && tegmen == Turbs && Random.float 32. < fides -> Latifundium
+      | Mir when fides > 0.20 && eff > 1.20 && Random.float (rs / 1024.) < (luxRate * eff)  -> Latifundium
         
       | _ -> d
     (** next dominium *)

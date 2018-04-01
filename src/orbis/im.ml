@@ -228,7 +228,7 @@ let update e rm im j (na:natio Nia.t) =
       let ins   = Rvi.Next.instrumentum (Rv.instrumentum rv) (artes na i) (sophia na i) in
       let oikos, new_vicus = Rvi.Next.oikos r (p_oik) tegmen  plebs ins (agriCopia na i) in
       let eff   = Rv.Fun.efficientia (R.hospitalitas r) ins in
-      let dominium = Rvi.Next.dominium (fides na i) (luxus na i) rs tegmen eff (Rvi.dominium incola) in
+      let dominium = Rvi.Next.dominium (natioPlebs na i) (fides na i) (luxus na i) rs tegmen eff (Rvi.dominium incola) in
       let incola = Rvi.make plebs i oikos dominium ins in
       if new_vicus then vlr := ( (rid,incola)::(!vlr) ) ;
       Rv.Incol (incola) in
