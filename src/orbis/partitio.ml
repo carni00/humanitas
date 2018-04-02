@@ -343,6 +343,7 @@ let primary (n:natio) =
   let eo (*e_oppressio*) = n.pp.oppressio * Ars.eff n.artes Ars.MET * Ars.eff n.artes Ars.GUN in
   (* valeur : oppressio effective / fructus.oppressio *)
   let alien = (u-lab) * (cut 0. u ( n.fides ** 0.5 )) in
+(*  let alien = cut 0. (u - lab) (n.fides ** 0.5) in : résultat absurde : fides détruit la civilisation *)
   let cMil = civicMilitaria n.g lab alien n.libertas n.politeia n.agriCopia 0. in
   let sap (*sapientia*) = max 0. (u - lab - max (nl-lab) (alien + cMil + eo) ) in
   let lux = alien * ((cut 0. u n.latifundium) ** 2.) in

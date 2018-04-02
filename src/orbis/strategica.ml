@@ -149,8 +149,15 @@ let poleis s d n pil =
   tactic_list  = poleis_tactic d n pil;
   }
 
-let a_poleis d n pil = poleis ( Stratiotikon.init 5 5 0 ) d n pil
-let d_poleis d n pil = poleis ( Stratiotikon.init 9 1 0 ) d n pil
+let a_poleis d n pil = 
+  let open Tfloat in
+  let p = Natio.partitio n in
+  let hum = Partitio.humanitas p in
+  let str = Partitio.stratiotikon p in
+  let rel = iof (10. * (cut 0. u (0.3 * hum / str ))) in
+  poleis ( Stratiotikon.init (10 -- rel) rel 0 ) d n pil
+
+let d_poleis d n pil = poleis ( Stratiotikon.init 10 0 0 ) d n pil
 
 let republic d n pil = 
   {
