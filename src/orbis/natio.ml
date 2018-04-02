@@ -321,28 +321,6 @@ let update gn jn cl n(*natio*) pr luc p(*partitio*) pArtes =
   }
   
 
-(*let update (rm, rs, j, im, g, fr) id n(*natio*) p(*partitio*) prl = n
-(* revenus effectifs de l'année passée *)
-  and lostRatio = G.lostRatio g j id
-(* proportion de la chora occupée par des nationes ennemies *)
-  and warRatio = G.warRatio g j id in
-(* proportion de nationes ennemies parmi les proximae *)*)
-(*  let d = Dx.v n.d e.labor n.k.sophia n.k.fides n.c.copia (iof n.k.plebs) p.militaria warRatio lostRatio in*)
-(* situation démog au tour n, fonction des naissances et décès de l'année passée *)
-(*  let artes = artes (n.artes, n.k.sophia, (iof n.k.instrumentum), e.sapientia, (iof n.k.plebs), prl) in*)
-(* artes au tour n, fonction des découvertes faites l'année passée *)
-(*  let k = K.v (n.k, n.p, n.artes) (p, e) (Dx.pyramid d, artes, lostRatio) in*)
-(* capitaux au tour n *)
-(*  let c = computation rm rs im g id k.instrumentum e.militaria (iof k.plebs) in*)
-(* données supplémentaires *)
-(*  {
-  n with
-  p = p;
-  d = d;
-  artes = artes;
-  k = k;
-  c = c;
-  }*)
 (* Ordre des calculs : 
 
 1. Productions effectives de l'année précédente, en fonction des capitaux et technologies disponibles au tour (n-1), et de la partitio réalisée durant cette année.

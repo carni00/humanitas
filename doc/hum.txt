@@ -7918,3 +7918,6 @@ natio.luc
 Rv : déplacement du module Fun
 
 226.ger.12.14H10
+extension du Latifundium
+
+226.ger.13.12H53

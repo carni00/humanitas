@@ -521,39 +521,6 @@ va déterminer la probabilité de maintien du régime social ou de révolution s
 * V. Du devenir des empires *
 *******************************
 
---- 28 Nivôse an 217 DDM 6 Floréal an 217
- 
-Fides & Seditio : le devenir de l’empire
-
-Fides mesure l’aptitude d’une natio à servir un empire.
-
-Deux processus génèrent fides : la production religio, pour toute la population,
-et le fait de servir l’empire, pour tous ses serviteurs.  Ainsi, toutes les
-productions impériales produisent de la fides, mais en diverses proportions.
-
-Toute *production impériale (religio,  militaria, oppressio et luxus) génère une
-demi-production effective de religio.  On remarque que cette production supp est
-affectée par le nombre de producteurs mais non par les facteurs de productivité
-de l’affectatio religio.
-
-Rappelons que le spolium vaut au plus fides, augmenté de l’oppressio effectve du
-tour précédent.
-
-Toute *affectatio impériale, parce qu’elle est un gaspillage de la capacité
-sociale, accroît également le capital seditio : l’aptitude à l’insurrection.
-Toute *affectatio impériale génère une demi-production effctive de capital
-seditio.  Enfin, l’oppressio effective génère une production effective
-équivalente de capital seditio.
-
-Il y a risque d’insurrection quand seditio dépasse 30%.  L’insurrection est
-victorieuse ssi seditio dépasse 50%.  La défaite éventuelle de l’insurrection
-vaut réduction de seditio et de plebs (massacre des insurgés).  L’existence
-d’une forte minorité séditieuse n’est donc pas sans coût.
-
-On remarque que religio est très nettement la production qui produit le plus de
-fides, et ce d’autant plus que la technologie est développée, et le moins de
-seditio.
-
 --- 30 prairial an 217
 *** 24 fructidor an 224
 
@@ -583,28 +550,33 @@ avant la disparition de l’empire.
   donc de militaria, est menacée.  L’empire est donc également menacé par les
   défaites militaires etc.
 
-Avant cette option, l’empire doit craindre une révolution politique. 
+Avant cette option, l’empire doit craindre une révolution sociale. 
 
 *** 18 Messidor an 217
+DDM 13 germinal an 226
 
-De la révolution politique
+De la révolution sociale
 
-Seditio désigne la tentative d’anihilation de l’empire et, par extension, le
-capital rendant probable cette éventualité.
+Seditio désigne l’opposition aux régimes aristocratiques.
+Lorsque sedition dépasse un certain stade, des révoltes peuvent éclater.
+Le niveau de révolte est fonction de seditio.
+En deça d’un certain niveau, la révolte est écrasée ; il n’en résulte que
+quelques pertes en hommes et en capital.
 
-Cette éventualité n’est jamais certaine. Elle est jouée aux dés chaque tour.
-Par contre, la génération du capital seditio répond à des critères certains :
+Au delà d’un certain niveau de seditio (0.5), chaque tour, le pouvoir peut
+tomber entre les mains de nouvelles institutions démocratiques (boulê).
+Les latifundii sont supprimés ; le spolium n’est plus versé ; le financement
+de religio n’est plus assuré.
 
+La génération du capital seditio répond à des critères certains :
+
+- le niveau du luxus
 - le niveau du spolium
-- le mode de prélèvement (oppressio plutôt que religio) voire
-- le contenu du spolium (militaria moins que le reste)
+- le niveau d’oppressio
 - la famine
 
-L’issue d’une seditio est également certaine. Elle est fructueuse ssi le capital
-seditio est supérieur à 50%.
+(mil + rel + oti)/2 + lux + opp×2 + (u - dxCopia)
 
-Les conditions favorisant la probabilité de sedito restent à débattre.  idée :
-capital seditio >30%
 
 --- 16 Nivose an 213
 DDM 6 ventose an 220
