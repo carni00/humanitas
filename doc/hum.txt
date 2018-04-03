@@ -7927,3 +7927,6 @@ sedition : MAJ humanopaedia
 les poleis aristocratiques ont un objectif de religio/humanitas
 
 226.ger.14.19H15
+oppressio : maj
+
+226.ger.14.19H48
