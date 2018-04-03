@@ -72,6 +72,7 @@ type natio = {
   agriCopia : float;
   ususList : UsusList.t;
   pp : t;
+  lucrum : t;
   }
 (** données de la natio qui déterminent le calcul d’une partitio *)
 

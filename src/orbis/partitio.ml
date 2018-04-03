@@ -127,6 +127,7 @@ type natio = {
   agriCopia   : float;
   ususList    : UsusList.t;
   pp          : t;
+  lucrum      : t;
   }
 (* données de la natio qui déterminent le calcul d’une partitio *)
 
@@ -309,18 +310,20 @@ let resistance_a_l_occupation g centralCoef =
   occupation_taux * (u + centralCoef)
 
 
-let civicMilitaria gn lab alien libertas politeia agriCopia warCoef =
-  let centralCoef = if Politeia.is_centralized politeia then u else 0. in
-  (* seules les politeia bureaucratiques peuvent utiliser l’armée pour s’approprier des terres à coloniser *)
-  let f x = (2. ** (x * 10.) )    (* chaque dixième d'agriCopia augmente d’un facteur 2 le résultat*)
-  and g x = (8. ** (x * 10.) ) in
-  let civicMilitaria =
-  (* protection_des_recoltes *)                0.001 * f (1.4 - agriCopia) 
-  (* politique_coloniale     *)+ centralCoef * 0.001 * g (1.2 - agriCopia) 
-  (* defense_du_territoire   *)+ (resistance_a_l_occupation gn centralCoef) in
-  min3 (u-lab-alien) libertas civicMilitaria
-  (* la survie passe avant la milice civique *)
-  (* la milice civique n’est assuré que par les peuples libres *)
+let civicMilitaria gn hum spolium libertas politeia agriCopia warCoef =
+  let cMmax = hum-spolium in
+   if cMmax <= 0. then 0. else
+    let centralCoef = if Politeia.is_centralized politeia then u else 0. in
+    (* seules les politeia bureaucratiques peuvent utiliser l’armée pour s’approprier des terres à coloniser *)
+    let f x = (2. ** (x * 10.) )    (* chaque dixième d'agriCopia augmente d’un facteur 2 le résultat*)
+    and g x = (8. ** (x * 10.) ) in
+    let civicMilitaria =
+    (* protection_des_recoltes *)                0.001 * f (1.4 - agriCopia) 
+    (* politique_coloniale     *)+ centralCoef * 0.001 * g (1.2 - agriCopia) 
+    (* defense_du_territoire   *)+ (resistance_a_l_occupation gn centralCoef) in
+    min3 cMmax libertas civicMilitaria
+    (* la survie passe avant la milice civique *)
+    (* la milice civique n’est assuré que par les peuples libres *)
 (*  défense anarchique des récoltes et des terres, et conquete de nouvelles terres vierges (républiques) *) 
 
 
@@ -340,14 +343,16 @@ let primary (n:natio) =
   let max_labor = n.facultas / ( n.plebs * fr * n.efficientia ) in
   (* valeur max de labor de fait de l’insufisance possible des terres disponibles (sans considération de la main d’œuvre disponible *)
   let lab (*labor*) = min3 u (nl*1.1) (max_labor) in
-  let eo (*e_oppressio*) = n.pp.oppressio * Ars.eff n.artes Ars.MET * Ars.eff n.artes Ars.GUN in
+(*  let eo (*e_oppressio*) = n.pp.oppressio * Ars.eff n.artes Ars.MET * Ars.eff n.artes Ars.GUN in*)
   (* valeur : oppressio effective / fructus.oppressio *)
-  let alien = (u-lab) * (cut 0. u ( n.fides ** 0.5 )) in
+  let hum  = u - lab in
+  let alien= hum * (cut 0. u ( n.fides ** 0.5 )) in
+  let spol = min u (alien + 2. * n.lucrum.oppressio / n.plebs) in
 (*  let alien = cut 0. (u - lab) (n.fides ** 0.5) in : résultat absurde : fides détruit la civilisation *)
-  let cMil = civicMilitaria n.g lab alien n.libertas n.politeia n.agriCopia 0. in
-  let sap (*sapientia*) = max 0. (u - lab - max (nl-lab) (alien + cMil + eo) ) in
+  let cMil = civicMilitaria n.g hum spol n.libertas n.politeia n.agriCopia 0. in
+  let sap (*sapientia*) = max 0. (hum - max (nl-lab) (spol+cMil)) in
   let lux = alien * ((cut 0. u n.latifundium) ** 2.) in
-  let oti = max 0. (u-lab-sap-cMil-lux) in (* soustraction de float, on vérifie que résultat >= 0 *)
+  let oti = max 0. (hum-sap-cMil-lux) in (* soustraction de float, on vérifie que résultat >= 0 *)
 (* désoeuvrement primaire : ie à moins que l’empire n’en fasse qqchose *)  
   List.fold_left set_att null [(LAB,lab);(SAP,sap);(LUX,lux);(MIL,cMil);(OTI,oti)]
 (* découpage primaire : ie avant stratiotikon,  de la capacité sociale *)

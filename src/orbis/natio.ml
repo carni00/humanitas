@@ -232,6 +232,7 @@ let pNatio n =
   P.g = geographia n;
   P.pyramid = pyramid n;
   P.pp = partitio n;
+  P.lucrum = lucrum n;
   P.artes = artes n;
   P.politeia = politeia n;
   P.plebs = plebs n;

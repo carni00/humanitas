@@ -155,7 +155,7 @@ let a_poleis d n pil =
   let hum = Partitio.humanitas p in
   let str = Partitio.stratiotikon p in
   let rel = iof (10. * (cut 0. u (0.3 * hum / str ))) in
-  poleis ( Stratiotikon.init (10 -- rel) rel 0 ) d n pil
+  poleis ( Stratiotikon.init (9 -- rel) rel 1 ) d n pil
 
 let d_poleis d n pil = poleis ( Stratiotikon.init 10 0 0 ) d n pil
 
