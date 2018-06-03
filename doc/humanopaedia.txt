@@ -47,7 +47,7 @@ Bilan des acquis de Testart et alii:
   - l’État apparaît avant l’écriture au moyen-orient
   - l’existence de l’État précède toujours la formation de la ville
   - l’esclavage précède l’État
-- l’adoption de l’économie agricole dans la région du Jourdain (9500 - 7500) voient le développement des villes (Jéricho)
+- l’adoption de l’économie agricole dans la région du Jourdain (9500 - 7500) voit le développement des villes (Jéricho)
   - segmentation de la population par profession
   - maisons rectangulaires non enterrées
   - hiérarchie sociale (Jacques Cauvin) ==> l’État de Testart ?
@@ -261,7 +261,7 @@ diminuée du luxus : le stratiotikon.
 
 ***
 
-De l’origine des empires
+De l’origine des empires [ à coder ]
 
 L’adoption d’un gouvernement centralisé exige la découverte préalable de
 l’écriture, et a pour objet d’augmenter l’effacité des forces armées, 
@@ -386,34 +386,31 @@ Cela suffit pour avoir une oppressio plus efficace à court terme.
 La production "Sapientia" est directement entravée par oppressio, et indirectement par religio, via fides.
 
 --- 16 germinal an 218
-
+DDM 15 prairial an 226
 Religio versus Oppressio
 
-Les empires disposent de deux moyens de produire du spolium.  Pls éléments
-peuvent les amener à préférer dans une certaine mesure religio ou oppressio.
-- Religio produit (plus que les autres affectatio) un capital : fides, sur
-  lequel on peut se reposer en cas de difficulté.
-- Oppressio est immédiatement efficace, ce qui est utile pour faire face à une
-  urgence, par exemple une guerre subie.
-- Une des deux affectatio peut être objectivement plus efficace du fait de
-  l’état des artes, voire du climat idéologique du moment.
-- Certains stratèges pourraient avoir des préférences a priori pour religio ou
-  oppressio.
+Il existe deux moyens de produire du spolium.
+Pls éléments peuvent amener à préférer dans une certaine mesure religio ou oppressio :
+- Religio produit (plus que les autres affectatio) un capital : fides, sur lequel on peut se reposer en cas de difficulté, 
+- L’abus d’oppressio provoque des révoltes
+- L’efficacité de religio rapportée aux dépenses de religio est décroissante
+- Oppressio est immédiatement efficace, ce qui est utile pour faire face à une urgence, par exemple une guerre subie.
+- L’efficacité de religio et d’oppressio sont affectées par les artes (mais les mêmes)
+- L’efficacité de religio est affectée par les merveilles
+- Certains stratèges pourraient avoir des préférences a priori pour religio ou oppressio.
 
 --- 29 prairial an 217
 
 Des limites du développement du spolium
 
-1. le spolium suppose une population en mesure de travailler, donc vivante, donc
-nourrie.  Tout développement aux dépens de labor est donc inefficace, mais
-néanmoins possible (famine «politique»).
+1. le spolium suppose une population en mesure de travailler, donc vivante, donc nourrie.
+Tout développement aux dépens de labor est donc inefficace, mais néanmoins possible (famine «politique»).
 
-2. la valeur brute du spolium dépend de la productivité du travail/du capital
-instrumentum.  Celui-ci dépend à pls titres, ± directs, de sapientia.  Son
-développement en proportion de la capacité sociale, aux dépens de sapientia,
-peut donc lui être globalement dommageable quant à sa valeur absolue.  Au-delà
-d’un certain seuil, le spolium produit de la stagnation, voire de la régression
-économique.
+2. la valeur brute du spolium dépend de la productivité du travail/du capital instrumentum.
+Celui-ci dépend à pls titres, ± directs, de sapientia.
+Son développement en proportion de la capacité sociale, aux dépens de sapientia, peut donc lui être globalement
+ dommageable quant à sa valeur absolue.  
+Au-delà d’un certain seuil, le spolium produit de la stagnation, voire de la régression économique.
 
 
 *** 5 floreal an 224
@@ -433,10 +430,10 @@ progressivement les regiones voisines.
 
 Le passage en latifundium requiert 
 - efficienta regionale > 1.40
-- fides > 0.2
+- fides (nationale) > 0.2
 Et est favorisé par :
 - taux de luxus national élevé (lucrum.luxus rapporté à la plèbe)
-- superficie regio faible (adaptation résolution)
+- superficie regio faible (adaptation à la résolution de la carte)
 
 
 
@@ -445,41 +442,41 @@ DDM 19 frimaire an 226
 
 De luxo
 
-Il avait ete prevu que luxus augmente au cours de la partie afin d'accroitre le
-niveau de diff. Par ailleurs, l'idee que luxus s'accroisse regulierement entre
-deux revolutions ne semblait pas absurde. La fonction d'accroissement n'avait
-cependant pas ete discutée. 
+Il avait ete prevu que luxus augmente au cours de la partie afin d'accroitre le niveau de diff.
+Par ailleurs, l'idee que luxus s'accroisse regulierement entre deux revolutions ne semblait pas absurde.
+La fonction d'accroissement n'avait cependant pas ete discutée. 
 
-Luxus est une partie croissante d’alienatio. La cité aristocratique, puis le 
-prince développent alienatio afin d’accroître leur emprise sur la capacité 
-sociale.
+Luxus est une partie croissante d’alienatio. 
+La cité aristocratique, puis le prince développent alienatio afin d’accroître leur emprise sur la capacité sociale.
 L’alienatio est progressivement affecté au luxus.
 
-Luxus ne peut jamais dépasser alienatio, il est par conséquent exprimé comme
-un taux d’alienatio.
+Luxus ne peut jamais dépasser alienatio, il est par conséquent exprimé comme un taux d’alienatio.
 
-Le prince peut réduire le taux de luxus dans la capacité sociale en réduisant
-alienatio, mais il ne peut réduire le taux de luxus dans alienatio.
+Le prince peut réduire le taux de luxus dans la capacité sociale en réduisant alienatio,
+ mais il ne peut réduire le taux de luxus dans alienatio.
 
-Le luxus est extrait dans les regiones latifundiaires seules. La progression
-du latifundium réduit les ressources impériales.
+Le luxus est extrait dans les regiones latifundiaires seules. 
+La progression du latifundium réduit les ressources impériales.
+Il est annulé si le latifundium disparait dans toute la nation (révolution sociale).
 
-Le taux de luxus dans la capacité nationale est par conséquent égal au produit
-de trois valeurs :
+Le taux de luxus dans la capacité nationale est par conséquent égal au produit de trois valeurs :
 - l’alienatio nationale au tour t
-- le taux de latifundium : la part des regiones caractérisée par le latifundium,
-pondérée par leur plebs.
-- l’indice de luxus : le taux de luxus dans alienatio dans les regiones latifundiaires.
+- le taux de latifundium : la part des regiones caractérisée par le latifundium, pondérée par leur plebs.
+- l’indice de luxus, c-à-d le taux de luxus prélevé sur l’alienatio dans les regiones latifundiaires.
 
 L’indice de luxus est national. Il vaut initialement zéro, et peut croître jusqu’à 1.
-(la pente de l’aristocratie est de prendre toute l’alienatio, ce qui ne préjuge pas
-du consentement de la population à cette évolution)
+(la pente de l’aristocratie est de prendre toute l’alienatio, ce qui ne préjuge pas du consentement
+ de la population à cette évolution)
+
 Il croît à partir du moment ou le latifundium existe (dans la chora nationale).
-Il est égal au taux de latifundium :
+Il est plafonné par le taux de latifundium :
 Lorsque le taux de latifundium est de 50%,
--> l’indice de luxus vaut 50%,
--> le taux de luxus dans l’alienation nationale vaut 50% × 50% = 25%
-Il est annulé si le latifundium disparait dans toute la nation (révolution sociale).
+-> l’indice de luxus tend vers 50%,
+-> le taux de luxus dans l’alienation nationale tend vers 50% × 50% = 25%
+
+Le taux de croissance de luxus est modulé par le niveau de difficulté.
+Le taux de croissance de luxus est anormalement affabli pour les niveaux de difficulté facile, de sorte
+qu’en mode facile, un empire peut aisément tenir plusieurs millénaires.
 
 
 
@@ -558,7 +555,7 @@ DDM 13 germinal an 226
 De la révolution sociale
 
 Seditio désigne l’opposition aux régimes aristocratiques.
-Lorsque sedition dépasse un certain stade, des révoltes peuvent éclater.
+Lorsque seditio dépasse un certain stade, des révoltes peuvent éclater.
 Le niveau de révolte est fonction de seditio.
 En deça d’un certain niveau, la révolte est écrasée ; il n’en résulte que
 quelques pertes en hommes et en capital.
@@ -1382,8 +1379,12 @@ L’objectif « idéologique » devrait pouvoir être modulé au vu de ces éven
 
 
 Liste des questions secondaires:
-* les migrations & deportations les artes militaires les niveaux de difficulte
-* les merveilles
+* les niveaux de difficulte > modulation du taux de luxus (normal = réaliste,...)
+* les merveilles 
+  > générée par une affectatio supplémentaire
+  > bonus réalistes (infrastructures + prestige)
+* les artes militaires
+* les migrations & deportations
 
 à coder : poids de luxus sur les terres arables
 

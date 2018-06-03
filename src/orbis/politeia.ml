@@ -84,18 +84,6 @@ open Tfloat
 let famine agriCopia = 10. ** (10. * (1.2 - agriCopia))
 (* pression du manque de terres sur les changements politiques *)
 
-(*let next_dominus n = 
-  match n.p.dominus, n.p.arkhe with 
-  | Demos, Anarchy -> let pnb = Tlist.len n.pil in
-                      if pnb > 0 
-                      && n.agriCopia < 1.2 
-                      && let x = foi pnb * (if n.metallurgy then 10. else u) * famine n.agriCopia
-                         in Random.int 1000 < iof x
-                      then Aristoi (* Passage en feudalism : on charge les meilleurs guerriers de fournir
-                                      par les armes le blé et la terre qui font défaut *)
-                      else n.p.dominus
-  | _              -> n.p.dominus*)
-
 
 let next_arkhe n =
   match (dominus n.p) , n.p.arkhe with 
@@ -106,6 +94,9 @@ let next_arkhe n =
                       else Anarchy
   | _    , arkhe   -> arkhe
 
+
+let seditio n = 
+(* (mil + rel + oti)/2 + lux + opp×2 + (u - dxCopia) *)
 
 let update n = 
   {
