@@ -95,7 +95,7 @@ let next_arkhe n =
   | _    , arkhe   -> arkhe
 
 
-let seditio n = 
+let seditio n = 0
 (* (mil + rel + oti)/2 + lux + opp×2 + (u - dxCopia) *)
 
 let update n = 
