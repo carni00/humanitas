@@ -26,7 +26,9 @@ latifundium
 calculer un objectif de religio en % de la civilisation et non du stratiotikon (sans quoi le luxe bouffe religio et donc
 spolium)
 
-pallier à l’augmentation du luxe par le seul moyen possible : oppressio
+croissance lente de l’indice de luxus
+pallier à l’augmentation du luxe - ou pas - par le seul moyen possible : oppressio
+seditio -> révolution sociale
 
 si occupation, coder les passages en latifundium en fonction de fides
 coder les pertes militaires et civiles consécutives des guerres

@@ -549,22 +549,12 @@ provoque la famine. À terme, la valeur brute du spolium, donc de militaria, est
 L’empire est donc également menacé par les défaites militaires etc.
 
 Avant cette option, l’empire doit craindre une révolution sociale. 
+ 
+***
 
-*** 18 Messidor an 217
 DDM 13 germinal an 226
 
-De la révolution sociale
-
-Seditio désigne l’opposition aux régimes aristocratiques.
-Lorsque seditio dépasse un certain stade, des révoltes peuvent éclater.
-Le niveau de révolte est fonction de seditio.
-En deça d’un certain niveau, la révolte est écrasée ; il n’en résulte que
-quelques pertes en hommes et en capital.
-
-Au delà d’un certain niveau de seditio (0.5), chaque tour, le pouvoir peut
-tomber entre les mains de nouvelles institutions démocratiques (boulê).
-Les latifundii sont supprimés ; le spolium n’est plus versé ; le financement
-de religio n’est plus assuré.
+De l’opposition aux régimes aristocratiques.
 
 La génération du capital seditio répond à des critères certains :
 
@@ -576,7 +566,37 @@ La génération du capital seditio répond à des critères certains :
 (mil + rel + oti)/2 + lux + opp×2 + (u - dxCopia)
 
 
-***
+*** 18 Messidor an 217
+DDM 19 prairial an 226
+
+De la révolution sociale
+
+Lorsque seditio dépasse un certain stade, des révoltes peuvent éclater.
+Le niveau de révolte est fonction de seditio.
+En deça d’un certain niveau, la révolte est écrasée ; il n’en résulte que
+quelques pertes en hommes et en capital.
+
+Au delà d’un certain niveau de seditio (0.5), les révoltes peuvent
+devenir révolution sociale.
+
+La révolution sociale est le remplacement du dominium latifundium par 
+le dominium minifundium dans les regiones latifundiaires.
+Il en résulte la suppression du luxus dans la regio.
+
+Si le niveau d’oppressio est élevé, la révolution politique peut s’ajouter 
+à la révolution sociale.
+
+La révolution politique peut atteindre différents degrés :
+1- s’il existe un monarque : sa chute (et son remplacement par un conseil)
+2- s’il existe un pouvoir central national : sa suppression
+3- s’il existe des cités : la formation d’institutions démocratiques : boulê
+
+La formation d’une boulê est le niveau le plus radical de la révolution.
+L’existence d’une boulê autorise la formation d’un nouveau pouvoir national,
+mais interdit tant la monarchie que le latifundium.
+
+
+
 
 De la politique intérieure du stratège
 
@@ -598,43 +618,14 @@ Il est évident qu’un niveau de spolium nul ou trop élevé amène assez rapid
 ne réalisant aucun progrès technique le serait.  S’il existe un (ou pls) niveaux
 optimum de spolium, ils se situent nécessairement entre ces deux extrêmes.
 
-- L’idéologie du stratège
-
-On pourrait imaginer que chaque prince géré par l’IA ait une personnalité en la
-matière, on aurait des princes « fascistes » et des princes modérés.
-
-Le choix étant celui de la production militaire immédiate, ou bien la «
-recherche », le caractère du stratège pourrait être défini comme un objectif de
-ratio militaria / sapientia.  L’IA calculant à partir de ce ratio, et des
-impératifs que sont labor, luxus et les dépenses nécessaires à la réalisation du
-spolium, le niveau de spolium qui en résulte (tjrs comme objectif) et les
-dépenses nécessaires qu’il implique en termes d’oppressio et religio.
-
-- La modulation de l’objectif
-
-L’objectif « idéologique » devrait pouvoir être modulé au vu de ces éventualités
-:
-- au delà d’un certain niveau, le spolium réduit sapientia à ce point que la
-  productivité globale de la nation diminue.
-- au delà d’un certain niveau, le spolium engendre des révoltes de la plèbe,
-  dont la répression est coûteuse.  D’un autre côté, ces éventualités ne peuvent
-  dicter à elles-seules le niveau du spolium, car un minimum de militaria (à
-  apprécier précisément selon l’idéologie du prince) est nécessaire à la
-  défense, donc la survie de l’empire.  Bref, un barycentre doit être envisagé.
-  Notez que de telles contradictions n’apparaissent que chez les empires âgés,
-  dont le spolium est dévoré par le luxe.
-
-
-
 
 *************************************
 * IV. Des relations internationales *
 *************************************
 
 
---- 15 nivose an 214 DDM 8 frimaire an 218
-
-Des junctiones
+--- 15 nivose an 214 
+DDM 8 frimaire an 218
 
 Chaque natio dispose de la liste des ses voisines: les *proximae Chaque natio
 entretient avec chacune de ses proximae une *relatio type relatio = PAX | BELLUM
@@ -649,8 +640,6 @@ ont eu lieu
 ***
 
 DDM 4 frimaire an 226
-
-De junctionibus
 
 Les nationes peuvent être en contact (géographique) ou non.  Les nationes peuvent avoir
 signé un traité de paix, être en guerre, ou ne pas se faire la guerre, sans avoir signé de
@@ -687,29 +676,6 @@ revient au même) et de la technologie (là il y a une différence : une natio
 dépourvue de la navigatio ne peut conquérir des cases océanes mais peut traiter
 avec une natio possédant le débouché maritime)
 
-DDM 4 frimaire an 226
-
-Des tactiques
-
-Chaque natio a une tactique envers les autres nations et la terra incognita.
-type tactic = DEFENSIVE | OFFENSIVE | RETREAT.  La tactic par défaut est
-DEFENSIVE.  L’invasion d’une natio étrangère ou de la terra incognita commence
-lorsque La tactique est offensive
-
-Ceci implique que : 
-1. On peut attaquer une autre nation sans déclaration de guerre
-2. On peut attaquer la terra incognita bien qu’on ne puisse ni lui déclarer la guerre, ni
-signer de traité de paix.
-
---- 29 brumaire an 217
-
-Effet sur la superficie des imperii de la tactique *RETREAT
-
-- *RETREAT vis à vis de la terra incognita : toute regio de l'imperium, non
-  peuplée, voisine de regiones hors-imperium est abandonnée.
-- *RETREAT vis à vis de la natio n : toute regio de l'imperium, peuplée par la
-  natio n, voisine de regiones hors-imperium est abandonnée.
-
 --- 6 Germinal an 216
 DDM 4 frimaire an 226
 
@@ -744,6 +710,29 @@ La combinaison peace - offensive vaut attaque effective sans déclaration de gue
 (on peut s’attendre dans ce cas à une perte de réputation et à subir une déclaration de
 guerre en retour)
 
+DDM 4 frimaire an 226
+
+Des tactiques
+
+Chaque natio a une tactique envers les autres nations et la terra incognita.
+type tactic = DEFENSIVE | OFFENSIVE | RETREAT.  La tactic par défaut est
+DEFENSIVE.  L’invasion d’une natio étrangère ou de la terra incognita commence
+lorsque La tactique est offensive
+
+Ceci implique que : 
+1. On peut attaquer une autre nation sans déclaration de guerre
+2. On peut attaquer la terra incognita bien qu’on ne puisse ni lui déclarer la guerre, ni
+signer de traité de paix.
+
+--- 29 brumaire an 217
+
+Effet sur la superficie des imperii de la tactique *RETREAT
+
+- *RETREAT vis à vis de la terra incognita : toute regio de l'imperium, non
+  peuplée, voisine de regiones hors-imperium est abandonnée.
+- *RETREAT vis à vis de la natio n : toute regio de l'imperium, peuplée par la
+  natio n, voisine de regiones hors-imperium est abandonnée.
+
 
 
 ***
@@ -751,17 +740,16 @@ guerre en retour)
 
 --- 22 & 23 germinal an 210
 
+Nations, empires, conquêtes et tribut.
+
 Il faut distinguer 2 types de deplacements interN de valeur: le Pillage du
 travail (l'exploitation interN proprement dite) & pillage des ressources rares
 (qui a surtout une importance du fait de la rarete de ces ressources, et de leur
 inegale repartition sur la planete).
 
 
-
 --- 29 Messidor an 216
 DDM 12 frimaire an 226
-
-Nations, empires, conquêtes et tribut.
 
 L'expérience historique nous démontre que les frontières des imperii peuvent
 évoluer très rapidement, contrairement aux chôra. Ceci implique qu'une microcase
@@ -1412,9 +1400,39 @@ Liste des questions secondaires:
 * VII. De l’IA   *
 ******************
 
+
+- L’idéologie du stratège
+
+On pourrait imaginer que chaque prince géré par l’IA ait une personnalité en la
+matière, on aurait des princes « fascistes » et des princes modérés.
+
+Le choix étant celui de la production militaire immédiate, ou bien la «
+recherche », le caractère du stratège pourrait être défini comme un objectif de
+ratio militaria / sapientia.  L’IA calculant à partir de ce ratio, et des
+impératifs que sont labor, luxus et les dépenses nécessaires à la réalisation du
+spolium, le niveau de spolium qui en résulte (tjrs comme objectif) et les
+dépenses nécessaires qu’il implique en termes d’oppressio et religio.
+
+- La modulation de l’objectif
+
+L’objectif « idéologique » devrait pouvoir être modulé au vu de ces éventualités
+:
+- au delà d’un certain niveau, le spolium réduit sapientia à ce point que la
+  productivité globale de la nation diminue.
+- au delà d’un certain niveau, le spolium engendre des révoltes de la plèbe,
+  dont la répression est coûteuse.  D’un autre côté, ces éventualités ne peuvent
+  dicter à elles-seules le niveau du spolium, car un minimum de militaria (à
+  apprécier précisément selon l’idéologie du prince) est nécessaire à la
+  défense, donc la survie de l’empire.  Bref, un barycentre doit être envisagé.
+  Notez que de telles contradictions n’apparaissent que chez les empires âgés,
+  dont le spolium est dévoré par le luxe.
+
+
+
+
 --- 16 Nivôse
 
-De l'IA
+Du caractère du prince
 
 Il pourrait etre souhaitable d'attribuer un caractere predefini aux dirigeants
 les faisant preferer une "voie de developpement" imperiale.  Ie privilegier un
