@@ -7932,7 +7932,4 @@ oppressio : maj
 226.ger.14.19H48
 les cités aristocratiques développent oppressio pour compenser la perte en stratiotikon résultant du développement de luxus
 
-226.pra.15.15H33
-226.pra.15.15H34
-226.pra.17.22H27
-226.pra.21.09H02
+226.fru.08.09H24

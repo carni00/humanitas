@@ -373,7 +373,7 @@ let regio atelier rid =
   | Some civitas -> [
     line (Si.civitas (Civitas.civ civitas) (Civitas.nth civitas)) " " ;
     line "founded in"                   (Si.date (Civitas.origo civitas) ) ;
-    line "plebs"                        (Si.plebs (Civitas.plebs civitas) ) ;
+    line "urbani"                       (Si.plebs (Civitas.plebs civitas) ) ;
   
   
   ]
