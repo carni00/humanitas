@@ -45,9 +45,7 @@ type t =
   arkhe       : arkhe;
   }
 
-let dominus         p = match p.poleis with 
-                      | true  -> if p.boule then Demos else Aristoi
-                      | false -> if p.latifundium < 0.2 then Demos else Aristoi
+let dominus         p = if p.latifundium < 0.5 then Demos else Aristoi
 let is_aristocratic p = dominus p = Aristoi
 let is_democratic   p = dominus p = Demos
 let is_centralized  p = p.arkhe <> Anarchy
@@ -68,13 +66,13 @@ type natio =
 
 
 let to_string p = match dominus p, p.arkhe, p.poleis with
-| Demos,  Anarchy, false -> "Anarchy"
-| _    ,  Anarchy, false -> "Feudalism"
-| Demos,  Anarchy, true  -> "Democratic cities"
-| Aristoi,Anarchy, true  -> "Aristocratic cities"
-| Demos  ,Council, _     -> "Democratic republic"
-| Aristoi,Council, _     -> "Oligarchic republic"
-| _      ,Monarch, _     -> "Monarchy"
+| Demos,  Anarchy, _ -> "Anarchy"
+| _    ,  Anarchy, _ -> "Feudalism"
+(*| Demos,  Anarchy, true  -> "Democratic cities"*)
+(*| Aristoi,Anarchy, true  -> "Aristocratic cities"*)
+| Demos  ,Council, _ -> "Republic"
+| _      ,Council, _ -> "Plutocracy"
+| _      ,Monarch, _ -> "Monarchy"
 (*| _                      -> "unknown"*)
 
 let anarchy = { poleis = false; boule = false ; latifundium = 0. ; arkhe = Anarchy }
