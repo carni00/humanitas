@@ -126,7 +126,7 @@ let fines atelier nid =
 
   let box w strn = Box (foi w,  1., `right, S strn) in
   let void       = Box (   1.,  1., `left,  S " | " ) in
-  let lin5 a b c d e f = List (Columns, box 6 a :: List.fold_left (fun a b -> void :: box 4 b :: a) [] [f;e;d;c;b]) in
+  let lin5 a b c d e f = List (Columns, box 4 a :: List.fold_left (fun a b -> void :: box 4 b :: a) [] [f;e;d;c;b]) in
   let line t amp ple p = lin5 t (sof 3 amp) (sof 4 ple) (sof 0 (P.lab p)) (sof 0 (P.mil p)) (sof 0 (P.lux p)) in
   let linc t c       p = line t  c.Rv.superficies c.Rv.plebs  p          in (*line chora*)
   let linf t amp ple p = line t  (amp g)          (ple g)    (p luc nid) in
@@ -140,10 +140,10 @@ let fines atelier nid =
     linf " Chora "          Gn.choraAmp     Gn.plebs     Luc.factum  ;
     lin5 " ------------ "     "-------- "   "-------- " "-------- " "-------- " "-------- " ;
     ] ^^ damnList ^^ [
-    linf "Damnum summa"    Gn.funuSumAmp   Gn.funuSumPle Luc.damSum             ;
+    linf "Damnum sum."      Gn.funuSumAmp   Gn.funuSumPle Luc.damSum             ;
     lin5 " ------------ "     "-------- "   "-------- " "-------- " "-------- " "-------- " ;
     ] ^^ tribList ^^ [
-    linf "Tributum summa"  Gn.fineSumAmp   Gn.fineSumPle Luc.tribuSum              ;
+    linf "Tributum sum."    Gn.fineSumAmp   Gn.fineSumPle Luc.tribuSum              ;
     lin5 " ------------ "     "-------- "   "-------- " "-------- " "-------- " "-------- " ;
     linf " Imperium "       Gn.impAmp       Gn.impPle    Luc.lucrum                   ;
     ] )
@@ -158,8 +158,6 @@ let chora atelier nid =
 
   let box strn = Box (4.,  1., `right, S strn) in
   let void     = Box (1.,  1., `left,  S " | " ) in
-(*  let perc p f = Strn.percent (-2) (f p) in *)
-(*  let line a b         = List (Columns, [ box a; void; box b; ] ) in*)
   let lin6 a b c d e f = List (Columns, List.fold_left (fun a b -> box b :: void :: a) [box f] [e;d;c;b;a]) in
   let linc a c = lin6 a (sof   3  c.Rv.superficies) 
                         (sof ( 5) c.Rv.facultas)
