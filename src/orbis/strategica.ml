@@ -108,8 +108,8 @@ let anarchy d n pil =
   rogatio_list = Nil.empty;
   tactic_list  = 
     let tactic pid = 
-      if N.copia n < 0.80 then J.Offensive J.Conquest (* manque de terre grave *)
-      else if N.copia n < 1.0  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
+(*    if gn.terre_cultivable_adjacente == 0 then J.Offensive J.Conquest (* manque de terre grave *)*)
+      if N.copia n < 1.0  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
       (* attaque venant de l’étranger + manque de terre *)
       else J.Defensive in
     Nil.init (fun pid -> tactic pid) pil
@@ -119,8 +119,8 @@ let anarchy d n pil =
 
 let tactic_tw_nationes d n pil =
   let tactic pid = 
-    if N.copia n < 0.90 then J.Offensive J.Conquest
-    else if N.copia n < 1.0  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
+(*  if gn.terre_cultivable_adjacente == 0 then J.Offensive J.Conquest (* manque de terre grave *)*)
+    if N.copia n < 1.0  && Data.tactic d pid (N.nid n) == J.Offensive J.Conquest then J.Offensive J.Release
     else J.Defensive in
   Nil.init (fun pid -> tactic pid) pil
 (* tactique des cités envers les autres nations *)
@@ -167,8 +167,8 @@ let republic d n pil =
   stratiotikon = Stratiotikon.init 9 1 0;
   rogatio_list = Nil.empty;
   tactic_list  = poleis_tactic d n pil;
-
   }
+
 (*** FIXME : créer une IA républicaine  ***)
 
 
