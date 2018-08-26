@@ -50,6 +50,7 @@ let is_aristocratic p = dominus p = Aristoi
 let is_democratic   p = dominus p = Demos
 let is_centralized  p = p.arkhe <> Anarchy
 let is_civilized    p = p.poleis
+let has_boule       p = p.boule = true
 let arkhe           p = p.arkhe
 
 type natio =

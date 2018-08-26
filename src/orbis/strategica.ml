@@ -151,7 +151,13 @@ let a_stratiotikon n =
   let rel = iof (10. * (cut 0. u (0.3 * hum / str ))) in
   let opp = iof (10. * (cut 0. u (lux * hum / str ))) in
   let rel = min (9--opp) rel in
-  ( Stratiotikon.init (9--rel--opp) rel opp )
+  Stratiotikon.init (9--rel--opp) rel opp
+
+
+let d_stratiotikon n = 
+  let pa  = N.politeia n in
+  let rel = if Pa.has_boule pa then 0 else 1 in
+  Stratiotikon.init (10-rel) rel 0
 
 
 let a_poleis d n pil = 
@@ -164,7 +170,7 @@ let a_poleis d n pil =
 
 let d_poleis d n pil = 
   {
-  stratiotikon = Stratiotikon.init 9 1 0;
+  stratiotikon = d_stratiotikon n;
   rogatio_list = Nil.empty;
   tactic_list  = poleis_tactic d n pil;
   }
@@ -172,7 +178,7 @@ let d_poleis d n pil =
 
 let republic d n pil = 
   {
-  stratiotikon = Stratiotikon.init 9 1 0;
+  stratiotikon = d_stratiotikon n;
   rogatio_list = Nil.empty;
   tactic_list  = poleis_tactic d n pil;
   }

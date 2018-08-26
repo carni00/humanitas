@@ -53,6 +53,7 @@ val is_aristocratic : t -> bool
 val is_democratic   : t -> bool
 val is_centralized : t -> bool
 val is_civilized   : t -> bool
+val has_boule   : t -> bool
 val to_string : t -> string
 val dominus   : t -> dominus
 val arkhe     : t -> arkhe
