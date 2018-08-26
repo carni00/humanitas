@@ -31,41 +31,50 @@ Bilan des acquis de Testart et alii:
   - est suivie d’une période d’économie mixte (agriculture + chasse/cueillette) sédentaire
     - cas du proche orient : 12 000 BC -> 8500 BC
     - Chine, Mésoamérique, Andes, Soudan : écart comparable
-  - l’économie mixte peut durer indéfiniment (Amazonie, Amérique du nord, Afrique équatoriale, Nouvelle guinée etc.)
-  - la chasse cueillette exclusive peut durer indéfiniment, y compris là ou l’agriculture est possible (Australie)
+  - l’économie mixte peut durer indéfiniment (Amazonie, Amérique du nord, Afrique équatoriale,
+    Nouvelle guinée etc.)
+  - la chasse cueillette exclusive peut durer indéfiniment, y compris là ou l’agriculture est
+    possible (Australie)
 - toutes les économies mixtes sont caractérisées par la propriété usufondée :
-  - la terre ne peut appartenir à une personne autre que celle qui la cultive, le loyer de la terre n’existe pas
+  - la terre ne peut appartenir à une personne autre que celle qui la cultive, le loyer de la terre
+    n’existe pas
   - on ne peut acheter / vendre la terre
-  - la terre appartient à celui qui la cultive, sous réserve d’une redistribution des terres opérée par la puissance publique
-- les économies agricoles finissent par adopter (exception : Afrique noire) la propriété pleine et le loyer de la terre
+  - la terre appartient à celui qui la cultive, sous réserve d’une redistribution des terres opérée
+    par la puissance publique
+- les économies agricoles finissent par adopter (exception : Afrique noire) la propriété pleine et
+  le loyer de la terre
   - le monde des cités connait la propriété pleine
   - les celtes l’ont déjà adopté à l’époque de la conquête romaine
   - les peuples germaniques l’adoptent au plus tard au Ve siècle de notre ère
 - sur l’écriture, la ville et l’État
-  - l’État peut exister sans écriture : César ne fait pas face à un État, mais bien à des États gaulois (vote de la guerre, service militaire), sans écriture
-    ( en revanche l’absence d’écriture limite peut être la dimension spatiale de l’État )
+  - l’État peut exister sans écriture : César ne fait pas face à un État, mais bien à des États
+    gaulois (vote de la guerre, service militaire), sans écriture ( en revanche l’absence d’écriture
+limite peut être la dimension spatiale de l’État )
   - l’État apparaît avant l’écriture au moyen-orient
   - l’existence de l’État précède toujours la formation de la ville
   - l’esclavage précède l’État
-- l’adoption de l’économie agricole dans la région du Jourdain (9500 - 7500) voit le développement des villes (Jéricho)
+- l’adoption de l’économie agricole dans la région du Jourdain (9500 - 7500) voit le développement
+  des villes (Jéricho)
   - segmentation de la population par profession
   - maisons rectangulaires non enterrées
   - hiérarchie sociale (Jacques Cauvin) ==> l’État de Testart ?
 
 Conclusion :
-L’économie agricole permet d’augmenter la densité de population et la création d’agglomération humaine jamais vues auparavant.
-L’organisation politique et sociale anarchique des sociétés apparait insuffisante à la taille de la population de la ville.
-Face à ce défi, la puissance publique voit ses prérogatives augmenter progressivement ; elle devient plus permanente ; 
-un segment de la population forme un corps de fonctionnaires. Ils inventent l’écriture pour leurs besoins d’administration.
-C’est en ce sens qu’apparaissent l’État et de nouvelles hiérarchies sociales.
+L’économie agricole permet d’augmenter la densité de population et la création d’agglomération
+humaine jamais vues auparavant.  L’organisation politique et sociale anarchique des sociétés
+apparait insuffisante à la taille de la population de la ville.  Face à ce défi, la puissance
+publique voit ses prérogatives augmenter progressivement ; elle devient plus permanente ; un segment
+de la population forme un corps de fonctionnaires. Ils inventent l’écriture pour leurs besoins
+d’administration.  C’est en ce sens qu’apparaissent l’État et de nouvelles hiérarchies sociales.
 
-La propriété lucrative - *latifundium - apparaît bien plus tard, entre 3000 et 2900BC à Sumer. Il s’agit d’une appropriation
-privative progressive d’une ferme d’État par le haut-fonctionnaire qui en est responsable.
-Il apparaît que ce processus a affecté sans exception toutes les civilisations ayant atteint le stade de l’économie agricole et
-de l’État.
-La propriété lucrative peut aussi être une conséquence de l’invasion d’une civilisation par des armées étrangères.
+La propriété lucrative - *latifundium - apparaît bien plus tard, entre 3000 et 2900BC à Sumer. Il
+s’agit d’une appropriation privative progressive d’une ferme d’État par le haut-fonctionnaire qui en
+est responsable.  Il apparaît que ce processus a affecté sans exception toutes les civilisations
+ayant atteint le stade de l’économie agricole et de l’État.  La propriété lucrative peut aussi être
+une conséquence de l’invasion d’une civilisation par des armées étrangères.
 
-Les premières dynasties sumériennes apparaissent vers 2900BC, soit en même temps ou bien juste après le latifundium.
+Les premières dynasties sumériennes apparaissent vers 2900BC, soit en même temps ou bien juste après
+le latifundium.
 
 --- 18 Brumaire an 215 
 DDM  3 brumaire an 225
@@ -94,7 +103,8 @@ disposition d'hommes aux armées)
 - otium : désoeuvrement
 
 On distingue : 
-- spolium : capacité sociale effectivement commandée par l’aristocratie ( oppressio + militaria + religio + luxus ) 
+- spolium : capacité sociale effectivement commandée par l’aristocratie ( oppressio + militaria +
+  religio + luxus ) 
 - alienatio : capacité sociale spontanément consentie à l’aristocratie SIC
 - humanitas (civilisation) : sapientia + spolium SIC
 - stratiotikon : marge de manoeuvre du stratège : oppressio + militaria + religio + otium
@@ -146,9 +156,11 @@ DDM 29 frimaire an 225
 La politeia est l’organisation politique et sociale de la natio, elle peut être
 plus ou moins égalitaire ou aristocratique, anarchique ou centralisée.  
 
-La politeia est aristocratique en proportion du taux de latifundium.
+Le latifundium est la base matérielle du pouvoir de l’aristocratie sur la natio.
+Il lui permet de s’accaparer une part du fructus : le luxus.
+La politeia est donc aristocratique en proportion du taux de latifundium.
 
-Les politeia centralisée sont dirigée par un conseil ou un monarque, lequel siège
+Les politeia centralisée sont dirigées par un conseil ou un monarque, lequel siège
 dans une capitale.
 Un gouvernement centralisé permet :
 1. de coordonner les forces armées nationales
@@ -224,16 +236,17 @@ l’empereur, étant le contre-exemple.
 Un gouvernement central au dessus de cités démocratiques est toujours un conseil
 dépourvu du pouvoir de partage de la capacité sociale.
 
-En d’autres termes, la forme monarchique du gouvernement central est incompatible 
+En d’autres termes, la forme monarchique du gouvernement central, parce qu’on l’a
+définie comme détentrice du partage de la capacité sociale, est incompatible 
 avec les institutions poliades démocratiques.
 
 Lorsque les cités se dotent d’une boulê, le monarque éventuel perd donc son pouvoir.
 
-Inversement, la mise en place d’une monarchie supprime la boulê de pouvoir réel 
+Inversement, la mise en place d’une monarchie implique la suppression des boulê
 pour la même raison.
 
-Les princes qui souhaitent durer devront par conséquent veiller à prévenir les
-révolutions démocratiques dans les cités.
+Les princes qui souhaitent durer devront par conséquent veiller à prévenir la
+constitution de boulê dans les cités.
 
 *** 8 nivose an 225
 
@@ -295,8 +308,8 @@ militaria dans deux circonstances :
 --- 27 Brumaire An 212
 DDM 18 thermidor an 219
 
-Aucune nation impériale ne pourra parvenir dans le temps de jeu imparti au
-joueur humain à réaliser la conquête totale du monde.
+Aucune nation impériale ne pourra a priori parvenir dans le temps de jeu
+imparti au joueur humain à réaliser la conquête totale du monde.
 Les politeia aristocratiques sont caractérisées par le développement de
 l’affectatio luxus. Ceci tend à réduire les marges de manoeuvres des monarques
 et à augmenter le niveau de difficulté pour le joueur humain au cours de la
@@ -312,12 +325,14 @@ Les républiques ainsi formées, parce qu’elles voient leur marge de manoeuvre
 augmentée de la suppression du luxus, sont des adversaires redoutables pour les
 monarchies voisines.
 
+
 --- 16 Nivôse an 213
 DDM 4 brumaire an 225
 
 Les nationes ne peuvent etre absorbees en un tour-annee. Mais, chaque annee, la
 frontiere peut evoluer d'une [regio]. Les cités peuvent donc s'etendre, mais
 lentement.
+
 
 --- 1er nivôse an 214
 
@@ -328,44 +343,6 @@ ennemis.
 
 [Ce faisant, il prend de plus le risque d’être renversé par ses mandants, 
 qui lui préfèreront un gouvernement oligarchique]
-
-
---- 18 Ventose an 214
-
-Sophia détermine la probabilité de découvrir les artes, mais ne détermine qu’une
-probabilité. Il en résulte que la découverte des artes constitue un élément de
-hasard considérable dans l’évolution de la partie.  Cependant, il ne s’agit pas
-d’un hasard total et permanent, mais d’un hasard ponctuel pouvant renverser le
-cours de la partie cinq ou six fois.
-
---- 2 thermidor an 217
-
-De la précision de l’action du stratège
-
-Gérer des unités réelles de population ou d’investissements productifs ne serait
-pas conforme à l’objectif de non croissance exponentielle du nombre de choses à
-gérer. En effet, ces éléments croissent d’un facteur 100 du fait de la
-croissance de la population et de celle du spolium.
-
-Gérer des parts de capacité sociale supprime uniquement le premier de ces deux «
-problèmes ».
-
-La solution est donc la gestion de part du spolium disponible pour l’empire (ie
-luxus exclu).
-
-Rappel : le partage se fait entre 4 attributiones : oppressio, religio,
-militaria et otium.
-
-Quant à la la précision de l’action du stratège, le bon ordre de grandeur me
-semble être le dixième du spolium disponible.
-
-
-
-Lorsque fides atteint un niveau suffisant, ce sont les regiones de la chora
-qui tombent une à une en régime latifundiaire.
-
-L’aristocratie accroit son pouvoir au fur et à mesure de l’extension du régime
-latifundiaire à toutes les regiones.
 
 
 
@@ -385,6 +362,7 @@ Sapientia doit être réduite par fides + e.oppressio.
 Cela suffit pour avoir une oppressio plus efficace à court terme.
 La production "Sapientia" est directement entravée par oppressio, et indirectement par religio, via fides.
 
+
 --- 16 germinal an 218
 DDM 15 prairial an 226
 Religio versus Oppressio
@@ -395,7 +373,7 @@ Pls éléments peuvent amener à préférer dans une certaine mesure religio ou 
 - L’abus d’oppressio provoque des révoltes
 - L’efficacité de religio rapportée aux dépenses de religio est décroissante
 - Oppressio est immédiatement efficace, ce qui est utile pour faire face à une urgence, par exemple une guerre subie.
-- L’efficacité de religio et d’oppressio sont affectées par les artes (mais les mêmes)
+- L’efficacité de religio et d’oppressio sont affectées par les artes (mais pas les mêmes)
 - L’efficacité de religio est affectée par les merveilles
 - Certains stratèges pourraient avoir des préférences a priori pour religio ou oppressio.
 
@@ -404,13 +382,16 @@ Pls éléments peuvent amener à préférer dans une certaine mesure religio ou 
 Des limites du développement du spolium
 
 1. le spolium suppose une population en mesure de travailler, donc vivante, donc nourrie.
-Tout développement aux dépens de labor est donc inefficace, mais néanmoins possible (famine «politique»).
+Tout développement aux dépens de labor est donc inefficace, mais néanmoins possible via
+oppressio, moyennant une effacité décroissante.
 
 2. la valeur brute du spolium dépend de la productivité du travail/du capital instrumentum.
 Celui-ci dépend à pls titres, ± directs, de sapientia.
-Son développement en proportion de la capacité sociale, aux dépens de sapientia, peut donc lui être globalement
- dommageable quant à sa valeur absolue.  
-Au-delà d’un certain seuil, le spolium produit de la stagnation, voire de la régression économique.
+Son développement en proportion de la capacité sociale, aux dépens de sapientia, peut donc
+ lui être globalement dommageable quant à sa valeur absolue.  
+Au-delà d’un certain seuil, le spolium produit de la stagnation, voire de la régression
+économique, ce qui limite en retour la valeur de spolium.
+Il semble donc qu’il existe un spolium maximum d’équilibre pour un niveau d’efficientia donné.
 
 
 *** 5 floreal an 224
@@ -529,8 +510,9 @@ maintien du régime social ou de révolution sociale (passage en mir ou minifund
 Du devenir des empires
 
 Luxus est une proportion croissante de spolium, au fur et à mesure que le latifundium
-s’étend.  Toutes les parties du spolium servent l’empire.  Cependant, des parties du
-spolium, c’est la moins productive.  Sa croissance met à terme en danger l’empire. 
+s’étend.  Toutes les parties du spolium servent l’empire (elles produisent un peu de
+fides).  Cependant, des parties du spolium, c’est la moins productive.  Sa croissance
+ met à terme en danger l’empire. 
 
 En effet, Face au luxus croissant,
 - soit le stratège réduit militaria, et expose l’empire à des défaites militaires, une
@@ -581,18 +563,19 @@ devenir révolution sociale.
 
 La révolution sociale est le remplacement du dominium latifundium par 
 le dominium minifundium dans les regiones latifundiaires.
-Il en résulte la suppression du luxus dans la regio.
+Il en résulte la suppression du luxus dans la regio et la baisse mécanique du 
+luxus dans les autres regiones.
 
 Si le niveau d’oppressio est élevé, la révolution politique peut s’ajouter 
 à la révolution sociale.
 
 La révolution politique peut atteindre différents degrés :
 1- s’il existe un monarque : sa chute (et son remplacement par un conseil)
-2- s’il existe un pouvoir central national : sa suppression
+2- s’il existe un conseil oligarchique : sa suppression (passage en anarchie)
 3- s’il existe des cités : la formation d’institutions démocratiques : boulê
 
-La formation d’une boulê est le niveau le plus radical de la révolution.
-L’existence d’une boulê autorise la formation d’un nouveau pouvoir national,
+La formation de boulê est le niveau le plus radical de la révolution.
+L’existence de boulê autorise la formation d’un nouveau pouvoir national,
 mais interdit tant la monarchie que le latifundium.
 
 
@@ -627,15 +610,15 @@ optimum de spolium, ils se situent nécessairement entre ces deux extrêmes.
 --- 15 nivose an 214 
 DDM 8 frimaire an 218
 
-Chaque natio dispose de la liste des ses voisines: les *proximae Chaque natio
-entretient avec chacune de ses proximae une *relatio type relatio = PAX | BELLUM
-| N_RELATIO La relatio par défaut, ie en l’absence de traité signé ou de
-déclaration de guerre faite, est N_RELATIO.
+Chaque natio dispose de la liste des ses voisines: les *proximae.
+Chaque natio entretient avec chacune de ses proximae une *relatio 
+type relatio = PAX | BELLUM | N_RELATIO 
+La relatio par défaut, ie en l’absence de traité signé ou de déclaration de guerre faite,
+ est N_RELATIO.
 
 Chaque junctio est redefini en fonction de l'etat precedent, et des rogationes :
-Par defaut, junctio reste identique Junctio devient BELLUM si une declaration de
-guerre a eu lieu Junctio devient PAX si deux proprositions de paix reciproques
-ont eu lieu
+Par defaut, junctio reste identique Junctio devient BELLUM si une declaration de guerre a
+eu lieu Junctio devient PAX si deux proprositions de paix reciproques ont eu lieu
 
 ***
 
@@ -770,7 +753,7 @@ modifications :
 Deux situations se présentent : selon que les nations occupantes et occupées 
 ont signé ou non un traité de paix.
 
-En l’absence de traité de paix (ou de traité de facto rompu), situation initiale
+En l’absence de traité de paix (ou traité de facto rompu), situation initiale
 de la conquête, la situation des regiones occupées est la suivante :
 - pillage de la regio par l’occupant
 - résistance de l’occupé
@@ -786,14 +769,14 @@ la terre occupée)
 exterminés)
 
 En cas de paix (inégale) signée :
-- les regiones occupées restent occupées, mais la natio occupée acquiert le
-statut d’état vassal / client
-- la résistance cesse en échange du renoncement par l’occupant du droit de
-coloniser / exproprier l’occupé.
-- le pillage est maintenu sous forme de tribut accru :
+- les regiones occupées restent occupées
+- la natio occupée acquiert le statut d’état vassal / client
+- l’occupé conserve le droit de cultiver et d’habiter les regiones occupées
+- l’occupé doit verser sans résistance un tribut :
 - 33% de labor/cibus
 - 100% de luxus
 - 50% de militaria (mercenaires fournis comme tribut à l’occupant)
+
 
 On remarque qu'une natio et un gouvernement peuvent survivre quelques siècles
 alors que leur imperium est nul. 
@@ -824,7 +807,6 @@ De la probabilité d'évolution du limes
 
 Il y a stabilité du limes pour une vis de 100, conquête au dessus, retraite en
 dessous.
-
 
 
 --- 5 Thermidor an 216
@@ -1002,6 +984,16 @@ Gunpowder : 0.4 Steamengine: 0.6 Combustion : 0.8 Electricity: 0.8
 (somme des log des plebs de chaque nation) 
 [les chances d'une natio serait alors modifiée par l'absorbtion de la chora
 d'une autre natio par une troisième]
+
+
+--- 18 Ventose an 214
+
+Sophia détermine la probabilité de découvrir les artes, mais ne détermine qu’une
+probabilité. Il en résulte que la découverte des artes constitue un élément de
+hasard considérable dans l’évolution de la partie.  Cependant, il ne s’agit pas
+d’un hasard total et permanent, mais d’un hasard ponctuel pouvant renverser le
+cours de la partie cinq ou six fois.
+
 
 
 *****************
@@ -1247,6 +1239,29 @@ toutes de meme taille).
 * VI. Du jeu   *
 ****************
 
+--- 2 thermidor an 217
+
+De la précision de l’action du stratège
+
+Gérer des unités réelles de population ou d’investissements productifs ne serait
+pas conforme à l’objectif de non croissance exponentielle du nombre de choses à
+gérer. En effet, ces éléments croissent d’un facteur 100 du fait de la
+croissance de la population et de celle du spolium.
+
+Gérer des parts de capacité sociale supprime uniquement le premier de ces deux «
+problèmes ».
+
+La solution est donc la gestion de part du spolium disponible pour l’empire (ie
+luxus exclu).
+
+Rappel : le partage se fait entre 4 attributiones : oppressio, religio,
+militaria et otium.
+
+Quant à la la précision de l’action du stratège, le bon ordre de grandeur me
+semble être le dixième du spolium disponible.
+
+
+
 --- 21 Floreal an 210
 
 Le joueur se voit presenter le calendrier de sa civ et n'a un moyen de
@@ -1312,6 +1327,46 @@ qu'assurer e la fois: 1. la progressivite de l'extension des nations (par
 opposition à un systeme de Macrocases seules) 2. la non parfaite linearite dans
 le temps de cette progression et surtout la non rectitude dans l'espace des
 frontieres.
+
+--- 23 Pluviôse an 214
+DDM 14 thermidor an 223
+
+Du brouillard de guerre
+
+Sont affichees en toute hypothèse : 
+- la chora, y compris lorsqu’elle est occupée par l’ennemi
+- l’imperium
+
+Sont affichees sous diverses conditions : 
+- les regiones voisines de la natio (terrestre ou maritime), dont la
+  connaissance de la consistance est régulièrement rapportée à la polis 
+  (par des expéditions ad hoc ou aux fins de commerce etc.)
+- il en résulte une coincidence entre les regiones visibles et les poleis 
+  avec lesquelles nous pouvons communiquer
+
+- l’étendue de ces regiones est déterminée par instrumentum (variable
+  représentative tant des capacités productives en général que du niveau
+  technique, capital pour la rapidité des déplacements et communications)
+- la visibilité des regiones marines au delà d’une certaine distance de la 
+  cote suppose l’ars NAV
+- la visibilité est fonction de la distance à la capitale
+- ars     inst max  rayon de visibilité (km) (terre, mer ssi NAV)
+  AGR ->  100.      2000
+| MET ->  200.      4000, 20000 
+| STE ->  400.      8000, 40000
+| CMB ->  600.     12000, 60000
+| ELE ->  800.     16000, 80000
+- la visibilité des regiones marines implique la visibilité des cotes
+  adjacentes, mais non de l’intérieur des terres
+
+- on distingue deux zones de brouillard :
+- la zone absolument inconnue : hors rayon d’exploration. 
+  Cette zone est affichée comme océane.
+- les continents inexplorés, techniquement les regiones terrestres
+  au-delà de la zone d’exploration terrestre mais en deçà de la zone
+  d’exploration marine.
+  Cette zone est spécifiquement affichée comme terrestre inexplorée
+
 
 --- 17 Germinal an 215 
 DDM 5 Nivôse an 216
@@ -1456,47 +1511,6 @@ guerre s'il pense y avoir interet et ne propose jamais la paix.
 ************************
 * VIII. Miscelaneous   *
 ************************
-
---- 23 Pluviôse an 214
-DDM 14 thermidor an 223
-
-Du brouillard de guerre
-
-Sont affichees en toute hypothèse : 
-- la chora, y compris lorsqu’elle est occupée par l’ennemi
-- l’imperium
-
-Sont affichees sous diverses conditions : 
-- les regiones voisines de la natio (terrestre ou maritime), dont la
-  connaissance de la consistance est régulièrement rapportée à la polis 
-  (par des expéditions ad hoc ou aux fins de commerce etc.)
-- il en résulte une coincidence entre les regiones visibles et les poleis 
-  avec lesquelles nous pouvons communiquer
-
-- l’étendue de ces regiones est déterminée par instrumentum (variable
-  représentative tant des capacités productives en général que du niveau
-  technique, capital pour la rapidité des déplacements et communications)
-- la visibilité des regiones marines au delà d’une certaine distance de la 
-  cote suppose l’ars NAV
-- la visibilité est fonction de la distance à la capitale
-- ars     inst max  rayon de visibilité (km) (terre, mer ssi NAV)
-  AGR ->  100.      2000
-| MET ->  200.      4000, 20000 
-| STE ->  400.      8000, 40000
-| CMB ->  600.     12000, 60000
-| ELE ->  800.     16000, 80000
-- la visibilité des regiones marines implique la visibilité des cotes
-  adjacentes, mais non de l’intérieur des terres
-
-- on distingue deux zones de brouillard :
-- la zone absolument inconnue : hors rayon d’exploration. 
-  Cette zone est affichée comme océane.
-- les continents inexplorés, techniquement les regiones terrestres
-  au-delà de la zone d’exploration terrestre mais en deçà de la zone
-  d’exploration marine.
-  Cette zone est spécifiquement affichée comme terrestre inexplorée
-
-
 
 
 --- 9 Pluviose an 216
