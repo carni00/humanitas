@@ -103,7 +103,7 @@ let update n =
   {
   seditio  = f (n.k.seditio) 0.90 (P.opp fru + squot 0. (P.alienatio atr) (P.humanitas atr) );
 (*  fides    = f (n.k.fides)   0.90 (P.rel fru + P.servitium atr);*)
-  fides    = f (n.k.fides)   0.90 ( (P.rel fru )) ;
+  fides    = f (n.k.fides)   0.90 ( (P.rel fru ) ** 0.5 ) ;
   sophia   = g 0.99 + g 0.999 + g 0.9999 ;
   (* sophia tend très lentement vers sapientia * 1.20 *)
   ususList = Partitio.UsusList.create n.k.ususList n.pp atr n.pArtes n.cArtes;

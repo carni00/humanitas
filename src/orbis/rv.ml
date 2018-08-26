@@ -173,9 +173,8 @@ module Incola = struct
     let dominium natioPlebs fides lux rs tegmen eff d = 
       let luxRate = lux / natioPlebs in (* lucrum.lux / plebs = env [0..1] *)
       match d with
-      | Mir when fides > 0.20 && tegmen == Turbs && Random.float 64. < fides -> Latifundium
-      | Mir when fides > 0.20 && eff > 1.20 && Random.float (rs ) < (8192. * luxRate * eff)  -> Latifundium
-        
+      | Mir when fides > 0.10 && tegmen == Turbs && Random.float 64. < fides -> Latifundium
+      | Mir when fides > 0.10 && eff > 1.20 && Random.float (rs ) < (8192. * luxRate * eff)  -> Latifundium
       | _ -> d
     (** next dominium *)
 
