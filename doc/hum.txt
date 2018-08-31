@@ -7967,3 +7967,9 @@ mais la racine carree de religio qui détermine fides.
 
 
 226.fru.14.17H32
+Font : nettoyage archaismes + utilisation police dejavu (Free non
+disponible par défaut en Debian)
+
+
+
+226.fru.15.00H14

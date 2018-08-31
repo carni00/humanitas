@@ -30,23 +30,37 @@ type t = {
   rel : int;
   opp : int;
   }
-let make = {
+
+let null = {
   mil = 0;
   rel = 0;
   opp = 0;
   }
-let init m r o = {
-  mil = m;
-  rel = r;
-  opp = o;
-  }
 
 let sn (* step number *) = 10
+
 let otium s = sn - ( s.mil + s.rel + s.opp )
+
+let generic_init convert mil rel opp =
+  let f max v = cut 0 max (convert v) in
+  let o = f  sn      opp in
+  let r = f (sn-o)   rel in
+  let m = f (sn-o-r) mil in
+  {
+    mil = m;
+    rel = r;
+    opp = o;
+  }
+
+let init  = generic_init (fun i -> i)
+let float = generic_init (fun v -> iof (v *. foi sn) )
+
+
 let inc s a = if otium s < 1 then s else match a with
 | Mil -> { s with mil = s.mil + 1 }
 | Rel -> { s with rel = s.rel + 1 }
 | Opp -> { s with opp = s.opp + 1 }
+
 let dec s a = match a with
 | Mil -> if s.mil > 0 then  { s with mil = s.mil - 1 } else s
 | Rel -> if s.rel > 0 then  { s with rel = s.rel - 1 } else s

@@ -23,12 +23,13 @@
 
 (** Répartition de la capacité sociale à la disposition du prince
     entre les différentes attributiones impériales
-    leur somme s'éleve à 1. *)
+    leur somme s'éleve à 10 *)
 
 
 type t
-val make : t
-val init : int -> int -> int -> t
+val null  : t
+val init  : int   -> int   -> int   -> t
+val float : float -> float -> float -> t
 
 val mil : t -> float
 val rel : t -> float

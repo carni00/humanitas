@@ -63,7 +63,7 @@ module Data = struct
   
   let of_nil (nil) =
   ( {
-    stratiotikon_list = Nil.init (fun nid->Stratiotikon.make) nil;
+    stratiotikon_list = Nil.init (fun nid->Stratiotikon.null) nil;
     tactic_map    = Nim.empty;
     rogatio_map   = Nim.empty;
     } : d )
@@ -90,7 +90,7 @@ end
 
 let make = 
   {
-  stratiotikon = Stratiotikon.make ;
+  stratiotikon = Stratiotikon.null ;
   rogatio_list = Nil.empty;
   tactic_list  = Nil.empty;
   }
