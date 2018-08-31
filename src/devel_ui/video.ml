@@ -244,7 +244,7 @@ module Draw(X : sig end) = struct
 (** Draws on screen a string. The color is white if the screen location is dark, black if is light. The picking bitmap is eventually updated *)
 
   let resolution () =
-    let f s dy dx = antiStrn ~xAlign:Right ~yAlign:Bottom ~font:Font.Ubuntu s (rsv swip-dx) (rsv ship-dy*rsv ehipi) in
+    let f s dy dx = antiStrn ~xAlign:Right ~yAlign:Bottom ~font:Font.Sans s (rsv swip-dx) (rsv ship-dy*rsv ehipi) in
     let g dy s = f s dy (0) in
     g 0 ((soi (rsv swip))^" x "^(soi (rsv ship)));
     g 1 ((soi (rsv ewipi))^" x "^(soi (rsv ehipi)));
@@ -344,7 +344,8 @@ module Draw(X : sig end) = struct
     let dst = RS.value screenBS in
     fill_rect ~rect:(rect_of_box box) dst (Color.to_sdlvideo co)
   let screen_size = RS.map (fun g -> (Screen.iwip |- float) g,  (Screen.ihip |- float) g) screen_geometry
-  let default_font = Sdlttf.open_font "/usr/share/fonts/truetype/freefont/FreeSans.ttf" 15
+(*  let default_font = Sdlttf.open_font "/usr/share/fonts/truetype/freefont/FreeSans.ttf" 15*)
+  let default_font = Sdlttf.open_font (Font.path Font.Sans) 15
   let draw_text ?(pos = `centered) font msg box = ()
   (*unused fin*)
  
@@ -360,7 +361,7 @@ module Draw(X : sig end) = struct
     let default = ()
     (*unused fin*)
     type style = unit
-    let font = Font.Freesans
+    let font = Font.Sans
 
 
   let draw style string pressed box =
@@ -378,7 +379,7 @@ module Draw(X : sig end) = struct
 
   module Label = struct
     type style = unit
-    let font, size = Font.Freeserif, iof( rsv ehip *. 0.72 )
+    let font, size = Font.Serif, iof( rsv ehip *. 0.72 )
     let draw style string box =
       let w, h, x, y = whxy_of_box box in
       let x,y = center_of_box box in

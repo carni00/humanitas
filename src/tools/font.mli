@@ -24,9 +24,8 @@
 (** Common data about building good-looking font *)
 type id = 
   | Default
-  | Ubuntu
-  | Freesans
-  | Freeserif
+  | Sans
+  | Serif
 
 type t = id*int 
 

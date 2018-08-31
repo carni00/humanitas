@@ -263,7 +263,7 @@ let polis atelier nid =
     line "instrumentum" (sof   0  N.instrumentum   ) ;
     line "efficientia"  (sof (-2) N.efficientia   ) ;
     line "sophia"       (sof (-2) N.sophia   ) ;
-    line "fides"        (sof (-2) N.fides   ) ;
+    line "fides"        (sof (-3) N.fides   ) ;
     line "latifundium"  (sof (-2) N.latifundium   ) ;
     ])
 

@@ -25,9 +25,10 @@ luxus
 latifundium
 calculer un objectif de religio en % de la civilisation et non du stratiotikon (sans quoi le luxe bouffe religio et donc
 spolium)
-
 croissance lente de l’indice de luxus
 pallier à l’augmentation du luxe - ou pas - par le seul moyen possible : oppressio
+
+limiter religio par le niveau de fides
 seditio -> révolution sociale
 
 si occupation, coder les passages en latifundium en fonction de fides

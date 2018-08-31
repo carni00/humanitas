@@ -26,24 +26,21 @@ open Std
 (** common data about building good-looking font *)
   type id = 
   | Default
-  | Ubuntu
-  | Freesans
-  | Freeserif
+  | Sans
+  | Serif
 
   let idList = [
    Default;
-   Ubuntu;
-   Freesans;
-   Freeserif;
+   Sans;
+   Serif;
   ]
 
   let path = function
-  | Default   -> "/usr/share/fonts/truetype/freefont/FreeSans.ttf"
-  | Ubuntu    -> "/usr/share/fonts/truetype/freefont/FreeSerif.ttf"
-(*  | Default   -> "/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf"*)
-(*  | Ubuntu    -> "/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf"*)
-  | Freesans  -> "/usr/share/fonts/truetype/freefont/FreeSans.ttf"
-  | Freeserif -> "/usr/share/fonts/truetype/freefont/FreeSerif.ttf"
+  | Default   -> "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+(*  | Freesans  -> "/usr/share/fonts/truetype/freefont/FreeSans.ttf"*)
+  | Sans  -> "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+(*  | Freeserif -> "/usr/share/fonts/truetype/freefont/FreeSerif.ttf"*)
+  | Serif -> "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"
 
   type t = id*int 
 
@@ -55,9 +52,8 @@ open Std
 
   let validId id size =
     if id <> Default then id 
-    else if size<10 then Ubuntu
-    else if size<12 then Freesans
-    else Freeserif
+    else if size<12 then Sans
+    else Serif
 
   let valid id size = validId id size, cut sizeMin sizeMax size
 

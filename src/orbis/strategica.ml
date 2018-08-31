@@ -156,8 +156,9 @@ let a_stratiotikon n =
 
 let d_stratiotikon n = 
   let pa  = N.politeia n in
-  let rel = if Pa.has_boule pa then 0 else 1 in
-  Stratiotikon.init (10-rel) rel 0
+  if Pa.has_boule pa 
+  then Stratiotikon.init 10 0 0 
+  else a_stratiotikon n
 
 
 let a_poleis d n pil = 
