@@ -97,13 +97,13 @@ let  compute_vis n =
 
 let update n = 
   let atr = P.Record.attrib  n.pr in
+  let act = P.Record.actio   n.pr in
   let fru = P.Record.fructus n.pr in
   let f k i p = k*i + p*(u-i) in
   let g i = f (n.k.sophia / 3.) i (P.sap fru * 0.40) in
   {
   seditio  = f (n.k.seditio) 0.90 (P.opp fru + squot 0. (P.alienatio atr) (P.humanitas atr) );
-(*  fides    = f (n.k.fides)   0.90 (P.rel fru + P.servitium atr);*)
-  fides    = f (n.k.fides)   0.90 ( (P.rel fru ) ** 0.5 ) ;
+  fides    = f (n.k.fides)   0.90 ( (P.rel fru + P.servitium act ) ** 0.5 ) ;
   sophia   = g 0.99 + g 0.999 + g 0.9999 ;
   (* sophia tend très lentement vers sapientia * 1.20 *)
   ususList = Partitio.UsusList.create n.k.ususList n.pp atr n.pArtes n.cArtes;

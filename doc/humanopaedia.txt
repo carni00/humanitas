@@ -202,6 +202,8 @@ cueilleurs
 2. la défense du territoire contre les razzias des forces armées des autres 
 nations.
 
+L’actio militaria produit un peu d’aptitude à la servitude (fides).
+
 Les nationes agricoles dépassant 4 hab/km2 construisent des cités. Les cités,
 qui ne peuvent être trop proches les unes des autres, sont limitées en nombre
 (par exemple : 4 par nation)
@@ -219,8 +221,9 @@ de cité)
 La cité peut se doter ou non d’une boulê, c’est-à-dire d’instutions organisant 
 l’exercice du pouvoir politique par le peuple.
 
-Dans les cités dépourvues de boulê, les élites dirigeantes développent l’affectatio
-religio et le capital fides pour conserver le pouvoir entre leurs mains.
+Dans les cités dépourvues de boulê, si fides atteint un certain niveau (0.10),
+ les élites dirigeantes développent l’affectatio religio pour accroitre encore
+au-delà le capital fides.
 
 Lorsque fides atteint un niveau suffisant, les élites s’approprient les biens publics :
 la propriété lucrative - le latifundium - succède à la propriété collective - mir - 

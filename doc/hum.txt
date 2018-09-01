@@ -7970,3 +7970,7 @@ Stratiotikon.null, init, float
 
 
 226.fru.15.14H17
+a_stratiotikon : rewriting (use of Stratiotikon.float)
+
+
+226.fru.15.15H00

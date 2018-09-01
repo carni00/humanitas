@@ -151,7 +151,7 @@ let a_stratiotikon n =
   let opp = (lux * hum / str ) in
   let mil_min =  0.1 in (* militaria à assurer a minima *)
   let rel_obj = (0.3 * hum / str ) in (* objectif long terme pour l’aristocratie : 30% de l’humanitas *)
-  let rel_fid = (0.1 + Natio.fides n) in (* choix raisonnable immédiat qui ne générera pas trop de seditio *)
+  let rel_fid = (0.0 + Natio.fides n) in (* choix raisonnable immédiat qui ne générera pas trop de seditio *)
   let rel = min3 (u - mil_min - opp) rel_obj rel_fid in
   Stratiotikon.float u rel opp (* mil = u : tout ce qui reste, après opp et rel *)
 (* Faute de boulê, l’aristocratie en place ou en devenir fixe le niveau d’oppressio et religio *)

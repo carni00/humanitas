@@ -76,7 +76,7 @@ let spolium      p = p.militaria + p.oppressio + p.religio + p.luxus
 let stratiotikon p = p.militaria + p.oppressio + p.religio + p.otium
 let alienatio    p = p.militaria + p.oppressio + p.religio + p.luxus + p.otium
 let humanitas    p = p.militaria + p.oppressio + p.religio + p.luxus + p.sapientia
-let servitium    p = spolium p * 0.1
+let servitium    p = p.oppressio + p.religio   + 0.1 * ( p.militaria + p.luxus )
 let summa        p = p.militaria + p.oppressio + p.religio + p.luxus + p.sapientia + p.labor + p.otium
 
 
