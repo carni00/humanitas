@@ -7951,25 +7951,22 @@ suppression de la guerre permanente pour cause de sous-nutrition.
 226.fru.09.08H54
 rewriting
 
-
 226.fru.09.09H31
 corrections mineures
 
-
 226.fru.09.18H56
 la présence ou non d'une boule autorise ou non religio
-
 
 226.fru.09.19H15
 Ce n'est pas la racine carree de fides qui détermine alienatio,
 mais la racine carree de religio qui détermine fides.
 
-
-
 226.fru.14.17H32
 Font : nettoyage archaismes + utilisation police dejavu (Free non
 disponible par défaut en Debian)
 
-
-
 226.fru.15.00H14
+Stratiotikon.null, init, float
+
+
+226.fru.15.14H17
