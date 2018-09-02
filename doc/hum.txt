@@ -7981,3 +7981,22 @@ Sans métallurgie ni écriture, la fides résultante plafonne à 0.16.
 
 
 226.fru.16.08H38
+Le graphique se déplace vers la gauche quand on dépasse 1024 tours (la
+largeur de l’écran).
+Droit à découvrir métallurgie rétabli.
+Il en résulte 
+1° une humanitas accrue
+2° fides atteint 0.20 puis religio passe à 20% ... jusqu’à une fides de 0.66
+3° développement de luxus (et d’oppressio actuellement corrélé à luxus :
+à revoir)
+4° baisse lente puis effondrement de la sapience, puis de sophia, et
+finalement baisse de plebs corrélée à sophia
+Le modèle semble décrire l’évolution du monde Romain.
+
+Reste à développer pour la partie affaires nationales :
+- seditio
+- module de partage aristocratique du stratiotikon (choix de niveau d’oppressio et religio)
+- rétablissement des artes
+
+
+226.fru.16.10H44
