@@ -52,8 +52,8 @@ let next = function
 | N_ARS -> N_ARS
 
 
-let list = [AGR]
-(*let list = [AGR; MET]*)
+(*let list = [AGR]*)
+let list = [AGR; MET]
 (*let list = [AGR; MET; WRI; NAV; GUN; STE; CMB; ELE]*)
 let beginList = [AGR]
 

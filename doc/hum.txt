@@ -7974,3 +7974,10 @@ a_stratiotikon : rewriting (use of Stratiotikon.float)
 
 
 226.fru.15.15H00
+Rétablissement du servitium : l’actio militaria produit de la fides.
+Si la fides atteint 0.10 et qu’une cité est présente, l’aristocratie
+peut attribuer un point de stratiotikon à religio.
+Sans métallurgie ni écriture, la fides résultante plafonne à 0.16.
+
+
+226.fru.16.08H38

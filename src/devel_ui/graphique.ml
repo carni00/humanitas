@@ -37,8 +37,8 @@ let rsm  = RS.map
 let rsv  = RS.value
 let rsf  = rsv |- foi
 
-let swip = rsf D.swip
-let ship = rsf D.ship
+let swip = rsv D.swip
+let ship = rsv D.ship
 
    
 let display_graphique atelier =
@@ -51,10 +51,14 @@ let display_graphique atelier =
   else
     let flexurae = Nid.Nil.nth orbis.Orbis.flexuraeList pov in
 
-    let x turn   = iof ( (foi turn) * (Graph.xppt graph) ) in
-    let y value  = iof ( ship - value * Graph.yppu graph ) in
+    let x turn  =         iof ( (foi turn) * Graph.xppt graph ) in
+    let y value = ship -- iof (  value     * Graph.yppu graph ) in
 
     let draw_flexura key (flexura : Flexurae.Flexura.t) = 
+
+      let x_shift = max 0 (F.len flexura -- swip) in
+      let x turn  = x turn -- x_shift in
+
       let color   = Ci.natioKey key in
       let g n s e = Draw.line color (x n) (y s) (x (n ++ 1)) (y e) ; e in (** affiche un segment *)
       let yList   = List.rev (F.yList flexura) in

@@ -18,19 +18,16 @@ terres libres -> en cas d’attaque par un voisin, la vis est gaspillée à occu
 que la chora est occupée -> récoltes sont prélevées -> famine
 solution : 
 rester à un rapport imperium/chora inf à 2. -> fait
-se retirer des terres vides en cas d’agression et de rapport imp/chora sup à 1.1 -> coder l’effect de la tactic retreat dans le
-module im -> le dominus n’est pas systématiquement competitor. Si la case a des voisins étrangers (ou nid.none) et si le dominus
-est en retraite, alors il n’est pas competitor. 2. S’il n’y a aucun competitor, nid.none l’emporte.
+se retirer des terres vides en cas d’agression et de rapport imp/chora sup à 1.1 -> coder l’effect de la tactic retreat dans le module im -> le dominus n’est pas systématiquement competitor. Si la case a des voisins étrangers (ou nid.none) et si le dominus est en retraite, alors il n’est pas competitor. 2. S’il n’y a aucun competitor, nid.none l’emporte.
 luxus
 latifundium
 calculer un objectif de religio en % de la civilisation et non du stratiotikon (sans quoi le luxe bouffe religio et donc
 spolium)
 croissance lente de l’indice de luxus
 pallier à l’augmentation du luxe - ou pas - par le seul moyen possible : oppressio
-
 limiter religio par le niveau de fides
+
 seditio -> révolution sociale
 
 si occupation, coder les passages en latifundium en fonction de fides
 coder les pertes militaires et civiles consécutives des guerres
-à terme, réduire la proba de guerre anarchique
