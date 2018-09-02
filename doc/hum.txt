@@ -8000,3 +8000,10 @@ Reste à développer pour la partie affaires nationales :
 
 
 226.fru.16.10H44
+correctif : 
+1. le servitium a une efficacité linéaire (contrairement à
+religio)
+2. efficacité du servitium militaria réévalué à 0.5
+
+
+226.fru.16.14H44

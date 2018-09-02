@@ -346,13 +346,17 @@ let primary (n:natio) =
 (*  let eo (*e_oppressio*) = n.pp.oppressio * Ars.eff n.artes Ars.MET * Ars.eff n.artes Ars.GUN in*)
   (* valeur : oppressio effective / fructus.oppressio *)
   let hum  = u - lab in
-  let alien= hum * (cut 0. u ( n.fides )) in
-  let spol = min u (alien + 2. * n.lucrum.oppressio / n.plebs) in
-(*  let alien = cut 0. (u - lab) (n.fides ** 0.5) in : résultat absurde : fides détruit la civilisation *)
+(*  let alien= hum * (cut 0. u ( n.fides )) in*)
+(*  let spol = min u (alien + 2. * n.lucrum.oppressio / n.plebs) in*)
+(*  let lux  = alien * ((cut 0. u n.latifundium) ** 2.) in*)
+  let ced x = u - u / ( u + 2. * x ) in (* fonction croissante à efficacité(pente) décroissante *)
+  let alien=  hum          * ced (n.fides) in
+  let escl = (hum - alien) * ced (n.lucrum.oppressio / n.plebs) in
+  let spol = alien + escl in
+  let lux  = spol          * ced (n.latifundium ** 2.) in
   let cMil = civicMilitaria n.g hum spol n.libertas n.politeia n.agriCopia 0. in
-  let sap (*sapientia*) = max 0. (hum - max (nl-lab) (spol+cMil)) in
-  let lux = alien * ((cut 0. u n.latifundium) ** 2.) in
-  let oti = max 0. (hum-sap-cMil-lux) in (* soustraction de float, on vérifie que résultat >= 0 *)
+  let sap  = max 0. (hum - max (nl-lab) (spol+cMil)) in
+  let oti  = max 0. (hum-sap-cMil-lux) in (* soustraction de float, on vérifie que résultat >= 0 *)
 (* désoeuvrement primaire : ie à moins que l’empire n’en fasse qqchose *)  
   List.fold_left set_att null [(LAB,lab);(SAP,sap);(LUX,lux);(MIL,cMil);(OTI,oti)]
 (* découpage primaire : ie avant stratiotikon,  de la capacité sociale *)
