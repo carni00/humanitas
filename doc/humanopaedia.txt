@@ -537,52 +537,64 @@ Avant cette option, l’empire doit craindre une révolution sociale.
  
 ***
 
-DDM 13 germinal an 226
-
+DDM 18 fructidor an 226
+  
 De l’opposition aux régimes aristocratiques.
 
-La génération du capital seditio répond à des critères certains :
+Seditio mesure l’opposition populaire aux régimes aristocratiques.
+Seditio est déterminé par les critères suivants :
 
-- le niveau du luxus
-- le niveau du spolium
-- le niveau d’oppressio
 - la famine
+- le niveau d’oppressio
+- le niveau du luxus
+- le niveau du spolium, ssi sophia > fides
 
-(mil + rel + oti)/2 + lux + opp×2 + (u - dxCopia)
+(spolium/humanitas)×(sophia-fides) + (lux/spolium) + (esclavage/humanitas) + (u - dxCopia)
+
+Seditio détermine la probabilité de révolution sociale.
 
 
 *** 18 Messidor an 217
-DDM 19 prairial an 226
+DDM 18 fructidor an 226
 
 De la révolution sociale
 
-Lorsque seditio dépasse un certain stade, des révoltes peuvent éclater.
-Le niveau de révolte est fonction de seditio.
-En deça d’un certain niveau, la révolte est écrasée ; il n’en résulte que
-quelques pertes en hommes et en capital.
+La révolution sociale est la substitution d’un régime démocratique (république ou anarchie)
+à un régime aristocratique (monarchie, ploutocratie ou féodalisme). Elle implique également
+la suppression du latifundium.
 
-Au delà d’un certain niveau de seditio (0.5), les révoltes peuvent
-devenir révolution sociale.
+Elle est le résultat de l’accomplissement de trois étapes.
+1. la sédition de la plèbe, c’est-à-dire le refus de contribuer au spolium (refus de payer
+les loyers, désertion, occupation d’entreprise etc.) joint à la constitution d’un pouvoir parrallèle
 
-La révolution sociale est le remplacement du dominium latifundium par 
-le dominium minifundium dans les regiones latifundiaires.
-Il en résulte la suppression du luxus dans la regio et la baisse mécanique du 
-luxus dans les autres regiones.
+2. l’effondrement (ou non) des forces armées et de police de l’aristocratie
+- option effondrement : le gouvernement aristocratique et le latifundium cessent d’exister, faute de
+capacité de coercition. À ce stade, on qualifiera déjà la politeia de démocratique.
+- option répression : les forces armées éliminent les foyers de sédition. Pertes humaines.
+Maintien du latifundium et du gouvernement aristocratique.
 
-Si le niveau d’oppressio est élevé, la révolution politique peut s’ajouter 
-à la révolution sociale.
+3. la formation (ou non) d’institutions démocratiques (boulê), visant à prémunir une nouvelle dérive
+aristocratique.
+L’existence de boulê autorise la formation d’un nouveau pouvoir national, mais interdit tant la
+ monarchie que le latifundium.
 
-La révolution politique peut atteindre différents degrés :
-1- s’il existe un monarque : sa chute (et son remplacement par un conseil)
-2- s’il existe un conseil oligarchique : sa suppression (passage en anarchie)
-3- s’il existe des cités : la formation d’institutions démocratiques : boulê
+Les trois étapes se déroulent dans le même tour de jeu.
+Chaque étape est le préalable de l’étape suivante.
+La probabilité de succès de chaque étape est déterminée par le degré atteint par l’opposition
+au régime aristocratique ( *seditio ), selon la règle suivante :
 
-La formation de boulê est le niveau le plus radical de la révolution.
-L’existence de boulê autorise la formation d’un nouveau pouvoir national,
-mais interdit tant la monarchie que le latifundium.
+probabilité de 100% pour seditio >= 1.00
+probabilité de 1/2  pour seditio == 0.90
+probabilité de 1/4  pour seditio == 0.80
+probabilité de 1/32 pour seditio == 0.50
+etc.
 
+random (denom) == 0 où denom = 2 ** ( 10 ×( u - seditio ))
 
+Par conséquent, la croissance de luxus implique des révoltes populaires de plus en plus fréquentes,
+ puis une probabilité de plus en plus forte de révolution.
 
+***
 
 De la politique intérieure du stratège
 
