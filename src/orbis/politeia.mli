@@ -37,10 +37,20 @@ type arkhe =
 | Anarchy
 (** Détenteur du pouvoir exécutif *)
 
+type summa =
+| Anarkhia
+| Feudalism
+| Respublica
+| Plutocracy
+| Regnum
+(** résumé du régime politique *)
+
+
 type natio =
   {
   p          : t;
   poleis     : bool;
+  latifundium: float;
   writing    : bool;
   metallurgy : bool;
   agriCopia  : float;
@@ -57,6 +67,7 @@ val has_boule   : t -> bool
 val to_string : t -> string
 val dominus   : t -> dominus
 val arkhe     : t -> arkhe
+val summa     : t -> summa
 
 val anarchy : t
 val update  : natio -> t

@@ -249,6 +249,7 @@ let pNatio n =
 let paNatio cl n = ( {
   Politeia.p          = politeia n;
   Politeia.poleis     = (match cl with e::q -> true | [] -> false) ;
+  Politeia.latifundium= latifundium n;
   Politeia.writing    = List.mem Ars.WRI (artes n);
   Politeia.metallurgy = List.mem Ars.MET (artes n);
   Politeia.agriCopia  = agriCopia n;

@@ -35,6 +35,13 @@ type arkhe =
 | Anarchy
 (** Type de pouvoir exécutif national *)
 
+type summa =
+| Anarkhia
+| Feudalism
+| Respublica
+| Plutocracy
+| Regnum
+
 type nid = Nid.t
 
 type t = 
@@ -57,6 +64,7 @@ type natio =
   {
   p          : t;
   poleis     : bool;
+  latifundium: float;
   writing    : bool;
   metallurgy : bool;
   agriCopia  : float;
@@ -65,16 +73,19 @@ type natio =
   }
 (* paramètres du calcul de la politeia *)
 
+let summa p = match dominus p, p.arkhe, p.poleis with
+| Demos, Anarchy, _ -> Anarkhia
+| _    , Anarchy, _ -> Feudalism
+| Demos, Council, _ -> Respublica
+| _    , Council, _ -> Plutocracy
+| _    , Monarch, _ -> Regnum
 
-let to_string p = match dominus p, p.arkhe, p.poleis with
-| Demos,  Anarchy, _ -> "Anarchy"
-| _    ,  Anarchy, _ -> "Feudalism"
-(*| Demos,  Anarchy, true  -> "Democratic cities"*)
-(*| Aristoi,Anarchy, true  -> "Aristocratic cities"*)
-| Demos  ,Council, _ -> "Republic"
-| _      ,Council, _ -> "Plutocracy"
-| _      ,Monarch, _ -> "Monarchy"
-(*| _                      -> "unknown"*)
+let to_string p = match summa p with
+| Anarkhia    -> "Anarkhia"  
+| Feudalism   -> "Feudalism"    
+| Respublica  -> "Respublica"     
+| Plutocracy  -> "Plutocracy"     
+| Regnum      -> "Regnum"    
 
 let anarchy = { poleis = false; boule = false ; latifundium = 0. ; arkhe = Anarchy }
 
@@ -89,7 +100,7 @@ let next_arkhe n =
   | Demos, Anarchy -> if n.writing 
                       && let x = famine n.agriCopia * n.sophia
                          in Random.int 100 < iof x 
-                      then Council (* passage en république *)
+                      then Council
                       else Anarchy
   | _    , arkhe   -> arkhe
 
@@ -100,7 +111,8 @@ let seditio n = 0
 let update n = 
   {
   n.p with
-  poleis  = n.poleis;
-  arkhe   = next_arkhe n;
+  poleis       = n.poleis;
+  latifundium  = n.latifundium;
+  arkhe        = next_arkhe n;
   }
 

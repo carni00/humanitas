@@ -53,7 +53,7 @@ let next = function
 
 
 (*let list = [AGR]*)
-let list = [AGR; MET]
+let list = [AGR; MET; WRI]
 (*let list = [AGR; MET; WRI; NAV; GUN; STE; CMB; ELE]*)
 let beginList = [AGR]
 
