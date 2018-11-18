@@ -8022,3 +8022,8 @@ Politeia.summma
 
 
 227.bru.27.08H06
+Tlist.filter_and_map
+Natio.inventiones
+
+
+227.bru.27.09H04

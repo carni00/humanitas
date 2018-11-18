@@ -32,6 +32,11 @@ type t =
 | CMB 
 | ELE
 
+type cognitio = [
+| `inventio 
+| `propagatio
+]
+
 
 val eff : t list -> t -> float
 

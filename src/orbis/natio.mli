@@ -100,6 +100,7 @@ val jNatio  : t -> Junctiones.natio
 val imNatio : t -> Im.natio
 val pNatio  : t -> Partitio.natio
 
+val inventiones   : t -> Partitio.Record.t -> Ars.t list -> (Ars.cognitio * Ars.t) list 
 val update   : G.Natio.t -> Junctiones.Natio.t -> Civitas.t list -> t -> Partitio.Record.t -> Partitio.t -> Partitio.t -> Ars.t list -> t
 
 val create : Rm.t -> Im.t -> G.t -> Nid.t -> Civitas.t -> t

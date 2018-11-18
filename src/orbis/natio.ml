@@ -281,25 +281,23 @@ let regio n e lat lon alt coast brouillards =
 
 (******************************************* inventiones ***************************************************)
 
-type cognitio = [
-| `inventio
-| `propagatio
-]
-
-let inventiones pa(*previous artes*) politeia sophia inst plebs e_sapientia proxArtes =
+let inventiones n pr proxArtes =
+  let pa = artes n in
   let rand x = Random.int (max 1 (iof x)) = 0 in
   let v = 4. in (* vitesse de découverte *)
   let f ars =
     if not (List.mem ars pa)
     then
       let lev x = foi (Ars.level ars) * (10. ** x)  in
-      if ( sophia * 100. > lev 0. )
+      if ( (sophia n) * 100. > lev 0. )
       && (      ars =Ars.MET (* pas de prérequis pour découvrir la métallurgie *)
-          || ( ars =Ars.WRI && Politeia.is_civilized politeia ) 
+          || ( ars =Ars.WRI && Politeia.is_civilized (politeia n) ) 
           || ( ars!=Ars.WRI && List.mem Ars.MET pa ) )
       then
-        if (List.mem ars proxArtes && rand (lev (6. - v) / e_sapientia / inst)) then Some (`propagatio, ars) (*diffusion*)
-        else if (rand (lev (7. - v) / e_sapientia / log plebs)) then Some (`inventio, ars)
+        let inst = instrumentum n in
+        let e_sap= P.sap (P.Record.fructus pr) in
+        if (List.mem ars proxArtes && rand (lev (6. - v) / e_sap / inst)) then Some (`propagatio, ars) (*diffusion*)
+        else if (rand (lev (7. - v) / e_sap / log (plebs n) )) then Some (`inventio, ars)
         else None
       else None
     else None

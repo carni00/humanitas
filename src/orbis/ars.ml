@@ -36,6 +36,11 @@ type t =
 | CMB 
 | ELE
 
+type cognitio = [
+| `inventio 
+| `propagatio
+]
+
 
 let first = AGR
 
