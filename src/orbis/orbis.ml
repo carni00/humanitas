@@ -78,7 +78,8 @@ let update orbis (sl:StrategicaList.t) =
   let rl   = Nil.map2 Partitio.Record.compute pl pnl in
   let luc  = Lucrum.compute n_g n_j nil rl in
   let pal  = Nil.map Proxima.proxArtes o.proximaeList in
-  let n_nl = NatioList.update gnl jnl cl nl rl luc pl pal in
+  let inl  = Nil.map3 Natio.inventiones (nl :> Natio.t Nid.Nil.t) rl pal in
+  let n_nl = NatioList.update gnl jnl cl nl rl luc pl inl in
   let n_pl = Nid.Nil.init (fun i -> Proxima.proximae n_nl (G.pil nil n_g i)) nil in
     {
     orbis with

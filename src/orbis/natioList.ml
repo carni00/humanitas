@@ -55,12 +55,12 @@ let create rm im g cl = Nil.mapi (N.create rm im g) cl
 (* ce que l’on sait des proximae *)
 
 
-let update gnl jnl cl nl fl luc pl pal =
+let update gnl jnl cl nl fl luc pl inl =
   let f g j n p pa =
     let nid = Natio.nid n in
     let ncl = CivitasList.filter cl nid in
     N.update g j ncl n (Nid.Nil.nth fl nid) (Lucrum.lucrum luc nid) p pa in
-  Nil.map5 f gnl jnl nl pl pal
+  Nil.map5 f gnl jnl nl pl inl
 
 
 let politeia = nf N.politeia

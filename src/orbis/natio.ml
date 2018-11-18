@@ -306,7 +306,7 @@ let inventiones n pr proxArtes =
 (* techniques découvertes *)
 
 (******************************************* n_artes ***************************************************)
-
+(*
 let n_artes pa(*previous artes*) politeia sophia inst plebs e_sapientia proxArtes =
   let rand x = Random.int (max 1 (iof x)) = 0 in
   let v = 4. in (* vitesse de découverte *)
@@ -321,20 +321,24 @@ let n_artes pa(*previous artes*) politeia sophia inst plebs e_sapientia proxArte
                  (rand (lev (7. - v) / e_sapientia / log plebs)) (*invention*)
             || (List.mem ars proxArtes && rand (lev (6. - v) / e_sapientia / inst)) (*diffusion*)
                ) ) 
-  in List.filter f Ars.list
+  in List.filter f Ars.list*)
 (* techniques découvertes *)
+
+  
 
 (******************************************* NATIO UPDATE ***************************************************)
 
-let update gn jn cl n(*natio*) pr luc p(*partitio*) pArtes = 
+let update gn jn cl n(*natio*) pr luc p(*partitio*) inventiones = 
   match G.Natio.choraAmp gn with
   | 0. -> kill n
   | _ -> 
   let d  = Dx.update  n.fd (G.Natio.plebs gn) in
   (* la nouvelle démographie est le « produit » de la forward demographie de l’année précédente et de la géographie nationale présente (perte de regiones ?) *)
   let fd = Dx.preview d  (P.cibus luc) (sophia n) (fides n) (facultas n) (P.mil p) 0. in
-  let artes = n_artes (artes n) (politeia n) (sophia n) (instrumentum n) (plebs n) (P.sap (P.Record.fructus pr)) pArtes in
-(*  let artes = (artes n) in*)
+  let artes = 
+    let rec f = function [] -> (artes n) | (cognitio, ars) :: q -> (f q) @ [ ars ] in 
+    f (List.rev inventiones) in 
+    (* mise à jour des artes, avec conservation de l’ordre "normal" des artes *)
   let k  = Aedificium.update (aeNatio n artes pr luc) in
   { 
   n with
