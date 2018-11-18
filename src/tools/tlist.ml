@@ -178,6 +178,13 @@ let nFilter g l =
 (* filter en fonction du rang dans la liste *)
 
 
+let rec filter_and_map g = function
+  | []     -> []
+  | e :: q -> ( match (g e) with Some t -> t :: filter_and_map g q 
+                               | None   ->      filter_and_map g q  )
+(* filter && map a list *)
+
+
 let filter_n g l =
   let rec f n = function
   | [] -> []

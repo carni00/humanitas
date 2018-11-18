@@ -279,7 +279,35 @@ let regio n e lat lon alt coast brouillards =
     else Incognita
 (* la regio (lat,lon,alt,coast) est-elle connue de la natio n *)
 
-(******************************************* NATIO UPDATE ***************************************************)
+(******************************************* inventiones ***************************************************)
+
+type cognitio = [
+| `inventio
+| `propagatio
+]
+
+let inventiones pa(*previous artes*) politeia sophia inst plebs e_sapientia proxArtes =
+  let rand x = Random.int (max 1 (iof x)) = 0 in
+  let v = 4. in (* vitesse de découverte *)
+  let f ars =
+    if not (List.mem ars pa)
+    then
+      let lev x = foi (Ars.level ars) * (10. ** x)  in
+      if ( sophia * 100. > lev 0. )
+      && (      ars =Ars.MET (* pas de prérequis pour découvrir la métallurgie *)
+          || ( ars =Ars.WRI && Politeia.is_civilized politeia ) 
+          || ( ars!=Ars.WRI && List.mem Ars.MET pa ) )
+      then
+        if (List.mem ars proxArtes && rand (lev (6. - v) / e_sapientia / inst)) then Some (`propagatio, ars) (*diffusion*)
+        else if (rand (lev (7. - v) / e_sapientia / log plebs)) then Some (`inventio, ars)
+        else None
+      else None
+    else None
+
+  in Tlist.filter_and_map f Ars.list
+(* techniques découvertes *)
+
+(******************************************* n_artes ***************************************************)
 
 let n_artes pa(*previous artes*) politeia sophia inst plebs e_sapientia proxArtes =
   let rand x = Random.int (max 1 (iof x)) = 0 in
@@ -298,6 +326,7 @@ let n_artes pa(*previous artes*) politeia sophia inst plebs e_sapientia proxArte
   in List.filter f Ars.list
 (* techniques découvertes *)
 
+(******************************************* NATIO UPDATE ***************************************************)
 
 let update gn jn cl n(*natio*) pr luc p(*partitio*) pArtes = 
   match G.Natio.choraAmp gn with
