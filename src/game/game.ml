@@ -126,4 +126,10 @@ puis calcul des stratégies en fonction de l'orbis (stratégie par défaut pour 
 let update_orbis game int = Ext.applique cycle game int
 
 
- 
+let update_till_next_event game0 =
+  let rec test game = match game.orbis.Orbis.eventusNil with
+  | [] -> test (cycle game)
+  | _  -> game in
+  test (cycle game0)
+(* on passe un tour, puis on teste s’il y a des eventi, sinon on repasse un tour ... *)
+

@@ -48,6 +48,7 @@ type t = (* monde : ne change qu'en cas de end_of_turn *)
   junctiones : Junctiones.t;
   sd         : Strategica.Data.d;
   flexuraeList : Flexurae.t Nil.t;
+  eventusNil : Eventus.t Nil.t;
 (*  vetera : Vetera.t;*)
 (* données variable du monde *)
   }
@@ -57,13 +58,13 @@ let regioMap o = o.regioMap
 
 
 let update orbis (sl:StrategicaList.t) =
-  let o  = orbis in
-  let rm = o.regioMap in
-  let e  = o.espace in
-  let j  = o.junctiones in
-  let im = o.imperiumMap in
-  let nil= o.natioIdList in
-  let nl = o.natioList in
+  let o   = orbis in
+  let rm  = o.regioMap in
+  let e   = o.espace in
+  let j   = o.junctiones in
+  let im  = o.imperiumMap in
+  let nil = o.natioIdList in
+  let nl  = o.natioList in
   let n_turn = Date.inc o.turn in
   let sd   = SD.make (sl:> Strategica.t Nid.Nil.t) in
   let n_j  = Junctiones.update j (NatioList.jNatioList nl) (SD.jStrategies sd) in
@@ -92,7 +93,8 @@ let update orbis (sl:StrategicaList.t) =
     lucrum      = luc;
     civitasList = cl;
     sd          = sd;
-    flexuraeList = Nid.Nil.map2 (Flexurae.update) (n_nl :> Natio.t Nil.t) o.flexuraeList ;
+    flexuraeList= Nid.Nil.map2 (Flexurae.update) (n_nl :> Natio.t Nil.t) o.flexuraeList ;
+    eventusNil  = [];
 (*  vetera = Vetera.cat o.vetera n_vetera;*)
     }
 (* mise à jour de l'humanité résultant de l'écoulement d'une année *)
@@ -133,6 +135,7 @@ let create forme size =
     natioIdList = nil;
     sd = SD.of_nil nil;
     flexuraeList = Nid.Nil.init (fun i -> Flexurae.make) nil ;
+    eventusNil  = [];
 (*    vetera = [];*)
     }
   in orbis
