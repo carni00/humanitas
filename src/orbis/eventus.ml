@@ -56,17 +56,18 @@ let make_eventus nl actio date acteur = {
   spectateurs = NatioList.pil nl acteur ;
 }
 
-(*
-let rec concat date nl actio_fun (nil:> (nid * 'a list) list) = 
-  let rec of_list actio_fun acteur = function
+
+(*let rec concat date nl to_actio (nil:> (Nid.t * 'a list) list) = *)
+let rec concat date nl to_actio nil =
+  let rec list_compute to_actio acteur = function
     | []     -> []
-    | e :: q -> make_eventus nl (actio_fun e) date acteur :: of_list actio_fun acteur q in
-  let rec f = function
+    | e :: q -> make_eventus nl (to_actio e) date acteur :: list_compute to_actio acteur q in
+  let rec nil_compute = function
     | []              -> []
-    | (nid,list) :: q -> of_list actio_fun nid list :: of_nil q in
-  List.concat (f nil)
+    | (nid,list) :: q -> list_compute to_actio nid list :: nil_compute q in
+  List.concat (nil_compute nil)
 (* concaténation de data annuelle en liste d’eventus *)
-*)
+
 
 module Vetera = struct
 
