@@ -8033,3 +8033,9 @@ Natio.inventiones
 
 227.bru.27.10H36
 227.fri.01.21H53
+module Eventus
+orbis.eventusNil
+game.update_till_next_eventus
+
+
+227.fri.12.13H48

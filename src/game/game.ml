@@ -131,5 +131,5 @@ let update_till_next_event game0 =
   | [] -> test (cycle game)
   | _  -> game in
   test (cycle game0)
-(* on passe un tour, puis on teste s’il y a des eventi, sinon on repasse un tour ... *)
+(* on passe un tour, puis on teste s’il y a des eventus, sinon on repasse un tour ... *)
 

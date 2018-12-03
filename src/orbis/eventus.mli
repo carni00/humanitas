@@ -22,20 +22,24 @@
  *)
 
 
-type actio =
-| Civitas   of Civitas.t (* fondation de cité *)
-| Inventio  of Ars.t (* découverte d’ars *)
-| Cognitio  of Ars.t (* connaissance d’ars par diffusion  *)
-| Mutatio   of Politeia.summa (* changement de régime *)
-| Bellum    of Nid.t (* déclaration de guerre à ..*)
-| Offensive of Nid.t (* passage à l’offensive *)
-| Pax       of Nid.t (* paix conclue avec .. *)
+module Actio : sig
+  type t =
+  | Civitas   of Civitas.t (* fondation de cité *)
+  | Inventio  of Ars.t (* découverte d’ars *)
+  | Propagatio of Ars.t (* connaissance d’ars par diffusion  *)
+  | Mutatio   of Politeia.summa (* changement de régime *)
+  | Bellum    of Nid.t (* déclaration de guerre à ..*)
+  | Offensive of Nid.t (* passage à l’offensive *)
+  | Pax       of Nid.t (* paix conclue avec .. *)
+end
 
+type t
+  
+(*val concat : Date.t -> (Ars.cognitio * Ars.t) list Nid.Nil.t -> t*)
 
-type t = {
-  actio   : actio;
-  acteur  : Nid.t;
-  date    : Date.t;
-}
+module Vetera : sig
 
+  type t 
+
+end
 

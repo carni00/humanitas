@@ -50,10 +50,6 @@ let nil nl = fst (List.split nl)
 let create rm im g cl = Nil.mapi (N.create rm im g) cl
 (*creation de la nl à partir de la cl*)
 
-(*let proximaList g nl i =*)
-(*  Nil.init (fun i->nf N.proxima nl i) pil*)
-(* ce que l’on sait des proximae *)
-
 
 let update gnl jnl cl nl fl luc pl inl =
   let f g j n p pa =
@@ -69,6 +65,7 @@ let vis      = nf N.vis
 let pNatio   = nf N.pNatio
 let origo    = nf N.origo
 let urbsRid  = nf N.urbsRid
+let pil      = nf N.pil
 
 let pNatioList nl   = Nil.map N.pNatio nl
 let jNatioList nl   = Nil.map N.jNatio nl
@@ -76,7 +73,6 @@ let origoList nl    = Nil.map N.origo nl
 let imNatioArray nl = Nia.map_of_nil N.null N.imNatio nl
 let instArray nl    = Nia.map_of_nil N.null N.instrumentum nl
 
-(*let map  x = Nil.smap2 N.null N.null x*)
 
 (*let map2 x = Nil.smap2 N.null N.null x*)
 (* permet aux autres modules de parcourir deux t comme deux natio list *)

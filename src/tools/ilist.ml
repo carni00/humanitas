@@ -23,6 +23,7 @@
 
   type ('k, 'a) t = ('k*'a) list
   let null  = [] 
+  let add    l n a = (n,a) :: l
   let nth    l n = List.assoc n l
   let snth a l n = try (List.assoc n l) with Not_found -> a
   let to_list l  = List.map (fun (key,a)-> a) l

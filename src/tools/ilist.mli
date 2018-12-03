@@ -26,6 +26,7 @@
   type ('k, 'a) t = private ('k*'a) list
   val null : ('k, 'a) t
   (** empty ilist *)
+  val add  : ('k, 'a) t -> 'k -> 'a -> ('k, 'a) t 
   val nth  : ('k, 'a) t -> 'k -> 'a
   (** [nth l k] returns the leftmost value associated with key [k]. Raises [Not_found] if there is none.*)
   val snth : 'a -> ('k, 'a) t -> 'k -> 'a

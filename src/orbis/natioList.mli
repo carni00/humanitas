@@ -41,6 +41,7 @@ val vis      : t -> nid -> float
 val pNatio   : t -> nid -> Partitio.natio
 val origo    : t -> nid -> Rid.t*Date.t
 val urbsRid  : t -> nid -> Rid.t
+val pil      : t -> nid -> Nid.t list
 
 val jNatioList : t -> Junctiones.natio Nid.Nil.t
 val pNatioList : t -> Partitio.natio Nid.Nil.t
