@@ -20,7 +20,7 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  *)
-open Std
+open Humanitas_tools.Std
 
 type climat =
 | Arid
@@ -144,7 +144,7 @@ let hugrosFun ~h ~p =  p + match h with
 
 let inlandsisTemp = (-10)
 
-let is_glacier ~alt ~t ~p = t<= inlandsisTemp
+let is_glacier ~alt:_ ~t ~p:_ = t<= inlandsisTemp
 (* température faible et pluvia > fonte *)
 
 let is_seaIce ~alt ~t = alt<0 && t<=(-15)
@@ -164,7 +164,7 @@ let physis ~alt ~h ~t ~p =
   else
   let sMax = if t < (-5) then (20+t)*2
              else             (35+t) in
-  cut 0 sMax (ariditas t hugros)
+  cut 0 sMax (ariditas ~t ~p:hugros)
 (*aptitude de la regio au développement de la végétation naturelle*)
 (*indice calqué sur l’indice d’aridité, mais en y ajoutant l'effet négatif du froid extrême *)
 
@@ -206,11 +206,11 @@ let hospitalitasFun t hydros physis =
 (* hospitalité de la regio = indice de productivité du travail potentielle, instrumentum non compris *)
 
 
-let is_passable hugros glacier seaIce =
-     hugros < 2000 
-  && not glacier
-  && not seaIce
-(* les marécages, jungles, glaciers, et banquises ne peuvent être traversés par l’exercitus *)
+(* let is_passable hugros glacier seaIce =
+ *      hugros < 2000 
+ *   && not glacier
+ *   && not seaIce
+ * (\* les marécages, jungles, glaciers, et banquises ne peuvent être traversés par l’exercitus *\) *)
 
 let fluxus hydros = match hydros with
 | River record -> record.fluxus 
@@ -227,11 +227,11 @@ let mountain r = r.mountain
 let altitude r = altitudeFun r.alt
 let thermos  r = r.thermos
 let pluvia   r = r.pluvia
-let hugros   r = hugrosFun r.hydros r.pluvia
-let ariditas r = ariditas (thermos r) (hugros r)
-let physis   r = physis  r.alt r.hydros (thermos r) r.pluvia
-let climat   r = climat  (altitude r) (thermos r) (pluvia r)
-let climax   r = climax  (altitude r) (hydros r) (thermos r) (pluvia r)
+let hugros   r = hugrosFun ~h:r.hydros ~p:r.pluvia
+let ariditas r = ariditas ~t:(thermos r) ~p:(hugros r)
+let physis   r = physis  ~alt:r.alt ~h:r.hydros ~t:(thermos r) ~p:r.pluvia
+let climat   r = climat  ~altitude:(altitude r) ~t:(thermos r) ~p:(pluvia r)
+let climax   r = climax  ~altitude:(altitude r) ~h:(hydros r) ~t:(thermos r) ~p:(pluvia r)
 let physisValue rs r = physis r * rs
 let hospitalitas r = hospitalitasFun (thermos r) (hydros r) (physis r)
 

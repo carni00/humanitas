@@ -21,7 +21,8 @@
 
  *)
 
-open Std
+open Humanitas_tools
+open Humanitas_tools.Std
 
 module Ria = Rid.Array
 module E = Espace
@@ -55,14 +56,14 @@ let continentalite alt l =
 
 
 let add_chains (e:E.t) (waa:int Ria.t) = (*working altitude array*)
-  let s,w,h = E.dimir e in
+  let s,w,_ = E.dimir e in
   let res = E.resolution e in
   let wda = Ria.make s false in (* working dorsale array *)
   let legaldir(d) = d mod 4 in
   let rid = ref (Rid.none) in
   let dir = ref 0 in
   let alt rid = Ria.get waa (!rid) in
-  let _ = for chain=0 to (w/4) (*plutot fn de w que de s : il s’agit plus de créer des Am du sud que des caps*)
+  let _ = for _ =0 to (w/4) (*plutot fn de w que de s : il s’agit plus de créer des Am du sud que des caps*)
     do
     dir:=Random.int(4); (*4 voisins=>4 directions possibles*)
     rid:=E.Cylinder.randomRid ~polarExclusion res ; (*il faut une sélection initiale *)
@@ -98,7 +99,7 @@ let prim_agglo_c =
 
 
 let prim_agglo (e:E.t) = 
-  let s,w,h = E.dimir e in
+  let s,_,_ = E.dimir e in
   let proba = prim_agglo_c in
   let wa = Ria.make s (ocean) in (*working array*)
   let alt = Ria.get wa in (*on lit l’array sur lequel on travaille*)
@@ -134,7 +135,7 @@ let cyclic_agglo_c (s) =
 (*constantes des passages*)
 
 let passage e alt wa =
-  let s,w,h = E.dimir e in
+  let s,w,_ = E.dimir e in
   let proba, alt_proba, denom = cyclic_agglo_c s in
   for i = 2*w to (s-1-2*w)
   do
@@ -155,7 +156,7 @@ let passage e alt wa =
 
 let agglomeration (e:E.t) (wa:t) =
   let ca = Ria.make (E.sir e) (ocean) in  (*copy array*) 
-  let _ = for agglo_i = 1 to 8 
+  let _ = for _  = 1 to 8 
   do
     let _ = Ria.blit wa ca in
     let alt = Ria.get ca in

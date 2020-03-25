@@ -20,7 +20,8 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  *)
-open Std
+open Humanitas_tools
+open Humanitas_tools.Std
 module E = Espace
 
 type regio = {

@@ -85,22 +85,27 @@ val latMin   : float
 
 val hid      : float
 (** hauteur de l’espace en degrés : 160 *)
+
 val wid      : float
 (** largeur de l’espace en degrés : 360 *)
 
 
 val hik      : float
 (** hauteur de l’espace en km : env 17.800 *)
+
 val wik      : float
 (** largeur de l’espace en km : 40.000 *)
+
 val adik     : float
 (** average degree in kms : largeur moyenne en km d’un degré de longitude *)
 
 
 val yxr      : int -> float
 (** latitude (0..90) -> ratio entre la hauteur et la largeur de la regio de cette latitude *)
+
 val latdid   : float -> float -> float
 (** distance en degré de latitude entre deux latitudes *)
+
 val lonEquals : float -> float -> float -> bool
 (** teste l'égalité de deux longitudes (modulo la largeur du monde).
     lonEquals p a b est vraie si a=b à p degrés près *)
@@ -110,27 +115,35 @@ val lonEquals : float -> float -> float -> bool
 
 val resolution : t -> resolution
 val forme : t -> forme
+
 val sir   : t -> int
 (** size in regiones : nombre de regiones composant l’espace *)
+
 val wir   : t -> int
 (** width in regiones *)
+
 val hir   : t -> int
 (** height in regiones *)
+
 val dimir : t -> int*int*int
 (** dimensions in regiones : size, width, height *)
+
 val rw    : ?lat:float -> t -> float
 (** regio width in km *)
+
 val rh    : t -> float
 (** regio height in km *)
+
 val rs    : ?lat:float -> t -> float
 (** regio superficies in km2 *)
+
 val rdim  : ?lat:float -> t -> float*float*float
 
 val centerRid : t -> Rid.t
 (** regio centrale de l’espace *)
+
 val distance : (float*float) -> (float*float) -> float
 (** distance en km entre 2 points définis par lat et lon *)
-
 
 (** {5 création d’espace } *)
 
@@ -147,6 +160,7 @@ val superficie : t -> Rid.t -> float
 
 val latitude : t -> Rid.t -> float
 val longitude: t -> Rid.t -> float
+
 val coords   : t -> Rid.t -> float*float
 (** coordonnées (latitude, longitude) d’une regio *)
 
@@ -179,6 +193,7 @@ module Cylinder : sig
   
   val  rid_of_ryx : resolution -> int -> int -> Rid.t
   val srid_of_ryx : resolution -> int -> int -> Rid.t
+
   val yx_of_rrid : resolution -> Rid.t -> int*int
   (** relation linéaire entre la position (x,y) sur le plan-cylindre et l’indentifiant (rid) de la regio *)
 
@@ -188,17 +203,18 @@ module Cylinder : sig
   val randomRid  : ?polarExclusion:float -> resolution -> Rid.t
   (** renvoie une regio au hasard, avec exclusion éventuelle d’une proportion de latitudes polaires *)
 
-
   val regioWid   : resolution -> float
   (** largeur d’une regio en degré de longitude *)
+
   val regioHid   : resolution -> float
   (** hauteur d’une regio en degré de latitude *)
+
   val regioWik   : resolution -> float -> float
   (** largeur d’une regio en km, en fonction de la latitude *)
+
   val regioHik   : resolution -> float
   (** hauteur d’une regio en km *)
 
   val wir : resolution -> int
   val hir : resolution -> int
-  end
-
+end

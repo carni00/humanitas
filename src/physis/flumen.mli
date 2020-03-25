@@ -20,7 +20,6 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  *)
-open Std
 
 (** Appréhension des cours d’eaux et de leurs affluents comme des arbres *)
 

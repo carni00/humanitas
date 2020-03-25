@@ -23,8 +23,6 @@
 
 (** fonctions relatives à la création des continents en particulier et du relief en général *)
 
-open Std
-
 type t = int Rid.Array.t
 
 val lower_aside : (Rid.t -> int) -> int -> (Rid.t list) -> bool

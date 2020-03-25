@@ -42,7 +42,6 @@ module Array : sig
   val length : 'a t -> int
   val init : int -> (rid -> 'a) -> 'a t     
   val get : 'a t -> rid -> 'a
-  val length : 'a t -> int
   val make : int -> 'a -> 'a t 
   val copy : 'a t -> 'a t
   val blit : 'a t -> 'a t -> unit
@@ -52,5 +51,5 @@ module Array : sig
   val iter2 : ('a -> 'b -> unit) -> 'a t -> 'b t -> unit
   val to_array : 'a t -> 'a array
   val update : (rid -> 'a -> 'a) -> 'a t -> unit
-  end
+end
 
