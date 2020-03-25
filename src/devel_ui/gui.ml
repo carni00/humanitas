@@ -431,7 +431,7 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	    let f = function
 	      | W.Towers -> None
 	      | wid -> Some (Windows.windowPos (Status.windows status) wid) in
-	    let win_pos = Core.Std.Option.bind wid_opt f in
+	    let win_pos = Core.Option.bind wid_opt f in
 	    [ `sFocus win_pos ])
 	  window_focus_changes
 	  status_s

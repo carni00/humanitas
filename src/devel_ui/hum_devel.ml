@@ -63,7 +63,7 @@ let status, gui =
 
 let rien = 
   RS.trace 
-    (fun w -> Printf.printf "status: %s\n%!" (Core.Std.Option.value_map w ~default:"none" ~f:Draw.Window.string_of_id))
+    (fun w -> Printf.printf "status: %s\n%!" (Core.Option.value_map w ~default:"none" ~f:Draw.Window.string_of_id))
     (RS.map (fun s -> Windows.activeWindow (Status.windows s)) status)
 
 let handle_next_event ws pick =

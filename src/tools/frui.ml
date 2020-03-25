@@ -282,7 +282,7 @@ module Make(B : Backend) = struct
 
   let find_window ui wid =
     try List.find (fun w -> w.win_id = wid) ui.windows
-    with Not_found -> Core.Std.failwithf "Frui.find_window: unknown window %s" (B.Window.string_of_id wid) ()
+    with Not_found -> Core.failwithf "Frui.find_window: unknown window %s" (B.Window.string_of_id wid) ()
 
 
   let toolkit ?initial_focus ui_input =
@@ -300,7 +300,7 @@ module Make(B : Backend) = struct
       	  | `key_event e -> Some e
       	  | _ -> None
       	in
-	let g evts = match Core.Std.List.filter_map evts ~f with
+	let g evts = match Core.List.filter_map evts ~f with
 	  | [] -> None
 	  | l -> Some l
 	in
@@ -313,7 +313,7 @@ module Make(B : Backend) = struct
       	  | _ -> None
       	in
       	E.fmap 
-	  (fun x -> some (Core.Std.List.filter_map x f))
+	  (fun x -> some (Core.List.filter_map x f))
 	  keyboard_events
 
       let key_releases ~on =
@@ -323,7 +323,7 @@ module Make(B : Backend) = struct
       	  | _ -> None
       	in
       	E.fmap 
-	  (fun x -> some (Core.Std.List.filter_map x f))
+	  (fun x -> some (Core.List.filter_map x f))
 	  keyboard_events
 
       let mouse_events =
@@ -331,7 +331,7 @@ module Make(B : Backend) = struct
       	  | `mouse_event e -> Some e
       	  | _ -> None
       	in
-	let g evts = some (Core.Std.List.filter_map evts ~f) in
+	let g evts = some (Core.List.filter_map evts ~f) in
       	E.fmap g ui_input
 
       let left_presses ~on =
@@ -624,7 +624,7 @@ module Make(B : Backend) = struct
     |> snd
 
   let div_vertical_layout layout align bbox ws hs dims =
-    let nyexpands = Core.Std.List.count hs ~f:(( = ) `expands) in
+    let nyexpands = Core.List.count hs ~f:(( = ) `expands) in
     let ypositions =
       if nyexpands > 0 then
         div_vertical_fill_layout_ypos (float nyexpands) bbox ws hs dims
@@ -638,7 +638,7 @@ module Make(B : Backend) = struct
         | `center -> (fun w -> center w bbox.left bbox.right)
         | `left -> (fun w -> bbox.left, bbox.left +. w)
         | `right -> (fun w -> bbox.right -. w, bbox.right) in
-      Core.Std.List.map3_exn ws hs dims ~f:(fun w _ (dim_w,_) ->
+      Core.List.map3_exn ws hs dims ~f:(fun w _ (dim_w,_) ->
 	match w with
 	| `expands | `fills -> bbox.left, bbox.right
 	| `tight | `fixed _ -> pos dim_w
@@ -710,7 +710,7 @@ module Make(B : Backend) = struct
     |> snd
 
   let div_horizontal_layout layout align bbox ws hs dims =
-    let nxexpands = Core.Std.List.count ws ~f:(( = ) `expands) in
+    let nxexpands = Core.List.count ws ~f:(( = ) `expands) in
     let xpositions =
       if nxexpands > 0 then
         div_horizontal_fill_layout_xpos (float nxexpands) bbox ws hs dims
@@ -724,7 +724,7 @@ module Make(B : Backend) = struct
         | `center -> (fun h -> center h bbox.top bbox.bottom)
         | `top -> (fun h -> bbox.top, bbox.top +. h)
         | `bottom -> (fun h -> bbox.bottom -. h, bbox.bottom) in
-      Core.Std.List.map3_exn ws hs dims ~f:(fun _ h (_,dim_h) -> 
+      Core.List.map3_exn ws hs dims ~f:(fun _ h (_,dim_h) -> 
 	match h with
 	| `expands | `fills -> bbox.top, bbox.bottom
 	| `tight | `fixed _ -> pos dim_h
@@ -834,7 +834,7 @@ module Make(B : Backend) = struct
       List.append
 	(List.map event_of_window windows)
 	[ E.fmap 
-	    (Core.Std.List.find_map ~f:(function `layout _ -> Some false | _ -> None))
+	    (Core.List.find_map ~f:(function `layout _ -> Some false | _ -> None))
 	    ui_input ]
     )
     |> S.hold true
@@ -859,7 +859,7 @@ module Make(B : Backend) = struct
       List.map (widget_under_mouse_signal pos mouse_pos) d.div_children
 
   let element_under_mouse ui mouse_pos =
-    let open Core.Std in
+    let open Core in
     let is_visible e =
       S.value e.visibility <> `invisible 
       &&
@@ -884,7 +884,7 @@ module Make(B : Backend) = struct
     List.find_map (S.value ui.window_stack) (fun wid ->
       let window = List.find_exn ui.windows ~f:(fun w -> w.win_id = wid) in
       traverse (S.value window.win_contents) 
-      |> Core.Std.Option.map ~f:(fun x -> wid, x)
+      |> Core.Option.map ~f:(fun x -> wid, x)
     )
 
 (* **************************************************************************************
@@ -897,7 +897,7 @@ module Make(B : Backend) = struct
 	then Some elt else None
       | Label _ -> None
       | Div d ->
-	Core.Std.List.find_map d.div_children aux
+	Core.List.find_map d.div_children aux
     in
     aux (v window.win_contents)
 
@@ -926,7 +926,7 @@ module Make(B : Backend) = struct
     in
     { windows ; input ; send_input ; window_stack ;
       outdated_layout = outdated_layout_signal input windows ;
-      focus = S.map (Core.Std.Option.map ~f:(fun x -> x, None)) window_focus },
+      focus = S.map (Core.Option.map ~f:(fun x -> x, None)) window_focus },
     ui_events,
     output
 
@@ -991,7 +991,7 @@ module Make(B : Backend) = struct
 	  | _ -> None
 	)
 	[
-	`mouse_event (m_x,m_y,event,Core.Std.Option.map elt_um ~f:snd) ;
+	`mouse_event (m_x,m_y,event,Core.Option.map elt_um ~f:snd) ;
 	]
     ) ;
     elt_um <> None

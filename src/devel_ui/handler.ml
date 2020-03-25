@@ -191,9 +191,8 @@ let task_list status pick (m, nextEvent) =
   in match nextEvent, atelier_tasks with
   | Key (k, `release), [] ->
     K.(match k with
-    | KEY_k        when (m.rctrl && m.lctrl) -> exit 0
-    | KEY_HOME     when (m.rctrl && m.lctrl) -> [`switch_baby_mode false ]
-    | KEY_END      when (m.rctrl && m.lctrl) -> [`switch_baby_mode false ; `quit ]
+    | KEY_HOME     when (m.lctrl && m.lalt) -> [`switch_baby_mode false ]
+    | KEY_END      when (m.lctrl && m.lalt) -> [`switch_baby_mode false ; `quit ]
     | KEY_TAB   -> [`sFocus (Some W.Alter)]
     | KEY_F11   -> [`switch_fullscreen]
     | KEY_q     -> [`wOpen (W.Quit, W.Default)]

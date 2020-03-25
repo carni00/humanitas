@@ -57,15 +57,16 @@ limite peut être la dimension spatiale de l’État )
   des villes (Jéricho)
   - segmentation de la population par profession
   - maisons rectangulaires non enterrées
-  - hiérarchie sociale (Jacques Cauvin) ==> l’État de Testart ?
+  - hiérarchie sociale (Jacques Cauvin)
 
 Conclusion :
-L’économie agricole permet d’augmenter la densité de population et la création d’agglomération
-humaine jamais vues auparavant.  L’organisation politique et sociale anarchique des sociétés
-apparait insuffisante à la taille de la population de la ville.  Face à ce défi, la puissance
-publique voit ses prérogatives augmenter progressivement ; elle devient plus permanente ; un segment
-de la population forme un corps de fonctionnaires. Ils inventent l’écriture pour leurs besoins
-d’administration.  C’est en ce sens qu’apparaissent l’État et de nouvelles hiérarchies sociales.
+L’économie agricole permet d’augmenter :
+  - nécessairement, les rendements du sol et la densité de population.
+  - possiblement, sur les terres les plus fertiles, la productivité du travail
+
+Au-delà d'une certaine densité de population et productivité, on peut avoir la cité-État :
+  - segmentation de la population par profession
+  - administration publique des stocks -> invention de l’écriture
 
 La propriété lucrative - *latifundium - apparaît bien plus tard, entre 3000 et 2900BC à Sumer. Il
 s’agit d’une appropriation privative progressive d’une ferme d’État par le haut-fonctionnaire qui en
@@ -157,10 +158,11 @@ La politeia est l’organisation politique et sociale de la natio, elle peut êt
 plus ou moins égalitaire ou aristocratique, anarchique ou centralisée.  
 
 Le latifundium est la base matérielle du pouvoir de l’aristocratie sur la natio.
-Il lui permet de s’accaparer une part du fructus : le luxus.
-La politeia est donc aristocratique en proportion du taux de latifundium.
+Il lui permet de prélever une part du fructus : le luxus.
+La politeia est par conséquent aristocratique en proportion du taux de latifundium,
+entendu comme le rapport entre le latifundium et l’ensemble des terres agricoles.
 
-Les politeia centralisée sont dirigées par un conseil ou un monarque, lequel siège
+Les politeia centralisées sont dirigées par un conseil ou un monarque, lequel siège
 dans une capitale.
 Un gouvernement centralisé permet :
 1. de coordonner les forces armées nationales
@@ -179,7 +181,7 @@ La regio ou siège le gouvernement impérial est appelée URBS/capitale.
 
 Un empire est initialement dirigé par un conseil (oligarchie).
 Le pouvoir de commandement peut être confié à un seul (monarchie).
-Le rôle du joueur est donc la direction d’un empire.
+Le rôle du joueur est celui du monarque : la direction d’un empire.
 
 On utilisera parfois les termes suivants à propos des politeia :
 - anarchie (égalitaire et anarchique)
@@ -219,7 +221,7 @@ l’écriture.
 de cité)
 
 La cité peut se doter ou non d’une boulê, c’est-à-dire d’instutions organisant 
-l’exercice du pouvoir politique par le peuple.
+l’exercice démocratique du pouvoir politique.
 
 Dans les cités dépourvues de boulê, si fides atteint un certain niveau (0.10),
  les élites dirigeantes développent l’affectatio religio pour accroitre encore
@@ -237,7 +239,7 @@ gouvernement centralisé / se dote d’une capitale. Karakorum, ville-capitale f
 l’empereur, étant le contre-exemple.
 
 Un gouvernement central au dessus de cités démocratiques est toujours un conseil
-dépourvu du pouvoir de partage de la capacité sociale.
+dépourvu du pouvoir de prélèvement impérial sur la capacité sociale.
 
 En d’autres termes, la forme monarchique du gouvernement central, parce qu’on l’a
 définie comme détentrice du partage de la capacité sociale, est incompatible 
@@ -250,6 +252,23 @@ pour la même raison.
 
 Les princes qui souhaitent durer devront par conséquent veiller à prévenir la
 constitution de boulê dans les cités.
+
+Les nationes peuvent donc être
+- poliade
+- démocratique : cité + boulê
+- tribale      : pas de cité
+
+On dira des nationes qu’elles sont :
+- primitive     (tribale, égalitaire, et anarchique)
+- féodale       (tribale, latifundiaire et anarchique) (après disparition des cités)
+- poliade       (poliade, égalitaire, et anarchique)
+- aristocratique(poliade, latifundiaire, et anarchique)
+- démocratique  (démocratique, égalitaire, et anarchique)
+- républicaine  (démocratique, égalitaire, et centralisé)
+- impériale     (poliade ou tribale, latifundiaire ou non, et centralisé)
+
+Note : la démocratie exclut le latifundium.
+
 
 *** 8 nivose an 225
 
