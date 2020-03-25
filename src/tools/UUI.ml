@@ -1,6 +1,6 @@
 open React
 open Batteries
-open Printf
+(* open Printf *)
 
 type mouse_state = {
   m_left : bool ;
@@ -18,13 +18,13 @@ type box = {
   bottom : float
 }
 
-let string_of_box b = 
-  sprintf
-    "{ left = %g ; right = %g ; top = %g ; bottom = %g }"
-    b.left b.right b.top b.bottom
+(* let string_of_box b = 
+ *   sprintf
+ *     "{ left = %g ; right = %g ; top = %g ; bottom = %g }"
+ *     b.left b.right b.top b.bottom *)
 
-let print_box b = 
-  print_string (string_of_box b)
+(* let print_box b = 
+ *   print_string (string_of_box b) *)
 
 (* STATE DATATYPE *)
 type state = [ `active | `frozen | `invisible | `inactive ]
@@ -113,11 +113,11 @@ let c x = S.const x
 
 let bind_s s f = S.switch (S.map f s)
 
-let bind_e s f = 
-  let s' = S.map ~eq:( == ) f s in
-  let init = S.value s'
-  and changes = S.changes s' in
-  E.switch init changes
+(* let bind_e s f = 
+ *   let s' = S.map ~eq:( == ) f s in
+ *   let init = S.value s'
+ *   and changes = S.changes s' in
+ *   E.switch init changes *)
 
 module type Backend = 
 sig
@@ -276,16 +276,16 @@ module Make(B : Backend) = struct
 	| `bottom -> max (box.bottom -. h) box.bottom, box.bottom
     in { left ; right ; top ; bottom }
 
-  let store_pack_box w h bbox contents_pos = 
-    let left, right = match w with
-	`tight -> contents_pos.left, contents_pos.right
-      | `fills | `expands -> bbox.left, bbox.right
-      | `fixed w -> center w bbox.left bbox.right
-    and top, bottom = match h with
-	`tight -> contents_pos.top, contents_pos.bottom
-      | `fills | `expands -> bbox.top, bbox.bottom
-      | `fixed h -> center h bbox.top bbox.bottom in
-    { left ; right ; top ; bottom }
+  (* let store_pack_box w h bbox contents_pos = 
+   *   let left, right = match w with
+   *       `tight -> contents_pos.left, contents_pos.right
+   *     | `fills | `expands -> bbox.left, bbox.right
+   *     | `fixed w -> center w bbox.left bbox.right
+   *   and top, bottom = match h with
+   *       `tight -> contents_pos.top, contents_pos.bottom
+   *     | `fills | `expands -> bbox.top, bbox.bottom
+   *     | `fixed h -> center h bbox.top bbox.bottom in
+   *   { left ; right ; top ; bottom } *)
 
   let rec adjust_props parent_props w = match w.kind with
     | WSignal ws ->
@@ -403,7 +403,7 @@ module Make(B : Backend) = struct
 
 
   let hpack_centered_with_spaces_layout box dims = 
-    let total_w = List.fold_left (fun accuw (w,h) -> accuw +. w) 0. dims 
+    let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims 
     and n = List.length dims in
     let nspaces = float (n + 1) in
     let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
@@ -416,23 +416,23 @@ module Make(B : Backend) = struct
       (box.right -. xspace /. 2., [])
     |> snd
 
-  let hpack_centered_layout box dims = 
-    let total_w = List.fold_left (fun accuw (w,h) -> accuw +. w) 0. dims in
-    let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
-    let xspace = (box.right -. box.left -. total_w *. xscale) in
-    List.fold_right
-      (fun (w,_) (cur_x, accu) ->
-	cur_x -. w *. xscale,
-	(cur_x -. w *. xscale, cur_x) :: accu)
-      dims
-      (box.right -. xspace /. 2., [])
-    |> snd
+  (* let hpack_centered_layout box dims = 
+   *   let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims in
+   *   let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
+   *   let xspace = (box.right -. box.left -. total_w *. xscale) in
+   *   List.fold_right
+   *     (fun (w,_) (cur_x, accu) ->
+   *       cur_x -. w *. xscale,
+   *       (cur_x -. w *. xscale, cur_x) :: accu)
+   *     dims
+   *     (box.right -. xspace /. 2., [])
+   *   |> snd *)
 
   let hpack_justified_with_spaces_layout box = function
     | [] -> []
-    | h :: [] -> [ box.left, box.right ]
+    | _ :: [] -> [ box.left, box.right ]
     | dims ->
-      let total_w = List.fold_left (fun accuw (w,h) -> accuw +. w) 0. dims 
+      let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims 
       and n = List.length dims in
       let nspaces = float (n - 1) in
       let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
@@ -446,7 +446,7 @@ module Make(B : Backend) = struct
       |> snd
 
   let hpack_centered_layout box dims = 
-    let total_w = List.fold_left (fun accuw (w,h) -> accuw +. w) 0. dims in
+    let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims in
     let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
     let xspace = (box.right -. box.left -. total_w *. xscale) in
     List.fold_right
@@ -458,7 +458,7 @@ module Make(B : Backend) = struct
     |> snd
 
   let hpack_left_layout box dims = 
-    let total_w = List.fold_left (fun accuw (w,h) -> accuw +. w) 0. dims in
+    let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims in
     let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
     let xspace = (box.right -. box.left -. total_w *. xscale) in
     List.fold_right
@@ -471,7 +471,7 @@ module Make(B : Backend) = struct
 
 
   let hpack_right_layout box dims = 
-    let total_w = List.fold_left (fun accuw (w,h) -> accuw +. w) 0. dims in
+    let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims in
     let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
     List.fold_right
       (fun (w,_) (cur_x, accu) ->
@@ -482,7 +482,7 @@ module Make(B : Backend) = struct
     |> snd
 
   let hpack_justified_layout box dims =
-    let total_w = List.fold_left (fun accuw (w,h) -> accuw +. w) 0. dims in
+    let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims in
     let xscale = (box.right -. box.left) /. total_w in
     List.fold_right
       (fun (w,_) (cur_x, accu) ->
@@ -493,7 +493,7 @@ module Make(B : Backend) = struct
     |> snd
     
   let hpack_fill_layout nxexpands box props dims =
-    let total_w = List.fold_left (fun accuw (w,h) -> accuw +. w) 0. dims in
+    let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims in
     let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
     let xspace = (box.right -. box.left -. total_w *. xscale) /. nxexpands in
     List.fold_right2
@@ -530,7 +530,7 @@ module Make(B : Backend) = struct
 	(fun props (_,h) -> if fills props.h then bbox.top, bbox.bottom else pos h) 
 	props dims
     in
-    ((List.enum xpositions, List.enum ypositions) |> Enum.combine )
+    (Enum.combine (List.enum xpositions) (List.enum ypositions)     )
     /@ (fun ((left,right), (top,bottom)) -> { left ; right ; top ; bottom })
     |> List.of_enum
 
@@ -607,7 +607,7 @@ module Make(B : Backend) = struct
         (fun props (w,_) -> if fills props.w then bbox.left, bbox.right else pos w) 
         props dims
     in
-    ((List.enum xpositions, List.enum ypositions) |> Enum.combine)
+    (Enum.combine (List.enum xpositions) (List.enum ypositions))
     /@ (fun ((left, right), (top,bottom)) -> { left ; right ; top ; bottom })
     |> List.of_enum
 
@@ -772,7 +772,7 @@ module Make(B : Backend) = struct
   (* **************************************************************************************
      *** DRAWING 
      ************************************************************************************** *)
-  let string_of_dim = fun (w,h) -> sprintf "(%d,%d)" (int_of_float w) (int_of_float h)
+  (* let string_of_dim = fun (w,h) -> sprintf "(%d,%d)" (int_of_float w) (int_of_float h) *)
 
   let has_focus w = function
     | Some id when id = w.id -> true
@@ -790,8 +790,8 @@ module Make(B : Backend) = struct
 	| WSignal ws -> 
 	  draw_widget focus (S.value ws)
 	| Overlay children
-	| HPack { hp_children = children } 
-	| VPack { vp_children = children } ->
+	| HPack { hp_children = children ; _ } 
+	| VPack { vp_children = children ; _ } ->
       	  List.iter (draw_widget focus) children	  
 	| Frame fr ->
 	  B.Frame.draw (S.value fr.fr_style) (has_focus w focus) (S.value w.pos) ;
@@ -813,8 +813,8 @@ module Make(B : Backend) = struct
 	| Button bt, `left, `released, wum, used when used || not wum -> 
 	  bt.bt_pressed#send false ; 
 	  used
-	| HPack { hp_children = children },_,_,_,_ 
-	| VPack { vp_children = children },_,_,_,_
+	| HPack { hp_children = children ; _ },_,_,_,_ 
+	| VPack { vp_children = children ; _ },_,_,_,_
 	| Overlay children,_,_,_,_ ->
 	  List.fold_right 
 	    (fun w accu -> broadcast_mouse_button_event w b s ~x ~y accu)
@@ -847,8 +847,8 @@ module Make(B : Backend) = struct
 	  broadcast_keyboard_event fr.fr_child focus k event true used
 	| Frame fr, _ -> 
 	  broadcast_keyboard_event fr.fr_child focus k event selected_ancestor_frame used
-	| HPack { hp_children = children },_
-	| VPack { vp_children = children },_
+	| HPack { hp_children = children ; _ },_
+	| VPack { vp_children = children ; _ },_
 	| Overlay children,_ ->
 	  List.fold_right 
 	    (fun w accu -> broadcast_keyboard_event w focus k event selected_ancestor_frame accu)
@@ -862,10 +862,10 @@ module Make(B : Backend) = struct
   (* **************************************************************************************
      *** UI type definition
      ************************************************************************************** *)
-  let print_r = (function (`focus,x) -> printf "(foc %d) " x | (`unfocus, x) -> printf "(unfoc %d)" x)
-  let print_l xs = 
-    List.iter print_r xs ;
-    print_newline ()
+  (* let print_r = (function (`focus,x) -> printf "(foc %d) " x | (`unfocus, x) -> printf "(unfoc %d)" x) *)
+  (* let print_l xs = 
+   *   List.iter print_r xs ;
+   *   print_newline () *)
 
   let rec focus_signal widget = match widget.kind with
     | Frame fr ->
@@ -874,8 +874,8 @@ module Make(B : Backend) = struct
 	fr.fr_focus_request 
 	(focus_signal fr.fr_child)
 	
-    | HPack { hp_children = children }
-    | VPack { vp_children = children }
+    | HPack { hp_children = children ; _ }
+    | VPack { vp_children = children ; _ }
     | Overlay children ->
       S.merge (fun accu x -> if accu <> None then accu else x) None (List.map focus_signal children)
 	

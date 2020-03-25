@@ -6,19 +6,16 @@
 open Printf
 open React
 
-let ( |> ) x f = f x
-let ( % ) f g x = g (f x)
-let cons l x = x :: l
 let v x = S.value x
 let add_opt x l = match x with
   | Some y -> y :: l
   | None -> l
 
-let soio = function
-  | None -> "none"
-  | Some i -> sprintf "%d" i
-
-let pp label s = printf "%s %s\n%!" label s
+(* let soio = function
+ *   | None -> "none"
+ *   | Some i -> sprintf "%d" i
+ * 
+ * let pp label s = printf "%s %s\n%!" label s *)
 
 let bind_e s f = 
   let s' = S.map ~eq:E.equal f s in
@@ -33,10 +30,10 @@ type box = {
   bottom : float
 }
 
-let string_of_box b = 
-  sprintf
-    "{ left = %g ; right = %g ; top = %g ; bottom = %g }"
-    b.left b.right b.top b.bottom
+(* let string_of_box b = 
+ *   sprintf
+ *     "{ left = %g ; right = %g ; top = %g ; bottom = %g }"
+ *     b.left b.right b.top b.bottom *)
 
 let box_crop ~by b =
   let left = b.left +. by.left and right = b.right -. by.right
@@ -94,11 +91,11 @@ let string_of_layout = function
     sprintf "vpack(%s,%s)" (string_of_spacing string_of_valign vsp) (string_of_halign halign)
   | `overlay -> "overlay"
 
-let min_visibility x y = match x, y with
-  | `invisible, _ -> `invisible
-  | `translucent, `invisible -> `invisible
-  | `translucent, _ -> `translucent
-  | `opaque, x -> x
+(* let min_visibility x y = match x, y with
+ *   | `invisible, _ -> `invisible
+ *   | `translucent, `invisible -> `invisible
+ *   | `translucent, _ -> `translucent
+ *   | `opaque, x -> x *)
 
 module type Backend = sig
   module Key : sig
@@ -273,11 +270,11 @@ module Make(B : Backend) = struct
   let k x = S.const x
 
   let wmap assoc default x =
-    try snd (List.find (fun (k,v) -> x.id = k.id) assoc) 
+    try snd (List.find (fun (k,_) -> x.id = k.id) assoc) 
     with Not_found -> default
 
   let wmapi assoc default x =
-    try snd (List.find (fun (k,v) -> x = k.id) assoc) 
+    try snd (List.find (fun (k,_) -> x = k.id) assoc) 
     with Not_found -> default
 
   let find_window ui wid =
@@ -313,7 +310,7 @@ module Make(B : Backend) = struct
       	  | _ -> None
       	in
       	E.fmap 
-	  (fun x -> some (Core.List.filter_map x f))
+	  (fun x -> some (Core.List.filter_map x ~f))
 	  keyboard_events
 
       let key_releases ~on =
@@ -323,7 +320,7 @@ module Make(B : Backend) = struct
       	  | _ -> None
       	in
       	E.fmap 
-	  (fun x -> some (Core.List.filter_map x f))
+	  (fun x -> some (Core.List.filter_map x ~f))
 	  keyboard_events
 
       let mouse_events =
@@ -356,7 +353,7 @@ module Make(B : Backend) = struct
       	E.filter (List.exists f) mouse_events
 
       let elt_under_mouse id =
-      	let upd old = function
+      	let upd _ = function
       	  |(_,_,_,Some elt) -> elt.id = id
       	  | _ -> false
       	in
@@ -562,7 +559,7 @@ module Make(B : Backend) = struct
 	| `bottom -> max (box.bottom -. h) box.bottom, box.bottom
     in { left ; right ; top ; bottom }
 
-  let div_vertical_fill_layout_ypos nyexpands box ws hs dims =
+  let div_vertical_fill_layout_ypos nyexpands box _ws hs dims =
     let total_h = List.fold_left (fun accuh (_,h) -> accuh +. h) 0. dims in
     let yscale = if total_h <= box.bottom -. box.top then 1. else (box.bottom -. box.top) /. total_h in
     let yspace = (box.bottom -. box.top -. total_h *. yscale) /. nyexpands in
@@ -575,7 +572,7 @@ module Make(B : Backend) = struct
       (box.bottom, [])
     |> snd
 
-  let div_vertical_packed_layout_ypos valign box children_w children_h children_dims =
+  let div_vertical_packed_layout_ypos valign box _children_w _children_h children_dims =
     let total_h = List.fold_left (fun accuh (_,h) -> accuh +. h) 0. children_dims in
     let yscale = if total_h <= box.bottom -. box.top then 1. else (box.bottom -. box.top) /. total_h in
     let yspace = (box.bottom -. box.top -. total_h *. yscale) in
@@ -592,7 +589,7 @@ module Make(B : Backend) = struct
       (voffset, [])
     |> snd
 
-  let div_vertical_justified_layout_ypos box ws hs dims =
+  let div_vertical_justified_layout_ypos box _ws hs dims =
     match List.length dims with
     | 0 -> []
     | 1 -> [ box.top, box.bottom ]
@@ -601,7 +598,7 @@ module Make(B : Backend) = struct
       let yscale = if total_h <= box.bottom -. box.top then 1. else (box.bottom -. box.top) /. total_h in
       let yspace = (box.bottom -. box.top -. total_h *. yscale) /. float (n - 1) in
       List.fold_right2
-	(fun h (_,dim_h) (cur_y, accu) ->
+	(fun _h (_,dim_h) (cur_y, accu) ->
   	  let pos_y = cur_y -. dim_h *. yscale in
   	  pos_y -. yspace,
   	  (pos_y, cur_y) :: accu)
@@ -609,13 +606,13 @@ module Make(B : Backend) = struct
 	(box.bottom, [])
       |> snd
 
-  let div_vertical_spread_layout_ypos box ws hs dims =
+  let div_vertical_spread_layout_ypos box _ws hs dims =
     let n = List.length dims in
     let total_h = List.fold_left (fun accuh (_,h) -> accuh +. h) 0. dims in
     let yscale = if total_h <= box.bottom -. box.top then 1. else (box.bottom -. box.top) /. total_h in
     let yspace = (box.bottom -. box.top -. total_h *. yscale) /. float n in
     List.fold_right2
-      (fun h (_,dim_h) (cur_y, accu) ->
+      (fun _h (_,dim_h) (cur_y, accu) ->
   	let pos_y = cur_y -. dim_h *. yscale in
   	pos_y -. yspace,
   	(pos_y, cur_y) :: accu)
@@ -648,7 +645,7 @@ module Make(B : Backend) = struct
       (fun (left, right) (top,bottom) -> { left ; right ; top ; bottom })
       xpositions ypositions
 
-  let div_horizontal_fill_layout_xpos nxexpands box ws hs dims =
+  let div_horizontal_fill_layout_xpos nxexpands box ws _hs dims =
     let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims in
     let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
     let xspace = (box.right -. box.left -. total_w *. xscale) /. nxexpands in
@@ -661,7 +658,7 @@ module Make(B : Backend) = struct
       (box.right, [])
     |> snd
 
-  let div_horizontal_packed_layout_xpos halign box children_w children_h children_dims =
+  let div_horizontal_packed_layout_xpos halign box _children_w _children_h children_dims =
     let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. children_dims in
     let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
     let xspace = (box.right -. box.left -. total_w *. xscale) in
@@ -678,7 +675,7 @@ module Make(B : Backend) = struct
       (hoffset, [])
     |> snd
 
-  let div_horizontal_justified_layout_xpos box ws hs dims =
+  let div_horizontal_justified_layout_xpos box ws _hs dims =
     match List.length dims with
     | 0 -> []
     | 1 -> [ box.left, box.right ]
@@ -687,7 +684,7 @@ module Make(B : Backend) = struct
       let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
       let xspace = (box.right -. box.left -. total_w *. xscale) /. float (n - 1) in
       List.fold_right2
-	(fun w (dim_w,_) (cur_x, accu) ->
+	(fun _w (dim_w,_) (cur_x, accu) ->
   	  let posx = cur_x -. dim_w *. xscale in
   	  posx -. xspace,
   	  (posx, cur_x) :: accu)
@@ -695,13 +692,13 @@ module Make(B : Backend) = struct
 	(box.right, [])
       |> snd
 
-  let div_horizontal_spread_layout_xpos box ws hs dims =
+  let div_horizontal_spread_layout_xpos box ws _hs dims =
     let n = List.length dims in
     let total_w = List.fold_left (fun accuw (w,_) -> accuw +. w) 0. dims in
     let xscale = if total_w <= box.right -. box.left then 1. else (box.right -. box.left) /. total_w in
     let xspace = (box.right -. box.left -. total_w *. xscale) /. float n in
     List.fold_right2
-      (fun w (dim_w,_) (cur_x, accu) ->
+      (fun _w (dim_w,_) (cur_x, accu) ->
   	let posx = cur_x -. dim_w *. xscale in
   	posx -. xspace,
   	(posx, cur_x) :: accu)
@@ -747,7 +744,7 @@ module Make(B : Backend) = struct
       List.map (fun _ -> pos) children_dims
 
   let dimension_fun assoc = wmap assoc (0., 0.)
-  let position_fun assoc = wmap assoc null_box
+  (* let position_fun assoc = wmap assoc null_box *)
 
   let rec dimension_map elt = match elt.kind with
     | Button bt ->
@@ -843,23 +840,22 @@ module Make(B : Backend) = struct
    *** MOUSE EVENT FUNCTIONS
    ************************************************************************************** *)
 
-  let rec widget_under_mouse_signal pos mouse_pos widget =
-    let accu x y = if x = None then y else x in
-    let children_signals = collect_children_wum pos mouse_pos widget in
-    let children_wum = S.merge accu None children_signals in
-    S.l3
-      (fun children mouse_pos pos ->
-        if children <> None then children
-        else if point_over mouse_pos pos then Some widget.id
-        else None)
-      children_wum mouse_pos (pos widget)
-  and collect_children_wum pos mouse_pos widget = match widget.kind with
-    | Label _ | Button _ (*| Void*) -> []
-    | Div d ->
-      List.map (widget_under_mouse_signal pos mouse_pos) d.div_children
+  (* let rec widget_under_mouse_signal pos mouse_pos widget =
+   *   let accu x y = if x = None then y else x in
+   *   let children_signals = collect_children_wum pos mouse_pos widget in
+   *   let children_wum = S.merge accu None children_signals in
+   *   S.l3
+   *     (fun children mouse_pos pos ->
+   *       if children <> None then children
+   *       else if point_over mouse_pos pos then Some widget.id
+   *       else None)
+   *     children_wum mouse_pos (pos widget)
+   * and collect_children_wum pos mouse_pos widget = match widget.kind with
+   *   | Label _ | Button _ (\*| Void*\) -> []
+   *   | Div d ->
+   *     List.map (widget_under_mouse_signal pos mouse_pos) d.div_children *)
 
   let element_under_mouse ui mouse_pos =
-    let open Core in
     let is_visible e =
       S.value e.visibility <> `invisible 
       &&
@@ -869,7 +865,7 @@ module Make(B : Backend) = struct
     in
     let rec traverse e = 
       let is_one_of_my_children = match e.kind with
-	| Div d -> List.find_map d.div_children traverse
+	| Div d -> Core.List.find_map d.div_children ~f:traverse
 	| Button _ | Label _ -> None
       in
       if Option.is_some is_one_of_my_children then is_one_of_my_children
@@ -881,8 +877,8 @@ module Make(B : Backend) = struct
 	  None
       )
     in
-    List.find_map (S.value ui.window_stack) (fun wid ->
-      let window = List.find_exn ui.windows ~f:(fun w -> w.win_id = wid) in
+    Core.List.find_map (S.value ui.window_stack) ~f:(fun wid ->
+      let window = Core.List.find_exn ui.windows ~f:(fun w -> w.win_id = wid) in
       traverse (S.value window.win_contents) 
       |> Core.Option.map ~f:(fun x -> wid, x)
     )
@@ -897,7 +893,7 @@ module Make(B : Backend) = struct
 	then Some elt else None
       | Label _ -> None
       | Div d ->
-	Core.List.find_map d.div_children aux
+	Core.List.find_map d.div_children ~f:aux
     in
     aux (v window.win_contents)
 
@@ -930,7 +926,7 @@ module Make(B : Backend) = struct
     ui_events,
     output
 
-  let rec print_element n =
+  let print_element n =
     let space n = String.make n ' ' in
     let rec aux tab n = match n.kind with
       | Div d ->

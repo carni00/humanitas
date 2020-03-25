@@ -26,11 +26,11 @@
   let add    l n a = (n,a) :: l
   let nth    l n = List.assoc n l
   let snth a l n = try (List.assoc n l) with Not_found -> a
-  let to_list l  = List.map (fun (key,a)-> a) l
+  let to_list l  = List.map (fun (_,a)-> a) l
   let init f nil = List.map (fun key-> (key,f key)) nil
   let nMap f l = List.map (fun (key, a)->(key, f key a)) l
   let iteri f l = List.iter(fun (key, a)-> f key a ) l
-  let fold_left f s l = List.fold_left (fun s (key,a) -> f s a) s l
+  let fold_left f s l = List.fold_left (fun s (_,a) -> f s a) s l
 (*  let add l e    = e :: l*)
   let rec remove list a = match list with
     | [] -> []

@@ -40,7 +40,7 @@ let to_int   (_,i,_) = i
 let lower_bound (l,_,_) = l
 let upper_bound (_,_,u) = u
 
-let set  (l,i,u) v = (l, cut l u v    , u)
+let set  (l,_,u) v = (l, cut l u v    , u)
 let incr (l,i,u)   = (l, cut l u (i+1), u)
 let decr (l,i,u)   = (l, cut l u (i-1), u)
 

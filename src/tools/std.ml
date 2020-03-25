@@ -35,8 +35,8 @@ let ( |>  ) a f = f a
 
 let identity    = fun  a     -> a
 let flip      f = fun  x y   -> f  y x
-let curry     f = fun  x y   -> f (x,y)
-let uncur     f = fun (x,y)  -> f  x y
+(* let curry     f = fun  x y   -> f (x,y)
+ * let uncur     f = fun (x,y)  -> f  x y *)
 let compose g f = fun  x     -> g (f x)
 let ( |- )  g f = fun  x     -> f (g x)
 

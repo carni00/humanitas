@@ -174,14 +174,14 @@ module Nil = struct
   type t = N.t*int*int
   let legal (n,i,l) = (N.legal n), (cut 0 iMax i), (cut 0 lMax l)
   let make   n i l  = legal (n,i,l)
-  let nuance = fun (n,i,l) -> n
-  let intens = fun (n,i,l) -> i
-  let lumina = fun (n,i,l) -> l
+  let nuance = fun (n,_,_) -> n
+  let intens = fun (_,i,_) -> i
+  let lumina = fun (_,_,l) -> l
   let nuaadd (n,i,l) nd = (N.add n nd,i,l)
   let intadd (n,i,l) id = (n,i+id,l)
   let lumadd (n,i,l) ld = (n,i,l+ld)
-  let composition_strn (n,i,l) = 
-    Printf.sprintf "{n=%d;i=%d;l=%d}" (n:>int) i l
+  (* let composition_strn (n,i,l) = 
+   *   Printf.sprintf "{n=%d;i=%d;l=%d}" (n:>int) i l *)
   let arithmean (n,i,l) (o,j,m) = (N.arithmean n o, Ext.arithmean i j, Ext.arithmean l m)
 
  
@@ -268,8 +268,8 @@ module Rvb = struct
     let f = to_255 in f r, f v, f b
   (* associe à un RVB un triplet (r,v,b) lisible par Sdlttf *)
 
-  let composition_strn (RVB(r,v,b)) = 
-    Printf.sprintf "{r=%d;v=%d;b=%d}" r v b
+  (* let composition_strn (RVB(r,v,b)) = 
+   *   Printf.sprintf "{r=%d;v=%d;b=%d}" r v b *)
 
   let of_sdlvideo svco =
     let i = Int32.to_int svco in

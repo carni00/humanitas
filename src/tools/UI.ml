@@ -1,6 +1,6 @@
 open React
 open Batteries
-open Printf
+(* open Printf *)
 
 type mouse_state = {
   m_left : bool ;
@@ -18,29 +18,29 @@ type box = UUI.box = {
   bottom : float
 }
 
-let string_of_box b = 
-  sprintf
-    "{ left = %g ; right = %g ; top = %g ; bottom = %g }"
-    b.left b.right b.top b.bottom
+(* let string_of_box b = 
+ *   sprintf
+ *     "{ left = %g ; right = %g ; top = %g ; bottom = %g }"
+ *     b.left b.right b.top b.bottom *)
 
-let print_box b = 
-  print_string (string_of_box b)
+(* let print_box b = 
+ *   print_string (string_of_box b) *)
 
 (* STATE DATATYPE *)
-type visibility = [ `visible | `translucent | `invisible ]
+(* type visibility = [ `visible | `translucent | `invisible ] *)
 
 type state = [ `active | `frozen | `invisible | `inactive ]
-let state_clip ~(parent : state) (x : state) = match parent, x with
-  | `active, _ -> x
-  | `frozen, `active -> `frozen
-  | `frozen, _ -> x
-  | `invisible, `inactive -> `inactive
-  | `invisible, _ -> `invisible
-  | `inactive, _ -> `inactive
+(* let state_clip ~(parent : state) (x : state) = match parent, x with
+ *   | `active, _ -> x
+ *   | `frozen, `active -> `frozen
+ *   | `frozen, _ -> x
+ *   | `invisible, `inactive -> `inactive
+ *   | `invisible, _ -> `invisible
+ *   | `inactive, _ -> `inactive *)
 
-let visible_state = function
-  | `active | `frozen -> true
-  | `invisible | `inactive -> false
+(* let visible_state = function
+ *   | `active | `frozen -> true
+ *   | `invisible | `inactive -> false *)
 
 (* alternative STATE DATATYPE 
 type state = [ 
@@ -99,9 +99,9 @@ type size_spec = [
 | `fixed of float
 ]
 
-let fills = function 
-  | `expands | `fills -> true
-  | _ -> false
+(* let fills = function 
+ *   | `expands | `fills -> true
+ *   | _ -> false *)
 
 
 
@@ -112,11 +112,11 @@ let newid =
 
 let c x = S.const x
 
-let bind_e s f = 
-  let s' = S.map ~eq:( == ) f s in
-  let init = S.value s'
-  and changes = S.changes s' in
-  E.switch init changes
+(* let bind_e s f = 
+ *   let s' = S.map ~eq:( == ) f s in
+ *   let init = S.value s'
+ *   and changes = S.changes s' in
+ *   E.switch init changes *)
 
 module type Backend = 
 sig
@@ -239,91 +239,91 @@ module Make(B : Backend) = struct
   (* **************************************************************************************
      *** LAYOUT FUNCTIONS
      ************************************************************************************** *)
-  let point_over (x, y) box =
-    box.left <= x && x <= box.right && 
-    box.top <= y && y <= box.bottom
+  (* let point_over (x, y) box =
+   *   box.left <= x && x <= box.right && 
+   *   box.top <= y && y <= box.bottom *)
 
-  let center w x1 x2 =
-    let scale = if w <= x2 -. x1 then 1. else (x2 -. x1) /. w in
-    let space = (x2 -. x1 -. w *. scale) /. 2. in
-    (x1 +. space, x2 -.space)
+  (* let center w x1 x2 =
+   *   let scale = if w <= x2 -. x1 then 1. else (x2 -. x1) /. w in
+   *   let space = (x2 -. x1 -. w *. scale) /. 2. in
+   *   (x1 +. space, x2 -.space) *)
 
-  let fix w h (x,y) = 
-    (match w with `fixed x -> x | _ -> x),
-    (match h with `fixed y -> y | _ -> y)
+  (* let fix w h (x,y) = 
+   *   (match w with `fixed x -> x | _ -> x),
+   *   (match h with `fixed y -> y | _ -> y) *)
 
-  let store_box walign halign w h box (wmin,hmin) = 
-    let w = match w with
-	`tight -> wmin
-      | `fills | `expands -> box.right -. box.left
-      | `fixed w -> w
-    and h = match h with
-	`tight -> hmin
-      | `fills | `expands -> box.bottom -. box.top
-      | `fixed h -> h in
-    let left, right = 
-      match walign with 
-	| `centered -> center w box.left box.right
-	| `left -> box.left, min (box.left +. w) box.right
-	| `right -> max (box.right -. w) box.right, box.right
-    and top, bottom = 
-      match halign with 
-	| `centered -> center h box.top box.bottom
-	| `top -> box.top, min (box.top +. h) box.bottom
-	| `bottom -> max (box.bottom -. h) box.bottom, box.bottom
-    in { left ; right ; top ; bottom }
+  (* let store_box walign halign w h box (wmin,hmin) = 
+   *   let w = match w with
+   *       `tight -> wmin
+   *     | `fills | `expands -> box.right -. box.left
+   *     | `fixed w -> w
+   *   and h = match h with
+   *       `tight -> hmin
+   *     | `fills | `expands -> box.bottom -. box.top
+   *     | `fixed h -> h in
+   *   let left, right = 
+   *     match walign with 
+   *       | `centered -> center w box.left box.right
+   *       | `left -> box.left, min (box.left +. w) box.right
+   *       | `right -> max (box.right -. w) box.right, box.right
+   *   and top, bottom = 
+   *     match halign with 
+   *       | `centered -> center h box.top box.bottom
+   *       | `top -> box.top, min (box.top +. h) box.bottom
+   *       | `bottom -> max (box.bottom -. h) box.bottom, box.bottom
+   *   in { left ; right ; top ; bottom } *)
 
-  let store_pack_box w h bbox contents_pos = 
-    let left, right = match w with
-	`tight -> contents_pos.left, contents_pos.right
-      | `fills | `expands -> bbox.left, bbox.right
-      | `fixed w -> center w bbox.left bbox.right
-    and top, bottom = match h with
-	`tight -> contents_pos.top, contents_pos.bottom
-      | `fills | `expands -> bbox.top, bbox.bottom
-      | `fixed h -> center h bbox.top bbox.bottom in
-    { left ; right ; top ; bottom }
+  (* let store_pack_box w h bbox contents_pos = 
+   *   let left, right = match w with
+   *       `tight -> contents_pos.left, contents_pos.right
+   *     | `fills | `expands -> bbox.left, bbox.right
+   *     | `fixed w -> center w bbox.left bbox.right
+   *   and top, bottom = match h with
+   *       `tight -> contents_pos.top, contents_pos.bottom
+   *     | `fills | `expands -> bbox.top, bbox.bottom
+   *     | `fixed h -> center h bbox.top bbox.bottom in
+   *   { left ; right ; top ; bottom } *)
 
-  let rec adjust_props parent_props w = match w.kind with
-    | Button _ | Void | Label _ ->
-      { w with props = adjust_props_aux parent_props w.props }
-
-    | Overlay children ->
-      let props = adjust_props_aux parent_props w.props in
-      let children = List.map (adjust_props props) children in
-      { w with
-  	  kind = Overlay children ;
-  	  props }
-
-    | Frame fr ->
-      let props = adjust_props_aux parent_props w.props in
-      let fr_child = adjust_props props fr.fr_child in
-      { w with
-  	  kind = Frame { fr with fr_child } ;
-  	  props }
-
-    | HPack hp ->
-      let props = adjust_props_aux parent_props w.props in
-      let hp_children = List.map (adjust_props props) hp.hp_children in
-      { w with
-  	  kind = HPack { hp with hp_children } ;
-  	  props }
-
-    | VPack vp ->
-      let props = adjust_props_aux parent_props w.props in
-      let vp_children = List.map (adjust_props props) vp.vp_children in
-      { w with
-  	  kind = VPack { vp with vp_children } ;
-  	  props }
-
-  and adjust_props_aux parent_props child_props =
-    S.l2
-      (fun parent child ->
-  	{
-  	  child with state = state_clip ~parent:parent.state child.state
-  	})
-      parent_props
-      child_props
+  (* let rec adjust_props parent_props w = match w.kind with
+   *   | Button _ | Void | Label _ ->
+   *     { w with props = adjust_props_aux parent_props w.props }
+   * 
+   *   | Overlay children ->
+   *     let props = adjust_props_aux parent_props w.props in
+   *     let children = List.map (adjust_props props) children in
+   *     { w with
+   * 	  kind = Overlay children ;
+   * 	  props }
+   * 
+   *   | Frame fr ->
+   *     let props = adjust_props_aux parent_props w.props in
+   *     let fr_child = adjust_props props fr.fr_child in
+   *     { w with
+   * 	  kind = Frame { fr with fr_child } ;
+   * 	  props }
+   * 
+   *   | HPack hp ->
+   *     let props = adjust_props_aux parent_props w.props in
+   *     let hp_children = List.map (adjust_props props) hp.hp_children in
+   *     { w with
+   * 	  kind = HPack { hp with hp_children } ;
+   * 	  props }
+   * 
+   *   | VPack vp ->
+   *     let props = adjust_props_aux parent_props w.props in
+   *     let vp_children = List.map (adjust_props props) vp.vp_children in
+   *     { w with
+   * 	  kind = VPack { vp with vp_children } ;
+   * 	  props }
+   * 
+   * and adjust_props_aux parent_props child_props =
+   *   S.l2
+   *     (fun parent child ->
+   * 	{
+   * 	  child with state = state_clip ~parent:parent.state child.state
+   * 	})
+   *     parent_props
+   *     child_props *)
 
   (* let rec dimension w = match w.kind with *)
   (*   | WSignal ws ->  *)
@@ -670,7 +670,7 @@ module Make(B : Backend) = struct
   (* 	{ w with kind = WSignal ws ; bbox = parent_bbox ; *)
   (* 	         pos  = bind_s ws (fun w -> w.pos) } *)
 
-  let null_box = { left = 0. ; right = 0. ; top = 0. ; bottom = 0. }
+  (* let null_box = { left = 0. ; right = 0. ; top = 0. ; bottom = 0. } *)
 
   (* **************************************************************************************
      *** WIDGET CONSTRUCTORS
@@ -740,13 +740,13 @@ module Make(B : Backend) = struct
   (* **************************************************************************************
      *** DRAWING 
      ************************************************************************************** *)
-  let string_of_dim = fun (w,h) -> sprintf "(%d,%d)" (int_of_float w) (int_of_float h)
+  (* let string_of_dim = fun (w,h) -> sprintf "(%d,%d)" (int_of_float w) (int_of_float h) *)
 
-  let has_focus w = function
-    | Some id when id = w.id -> true
-    | _ -> false
+  (* let has_focus w = function
+   *   | Some id when id = w.id -> true
+   *   | _ -> false *)
 
-  let rec draw_widget focus w = ()
+  let draw_widget _focus _w = ()
     (* if visible_state (S.value w.props).state then ( *)
     (*   match w.kind with *)
     (*     | Void ->  *)
@@ -793,9 +793,9 @@ module Make(B : Backend) = struct
   (*   ) *)
   (*   else used *)
 
-  let shortcut w k = match w.kind with
-    | Button bt -> bt.bt_shortcut = Some k
-    | _ -> false
+  (* let shortcut w k = match w.kind with
+   *   | Button bt -> bt.bt_shortcut = Some k
+   *   | _ -> false *)
 
   (* let rec broadcast_keyboard_event w focus k event selected_ancestor_frame used = *)
   (*   if (S.value w.props).state = `active then ( *)
@@ -861,16 +861,16 @@ module Make(B : Backend) = struct
   (*   in *)
   (*   (S.fold (List.fold_left update) init (focus_requests widget)) *)
 
-  let fullscreen = 
-    S.map (fun (w,h) -> { left = 0. ; right = w ; top = 0. ; bottom = h }) B.screen_size
+  (* let fullscreen = 
+   *   S.map (fun (w,h) -> { left = 0. ; right = w ; top = 0. ; bottom = h }) B.screen_size *)
 
-  let widget_layout w =
-    let topprops = S.const { w = `expands ; h = `expands ; state = `active } in
-    (* position fullscreen ( *)
-    (*   dimension ( *)
-	adjust_props topprops w
-    (*   ) *)
-    (* ) *)
+  (* let widget_layout w =
+   *   let topprops = S.const { w = `expands ; h = `expands ; state = `active } in
+   *   (\* position fullscreen ( *\)
+   *   (\*   dimension ( *\)
+   *       adjust_props topprops w
+   *   (\*   ) *\)
+   *   (\* ) *\) *)
 
   let make topwidget = 
     (* let topwidget = position fullscreen (dimension (adjust_props topprops topwidget)) in *)
@@ -881,10 +881,10 @@ module Make(B : Backend) = struct
 
   let draw ui = draw_widget (S.value ui.focus) ui.topwidget
 
-  let mouse_button_event ui b s ~x ~y = false
+  let mouse_button_event _ui _b _s ~x:_ ~y:_ = false
     (* broadcast_mouse_button_event ui.topwidget b s ~x:(float x) ~y:(float y) false *)
 
-  let keyboard_event ui k event = false
+  let keyboard_event _ui _k _event = false
     (* broadcast_keyboard_event ui.topwidget (S.value ui.focus) k event false false *)
 
 end

@@ -24,14 +24,19 @@
 (** Map operations *)
 (** La map diffère de la matrice en ce qu’elle est la liste des seules cases non vides de la matrice équivalente *)
 
-  type ('c, 'b, 'a) t = private (('c*'b)*'a) list
-  val null : ('c, 'b, 'a) t
-  (** map dépourvue de données *)
-  val nth  : ('c, 'b, 'a) t -> 'c -> 'b -> 'a
-  (** [nth map y x] renvoie la valeur associée à la clé [(y,x)] *)
-  val snth : 'a -> ('c, 'b, 'a) t -> 'c -> 'b -> 'a
-  (** [snth a map y x] renvoie [a] si aucune valeur n’est associée à la clé [(y,x)] *)
-  val init : ('c->'b->'a) -> 'c list -> 'b list -> ('c, 'b, 'a) t
-  (** [init f [y0; ...; yn] [x0; ...; xn]] construit une map associant à chaque couple [(y,x)] la valeur [(f y x)] *)
-  val nMap : ('c->'b->'a->'d) -> ('c, 'b, 'a) t -> ('c, 'b, 'd) t
-  (** construction d’une nouvelle map d’égales dimensions *)
+type ('c, 'b, 'a) t = private (('c*'b)*'a) list
+
+val null : ('c, 'b, 'a) t
+(** map dépourvue de données *)
+
+val nth  : ('c, 'b, 'a) t -> 'c -> 'b -> 'a
+(** [nth map y x] renvoie la valeur associée à la clé [(y,x)] *)
+
+val snth : 'a -> ('c, 'b, 'a) t -> 'c -> 'b -> 'a
+(** [snth a map y x] renvoie [a] si aucune valeur n’est associée à la clé [(y,x)] *)
+
+val init : ('c->'b->'a) -> 'c list -> 'b list -> ('c, 'b, 'a) t
+(** [init f [y0; ...; yn] [x0; ...; xn]] construit une map associant à chaque couple [(y,x)] la valeur [(f y x)] *)
+
+val nMap : ('c->'b->'a->'d) -> ('c, 'b, 'a) t -> ('c, 'b, 'd) t
+(** construction d’une nouvelle map d’égales dimensions *)

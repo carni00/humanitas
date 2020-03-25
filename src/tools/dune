@@ -1,0 +1,4 @@
+(library
+  (name humanitas_tools)
+  (public_name humanitas.tools)
+  (libraries batteries core react))

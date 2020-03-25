@@ -35,7 +35,7 @@ let init h w f =
 
 
 
-let make h w a = init h w (fun j i -> a)
+let make h w a = init h w (fun _ _ -> a)
 
 let line   mx y = Array.get mx y
 
@@ -59,12 +59,12 @@ let ySum mx y = Tarray.sum (line mx y)
 let xSum mx x = Std.Ext.fold_left (fun s y->s+get mx y x) 0 (height mx)
 (* somme des valeurs de la colonne x de la matrice mx *)
 
-let to_lili (mx : 'a array array) =
-  let h = Array.length mx in
-  let rec f j =
-  if j = h then ( [] : 'a list list )
-  else Array.to_list mx.(j) :: f (j+1) in
-  f 0
+(* let to_lili (mx : 'a array array) =
+ *   let h = Array.length mx in
+ *   let rec f j =
+ *   if j = h then ( [] : 'a list list )
+ *   else Array.to_list mx.(j) :: f (j+1) in
+ *   f 0 *)
 (* matrix_to_lili *)
 
 

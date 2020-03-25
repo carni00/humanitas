@@ -26,24 +26,28 @@ type 'a t = private 'a array array array
 
 val depth  : 'a t -> int
 (** returns the depth (dimz) of the cube *)
+
 val height : 'a t -> int
 (** returns the height (dimy) of the cube *)
+
 val width  : 'a t -> int
 (** returns the width (dimx) of the cube *)
+
 val volume: 'a t -> int
 (** returns the volume of the cube *)
 
 val plan   : 'a t -> int -> 'a array array
 (** [plan c z] returns the plan [z] of the cube*)
+
 val line   : 'a t -> int -> int -> 'a array
 (** [line c z y] returns the line [y] in plan [z] of the cube*)
+
 val get    : 'a t -> int -> int -> int -> 'a
 (** [get c z y x] returns the element [x] of line [y] in plan [z] *)
 
 val make   : int -> int -> int -> 'a -> 'a t
 (** [make d h w a] returns a fresh cube of depth [d], height [h] and width [w], with all element initialized to [a] *)
+
 val init   : int -> int -> int -> (int -> int -> int -> 'a) -> 'a t
 (** [init d h w f] returns a fresh cube of depth [d], height [h] and width [w], with element [x] of line [y] in
 plan [z] initialized to the result of [f z y x] *)
-
-

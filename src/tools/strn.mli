@@ -25,18 +25,23 @@
 
 val pth : string -> string
 (** Add parentheses to a string *)
+
 val rdblint : int -> int -> string
 (** Returns a lisible string for a long integer. 
     For example, [rdblint 3 8456789] returns ["8 450 000"]. *)
+
 val longInt : int -> int -> string
 (** Returns a lisible string for a long integer. 
     For example, [longInt 5 8456789] returns ["8 450 000"]. *)
+
 val float : int -> float -> string
 (** Returns a lisible string for a float. 
     For example, [float (-2) 2.2568648] returns ["2.25"]. *)
+
 val rdblfloat : int -> float -> string
 (** Returns a lisible string for a float. 
     For example, [rdblfloat (-3) 0.02568648] returns ["0.0256"]. *)
+
 val percent : int -> float -> string
 (** Returns a lisible string for a float. 
     For example, [percent (-2) 0.0225688] returns ["2.25%"]. *)
@@ -47,7 +52,6 @@ val longitude : float -> string
 val coords : float -> float -> string
 (** [coords lat lon] returns lisible geographical coordinates. 
     For example, [coords (-10.5465) (10.2165)] returns ["(10.5°N,10.2°E)"] *)
-
 
 val km  : int -> int -> string
 val km2 : int -> int -> string

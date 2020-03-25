@@ -23,8 +23,6 @@
 
 (*type 'a id = int*)
 
-open Std
-
 type 'a t  = int
 type 'a id = 'a t
 
@@ -39,28 +37,28 @@ module Til =
   let len      = List.length
   let nth    l i = try (List.assoc i l) with Not_found -> raise (Failure ("Til.nth : unknown id") )
   let snth a l i = try (List.assoc i l) with Not_found -> a
-  let to_list  l =  List.map  (fun (nid,a)-> a  ) l
-  let key_list l =  List.map  (fun (nid,a)-> nid) l
-  let iter f l = List.iter(fun (i, a)-> f   a ) l
+  let to_list  l =  List.map  (fun (_,a)-> a  ) l
+  let key_list l =  List.map  (fun (nid,_)-> nid) l
+  let iter f l = List.iter(fun (_, a)-> f   a ) l
   let map  f l = List.map (fun (i, a)-> (i, f a)) l
   let mapi f l = List.map (fun (i, a)-> (i, f i a) ) l
   let add l a    = 
-    let key_list = List.map (fun (i,a) -> i) l in
+    let key_list = List.map (fun (i,_) -> i) l in
     let rec choose_id i = if not (List.mem i key_list) then i else choose_id (i+1) in
     (choose_id 0, a) :: l
-  let assoc    i (l: ('a)t) = try (List.assoc i l) with Not_found -> raise (Failure ("Tid.Til.assoc : unknown id") )
+  (* let assoc    i (l: ('a)t) = try (List.assoc i l) with Not_found -> raise (Failure ("Tid.Til.assoc : unknown id") ) *)
 
   let rec find p = function
   | [] -> raise (Failure ("Tid.Til.find : unknown id") )
-  | (i,a) :: q -> if p a then a else find p q
+  | (_,a) :: q -> if p a then a else find p q
 
   let rec search p = function
   | [] -> None
-  | (i,a) :: q -> if p a then Some a else search p q
+  | (_,a) :: q -> if p a then Some a else search p q
 
   let rec filter p = function
   | [] -> []
-  | (i,a) :: q -> if p a then a::(filter p q) else filter p q
+  | (_,a) :: q -> if p a then a::(filter p q) else filter p q
 
   let rec alter (l: ('a)t) i f = match l with
     | [] -> failwith "Tid.Til.alter : unknown id"
@@ -69,7 +67,7 @@ module Til =
 
 
 
-  let first_id (l: ('a)t)   = match l with (i,a)::q -> i | _ -> raise (Failure ("Tid.Til.first_id : empty list") )
+  let first_id (l: ('a)t)   = match l with (i,_)::_ -> i | _ -> raise (Failure ("Tid.Til.first_id : empty list") )
 
   end
 

@@ -28,15 +28,17 @@
 (** {5 Advanced users modules } *)
 
 module Nuance : sig
-(** Generation of identifiers of nuances *)
+  (** Generation of identifiers of nuances *)
 
   type t = private float
-  val degres : int
-(** number of default nuances (20) *)
-  val circ : float
-(** circonference du cercle chromatique (20.) *)
 
-(** {5 20 ordered default nuances } *)
+  val degres : int
+  (** number of default nuances (20) *)
+
+  val circ : float
+  (** circonference du cercle chromatique (20.) *)
+
+  (** {5 20 ordered default nuances } *)
 
   val none      : t
   val bleu      : t
@@ -60,73 +62,86 @@ module Nuance : sig
   val violet    : t
   val indigo    : t
 
-(** {5 custom nuances } *)
+  (** {5 custom nuances } *)
 
   val add       : t -> float -> t
-(** [add jaune x] builds a custom nuance from an existing one. [add jaune 0.] equals [jaune] ; [add jaune 1.] equals [ambre] ; [add jaune (-0.5)] returns a nuance equally between [vert] and [jaune]. *)
+  (** [add jaune x] builds a custom nuance from an existing one. [add jaune 0.] equals [jaune] ; [add jaune 1.] equals [ambre] ; [add jaune (-0.5)] returns a nuance equally between [vert] and [jaune]. *)
+
   val custom    : float -> t
-(** [custom x] buils a custom nuance [custom 0.] equals [bleu]. [custom 6.5] returns a nuance equally between
-[amande] and [emeraude]. [custom (-13.)] equals [custom 7.]. *)
+  (** [custom x] buils a custom nuance [custom 0.] equals [bleu]. [custom 6.5] returns a nuance equally between
+      [amande] and [emeraude]. [custom (-13.)] equals [custom 7.]. *)
+
   val cut       : t -> t -> t -> t
-(** [cut nMin nMax n] ensures [n] is between [nMin] and [nMax] *)
+  (** [cut nMin nMax n] ensures [n] is between [nMin] and [nMax] *)
 
   val to_strn    : t -> string
-(** returns a string describing the nuance. *)
+  (** returns a string describing the nuance. *)
+
   val name_strn  : t -> string
-(** returns a string describing the nuance. For example all nuances between 0. (inclusive) and 1. (exclusive) will
-be described as "bleu" *)
+  (** returns a string describing the nuance. For example all nuances between 0. (inclusive) and 1. (exclusive) will
+      be described as "bleu" *)
+
   val float_strn : t -> string
-(** returns a string describing the nuance as a float. For example [float_strn indigo] returns ["19.00"] *)
+  (** returns a string describing the nuance as a float. For example [float_strn indigo] returns ["19.00"] *)
 
   val arithmean  : t -> t -> t
-(** arithmean a b retuns the nuance just in between a and b, knowing a is before b in the chromatic order *)
-  val weighmean  : t -> t -> float -> float -> t
-(** arithmean a b x y retuns a if y=0, b if x=0, else something between a and b *)
+  (** arithmean a b retuns the nuance just in between a and b, knowing a is before b in the chromatic order *)
 
+  val weighmean  : t -> t -> float -> float -> t
+  (** arithmean a b x y retuns a if y=0, b if x=0, else something between a and b *)
 end
 
 module Nil : sig
-(** Generation of colors defined by a triplet Nuance × Intensité × Luminosité *)
-(** A [nil] color is not usable by the video system and must be turned into a [Color.t] that is a [rgb] color *)
-(** See module Color Conversion functions *)
+  (** Generation of colors defined by a triplet Nuance × Intensité × Luminosité *)
+  (** A [nil] color is not usable by the video system and must be turned into a [Color.t] that is a [rgb] color *)
+  (** See module Color Conversion functions *)
 
   type t
   val make : Nuance.t -> int -> int -> t
-(** [make n i l)] returns a [nil] color. [i] is the intensity of the color ; An intensity of 0 returns the color
-gray, whereas an intensity of 1000 returns a maximum intensity. [l] is the lightness of the color. A lightness
-of 0 returns black, whereas a lightness of 1000 returns white. Values under 0 are dealt as 0, whereas values
-above 1000 are dealt as 1000.*)
+  (** [make n i l)] returns a [nil] color. [i] is the intensity of the color ; An intensity of 0 returns the color
+      gray, whereas an intensity of 1000 returns a maximum intensity. [l] is the lightness of the color. A lightness
+      of 0 returns black, whereas a lightness of 1000 returns white. Values under 0 are dealt as 0, whereas values
+      above 1000 are dealt as 1000.*)
 
   val nuance : t -> Nuance.t
-(** [nuance nil] returns the nuance of the given nil color*)
+  (** [nuance nil] returns the nuance of the given nil color*)
+
   val intens : t -> int
-(** [intens nil] returns the intensity of the given nil color*)
+  (** [intens nil] returns the intensity of the given nil color*)
+
   val lumina : t -> int
-(** [lumina nil] returns the lightness of the given nil color*)
+  (** [lumina nil] returns the lightness of the given nil color*)
 
   val nuaadd : t -> float -> t
-(** [nuaadd nil float] returns a color similar as [nil], excepting its nuance is [Nuance.add (nuance nil) float]*)
+  (** [nuaadd nil float] returns a color similar as [nil], excepting its nuance is [Nuance.add (nuance nil) float]*)
+
   val intadd : t -> int -> t
-(** [intadd nil int] returns a color similar as [nil], excepting its intensity is [(intens nil) + int]*)
+  (** [intadd nil int] returns a color similar as [nil], excepting its intensity is [(intens nil) + int]*)
+
   val lumadd : t -> int -> t
-(** [lumadd nil lum] returns a color similar as [nil], excepting its lightness is [(lumina nil) + lum]*)
+  (** [lumadd nil lum] returns a color similar as [nil], excepting its lightness is [(lumina nil) + lum]*)
 end
 
 module Rvb : sig
-(** Generation of colors defined by amounts of red, green and blue *)
-(** A [rvb] color must be turned into a [Color.t] *)
-(** See module Color Conversion functions *)
+  (** Generation of colors defined by amounts of red, green and blue *)
+  (** A [rvb] color must be turned into a [Color.t] *)
+  (** See module Color Conversion functions *)
 
   type t
+
   val make : int -> int -> int -> t
-(** [make (r,g,b)] returns a rgb color with the given amounts of red, green and blue. Values under 0 are dealt as
-0., whereas values above 1000 are dealt as 1.*)
+  (** [make (r,g,b)] returns a rgb color with the given amounts of red, green and blue. Values under 0 are dealt as
+      0., whereas values above 1000 are dealt as 1.*)
+
   val of_nil : Nil.t -> t
-(** [of_nil nil] computes a rgb color from a nil color.*)
+  (** [of_nil nil] computes a rgb color from a nil color.*)
+
   val add : t -> t -> t
-(** [add c1 c2] computes the rgb sum of the rgb c1 and c2 *)
+  (** [add c1 c2] computes the rgb sum of the rgb c1 and c2 *)
+
   val lum_mult : t -> float -> t
-(** [lum_mult c r] computes a new rgb avec une luminosité ajustée d'un facteur r *)
+  (** [lum_mult c r] computes a new rgb avec une luminosité ajustée d'un facteur r *)
+
   val black : t
   val white : t
   val red : t
@@ -136,7 +151,6 @@ module Rvb : sig
   val blue : t
   val magenta : t
   val gray : int -> t
-
 end
 
 (******************************** MODULE COLOR *******************************)
@@ -179,10 +193,13 @@ val indigo   : t
 
 val red      : t
 (** alias for {!rouge} *)
+
 val yellow   : t
 (** alias for {!jaune} *)
+
 val green    : t
 (** alias for {!vert} *)
+
 val blue     : t
 (** alias for {!bleu} *)
 
@@ -190,27 +207,27 @@ val blue     : t
 (** {5 Computing custom colors } *)
 
 val nil : Nuance.t -> int -> int -> t
-
-(** [nil n i l] returns a color of the given nuance, intensity, and lightness *)
-(** An intensity of 0 returns the color gray, whereas an intensity of 1000 returns a maximum intensity. A lightness
-of 0 returns black, whereas a lightness of 1000 returns white. Values under 0 are dealt as 0, whereas values
-above 1000 are dealt as 1000.*)
+(** [nil n i l] returns a color of the given nuance, intensity, and lightness
+    An intensity of 0 returns the color gray, whereas an intensity of 1000 returns a maximum intensity. A lightness
+    of 0 returns black, whereas a lightness of 1000 returns white. Values under 0 are dealt as 0, whereas values
+    above 1000 are dealt as 1000.*)
 
 val rvb : int -> int -> int -> t
-
-(** [rvb r g b] returns a rgb color with the given amounts of red, green and blue. *)
-(** Values under 0 are dealt as 0., whereas values above 1000 are dealt as 1000.*)
-
+(** [rvb r g b] returns a rgb color with the given amounts of red, green and blue.
+    Values under 0 are dealt as 0., whereas values above 1000 are dealt as 1000.*)
 
 val iMax : int
 (** intensity maximum value (1000) *)
+
 val lMax : int
 (** lightness maximum value (1000) *)
+
 val cMax : int
 (** color (for a rgb color) maximum value (1000) *)
 
 val lumina : t -> int
 (** lightness of the given color (0..1000) *)
+
 val lumadd : t -> int -> t
 
 val arithmean : t -> t -> t
@@ -220,6 +237,7 @@ val arithmean : t -> t -> t
 
 val of_nil : Nil.t -> t
 (** builds a Color.t from a Nil.t *)
+
 val of_rvb : Rvb.t -> t
 (** builds a Color.t from a Rvb.t *)
 (*val of_int : int -> t*)

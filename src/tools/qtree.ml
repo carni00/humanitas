@@ -136,7 +136,7 @@ let set_adapter f _ contents accu =
 let set_fold f tree init = fold_aux (fun _ -> true) (set_adapter f) tree init
 (*val set_fold : (V2.t -> 'a -> 'b -> 'b) -> 'a set -> 'b -> 'b*)
 
-let set_iter f tree = set_fold (fun v2 a b -> f v2 a) tree ()
+let set_iter f tree = set_fold (fun v2 a () -> f v2 a) tree ()
 (*val set_iter : (V2.t -> 'a -> unit) -> 'a set -> unit*)
 
 (*let default d = function 
@@ -155,7 +155,7 @@ let set_fold_rect  ?(ul=None) ?(lr=None) f tree init =
   ?ul:V2.t -> ?lr:V2.t -> 
   (V2.t -> 'a -> 'b -> 'b) -> 'a set -> 'b -> 'b*)
 
-let set_iter_rect ?(ul=None) ?(lr=None) f tree = set_fold_rect ~ul:ul ~lr:lr (fun v2 a b -> f v2 a) tree ()
+let set_iter_rect ?(ul=None) ?(lr=None) f tree = set_fold_rect ~ul:ul ~lr:lr (fun v2 a () -> f v2 a) tree ()
 (*val set_iter_rect : ?ul:V2.t -> ?lr:V2.t -> (V2.t -> 'a -> unit) -> 'a set -> unit*)
 
 (*EOF*)

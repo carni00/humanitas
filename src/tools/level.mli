@@ -41,33 +41,44 @@ val smake        : int -> int -> int -> t
 
 val to_int      : t -> int
 (** returns the current value of the level *)
+
 val to_float    : t -> float
 (** returns the current value of the level, turned into a float *)
+
 val lower_bound : t -> int
 (** returns the lower bound of the level *)
+
 val upper_bound : t -> int
 (** returns the upper bound of the level *)
+
 val incr        : t -> t
 (** increases the current value of the level ; do nothing if trying to go above the upper bound *)
+
 val decr        : t -> t
 (** decreases the current value of the level ; do nothing if trying to go below the lower bound *)
+
 val set         : t -> int -> t
 (** set the current value of the level, with a maximum value of upper_bound, and a minimum value of lower_bound *)
+
 val floor_at    : int -> t -> t
 (** ensures current value is at least x *)
 
 
 val extent      : t -> int
 (** distance between the upper and lower bounds *)
+
 val range       : t -> int
 (** distance between the current level value and the lower bound *)
 
 
 val min         : t -> int
 (** alias for {!lower_bound} *)
+
 val max         : t -> int
 (** alias for {!upper_bound} *)
+
 val int         : t -> int
 (** alias for {!to_int} *)
+
 val float       : t -> float
 (** alias for {!to_float} *)

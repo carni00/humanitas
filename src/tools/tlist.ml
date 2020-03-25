@@ -36,13 +36,13 @@ let snth a list n = try (List.nth list n) with Failure _ -> a
 let rec last = function 
   | [] -> failwith "Tlist.last"
   | last :: [] -> last
-  | t    :: q  -> last q
+  | _    :: q  -> last q
 (* dernier élément d’une list *)
 
 let rec optLast = function 
   | [] -> None
   | last :: [] -> Some last
-  | t    :: q  -> optLast q
+  | _    :: q  -> optLast q
 (* dernier élément d’une list *)
 
 let min = function
@@ -71,7 +71,7 @@ let init ?(b=0) n f =
 let int n = init n (fun i->i)
 
 
-let make n a = init n (fun i->a)
+let make n a = init n (fun _ -> a)
 
 let mapi g l =
   let rec f n = function
@@ -81,7 +81,7 @@ let mapi g l =
 (* comme List.map g l, sauf que g utilise le numéro des éléments de la liste *)
 
 
-let rec fold_lefti g s l =
+let fold_lefti g s l =
   let rec f n s = function
   | [] -> s
   | e::q -> f (n+1) (g n s e) q in
@@ -138,16 +138,16 @@ let assRev list =
 
 let rec optAssoc a = function
   | [] -> None
-  | (k,b)::q when k=a -> Some b
-  | (k,b)::q          -> optAssoc a q
+  | (k,b)::_ when k=a -> Some b
+  | _::q          -> optAssoc a q
 (* comme assoc, mais renvoie une option plutôt que possiblement une exception *)
 
-let keyList   list = List.map (fun (a,b) -> a) list
-let valueList list = List.map (fun (a,b) -> b) list
+let keyList   list = List.map (fun (a,_) -> a) list
+let valueList list = List.map (fun (_,b) -> b) list
 
 let champ l a n = 
   let rec f i l = match i,l with
-  | i, e::q when i<a -> f (i+1) q
+  | i, _::q when i<a -> f (i+1) q
   | i, e::q when i<(a+n) -> e::f (i+1) q
   | _ -> [] in
   f 0 l
@@ -164,7 +164,7 @@ let rec remove list e = match list with
 
 let rec nRemove list n = match list with
   | [] -> []
-  | e :: q when n=0 -> q
+  | _ :: q when n=0 -> q
   | e :: q -> e :: nRemove q (n-1)
 (* retrait du x-iéme élément d'une liste, s'il existe *)
 
@@ -173,7 +173,7 @@ let nFilter g l =
   let rec f n = function
   | [] -> []
   | e :: q when (g n) -> e :: f (n + 1) q
-  | e :: q -> f (n + 1) q in
+  | _ :: q -> f (n + 1) q in
   f 0 l
 (* filter en fonction du rang dans la liste *)
 
@@ -189,37 +189,37 @@ let filter_n g l =
   let rec f n = function
   | [] -> []
   | e :: q when (g e) -> n :: f (n + 1) q
-  | e :: q -> f (n + 1) q in
+  | _ :: q -> f (n + 1) q in
   f 0 l
 (* liste des quantiemes des éléments satisfaisant g *)
 
 let mem_n a l =
   let rec f n = function
   | [] -> raise Not_found
-  | e :: q when e = a -> n
-  | e :: q -> f (n + 1) q in
+  | e :: _ when e = a -> n
+  | _ :: q -> f (n + 1) q in
   f 0 l
 (* quantieme de l’élément satisfaisant g *)
 
 let rec following a l = match l with
-  | e :: f :: q when e = a -> f
-  | e :: f :: q -> following a (f::q)
+  | e :: f :: _ when e = a -> f
+  | _ :: f :: q -> following a (f::q)
   | _ -> raise (Failure "List.following") (*Not_found*)
 (* suivant de a dans la liste l *) 
 
 let following_or_first a list = 
   let rec g a l = match l with
-  | e :: f :: q when e = a -> f
+  | e :: f :: _ when e = a -> f
   | e :: [] when e = a -> List.hd list
-  | e :: f :: q -> g a (f::q)
+  | _ :: f :: q -> g a (f::q)
   | _ -> raise (Failure "List.following_or_first") in (*Not_found*)
   g a list
 (* suivant de a dans la liste l, avec tour complet *) 
 
 let rec following_or_last a l = match l with
-  | e :: f :: q when e = a -> f
+  | e :: f :: _ when e = a -> f
   | e :: [] when e = a -> e
-  | e :: f :: q -> following_or_last a (f::q)
+  | _ :: f :: q -> following_or_last a (f::q)
   | _ -> raise (Failure "List.following_or_last") (*Not_found*)
 (* suivant de a dans la liste l ou a si c’est le dernier *) 
 
@@ -231,15 +231,16 @@ let previous_or_last  a l = following_or_first a (rev l)
 
 
 
-let rec uniques = function
-  | [] -> []
-  | e :: q when List.mem e q -> uniques q
-  | e :: q -> e :: uniques q
-(** list of uniques elements of l *)
 
 
 
 (****************************** Once used and not actually used *******************************)
+
+(* let rec uniques = function
+ *   | [] -> []
+ *   | e :: q when List.mem e q -> uniques q
+ *   | e :: q -> e :: uniques q
+ * (\** list of uniques elements of l *\) *)
 
 (*let rec search f = function
   | [] -> None

@@ -38,9 +38,11 @@ module Til : sig
   val nth       :  'a t -> 'a id -> 'a
   val snth      :  'a -> 'a t -> 'a id -> 'a
   val to_list   :  'a t -> 'a list
-(** returns the liste of values (keys are lost) *)
+  (** returns the liste of values (keys are lost) *)
+
   val key_list  :  'a t -> ('a id) list
-(** returns the liste of keys ('a id) (values are lost) *)
+  (** returns the liste of keys ('a id) (values are lost) *)
+
   val iter      : ('a -> unit) -> 'a t -> unit 
   val map       : (         'a -> 'b) -> 'a t -> 'b t
   val mapi      : ('a id -> 'a -> 'b) -> 'a t -> 'b t
@@ -51,5 +53,3 @@ module Til : sig
   val alter     : ('a) t -> 'a id -> ('a -> 'a) -> ('a) t
   val first_id  : ('a) t -> 'a id
   end
-
-

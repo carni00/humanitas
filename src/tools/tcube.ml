@@ -35,7 +35,7 @@ let init d h w f =
   Array.init d hf
 (* comme Array.init *)
 
-let make d h w a = init d h w (fun z y x -> a)
+let make d h w a = init d h w (fun _ _ _ -> a)
 
 let plan c z = Array.get c z
 
