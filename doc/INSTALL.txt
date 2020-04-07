@@ -1,16 +1,25 @@
 #RUN/MAKE COMPLETE HUMANITAS ON GNU/LINUX - HOWTO
 
+1. paquets apt
 sudo apt-get update
-sudo apt-get install curl m4 libpcre3 libpcre3-dev libev-dev freeglut3 freeglut3-dev vim subversion git ocaml opam
+sudo apt-get install curl m4 libpcre3 libpcre3-dev libev-dev freeglut3 freeglut3-dev vim git ocaml bubblewrap
 sudo apt-get install libsdl1.2-dev libsdl-ttf2.0-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl-sound1.2-dev libsdl-mixer1.2-dev
+
+2. opam
+sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)
 opam init
 opam update
 opam upgrade
 opam switch
-opam install core batteries lablgl ocamlsdl oasis utop
-svn co svn+ssh://carni@svn.gna.org/svn/hum/branches
-for f in `ls gfx`; do ln gfx/$f branches/refonte/gfx/$f ; done
-oasis setup
-make clean
-make
+opam switch create 4.09.1
+opam switch
+opam install core batteries lablgl ocamlsdl utop 
 
+3. merlin
+sudo apt remove vim
+sudo apt install vim-gtk #support python3
+opam install merlin
+opam user-setup install
+
+4. build 
+dune build
