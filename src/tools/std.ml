@@ -40,8 +40,6 @@ let flip      f = fun  x y   -> f  y x
 let compose g f = fun  x     -> g (f x)
 let ( |- )  g f = fun  x     -> f (g x)
 
-(*let ( |- ) f g a = g (f a)*)
-
 let fst3 (i,_,_) = i
 let snd3 (_,i,_) = i
 let trd3 (_,_,i) = i
@@ -96,6 +94,8 @@ let smap default f = function (*optfun*)
 | None    -> default
 
 end
+
+
 
 module Ext =
 struct
