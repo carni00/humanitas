@@ -20,6 +20,7 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  *)
+open Humanitas_tools
 open Std
 
 type climat =
@@ -164,7 +165,7 @@ let physis ~alt ~h ~t ~p =
   else
   let sMax = if t < (-5) then (20+t)*2
              else             (35+t) in
-  cut 0 sMax (ariditas t hugros)
+  cut 0 sMax (ariditas ~t ~p:hugros)
 (*aptitude de la regio au développement de la végétation naturelle*)
 (*indice calqué sur l’indice d’aridité, mais en y ajoutant l'effet négatif du froid extrême *)
 
@@ -227,11 +228,11 @@ let mountain r = r.mountain
 let altitude r = altitudeFun r.alt
 let thermos  r = r.thermos
 let pluvia   r = r.pluvia
-let hugros   r = hugrosFun r.hydros r.pluvia
-let ariditas r = ariditas (thermos r) (hugros r)
-let physis   r = physis  r.alt r.hydros (thermos r) r.pluvia
-let climat   r = climat  (altitude r) (thermos r) (pluvia r)
-let climax   r = climax  (altitude r) (hydros r) (thermos r) (pluvia r)
+let hugros   r = hugrosFun ~h:r.hydros ~p:r.pluvia
+let ariditas r = ariditas ~t:(thermos r) ~p:(hugros r)
+let physis   r = physis  ~alt:r.alt ~h:r.hydros ~t:(thermos r) ~p:r.pluvia
+let climat   r = climat  ~altitude:(altitude r) ~t:(thermos r) ~p:(pluvia r)
+let climax   r = climax  ~altitude:(altitude r) ~h:(hydros r) ~t:(thermos r) ~p:(pluvia r)
 let physisValue rs r = physis r * rs
 let hospitalitas r = hospitalitasFun (thermos r) (hydros r) (physis r)
 
