@@ -2,13 +2,15 @@
 **/.merlin
 _build
 _build*
-doc
+doc/
 archives/
 bashrc.humanitas
 bmp/
 branches/
 data/
 gfx/
+tmp/
+trash/
 git.txt
 refonte/
 .humrc*
