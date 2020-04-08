@@ -23,7 +23,7 @@
 
 (** fonctions relatives à la création des continents en particulier et du relief en général *)
 
-open Std
+(*open Std*)
 
 type t = int Rid.Array.t
 

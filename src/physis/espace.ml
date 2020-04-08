@@ -21,6 +21,7 @@
  
  *)
 
+open Humanitas_tools
 open Std
 
 type web =
@@ -382,6 +383,7 @@ module Regio = struct
   let lesHuit        e rid = Proximae.lesHuit   (proximaeRecord  e rid)
   let proximae       e rid = Proximae.toutes    (proximaeRecord  e rid)
   (** liste des proximae d’une regio *)
+  
   let random_fold_left e rid s f rate = Proximae.random_fold_left (proximaeRecord e rid) s f rate
 
   
