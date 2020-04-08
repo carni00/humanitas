@@ -39,7 +39,7 @@ val iter : int -> (t -> unit) -> unit
 module Array : sig
   type 'a t
   val empty  : 'a t 
-  val length : 'a t -> int
+(*  val length : 'a t -> int*)
   val init : int -> (rid -> 'a) -> 'a t     
   val get : 'a t -> rid -> 'a
   val length : 'a t -> int
