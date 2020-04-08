@@ -185,7 +185,7 @@ module Cylinder = struct
 
   let regioHid res = hid / (foi(hir res)) (* hauteur des regio exprimée en degré de latitude *)
   let regioWid res = wid / (foi(wir  res)) (* largeur des regio exprimée en degré de longitude *)
-  let regioSid res = regioWid res * regioHid res
+(*  let regioSid res = regioWid res * regioHid res*)
 
   let regioHik res     = hik / (foi(hir res)) 
   let regioWik res lat = wik / (foi(wir res)) / yxr (iof (abs lat))
@@ -242,9 +242,9 @@ module Proximae = struct
     (* dorsaleCreate exige que les 4 dirs soient « à la suite » dans le sens d’une rotation *)
 (*    let huitDirList   = [Nord; NE; East; SE; Sud; SW; West; NW]*)
   
-    let dirList = function 
-    | Quadral -> Direction.lesQuatre
-    | Octal   -> Direction.lesHuit
+(*    let dirList = function *)
+(*    | Quadral -> Direction.lesQuatre*)
+(*    | Octal   -> Direction.lesHuit*)
     let toutes p = function
     | Quadral -> Opt.value p.lesQuatre
     | Octal   -> Opt.value p.lesHuit
@@ -275,16 +275,16 @@ module Proximae = struct
                    }
     (* génération des listes de proximae d’une regio, en mode cylindre *)
   end
-(******************************   MODULE PROXIMAE.SPHERE   *************************************)
+(******************************   MODULE PROXIMAE.SPHERE   **************************************)
   module Sphere = struct
-    let proximaeCreate rid =
+    let proximaeCreate _rid =
       {
       lesQuatre = None;
       lesHuit = None;
       toutes = []; (* à compléter *)
       }
   end
-(*************************************************************************************************)
+(**************************************************************************************************)
   
   let proxima forme proximae dir =
     match forme with
@@ -355,9 +355,9 @@ let rh           e = match e.forme with
 
 let rdim ?(lat=0.) e = rs ~lat e, rw ~lat e, rh e
 
-let rsid   e = match e.forme with
-| Cylinder _ -> Cylinder.regioSid (resolution e)
-| Sphere     -> 1. (*Sphere.regioSid (resolution e)*)
+(*let rsid   e = match e.forme with*)
+(*| Cylinder _ -> Cylinder.regioSid (resolution e)*)
+(*| Sphere     -> 1. (*Sphere.regioSid (resolution e)*)*)
 
 (*************** MODULE ESPACE.REGIO : propriétés d'une regio appelée par son id *************)
 

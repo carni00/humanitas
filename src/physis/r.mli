@@ -93,7 +93,7 @@ val altitudeFun: int -> int
 val hugrosFun  : h:hydros -> p:int -> int
 (** associe à l’hydrographie et la pluviométrie l’humidité globale *)
 
-val is_glacier : alt:int -> t:int -> p:int -> bool
+val is_glacier : t:int -> bool
 val is_seaIce  : alt:int -> t:int -> bool
 val hospitalitasFun : int -> hydros -> int -> float
 val physisValue  : int -> t -> int

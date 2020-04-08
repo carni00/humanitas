@@ -59,7 +59,7 @@ let orientation pa pr i a mo o h vp =
       else mo,o,vp+1
 (*définition des new main orientation, orientation, virage proba*)
 
-let rec flumenCreate aa wa p pa pr pt i pi mo o vp flumen = 
+let flumenCreate aa wa p pa pr pt i pi mo o vp flumen = 
   let rec f i pi mo o vp flumen =
     (*id, previous id, main orientation, orientation, virage proba*)
     let a = Ria.get aa i in (*alt*)
@@ -90,7 +90,7 @@ let rec flumenCreate aa wa p pa pr pt i pi mo o vp flumen =
 (* mise à jour du flumen en construction après être « avancé » d’une regio *)
 
 let create (e:E.t) aa(*altitude array*) tla (*temp lat array*) =
-  let s,mw,mh = E.dimir e in
+  let s,mw,_mh = E.dimir e in
   let wa = Ria.make s 0 in (*river array : pour les flumenID*)
   let p  rid o = List.nth (ER.lesQuatre e rid) (o%4) in (*proxima, écrit ainsi pour l’efficacité*)
   let pa rid o = Ria.get aa  (p rid o) in (*proxima altitude*)
@@ -113,12 +113,12 @@ let create (e:E.t) aa(*altitude array*) tla (*temp lat array*) =
         let mo=g 0 (Random.int 4) in
         if mo>=0
         then let flumen = flumenCreate aa wa p pa pr pt (p i mo) i mo mo 0 (F.make fleuveID i (dir mo) (p i mo) ) in 
-        let rewriteWa flumen = Tlist.iteri (fun n regio ->(Ria.set wa regio.F.rid (flumen.F.fid))) flumen.F.cours in
+        let rewriteWa flumen = Tlist.iteri (fun _n regio ->(Ria.set wa regio.F.rid (flumen.F.fid))) flumen.F.cours in
         let flumenList = 
           if flumen<>F.null 
           then match flumen.F.fin with 
-          | F.Estuaire _    -> rewriteWa flumen ; flumen::flumenList
-          | F.Confluent rid -> rewriteWa flumen ; insert flumenList flumen
+          | F.Estuaire  _    -> rewriteWa flumen ; flumen::flumenList
+          | F.Confluent _rid -> rewriteWa flumen ; insert flumenList flumen
           | _ -> raise (Failure "FlumenList.create")
           else flumenList in flumenListCreate (fleuveID+1) flumenList
         else flumenListCreate (fleuveID+1) flumenList

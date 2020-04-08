@@ -21,7 +21,7 @@
 
  *)
 
-open Std
+open Humanitas_tools
 
 type t = int
 type rid = t (*Rid.t*)

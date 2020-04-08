@@ -145,7 +145,9 @@ let hugrosFun ~h ~p =  p + match h with
 
 let inlandsisTemp = (-10)
 
-let is_glacier ~alt ~t ~p = t<= inlandsisTemp
+(*let is_glacier ~alt ~t ~p = t<= inlandsisTemp*)
+
+let is_glacier ~t = t<= inlandsisTemp
 (* température faible et pluvia > fonte *)
 
 let is_seaIce ~alt ~t = alt<0 && t<=(-15)
@@ -161,7 +163,7 @@ let ariditas ~t ~p = p / (max 1 (t + 10))
 
 let physis ~alt ~h ~t ~p =
   let hugros = hugrosFun ~h ~p in
-  if alt<0 || is_glacier ~alt ~t ~p then 0
+  if alt<0 || is_glacier ~t then 0
   else
   let sMax = if t < (-5) then (20+t)*2
              else             (35+t) in
@@ -207,10 +209,10 @@ let hospitalitasFun t hydros physis =
 (* hospitalité de la regio = indice de productivité du travail potentielle, instrumentum non compris *)
 
 
-let is_passable hugros glacier seaIce =
-     hugros < 2000 
-  && not glacier
-  && not seaIce
+(*let is_passable hugros glacier seaIce =*)
+(*     hugros < 2000 *)
+(*  && not glacier*)
+(*  && not seaIce*)
 (* les marécages, jungles, glaciers, et banquises ne peuvent être traversés par l’exercitus *)
 
 let fluxus hydros = match hydros with

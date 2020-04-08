@@ -21,6 +21,7 @@
 
  *)
 
+open Humanitas_tools
 open Std
 
 module Ria = Rid.Array
@@ -89,7 +90,7 @@ let arrayCreate e (ll, dl, rl, sl) =
   let s,w,h = E.dimir e in
   let a    = Ria.make s 0 in
   let yvea = Array.make w (nullYve()) in
-  let vm = Tmap.init (fun h l -> 0) hl rl in (*variation des lat, évoluera à chaque x*)
+  let vm = Tmap.init (fun _h _l -> 0) hl rl in (*variation des lat, évoluera à chaque x*)
   let srd lat = List.assoc lat (List.combine ll dl) in (*standart relative degré*)
   let syd lat = (srd lat)*h/(cylLatMax*2) in (*standart y degré*)
   let asd vm hem lat = (* actual superior degré *) 
@@ -114,13 +115,13 @@ let arrayCreate e (ll, dl, rl, sl) =
     let g y =
       let rec f = function
       | [] -> 0 (*EQUAT*)
-      | lat::q when (y < asy vm ED.nord (Tlist.following lat rvll)
+      | lat::_q when (y < asy vm ED.nord (Tlist.following lat rvll)
                   || y > asy vm ED.sud  (Tlist.following lat rvll)) -> code vm y lat 
-      | lat::q -> f q in
+      | _lat::q -> f q in
       Ria.set a (E.Cylinder.rid_of_ryx (E.resolution e) y x) (f (Tlist.remove rvll EQUAT)) in (* objet de la fonction *)
     let _ = Ext.iter h g in
     let module C=Compare in
-    let alea l s v iv sv = match C.situ (abs v) (w-x) with
+    let alea _l s v iv sv = match C.situ (abs v) (w-x) with
     | C.Below -> let d=h*s/100 in (match C.bsitu (sInt (2*h)) (v-d) (v+d) with
       | C.Below when (iv-v)<(h/14) -> (-1)
       | C.Above when (v-sv)<(h/14) -> 1
@@ -152,7 +153,7 @@ let chainesZoneCreate (e:E.t) (wma: bool Ria.t) (wca : bool Ria.t) (waa:int Ria.
   let legaldir(d) = if d<>4 then d else 0 in
   let rid = ref (Rid.oi 0) in
   let dir = ref 0 in
-  let _ = for chain=0 to 25
+  let _ = for _chain=0 to 25
   do
   dir:=Random.int(4); (*4 voisins=>4 directions possibles*)
   rid:=E.Cylinder.randomRid ~polarExclusion:Continentes.polarExclusion res;
@@ -196,7 +197,7 @@ let chainsAgglo (e:E.t) (wca : bool Ria.t) (waa:int Ria.t) =
 
 
 let chainsCreate (e:E.t) (iaa : int Ria.t) (*initial altitude array*) =
-  let s,w,h = E.dimir e in
+  let s,w,_h = E.dimir e in
   let ima (*initial mountain array*)= Ria.make s false in
   let ica (*initial chaine array*)= Ria.make s false in
   let cycle_nb = 
@@ -211,7 +212,7 @@ let chainsCreate (e:E.t) (iaa : int Ria.t) (*initial altitude array*) =
   let rec f = function
     0 -> (e, ima, ica, iaa)
   | i -> cycle(f(i-1)) in
-  let e, fma, fca, faa = f(cycle_nb) in
+  let _e, fma, _fca, faa = f(cycle_nb) in
   fma, faa
   (*ajoute des chaînes de montagne de largeur variée à l'altitude array*)
   (*Carte plus grande =>plus de cycle =>plus de chaînes, et plus de passages=chaines plus hautes *)
@@ -244,7 +245,7 @@ let hydros rm (i:Rid.t) = R.hydros(get rm i)
 let thermos rm (i:Rid.t) = R.thermos(get rm i)
 
 (*let is_passable rm (i:Rid.t) = R.is_passable (get rm i)*)
-let climax rm (i:Rid.t) = R.climax(get rm i)
+(*let climax rm (i:Rid.t) = R.climax(get rm i)*)
 (*let tegmen rm (i:Rid.t) = Regio.tegmenFun (climax rm i) (Rv.Natura 80)*)
 (*let is_farmable rm (i:Rid.t) = Regio.is_farmable (get rm i)*)
 (* à déplacer dans la partie humaine *)
@@ -274,7 +275,7 @@ let pluviaArray e aa pla yvea =
 (*  let pluvDList= [    0;  120;  240;   360;   480] in (* surplus de precipitations respectives sur un désert *)*)
   let pluvDList= [ 1200; 1000;  800;   600;   400;   400] in (* *limite de l’effet altitude à une altitude donnée *)
   let f rid = 
-    let lat,lon = E.Cylinder.yx_of_rrid (E.resolution e) rid in
+    let _lat,lon = E.Cylinder.yx_of_rrid (E.resolution e) rid in
     let latPluvia = Ext.swy pList (pluvLA.(lon)) (Ria.get pla rid) in
     let alt = R.altitudeFun (Ria.get aa rid) in
     let altPluvia = Ext.swy aList (pluvDList) (alt) in
@@ -315,7 +316,7 @@ let create (e:E.t) =
     and p = pluvia i in 
     let h = if alt<0 then (if R.is_seaIce ~alt ~t then R.SeaIce 
                            else if alt<(-2) then R.Ocean else R.Sea) 
-            else (if R.is_glacier ~alt ~t ~p then R.Inlandsis else R.Dry) in
+            else (if R.is_glacier ~t then R.Inlandsis else R.Dry) in
     let area = ER.superficie e i in
     R.make i ~alt ~area ~h ~t ~p ~coast:(coast i) ~mountain:(mountain i) in
   let rm = Ria.init s regio in
