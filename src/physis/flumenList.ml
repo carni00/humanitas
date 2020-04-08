@@ -22,6 +22,7 @@
 
  *)
 
+open Humanitas_tools
 open Std
 
 module E = Espace

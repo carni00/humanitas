@@ -104,7 +104,9 @@ val physisValue  : int -> t -> int
 val none : t
 val rid  : t -> Rid.t 
 val alt  : t -> int
-val area : t -> float (** superficie en km2 *)
+val area : t -> float 
+(** superficie en km2 *)
+
 val hydros : t -> hydros
 val fluxus : t -> int
 val coast : t -> bool
