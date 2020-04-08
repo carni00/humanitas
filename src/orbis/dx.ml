@@ -21,6 +21,7 @@
 
  *)
 
+open Humanitas_tools
 open Std
 open Tfloat
 

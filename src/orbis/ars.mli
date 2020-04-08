@@ -21,6 +21,8 @@
 
  *)
 
+open Humanitas_tools
+
 type t = 
 | N_ARS 
 | AGR 

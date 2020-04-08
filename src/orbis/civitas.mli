@@ -23,6 +23,9 @@
 
 (** Chaque nation peut bâtir une cité *)
 
+open Humanitas_physis
+
+
 type rank =
 | Not_a_civitas
 | Ring  (* capitale sans développement urbain *)

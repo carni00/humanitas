@@ -22,6 +22,8 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
 open Std
 module Til = Tid.Til
 

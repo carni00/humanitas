@@ -21,9 +21,10 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+
 type t 
-
-
 
 val iter   : (Civitas.t -> unit) -> t -> unit
 

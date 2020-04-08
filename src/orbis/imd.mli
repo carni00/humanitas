@@ -21,6 +21,8 @@
 
  *)
 
+open Humanitas_physis
+
 type origo = Rid.t * Date.t (*lieu, date*)
 
 type t = {

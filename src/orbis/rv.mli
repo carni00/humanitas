@@ -21,6 +21,8 @@
 
  *)
 
+open Humanitas_physis
+
 type nid = Nid.t 
 
 type tegmen =
@@ -95,7 +97,7 @@ val set_oikos_urbs : t -> t
 (** mise à jour de l’oikos en urbs pour les rid fournies *)
 
 val dominus         : t -> nid
-val contents        : t -> contents
+(*val contents        : t -> contents*)
 val incola          : t -> Incola.t option
 val incola_id       : t -> nid
 val plebs           : t -> float

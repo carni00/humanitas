@@ -39,11 +39,13 @@ val factum : t -> Nid.t -> Partitio.t
 
 val damnum : t -> Nid.t -> Nid.t -> Partitio.t
 (** damnum subi par nid1 et du à nid2 *)
+
 val damSum : t -> Nid.t -> Partitio.t
 (** damnum total subi par nid1 *)
 
 val tributum : t -> Nid.t -> Nid.t -> Partitio.t
 (** tributum versé à nid1 par nid2 *)
+
 val tribuSum : t -> Nid.t -> Partitio.t
 (** tributum total versé à nid1 *)
 

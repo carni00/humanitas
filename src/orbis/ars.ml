@@ -22,7 +22,7 @@
  *)
 
 
-open Std
+open Humanitas_tools
 open Tfloat
 
 type t = 
@@ -42,10 +42,10 @@ type cognitio = [
 ]
 
 
-let first = AGR
+(*let first = AGR*)
 
 
-let next = function
+(*let next = function
 | AGR -> MET
 | MET -> WRI
 | WRI -> NAV
@@ -54,7 +54,7 @@ let next = function
 | STE -> CMB
 | CMB -> ELE
 | ELE -> N_ARS
-| N_ARS -> N_ARS
+| N_ARS -> N_ARS*)
 
 
 (*let list = [AGR]*)

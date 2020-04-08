@@ -44,8 +44,10 @@ module Nil : sig
   val snth : 'a -> (nid*'a) list -> nid -> 'a
   val to_list  : 'a t -> 'a list
 (** returns the liste of values (keys are lost) *)
+
   val key_list : 'a t -> nid list
 (** returns the liste of keys (nation id) (values are lost) *)
+
   val init : (nid->'a) -> nid list -> 'a t
   val exists : ('a -> bool) -> 'a t -> bool
   val iter : ('a->unit) -> 'a t -> unit 
@@ -54,6 +56,7 @@ module Nil : sig
   val mapi : (nid->'a->'b) -> 'a t -> 'b t
   val mapi_to_list : (nid->'a->'b) -> 'a t -> 'b list
 (** similar as mapi, excepting that it returns a list of the mapped values (keys are lost) *)
+
   val filter : ('a -> bool) -> 'a t -> 'a t
   val nfilter : (nid -> bool) -> 'a t -> 'a t
   val sort : 'a t -> 'a t
@@ -72,6 +75,7 @@ module Nim : sig
   val snth : 'a -> 'a t -> nid -> nid -> 'a
   val bnth : 'a -> 'a t -> nid -> nid -> 'a
 (** à utiliser sur la map équivalente à une matrice symétrique (c-à-d ou nth y x == nth x y, mais ou seule nth y x est encodé *)
+
   val init : (nid -> nid -> 'a) -> nid list -> 'a t
   val iteri: (nid -> nid -> 'a -> unit) -> 'a t -> unit
   val mapi : (nid -> nid -> 'a -> 'b) -> 'a t -> 'b t
@@ -82,9 +86,9 @@ module Nim : sig
   val sym   : 'a t -> 'a t
   val sym_mapi : (nid->nid->'a->'a) -> 'a t -> 'a t
   val smap2 : 'a -> 'b -> ((nid*nid)->'a -> 'b -> 'c) -> 'a t -> 'b t -> 'c t
-  (** mappage de deux Nil.t possiblement incomplètes (des couples clé/élément manquent). Les valeurs a0 et b0 sont retenues dans
-  ces cas en input *)
-  (** smap2 suppose que al et bl sont classées dans le même ordre (selon les k(eys)) *)
+  (** mappage de deux Nil.t possiblement incomplètes (des couples clé/élément manquent). Les valeurs a0 et b0 sont retenues dans ces cas en input ;
+      smap2 suppose que al et bl sont classées dans le même ordre (selon les k(eys)) *)
+
   val line  : 'a t -> nid -> 'a Nil.t
   val of_ll : 'a Nil.t Nil.t -> 'a t
   val to_ll : 'a t -> 'a Nil.t Nil.t
@@ -119,6 +123,7 @@ module Nix : sig
   val make  : 'a -> 'a t 
   val empty : unit -> 'a option t 
   (** returns a matrix sized for the max number of nations, and filled with the option None *)
+
   val nIter : (nid -> nid-> 'a -> unit) -> 'a t -> unit
   val line   : 'a t -> nid -> 'a Nia.t
   val column : 'a t -> nid -> 'a Nil.t

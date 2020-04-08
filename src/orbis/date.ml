@@ -31,13 +31,13 @@ type t =
 | Unknown
 
 let agriculture = G(-8500)
-let ceramique   = G(-5200) (*Obeid I : faucille en argile cuite*)
-let masonry     = G(-5000) (*Obeid I : ziggurat*)
+(*let ceramique   = G(-5200) (*Obeid I : faucille en argile cuite*)*)
+(*let masonry     = G(-5000) (*Obeid I : ziggurat*)*)
 let metallurgy  = G(-4500) (*Bulgarie : fusion du cuivre*)
 let irrigation  = G(-4200) (*Eridu : 4000 habitants*)
 let writing     = G(-3400)
-let bronze      = G(-3000) 
-let latifundium = G(-3000) 
+(*let bronze      = G(-3000) *)
+(*let latifundium = G(-3000) *)
 let beginning   = irrigation
 
 let inc date    = match date with

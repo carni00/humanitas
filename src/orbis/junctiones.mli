@@ -81,15 +81,16 @@ module Natio : sig
   val make : j -> nid -> t 
 
   val relatio_list  : t -> relatio Nid.Nil.t 
-  (** liste de nos relations diplomatiques *)
-  (** seules les valeurs différentes de N_relatio sont enregistrées *)
+  (** liste de nos relations diplomatiques ; 
+      seules les valeurs différentes de N_relatio sont enregistrées *)
 
   val theirTactic_list : t -> tactic  Nid.Nil.t 
-  (** liste des tactiques des autres nations envers nous *)
-  (** la liste de nos tactiques envers les autres nations est dans notre strategica *)
+  (** liste des tactiques des autres nations envers nous ; 
+      la liste de nos tactiques envers les autres nations est dans notre strategica *)
 
   val am_i_at_war       : t -> bool
   (** suis-je en guerre (bellum) avec une quelconque autre natio *)
+
   val am_i_under_attack : t -> bool
   (** suis-je attacké (offensive x) par une quelconque autre natio *)
 

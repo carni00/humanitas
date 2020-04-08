@@ -21,7 +21,7 @@
 
  *)
 
-open Std
+open Humanitas_tools
 open Tfloat
 
 module P  = Partitio
