@@ -21,6 +21,7 @@
 
  *)
 
+open Humanitas_tools
 open Std
 open Tfloat
 
@@ -188,11 +189,11 @@ type fun_cons =
 
 let alter p (fcl:fun_cons list) =
   let fun_alter = function
-  | ADD_PL(pList)-> (fun a v -> Nil.fold_left (fun s p -> s+(attrib p a) ) v pList )
-  | ADD_P(p)     -> (fun a v -> v + attrib p a)
-  | SBS_P(p)     -> (fun a v -> v - attrib p a)
-  | MUL_I(i)     -> (fun a v -> v * i)
-  | DIV_I(i)     -> (fun a v -> squot 0. v i) (*la plèbe peut être nulle*) 
+  | ADD_PL(pList)-> (fun  a v -> Nil.fold_left (fun s p -> s+(attrib p a) ) v pList )
+  | ADD_P(p)     -> (fun  a v -> v + attrib p a)
+  | SBS_P(p)     -> (fun  a v -> v - attrib p a)
+  | MUL_I(i)     -> (fun _a v -> v * i)
+  | DIV_I(i)     -> (fun _a v -> squot 0. v i) (*la plèbe peut être nulle*) 
   | FUN(f)       ->  f in
   let fun_list aid = List.map (fun fcons ->(fun_alter fcons) aid) fcl in
   let f aid att    = Tlist.applique att (fun_list aid) in
@@ -207,7 +208,7 @@ let alter p (fcl:fun_cons list) =
     }
 (* application d’une liste de transformations aux membres de p *) 
 
-let listSum pList = match pList with (nid,p)::q -> alter p [ADD_PL q] | []->null
+let listSum pList = match pList with (_nid,p)::q -> alter p [ADD_PL q] | []->null
 (* somme de partitio *) 
 
 let actioFcons pyramid plebs = MUL_I ( Dx.Pyramid.facultas_ratio pyramid plebs )
@@ -279,7 +280,7 @@ let cibusDamnumRatio = 0.33
 let militDamnumRatio = 0.50
 
 
-let damnum_of_factum p (funus,chora) relatio =
+let damnum_of_factum p (funus,chora) _relatio =
   let ratio = ( funus.Rv.plebs /. chora.Rv.plebs ) in
   let f a v = match a with
   | LAB -> v * ratio * cibusDamnumRatio
@@ -310,7 +311,7 @@ let resistance_a_l_occupation g centralCoef =
   occupation_taux * (u + centralCoef)
 
 
-let civicMilitaria gn hum spolium libertas politeia agriCopia warCoef =
+let civicMilitaria gn hum spolium libertas politeia agriCopia _warCoef =
   let cMmax = hum-spolium in
    if cMmax <= 0. then 0. else
     let centralCoef = if Politeia.is_centralized politeia then u else 0. in

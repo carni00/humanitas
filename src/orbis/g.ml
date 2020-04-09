@@ -21,7 +21,8 @@
 
  *)
 
-open Std
+open Humanitas_tools
+open Humanitas_physis
 
 module E=Espace
 module Rvi=Rv.Incola

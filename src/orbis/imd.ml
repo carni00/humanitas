@@ -23,6 +23,8 @@
 
 (** fonctions permettant de déterminer le nombre, la localisation, l'étendue des civilisations initiales ; fonctions appelées par Orbis.create uniquement *)
 
+open Humanitas_tools
+open Humanitas_physis
 open Std
 
 module Ria = Rid.Array
@@ -33,7 +35,6 @@ module ER = Espace.Regio
 module D  = Date
 
 
-type rid = Rid.t
 type origo = Rid.t * Date.t (*lieu, date*)
 (* origine d'une civ = lieu et date developpement agriculture *)
 
@@ -56,7 +57,7 @@ let reachable_terrae_map e rm =
   let wa = Ria.init s (fun i-> Rm.alt rm i >= 0) in (* toute terre est reachable a priori *)
   let ca = Ria.make s false in
   let proba, denom = [| 0; 9; 10; 10; 10 |],10 in
-  let agglo i =
+  let agglo _i =
     let _ = Ria.blit wa ca in
     let proba l = proba.(Tlist.census (Ria.get ca) l) in
     let f id r =
@@ -102,8 +103,8 @@ let reached_terrae_map e retm rm =
 (* définit les zones que l'humanité a parcouru avant Date.beginning, soit les terres pouvant être parcourues, à partir du lieu de naissance de l'espece homo sapiens *)
 
 
-let civilization_centers e (rdtm: bool Ria.t) (rm) =
-  let s,w,h = E.dimir e in
+let civilization_centers e (_rdtm: bool Ria.t) (rm) =
+  let s,w,_h = E.dimir e in
   let res = E.resolution e in
   let ccm (*civ centers map*)  = Ria.make (s) (Nid.none) in
   let zrm (*zone réservée map*)= Ria.make (s) (false) in
@@ -121,7 +122,7 @@ let civilization_centers e (rdtm: bool Ria.t) (rm) =
       Ria.set zrm (E.Cylinder.srid_of_ryx res (cy+j) (cx+i)) true
     done; done in
 
-  let disque_potentiel (ccm) (crid) (*central regio id*) =
+  let disque_potentiel (_ccm) (crid) (*central regio id*) =
     let cy,cx = E.Cylinder.yx_of_rrid (res) crid in
     let rec boucle p i j =
       let j,i = if i<r then j,(i+1) else (j+1),(-r) in (*déplacement du curseur*)
@@ -152,13 +153,13 @@ let civilization_centers e (rdtm: bool Ria.t) (rm) =
                    if List.length vnl = 1 
                    then (nid::bnl), (Tlist.remove vnl nid)
                    else createNations (i+1) (nid::bnl) (Tlist.remove vnl nid) in
-  let bnl,vnl = createNations 0 [] Nid_list.make in
+  let bnl,_vnl = createNations 0 [] Nid_list.make in
   ccm, coa (*civ origo array*), bnl
 (* crée les centres de civ = 1 case initiale par nation *)
 
 
 let civ_map e (ccm:Nid.t Ria.t) (coa:origo Nia.t) rm =
-  let s,w,h = E.dimir e in
+  let s,w,_h = E.dimir e in
   let origoDate civ = snd(Nia.get coa civ)  in
   let f i = let civ=Ria.get ccm i in (civ, if civ=Nid.none then Date.Unknown else origoDate civ) in
   let wa (*work array*) = Ria.init s f in

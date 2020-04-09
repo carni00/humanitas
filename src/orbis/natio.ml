@@ -21,6 +21,9 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+
 open Std
 open Tfloat
 
@@ -101,9 +104,9 @@ let efficientiaFun = Rv.Fun.efficientia
 (* productivité du travail *)
 
 
-let rec artesFun = function
-| [] -> []
-| (ars,i)::q -> if i=1. then ars::artesFun q else artesFun q
+(*let rec artesFun = function*)
+(*| [] -> []*)
+(*| (ars,i)::q -> if i=1. then ars::artesFun q else artesFun q*)
 (* artes maîtrisés *)
 
 
@@ -248,7 +251,7 @@ let pNatio n =
 
 let paNatio cl n = ( {
   Politeia.p          = politeia n;
-  Politeia.poleis     = (match cl with e::q -> true | [] -> false) ;
+  Politeia.poleis     = (match cl with _e::_q -> true | [] -> false) ;
   Politeia.latifundium= latifundium n;
   Politeia.writing    = List.mem Ars.WRI (artes n);
   Politeia.metallurgy = List.mem Ars.MET (artes n);
@@ -336,7 +339,7 @@ let update gn jn cl n(*natio*) pr luc p(*partitio*) inventiones =
   (* la nouvelle démographie est le « produit » de la forward demographie de l’année précédente et de la géographie nationale présente (perte de regiones ?) *)
   let fd = Dx.preview d  (P.cibus luc) (sophia n) (fides n) (facultas n) (P.mil p) 0. in
   let artes = 
-    let rec f = function [] -> (artes n) | (cognitio, ars) :: q -> (f q) @ [ ars ] in 
+    let rec f = function [] -> (artes n) | (_cognitio, ars) :: q -> (f q) @ [ ars ] in 
     f (List.rev inventiones) in 
     (* mise à jour des artes, avec conservation de l’ordre "normal" des artes *)
   let k  = Aedificium.update (aeNatio n artes pr luc) in
@@ -372,7 +375,7 @@ Calcul de vis en fonction de l'imperium du tour présent, de militaria de l'ann�
 
 (******************************* NATIO CREATE *******************************************)
 
-let create rm im g nid civitas =
+let create _rm _im g nid civitas =
   let g = G.Natio.make g [] nid in
 (*  let plebs = G.plebs g nid in (* Depr. let plebs = physis * Dx.npc * 141/100 in*)*)
   let efficientia = efficientiaFun (Gn.hospitalitas g) (Gn.instrumentum g) in

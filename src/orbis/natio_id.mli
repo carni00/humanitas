@@ -4,6 +4,7 @@
     nation.
 *)
 
+open Humanitas_tools
 open Std
 
 type t = [`natio_id] id

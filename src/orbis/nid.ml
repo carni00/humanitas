@@ -21,6 +21,7 @@
 
  *)
 
+open Humanitas_tools
 open Std
 
 type t   = int
@@ -49,20 +50,20 @@ module Nil =
   let snth a l n = try (List.assoc n l) with Not_found -> a
   let len = List.length
 
-let max_id = function [] -> 0 | (nid,a)::q -> List.fold_left (fun maxFound (newNid,a) -> max maxFound newNid) nid q +1
-  let to_list  l =  List.map  (fun (nid,a)-> a  ) l
-  let key_list l =  List.map  (fun (nid,a)-> nid) l
+let max_id = function [] -> 0 | (nid,_a)::q -> List.fold_left (fun maxFound (newNid,_a) -> max maxFound newNid) nid q +1
+  let to_list  l =  List.map  (fun (_nid,a)-> a  ) l
+  let key_list l =  List.map  (fun (nid,_a)-> nid) l
   let init f nil =  List.map  (fun nid-> (nid,f nid)) nil
   let of_list  l = Tlist.mapi (fun i a -> (i, a)) l
   let map    f l = List.map (fun (nid, a)->(nid, f a)) l
   let mapi   f l = List.map (fun (nid, a)->(nid, f nid a)) l
   let mapi_to_list f l = List.map (fun (nid, a)->(f nid a)) l
-  let iter   f l = List.iter(fun (nid, a)-> f a ) l
-  let fold_left f s l = List.fold_left (fun s (nid,a) -> f s a) s l
+  let iter   f l = List.iter(fun (_nid, a)-> f a ) l
+  let fold_left f s l = List.fold_left (fun s (_nid,a) -> f s a) s l
   let nfilter  f = List.filter (fun (k,_)->(f k))
   let filter   f = List.filter (fun (_,a)->(f a))
   let sort list  = List.sort (fun (k1,_) (k2,_) -> compare k1 k2) list
-  let map2 f al bl = List.map2 (fun (k,a) (k,b) ->(k, f a b)) al bl
+  let map2 f al bl = List.map2 (fun (_k,a) (k,b) ->(k, f a b)) al bl
   let smap2 a0 b0 f al bl = 
     let rec g al bl = match al,bl with
     | (ak,a)::aq,(bk,b)::bq when ak=bk -> (ak,f ak a  b ) ::g aq bq 
@@ -73,17 +74,18 @@ let max_id = function [] -> 0 | (nid,a)::q -> List.fold_left (fun maxFound (newN
     | _                                -> [] in
     g al bl
   (** mappage de deux Nil.t possiblement incomplètes (des couples clé/élément manquent). Les valeurs a0 et b0 sont retenues dans
-  ces cas en input *)
-  (** smap2 suppose que al et bl sont classées dans le même ordre (selon les k(eys)) *)
-  let map3  f l1 l2 l3 = Tlist.map3 (fun (nid,a) (nid,b) (nid,c) ->(nid, f a b c)) l1 l2 l3
-  let map4  f l1 l2 l3 l4 = Tlist.map4 (fun (nid,a) (nid,b) (nid,c) (nid,d) ->(nid, f a b c d)) l1 l2 l3 l4
-  let map5  f l1 l2 l3 l4 l5 = Tlist.map5 (fun (nid,a) (nid,b) (nid,c) (nid,d) (nid,e) ->(nid, f a b c d e)) l1 l2 l3 l4 l5
+  ces cas en input ;
+  smap2 suppose que al et bl sont classées dans le même ordre (selon les k(eys)) *)
+
+  let map3  f l1 l2 l3 = Tlist.map3 (fun (_nid,a) (_nid,b) (nid,c) ->(nid, f a b c)) l1 l2 l3
+  let map4  f l1 l2 l3 l4 = Tlist.map4 (fun (_nid,a) (_nid,b) (_nid,c) (nid,d) ->(nid, f a b c d)) l1 l2 l3 l4
+  let map5  f l1 l2 l3 l4 l5 = Tlist.map5 (fun (_nid,a) (_nid,b) (_nid,c) (_nid,d) (nid,e) ->(nid, f a b c d e)) l1 l2 l3 l4 l5
   let rec exists f = function
   | []       -> false
-  | (n,a)::q -> f a || exists f q
+  | (_n,a)::q -> f a || exists f q
   let rec set l (nid,x) = match l with
   | []                  -> [ (nid,x) ]
-  | (n,a)::q when n=nid -> (n,x) :: q
+  | (n,_a)::q when n=nid -> (n,x) :: q
   | (n,a)::q            -> (n,a) :: set q (nid,x)
   let add l (nid,x) = (nid,x) :: l
   end 
@@ -98,6 +100,7 @@ module Nim =
   let snth a map y x = try (List.assoc (y,x) map) with Not_found -> a
   let bnth a map z w = b (snth a map) z w 
 (** à utiliser sur la map équivalente à une matrice symétrique (c-à-d ou nth y x == nth x y, mais ou seule nth y x est encodé *)
+
   let init  f nil = List.concat (List.map (fun y -> List.map (fun x-> ((y,x),f y x)) nil) nil) (* OK *)
   let iteri f map = List.iter (fun ((y,x),a) -> f y x a) map
   let mapi  f map = List.map  (fun ((y,x), a)->((y, x), f y x a)) map
@@ -109,23 +112,24 @@ module Nim =
   let sym_mapi f map = List.map (fun ((y,x),a) -> ((x,y),(f y x a))) map
   let smap2 = Nil.smap2
   (** mappage de deux Nil.t possiblement incomplètes (des couples clé/élément manquent). Les valeurs a0 et b0 sont retenues dans
-  ces cas en input *)
-  (** smap2 suppose que al et bl sont classées dans le même ordre (selon les k(eys)) *)
+  ces cas en input ;
+  smap2 suppose que al et bl sont classées dans le même ordre (selon les k(eys)) *)
+
   let rec line map j = match map with
   | [] -> []
-  | ((y,x), a)::aq when y=j -> (x,a) :: line aq j
-  | ((y,x), a)::aq          -> line aq j
+  | (( y, x), a)::aq when y=j -> (x,a) :: line aq j
+  | ((_y,_x),_a)::aq          -> line aq j
 
 
   let of_ll ll =
     let yList, ll = List.split ll in
     List.concat (List.map2 (fun y l -> (List.map (fun (x,a) -> (y,x),a) l) ) yList ll)
-  let rec to_ll map = 
+  let to_ll map = 
     let rec f z cl map = match map with
     | []            when cl <> [] -> (z,cl) :: []
-    | ((y,x),a)::aq when z=y -> f z ((x,a)::cl) aq
-    | ((y,x),a)::aq when z<y && cl<>[] -> (z,cl) :: f (z+1) [] map
-    | ((y,x),a)::aq when z<y -> f (z+1) [] map
+    | ((y, x), a):: aq when z=y -> f z ((x,a)::cl) aq
+    | ((y,_x),_a)::_aq when z<y && cl<>[] -> (z,cl) :: f (z+1) [] map
+    | ((y,_x),_a)::_aq when z<y -> f (z+1) [] map
     | _ -> [] in
   (f 0 [] map)
   (* to_ll suppose que les éléments de la map sont ordonnés, par y, puis par x *)
@@ -156,7 +160,7 @@ module Nia =
 module Nix =
   struct
   include Tmatrix
-  let empty_mx    = Tmatrix.make size size None
+(*  let empty_mx    = Tmatrix.make size size None*)
 (*  type 'a t = 'a array array*)
 (*  let length = nb*)
 (*  let surface = nb*nb*)

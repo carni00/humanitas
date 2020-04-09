@@ -20,6 +20,7 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  *)
+open Humanitas_tools
 open Std
 
 module Nil = Nid.Nil
@@ -105,7 +106,7 @@ let next_arkhe n =
   | _    , arkhe   -> arkhe
 
 
-let seditio n = 0
+(*let seditio n = 0*)
 (* (mil + rel + oti)/2 + lux + opp×2 + (u - dxCopia) *)
 
 let update n = 

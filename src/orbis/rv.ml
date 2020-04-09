@@ -21,7 +21,9 @@
 
  *)
 
+open Humanitas_tools
 open Std
+open Humanitas_physis
 
 type nid = Nid.t
 
@@ -229,8 +231,10 @@ module Brouillards = struct
   type t = int
   let mark int nid = Ext.fill_nth_bit int (Nid.ti nid)
   (** la natio nid connaît la regio *)
+
   let read int nid = (Ext.read_nth_bit int (Nid.ti nid) == 1)
   (** la natio nid connaît-elle la regio ? *)
+
   let null = (0 lsr 64)
   let init nid = mark null nid
 end
@@ -281,7 +285,7 @@ let set_oikos_urbs rv =
   {
   rv with
   contents = ( match rv.contents with
-  | Desertum_for n  -> rv.contents
+  | Desertum_for _n  -> rv.contents
   | Incol incola -> (Incol { incola with Incola.oikos = Incola.Urbs }) );
   }
 
@@ -289,20 +293,20 @@ let set_oikos_urbs rv =
 let dominus     rv = rv.dominus
 let contents    rv = rv.contents
 let incola      rv = match rv.contents with
-  | Desertum_for n -> None 
-  | Incol        i -> Some i
+  | Desertum_for _n -> None 
+  | Incol         i -> Some i
 let incola_id   rv = match rv.contents with
-  | Desertum_for n -> Nid.none 
-  | Incol        i -> Incola.nid i
+  | Desertum_for _n -> Nid.none 
+  | Incol         i -> Incola.nid i
 
 let plebs       rv = match rv.contents with
-  | Desertum_for n -> 0. 
-  | Incol        i -> Incola.plebs i
+  | Desertum_for _n -> 0. 
+  | Incol         i -> Incola.plebs i
 let brouillards rv = rv.brouillards
 
 let instrumentum rv = match rv.contents with
-| Desertum_for n -> 0.
-| Incol        i -> Incola.instrumentum i
+| Desertum_for _n -> 0.
+| Incol         i -> Incola.instrumentum i
 
 let tegmenFun hydros climax contents = match contents, hydros with 
     | Incol i, _                -> Incola.tegmen climax (Incola.oikos i)
@@ -328,8 +332,8 @@ let is_farmable ?rv:(rv=null) r = Fun.isFarmable ~inst:(instrumentum rv) (tegmen
 let facultas r rv = Incola.facultas (R.area r) (R.hospitalitas r) (instrumentum rv) (tegmen ~rv r ) 
 
 let densitas r rv = match rv.contents with 
-| Desertum_for n -> 0.
-| Incol        i -> Incola.densitas (R.area r) (i)
+| Desertum_for _n -> 0.
+| Incol         i -> Incola.densitas (R.area r) (i)
 
 (*****************************************************************************************************************)
 

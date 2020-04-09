@@ -21,7 +21,7 @@
 
  *)
 
-open Std
+open Humanitas_tools
 module N=Natio
 
 
@@ -86,7 +86,7 @@ let key_list =
 (** la liste des id des courbes *)
 
 
-let make = Ilist.init (fun k -> Flexura.make) key_list
+let make = Ilist.init (fun _k -> Flexura.make) key_list
 
 let update natio flexurae = Ilist.nMap (fun key flexura -> Flexura.update natio key flexura) flexurae
 

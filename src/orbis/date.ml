@@ -42,12 +42,12 @@ let beginning   = irrigation
 
 let inc date    = match date with
 | G date -> G (date + 1)
-| N date -> assert false
+| N _date -> assert false
 | Unknown-> assert false
 
 let add date i  = match date with 
 | G date -> G (date + i)
-| N date -> assert false
+| N _date -> assert false
 | Unknown-> assert false
 
 let make int = G int

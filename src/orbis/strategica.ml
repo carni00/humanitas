@@ -21,6 +21,7 @@
 
  *)
 
+open Humanitas_tools
 open Std
 module Nil = Nid.Nil
 module Nim = Nid.Nim
@@ -63,7 +64,7 @@ module Data = struct
   
   let of_nil (nil) =
   ( {
-    stratiotikon_list = Nil.init (fun nid->Stratiotikon.null) nil;
+    stratiotikon_list = Nil.init (fun _nid->Stratiotikon.null) nil;
     tactic_map    = Nim.empty;
     rogatio_map   = Nim.empty;
     } : d )
@@ -99,7 +100,7 @@ let feudum pil =
   {
   stratiotikon = Stratiotikon.init 6 2 0;
   rogatio_list = Nil.empty;
-  tactic_list  = Nil.init (fun nid -> J.Offensive J.Conquest) pil; (* on attaque partout pour conquérir de nles latifundia *)
+  tactic_list  = Nil.init (fun _nid -> J.Offensive J.Conquest) pil; (* on attaque partout pour conquérir de nles latifundia *)
   }
 
 let anarchy d n pil = 
@@ -126,7 +127,7 @@ let tactic_tw_nationes d n pil =
 (* tactique des cités envers les autres nations *)
 
 
-let tactic_tw_natives d n pil =
+let tactic_tw_natives _d n _pil =
   let open Tfloat in
   let j = N.junctiones n in
   let under_attack = Jn.am_i_under_attack j in
@@ -191,7 +192,7 @@ let republic d n pil =
 
 
 
-let update d n prl s =
+let update d n prl _s =
   let pil = Nil.key_list prl in
   let pa  = N.politeia n in
   match Pa.is_civilized pa, Pa.is_centralized pa, Pa.is_aristocratic pa with

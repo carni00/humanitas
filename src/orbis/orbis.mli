@@ -21,6 +21,8 @@
 
  *)
 
+open Humanitas_physis
+
 type t = (* monde : ne change qu'en cas de end_of_turn ou new_game ou load_game *)
   {
   espace : Espace.t;

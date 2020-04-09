@@ -41,5 +41,5 @@ let make n = {
 let proximae nl pil = Nil.init (fun pid -> make (NatioList.get nl pid)) pil 
 
 (*let proxArtes proximae = Core.List.dedup_and_sort (List.concat (List.map (fun p -> p.artes) (Nil.to_list proximae)))*)
-let proxArtes proximae = [] (* FIXME *)
+let proxArtes _proximae = [] (* FIXME *)
 

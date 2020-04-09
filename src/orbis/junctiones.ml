@@ -21,7 +21,6 @@
 
  *)
 
-open Std
 
 module Nil = Nid.Nil
 module Nim = Nid.Nim
@@ -123,14 +122,14 @@ let newRelationes rom =
 let nextRelatioMap rem rom =
   let newRelationes = Nim.sort (Nim.norm (newRelationes rom)) in
   (* Nim.norm a priori inutile, à vérifier le moment venu *)
-  let nextRelatio (y,x) pr nr = match nr with
+  let nextRelatio (_y,_x) pr nr = match nr with
   | N_relatio -> pr (*absence de newRelatio <=> on garde la previousRelatio*)
   | _ -> nr in
   Nim.smap2 N_relatio N_relatio nextRelatio rem newRelationes
 (* génération de la map des relations diplomatiques *)
 
 
-let update j nl sd =
+let update j _nl sd =
   let rem = nextRelatioMap j.relatioMap sd.rogatio_map in
   {
   relatioMap = rem;
@@ -150,7 +149,6 @@ module Natio = struct
   (* la liste de nos tactiques envers les autres nations est dans notre strategica *)
   }
 
-  open Tfloat
 
 (*  let make j nil nid = *)
 
@@ -163,17 +161,17 @@ module Natio = struct
   let compute_theirTactic_list j our_id =
     let rec filter = function
     | [] -> []
-    | ( (sujet,objet), t ) :: q when objet == our_id -> (sujet,t) :: filter q
-    | ( (sujet,objet), t ) :: q                      -> filter q in
+    | ( ( sujet, objet), t ) :: q when objet == our_id -> (sujet,t) :: filter q
+    | ( (_sujet,_objet),_t ) :: q                      -> filter q in
     filter j.tacticMap
     (* liste des tactiques des autres nations envers nous *)
 
   let compute_relatio_list j our_id =
     let rec filter = function
     | [] -> []
-    | ( (nid1,nid2), t ) :: q when nid1 == our_id -> (nid2,t) :: filter q
-    | ( (nid1,nid2), t ) :: q when nid2 == our_id -> (nid1,t) :: filter q
-    | ( (nid1,nid2), t ) :: q                     -> filter q in
+    | ( ( nid1, nid2), t ) :: q when nid1 == our_id -> (nid2,t) :: filter q
+    | ( ( nid1, nid2), t ) :: q when nid2 == our_id -> (nid1,t) :: filter q
+    | ( (_nid1,_nid2),_t ) :: q                     -> filter q in
     filter j.relatioMap
   (* liste de nos relations diplomatiques *)
   (* seules les valeurs différentes de N_relatio sont enregistrées *)
@@ -189,7 +187,7 @@ module Natio = struct
   let theirTactic_list nj = nj.theirTactic_list
 
   let am_i_under_attack nj = 
-    let f t = match t with Offensive x -> true | _ -> false in
+    let f t = match t with Offensive _x -> true | _ -> false in
     Nil.exists f  (nj.theirTactic_list) 
     (** suis-je attacké par une quelconque autre natio *)
 

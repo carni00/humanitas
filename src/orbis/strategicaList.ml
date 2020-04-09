@@ -29,7 +29,7 @@ module S   = Strategica
 type nid = Nid.t
 type t = Strategica.t Nid.Nil.t
 
-let make nil = Nil.init (fun nid -> S.make) nil 
+let make nil = Nil.init (fun _nid -> S.make) nil 
 
 let update (sl : t) (nl : NatioList.t) prll sd = 
 (*  let nil = NatioList.nil nl in*)

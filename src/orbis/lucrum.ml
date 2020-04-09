@@ -21,7 +21,6 @@
 
   *)
 
-open Std
 
 module Nil = Nid.Nil
 module Nim = Nid.Nim
@@ -49,7 +48,7 @@ let null = {
 
 let compute g j nil fl (*pl nl*) =
 (*  let factumList = Nil.map2 (fun nid p n -> Partitio.factum p n) pl nl in*)
-  let factumList = Nil.mapi (fun nid fru -> Partitio.Record.factum fru) fl in
+  let factumList = Nil.mapi (fun _nid fru -> Partitio.Record.factum fru) fl in
   
   let damnumFun inc dom =
     let chora = G.chora g inc in
@@ -58,8 +57,8 @@ let compute g j nil fl (*pl nl*) =
     P.damnum_of_factum (Nil.nth factumList inc) (funus, chora) relatio in
     (* le dommage (partitio) subi par *inc du fait de *dom *)
 
-  let damnumMap = Nim.init (fun i j -> damnumFun i j) nil in
-  let damnumList= Nil.mapi (fun y l -> P.listSum l) (Nim.to_ll damnumMap) in
+  let damnumMap = Nim.init (fun  i j -> damnumFun i j) nil in
+  let damnumList= Nil.mapi (fun _y l -> P.listSum l) (Nim.to_ll damnumMap) in
 (*  let tributumMap = Nim.sym (Nim.nfilter (fun (y,x)->(Junctiones.relatio j y x=Junctiones.Pax)) damnumMap) in*)
   
   let tributumFun inc dom damnum =

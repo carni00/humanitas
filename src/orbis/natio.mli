@@ -21,6 +21,8 @@
 
  *)
 
+open Humanitas_physis
+
 type key =
   | Facultas     
   | Plebs        

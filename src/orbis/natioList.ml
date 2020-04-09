@@ -21,8 +21,8 @@
 
  *)
 
+open Humanitas_tools
 open Std
-(*open Pseudo_float*)
 
 type nid = Nid.t
 type natio = Natio.t

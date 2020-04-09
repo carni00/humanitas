@@ -21,6 +21,8 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
 open Std
 open Tfloat
 
@@ -57,20 +59,20 @@ module Ria = Rid.Array
 module Nia = Nid.Nia
 (*module Nix = Nid.Nix*)
 
-let centralized   na i = (Nia.get na i).centralized
+(*let centralized   na i = (Nia.get na i).centralized*)
 let nav           na i = (Nia.get na i).nav
-let pop           na i = (Nia.get na i).pop
+(*let pop           na i = (Nia.get na i).pop*)
 let artes         na i = (Nia.get na i).artes
 let sophia        na i = (Nia.get na i).sophia
 let fides         na i = (Nia.get na i).fides
 let densitas      na i = (Nia.get na i).densitas
-let humanitas     na i = (Nia.get na i).humanitas
+(*let humanitas     na i = (Nia.get na i).humanitas*)
 let instrumentum  na i = (Nia.get na i).instrumentum
 let luxus         na i = (Nia.get na i).luxus       
 let natioPlebs    na i = (Nia.get na i).plebs
 let natioFacultas na i = (Nia.get na i).facultas
 let plebsVar      na i = (Nia.get na i).plebsVar
-let alim_ratio    na i = (Nia.get na i).alimonium_ratio
+(*let alim_ratio    na i = (Nia.get na i).alimonium_ratio*)
 let agriCopia     na i = (Nia.get na i).agriCopia
 let vis           na i = (Nia.get na i).vis
  
@@ -217,8 +219,8 @@ let update e rm im j (na:natio Nia.t) =
     let colonize     = colonize || local_colonization na dom r rv rcy in
 (*    let ina = isNeoAger r (Rv.tegmen rv) riv dom na in*)
     let hum = match Rv.contents rv with
-    | Rv.Desertum_for n when colonize -> Rv.Incol (Rvi.colonus dom (Rv.facultas r rv) (agriCopia na dom)) 
-    | Rv.Desertum_for n -> Rv.Desertum_for (n++1) 
+    | Rv.Desertum_for _n when colonize -> Rv.Incol (Rvi.colonus dom (Rv.facultas r rv) (agriCopia na dom)) 
+    | Rv.Desertum_for  n -> Rv.Desertum_for (n++1) 
     | Rv.Incol incola ->  
       let i     = Rvi.nid incola in
       let p_oik = Rvi.oikos incola in
@@ -247,7 +249,7 @@ let set_oikos_urbs im ridList =
 (** mise à jour de l’oikos en urbs pour les rid fournies *)
 
 
-let create e rm cm(*civilizations map*) ccm = 
+let create e rm cm(*civilizations map*) _ccm = 
   let s = Espace.sir e (*Ria.length cm*) in
   let f (i:Rid.t) =
     let civ,origo = Ria.get cm i in (*année de colonisation agricole*)

@@ -23,8 +23,7 @@
 
 (* orbis : un monde à un tour donné *)
 
-open Std
-(*open Abbrev.Orbis*)
+open Humanitas_physis
 
 module Nim = Nid.Nim
 module Nil = Nid.Nil
@@ -70,7 +69,7 @@ let update orbis (sl:StrategicaList.t) =
   let n_j  = Junctiones.update j (NatioList.jNatioList nl) (SD.jStrategies sd) in
   let n_im, vl = Im.update e rm im n_j (NatioList.imNatioArray nl) in
   let cl   = CivitasList.update e n_turn n_im (o.civitasList) vl in
-  (** Attention : l’im est mise à jour par effet de bord (regiones urbs) par CivitasList.update *)
+  (* Attention : l’im est mise à jour par effet de bord (regiones urbs) par CivitasList.update *)
   let n_g  = G.create  e rm n_im in
   let gnl  = G.natioList n_g nil in
   let jnl  = Junctiones.natioList n_j nil in
@@ -99,7 +98,7 @@ let update orbis (sl:StrategicaList.t) =
     }
 (* mise à jour de l'humanité résultant de l'écoulement d'une année *)
 
-let create forme size =
+let create _forme size =
   let e  = E.create (E.Cylinder E.Octal) size in
   let rm = Rm.create  e in
   let imd= Imd.create e rm in
@@ -115,11 +114,11 @@ let create forme size =
   let gnl  = G.natioList g nil in
   let jnl  = Junctiones.natioList j nil in
   let pnl  = NatioList.pNatioList nl in
-  let pl   = Nil.mapi (fun nid n -> Partitio.primary          n)  pnl    in
+  let pl   = Nil.mapi (fun _nid n -> Partitio.primary          n)  pnl    in
   let rl   = Nil.map2 (fun n p   -> Partitio.Record.compute p n)  pnl pl in
   let luc  = Lucrum.compute g j nil rl in
   let cl   = CivitasList.create e (NatioList.origoList nl) vl in
-  let nl   = NatioList.update gnl jnl cl nl rl luc pl (Nil.init (fun i -> []) nil) in
+  let nl   = NatioList.update gnl jnl cl nl rl luc pl (Nil.init (fun _i -> []) nil) in
   let pl   = Nid.Nil.init (fun i -> Proxima.proximae nl (G.pil nil g i)) nil in
   let orbis = {
     espace      = e;
@@ -134,7 +133,7 @@ let create forme size =
     junctiones  = j;
     natioIdList = nil;
     sd = SD.of_nil nil;
-    flexuraeList = Nid.Nil.init (fun i -> Flexurae.make) nil ;
+    flexuraeList = Nid.Nil.init (fun _i -> Flexurae.make) nil ;
     eventusNil  = [];
 (*    vetera = [];*)
     }

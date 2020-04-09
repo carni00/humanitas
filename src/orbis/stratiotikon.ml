@@ -21,10 +21,12 @@
 
  *)
 
+
+open Humanitas_tools
 open Std
 
 
-type attributio = Mil | Rel | Opp
+(*type attributio = Mil | Rel | Opp*)
 type t = {
   mil : int;
   rel : int;
@@ -56,15 +58,15 @@ let init  = generic_init (fun i -> i)
 let float = generic_init (fun v -> iof (v *. foi sn) )
 
 
-let inc s a = if otium s < 1 then s else match a with
-| Mil -> { s with mil = s.mil + 1 }
-| Rel -> { s with rel = s.rel + 1 }
-| Opp -> { s with opp = s.opp + 1 }
+(*let inc s a = if otium s < 1 then s else match a with*)
+(*| Mil -> { s with mil = s.mil + 1 }*)
+(*| Rel -> { s with rel = s.rel + 1 }*)
+(*| Opp -> { s with opp = s.opp + 1 }*)
 
-let dec s a = match a with
-| Mil -> if s.mil > 0 then  { s with mil = s.mil - 1 } else s
-| Rel -> if s.rel > 0 then  { s with rel = s.rel - 1 } else s
-| Opp -> if s.opp > 0 then  { s with opp = s.opp - 1 } else s
+(*let dec s a = match a with*)
+(*| Mil -> if s.mil > 0 then  { s with mil = s.mil - 1 } else s*)
+(*| Rel -> if s.rel > 0 then  { s with rel = s.rel - 1 } else s*)
+(*| Opp -> if s.opp > 0 then  { s with opp = s.opp - 1 } else s*)
 
 let f i = foi i /. foi sn
 let mil s = f  s.mil   

@@ -33,9 +33,10 @@ type t =
 | Offensive  of Nid.t (* passage à l’offensive *)
 | Pax        of Nid.t (* paix conclue avec .. *)
 
-let of_inventio cognitio ars = match cognitio with
-| `inventio -> Inventio ars
-| `propagatio -> Propagatio ars
+
+(*let of_inventio cognitio ars = match cognitio with*)
+(*| `inventio -> Inventio ars*)
+(*| `propagatio -> Propagatio ars*)
 
 end
 
@@ -48,17 +49,18 @@ type eventus = {
 }
 
 type t = eventus
-
+(*
 let make_eventus nl actio date acteur = {
   actio   ;
   date    ;
   acteur  ;
   spectateurs = NatioList.pil nl acteur ;
 }
-
+*)
 
 (*let rec concat date nl to_actio (nil:> (Nid.t * 'a list) list) = *)
-let rec concat date nl to_actio nil =
+(*
+let concat date nl to_actio nil =
   let rec list_compute to_actio acteur = function
     | []     -> []
     | e :: q -> make_eventus nl (to_actio e) date acteur :: list_compute to_actio acteur q in
@@ -66,16 +68,17 @@ let rec concat date nl to_actio nil =
     | []              -> []
     | (nid,list) :: q -> list_compute to_actio nid list :: nil_compute q in
   List.concat (nil_compute nil)
+*)
 (* concaténation de data annuelle en liste d’eventus *)
 
 
 module Vetera = struct
 
   type t = (int*eventus) list
-  let make = []
-  let add ilist eventus = match (ilist:> (int*eventus) list) with
-  | []       ->  (    0, eventus) :: []
-  | (i,e)::q ->  ((i+1), eventus) :: q
+(*  let make = []*)
+(*  let add ilist eventus = match (ilist:> (int*eventus) list) with*)
+(*  | []       ->  (    0, eventus) :: []*)
+(*  | (i,e)::q ->  ((i+1), eventus) :: q*)
   
 
 

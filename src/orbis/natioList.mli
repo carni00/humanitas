@@ -21,6 +21,7 @@
 
  *)
 
+open Humanitas_physis
 
 type nid = Nid.t
 type natio = Natio.t

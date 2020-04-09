@@ -104,7 +104,7 @@ let n_sum l min max =
   let rec f = function
   | [] -> 0.
   | (i,e,_)::q when i>=min && i<=max -> e + f q
-  | t::q -> f q in
+  | _t::q -> f q in
   f l
 (* nombre de personnes de min à max compris ans dans la pyramide l *)
 
@@ -121,7 +121,7 @@ let alimonium_ratio pyramid plebs =
 (* varie entre 70% et 98% selon la forme de la pyramide (les adultes consomment 100%) *)
 
 let create n(*naissances*) (he:int->float) (fdc) =
-  let mdc = fun a->0. in
+  let mdc = fun _a->0. in
   let rec f n h (*nb and health*) = function
   | 99 ->[]
   | a -> let sc = survie_coef fdc mdc a h in
@@ -154,20 +154,19 @@ let vigesimal pyramid =
 
 let nbmList pyramid =
   let rec g fel pyr = match fel, pyr with
-  | [], pyr -> [] (* cas terminal *)
-  | (fa,f)::fq, (pa,n,h)::pq when pa< fa -> g fel pq (* cas premier *)
-  | (fa,f)::fq, (pa,n,h)::pq when pa==fa -> (fa,n*f,h) :: g fq pq
+  | [], _pyr -> [] (* cas terminal *)
+  | (fa,_f)::_fq, (pa,_n,_h)::pq when pa< fa -> g fel pq (* cas premier *)
+  | (fa, f):: fq, (pa, n, h)::pq when pa==fa -> (fa,n*f,h) :: g fq pq
   | _ -> print_endline "Dx.Pyramid.nbm : input non viable"; [] in
   g ferti36 pyramid 
 (* liste des (par âge mère, nb max de naissances, h) *)
 
 let descendanceFinale pyramid naissances nbm =
   let rec g v fel pyr = match fel, pyr with
-  | [], pyr -> (0., 0.) (* cas terminal *)
-  | (fa,f)::fq, (pa,n,h)::pq when pa==(fa--1)-> g n fel pq (* cas second *)
-  | (fa,f)::fq, (pa,n,h)::pq when pa< fa     -> g u fel pq (* cas premier *)
-(*  | (fa,f)::fq, (pa,n,h)::pq when pa==fa     -> f*(n/v) + g v fq pq*)
-  | (fa,f)::fq, (pa,n,h)::pq when pa==fa     -> Couple.sum (f,f*n/v) (g v fq pq)
+  | [], _pyr -> (0., 0.) (* cas terminal *)
+  | (fa,_f)::_fq, (pa, n,_h)::pq when pa==(fa--1)-> g n fel pq (* cas second *)
+  | (fa,_f)::_fq, (pa,_n,_h)::pq when pa< fa     -> g u fel pq (* cas premier *)
+  | (fa, f):: fq, (pa, n,_h)::pq when pa==fa     -> Couple.sum (f,f*n/v) (g v fq pq)
   | _ -> print_endline "Dx.Pyramid.descendanceFinale : input non viable"; (0., 0.) in
   let isf_nbm, dfn_nbm = g u ferti36 pyramid in (* isf et dfn max calculés sur la ferti36 *)
   let rnnbm = naissances / nbm in
@@ -197,7 +196,7 @@ let var     d = d.var
 let famine  d = fdc d.copia
 
 let naissances_objectif s f facultas pna nbm =
-  let stpyr = Pyramid.create pna (fun i->s) (0.) in (*sophia theoric pyramid*)
+  let stpyr = Pyramid.create pna (fun _i->s) (0.) in (*sophia theoric pyramid*)
   let stp = Pyramid.sum stpyr in (*plebs*)
   let ar  = Pyramid.alimonium_ratio stpyr stp in
   let maxp= facultas / ar in
@@ -213,7 +212,7 @@ let naissances_objectif s f facultas pna nbm =
   nbm*pc + ndo*dc + nio*ic
 (*naissances objectif*)
 
-let naissances pyramid sc s f facultas wam =
+let naissances pyramid _sc s f facultas wam =
   let ffn = (Pyramid.n_sum pyramid 13 50)/2. in (*femmes en âge de*)
   let pna = match (List.hd pyramid) with (_,n,_) -> n in (*previous naissances*)
   let nbmList = Pyramid.nbmList pyramid in
@@ -266,7 +265,7 @@ let preview d(*demographics*) cibus(*effective lab*) s(*sophia*) f(*fides*) facu
 
 let null=
   {
-  pyramid = Pyramid.create 0. (fun x->0.) 0.;
+  pyramid = Pyramid.create 0. (fun _x->0.) 0.;
   copia   = 1.;
   tfg     = 0.;
   isf     = 0.,0.;
@@ -275,7 +274,7 @@ let null=
   }
 
 let create sophia plebs = 
-  let proportions = Pyramid.create 100. (fun i->sophia) (0.) in
+  let proportions = Pyramid.create 100. (fun _i->sophia) (0.) in
   let denominateur = Pyramid.sum proportions in
   let pyramid = List.map (fun (a,p,h)->(a,plebs*p/denominateur,h)) proportions in 
   { 

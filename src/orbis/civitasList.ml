@@ -46,10 +46,10 @@ let iter f (cl:t) = Til.iter f cl
 let test_vicus e (cl:t) rid inc =
     let nid= Rv.Incola.nid inc in
     let rec iter n = function
-    | []        -> n
-    | (i,c)::cq -> let n = n+iob(Civitas.civ c==nid) in
-               let d = Espace.Regio.distance e rid (Civitas.rid c) in
-               if n<4 && d>1500. then iter n cq else 4 in
+    | []         -> n
+    | (_i,c)::cq -> let n = n+iob(Civitas.civ c==nid) in
+                    let d = Espace.Regio.distance e rid (Civitas.rid c) in
+                    if n<4 && d>1500. then iter n cq else 4 in
     iter 0 (cl :> ('a*Civitas.t) list)
     (* tester si le vicus doit devenir ou non une cité *)
 
@@ -63,7 +63,7 @@ let rec add e origo (cl:t) vl = match vl with
                      if  n==4 then add e origo cl vq (*echec*)
                      else
                      let o = match origo with 
-                     | OrigoList ol -> ( match Nid.Nil.nth ol (Rv.Incola.nid inc) with rid,date -> Civitas.Post date )
+                     | OrigoList ol -> ( match Nid.Nil.nth ol (Rv.Incola.nid inc) with _rid,date -> Civitas.Post date )
                      | Date date -> Civitas.Equal date in
                      let c=Civitas.create rid (Espace.Regio.superficie e rid) inc n o in add e origo (Til.add cl c) vq
     (* ajoute des civitas à cl à partir d’une liste de vicus candidat *)
@@ -80,7 +80,7 @@ let update e turn im cl vl =
     | Some incola -> Civitas.update cvt (Espace.Regio.superficie e rid) incola in
   let cl = Til.map f cl in (* mise à jour cités existantes *)
   let cl = add e (Date turn) cl vl in (* ajout nouvelles cités *)
-  Im.set_oikos_urbs im (List.map (fun (cid,c) -> Civitas.rid c) cl) ; cl
+  Im.set_oikos_urbs im (List.map (fun (_cid,c) -> Civitas.rid c) cl) ; cl
 
 (******************************************************************************************************************************)
 
