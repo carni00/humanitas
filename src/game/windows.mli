@@ -65,6 +65,7 @@ type stackStatus = WindowID.status
 
   val leftStack        : t -> WindowID.t list 
 (** la pile de fenêtre de gauche *)
+
   val rightStack       : t -> WindowID.t list
 
   val leftStackStatus  : t -> stackStatus 

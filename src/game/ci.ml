@@ -21,7 +21,9 @@
 
  *)
 
-open Std
+open Humanitas_tools
+open Humanitas_orbis
+(*open Std*)
 
 (*module W   = WindowID*)
 (*module Ws  = Windows*)
@@ -42,7 +44,7 @@ let nil = Co.nil
 (************************* HUMANITAS COLORS ***************************)
 
 let dominium rv = match Rv.contents rv with
-  | Rv.Desertum_for n -> N.celadon
+  | Rv.Desertum_for _n -> N.celadon
   | Rv.Incol incola -> match Rv.Incola.dominium incola with
     | Rvi.Mir          -> N.pomme
     | Rvi.Latifundium  -> N.jaune
@@ -101,7 +103,7 @@ let natio (nid:Nid.t) =
 (*let natio (nid:Nid.t) = N.od(nid:>int)*)
 (*let natio (nid:Nid.t) = Co.Nuance.custom(Nid.tf nid)*)
 
-
+(*
 let affectatio ?(i=600) ?(lum=600) aff = match aff with
   | Partitio.LAB -> Color.nil  N.corail       i lum                 
   | Partitio.SAP -> Color.nil  N.turquoise    i lum                 
@@ -110,7 +112,7 @@ let affectatio ?(i=600) ?(lum=600) aff = match aff with
   | Partitio.REL -> Color.nil  N.pomme        i lum             
   | Partitio.LUX -> Color.nil  N.ble          i lum             
   | Partitio.OTI -> Color.nil  N.none         0 lum             
-
+*)
 
 let natioKey ?(i=900) ?(lum=500) (key : Natio.key) = match key with
   | Natio.Facultas        -> Color.nil  N.jaune         i lum

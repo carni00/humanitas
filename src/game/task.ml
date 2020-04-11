@@ -21,6 +21,8 @@
 
  *)
 
+open Humanitas_physis
+open Humanitas_orbis
 
 type t = [
 | `do_nothing

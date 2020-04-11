@@ -21,7 +21,11 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+open Humanitas_orbis
 open Std
+
 module E = Espace
 module ED = Espace.Direction
 
@@ -59,8 +63,8 @@ type t = {
   }
 
 let filter     s = s.filter
-let scale      s = s.scale
-let angle      s = s.angle
+(*let scale      s = s.scale*)
+(*let angle      s = s.angle*)
 let forme      s = s.forme     
 let earthMode  s = s.earthMode 
 let sr         s = s.sr
@@ -70,7 +74,7 @@ let nations    s = s.options.nations
 
 let cr     ?e  s = match e, forme s, earthMode  s with
   | Some e, Plan, true -> 
-    let y, x = E.Cylinder.yx_of_rrid (E.resolution e) (s.cr) in
+    let _y, x = E.Cylinder.yx_of_rrid (E.resolution e) (s.cr) in
     E.Cylinder.rid_of_ryx (E.resolution e) (E.hir e /2) x
   | None  , Plan, true -> raise (Failure "Scene.cr : veuillez précisez l’espace* de travail")
   | _                  -> s.cr
@@ -80,7 +84,7 @@ let filterList = [ `montes; `nationes; `tegmen]
 
 (************************************ MODULE SCALE ***********************************)
 module Scale = struct
-  type t = Level.t
+(*  type t = Level.t*)
   let ratio     = 1.333
   let altMin    =  3000. (*  3000 km de la surface de la terre (niveau de la mer) *)
   let altMax    = 15000.

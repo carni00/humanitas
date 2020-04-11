@@ -23,6 +23,7 @@
 
 (* fonctions relatives à un game.status *)
 
+open Humanitas_tools
 open Std
 module W   = WindowID
 module B   = Button
@@ -35,10 +36,10 @@ module B   = Button
 
 type stackStatus = W.status
 
-type buttonAlert =
-| Awake
-| Numb
-| Asleep
+(*type buttonAlert =*)
+(*| Awake*)
+(*| Numb*)
+(*| Asleep*)
 
 type t =
   {
@@ -52,7 +53,7 @@ type t =
   rightStackStatus : stackStatus;
   }
 
-let queen  ws          = match ws.queenHistory with t::q -> Some t | [] -> None
+let queen  ws          = match ws.queenHistory with t::_q -> Some t | [] -> None
 let towers ws          = ws.towers
 let leftStack ws       = ws.leftStack
 let rightStack ws      = ws.rightStack
@@ -67,18 +68,18 @@ let windowPos ws wName =
 let activeWindow ws =
   match ws.focus with
   | Some W.Central -> queen ws
-  | Some W.Left    -> (match ws.leftStack  with h::q -> Some h | _ -> None)
-  | Some W.Right   -> (match ws.rightStack with h::q -> Some h | _ -> None)
+  | Some W.Left    -> (match ws.leftStack  with h::_q -> Some h | _ -> None)
+  | Some W.Right   -> (match ws.rightStack with h::_q -> Some h | _ -> None)
   | _              ->                                                 None
 
 (*let is_window_focused ws wName = if (activeWindow ws = Some wName) then W.Active else W.Inactive*)
 
 let windowState ws wid = match W.duty wid with
   | W.Tower -> W.Alive (* if List.mem wid (towers ws)           then    W.Alive else   W.Invisible *)
-  | W.Queen -> (match ws.queenHistory with t::q when t=wid -> W.Alive | _ -> W.Nil)
+  | W.Queen -> (match ws.queenHistory with t::_q when t=wid -> W.Alive | _ -> W.Nil)
   | W.Sheet -> (match ws.leftStack    with 
-        | t::q                                  when t=wid -> W.Alive
-        | _ -> (match ws.rightStack   with t::q when t=wid -> W.Alive | _ -> W.Nil))
+        | t::_q                                  when t=wid -> W.Alive
+        | _  -> (match ws.rightStack   with t::_q when t=wid -> W.Alive | _ -> W.Nil))
 
 
 (*let  ws wName = *)
@@ -230,7 +231,7 @@ let update ws command =
 | `wClose (name)       -> wClose ws name
 | `wPrevious   
 | `wNext               -> feuillette ws command
-| `wUndo               -> { ws with queenHistory = match ws.queenHistory with t::q -> q | _ -> [] }
+| `wUndo               -> { ws with queenHistory = match ws.queenHistory with _t::q -> q | _ -> [] }
 | `wMove               -> wMove ws
 | `sFocus(pos)         -> let newFocus = focus ws pos in ( match newFocus with
                           | Some W.Left  -> { ws with leftStackStatus  = W.Alive; focus=newFocus }

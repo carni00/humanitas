@@ -21,7 +21,9 @@
 
  *)
 
-open Std
+open Humanitas_tools
+open Humanitas_physis
+(*open Std*)
 module E = Espace
  
 type t =
@@ -32,6 +34,7 @@ type t =
   latMax : float;
   }
 
+(*
 let make (crLat, crLon) scene screen =
   let open Tfloat in
   let module S = Scene in
@@ -42,6 +45,7 @@ let make (crLat, crLon) scene screen =
   latMin = crLat - d.S.hid/2. ;
   latMax = crLat + d.S.hid/2. ;
   }
+*)
 (* "rectangle" terrestre, en degrés de lon/lat, à afficher sur la surface-écran disponible *)
 
 

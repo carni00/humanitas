@@ -21,6 +21,9 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+open Humanitas_orbis
 open Std
 module E=Espace
 module N=Color.Nuance
@@ -120,9 +123,9 @@ module Color = struct
 
   let seaIce ?(t=15) () = co(N.ocean, iDef+100, lDef-160 + iof(tLumin t *. 2.0) )
 
-  let coast = co (N.ambre, 160, lDef+60)
+  let _coast = co (N.ambre, 160, lDef+60)
 
-  let oceanFond alt = match alt with
+  let _oceanFond alt = match alt with
   | (-1) -> co(N.ambre, 100, lDef*90/100)
   | (-2) -> co(N.ambre,  50, lDef*20/100)
   |  _   -> co(N.ambre,   0, 0) 
@@ -165,7 +168,7 @@ module Color = struct
          let altLum = (Ext.weighmean (4*alt) ((min 4400 altitude)/100) 0 1) * 8 - 50 in 
          let dominus= Rv.dominus rv in
          let incolaNid, populatio, urbs = match Rv.contents rv with
-         | Rv.Desertum_for n -> Nid.none, 0., 0
+         | Rv.Desertum_for _n -> Nid.none, 0., 0
          | Rv.Incol   incola -> 
            let populatio = max 0. (1. +. log ((Rvi.plebs incola) /. (rs))) in
            let urbs      = if Rvi.oikos incola=Rvi.Urbs then 0 else 0 in
@@ -318,7 +321,7 @@ let make game =
 
 let get tabula rid =
   match tabula with
-  | Qtree (ria, qtree) -> Rid.Array.get ria rid
+  | Qtree (ria, _qtree) -> Rid.Array.get ria rid
 (* obtenir une regio d’une tabula *)
 
 (*eof*)

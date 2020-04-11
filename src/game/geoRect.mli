@@ -30,7 +30,7 @@ type t =
   latMax : float;
   }
 
-val make : (float*float) -> Scene.t -> Screen.t -> t
+(*val make : (float*float) -> Scene.t -> Screen.t -> t*)
 
 val is_visible    : t -> (float*float) -> bool 
 

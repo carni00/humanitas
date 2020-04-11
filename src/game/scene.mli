@@ -23,6 +23,9 @@
 
 (** état courant de l’affichage de la carte *)
 
+open Humanitas_physis
+open Humanitas_orbis
+
 type forme =
 | Plan
 | Sphere
@@ -38,13 +41,16 @@ val sr         : t -> Rid.t option (*selected_regio*)
 val earthMode  : t -> bool
 val ascale     : t -> float
 (** actual scale : earthMode = 0. , zoom max = 1. *)
+
 val wik        : t -> float
 
 
 val alpha      : t -> float
 (** angle camera / surface terrestre *)
+
 val altdip     : t -> int -> float
 (** altitude delta (en y) en km *)
+
 val fluwip     : t -> float -> float
 
 val filter : t -> Tabula.filter

@@ -1,0 +1,4 @@
+(library
+  (name humanitas_game)
+  (public_name humanitas.game)
+  (libraries humanitas.tools humanitas.physis humanitas.orbis))

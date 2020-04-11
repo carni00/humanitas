@@ -21,6 +21,9 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_orbis
+
 module Atelier = struct
 
   
@@ -36,6 +39,7 @@ module Atelier = struct
     background : background;
     }
 (** la partie actuellement affichée à l’écran *)
+
   let game    a = a.game
   let tabula  a = a.tabula
   let pid     a = a.pid
@@ -62,7 +66,7 @@ module Atelier = struct
     graph = Graph.make;
     background = Tabula;
     }
-
+(*
   let create game pid screen   =
     let orbis= Game.orbis game in
     let scene= Scene.create (orbis) (Game.get_player game pid) in
@@ -75,7 +79,7 @@ module Atelier = struct
     graph = Graph.make;
     background = Tabula;
     }
-
+*)
   let update atelier task screen = 
     let game , tabula_need_update = match task with 
     | `end_of_turn int            -> Game.update_orbis (atelier.game) int, true

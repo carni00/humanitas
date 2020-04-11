@@ -21,7 +21,7 @@
 
  *)
 
-open Std
+
 
 type t = {
   xMin : float; (** plus petite valeur de x affichée à l’écran *)

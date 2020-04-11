@@ -21,6 +21,9 @@
 
  *)
 
+open Humanitas_physis
+
+
 type element =
 | Regio of Rid.t
 

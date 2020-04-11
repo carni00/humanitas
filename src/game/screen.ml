@@ -20,8 +20,10 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  *)
+
+open Humanitas_tools
 open Std
-open React
+(*open React*)
 
 type param = {
   fullscreen : bool;
@@ -131,7 +133,7 @@ let ehip  s = s.ehip
 (* 54 * 34 de 35*35 en 1920*1200 *)
 
 let ratio s = foi (iwip s) /. foi (ihip s)
-let omega = atan (104. /. 253.)
+(*let omega = atan (104. /. 253.)*)
 
 
 type box = float * float * float * float

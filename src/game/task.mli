@@ -20,6 +20,10 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  *)
+
+open Humanitas_physis
+open Humanitas_orbis
+
 type t = [
 | `do_nothing
 | `quit

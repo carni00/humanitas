@@ -21,6 +21,9 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+open Humanitas_orbis
 open Std
 module Nil = Nid.Nil
 module Til = Tid.Til
@@ -125,11 +128,12 @@ puis calcul des stratégies en fonction de l'orbis (stratégie par défaut pour 
 
 let update_orbis game int = Ext.applique cycle game int
 
-
+(*
 let update_till_next_event game0 =
   let rec test game = match game.orbis.Orbis.eventusNil with
   | [] -> test (cycle game)
   | _  -> game in
   test (cycle game0)
+*)
 (* on passe un tour, puis on teste s’il y a des eventus, sinon on repasse un tour ... *)
 

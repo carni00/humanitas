@@ -20,10 +20,12 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  *)
-
+open Humanitas_physis
+open Humanitas_orbis
+open Humanitas_tools
+open Std
 (** concept to_string *)
 
-open Std
 module W = WindowID
 
 let regio e rid = 

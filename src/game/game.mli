@@ -21,6 +21,10 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+open Humanitas_orbis
+
 module Player : sig
   type t
   type id

@@ -23,6 +23,10 @@
 
 (** Synthèse des données cartographiable à afficher ; interface entre la partie tabula et l’affichage *)
 
+open Humanitas_tools
+open Humanitas_physis
+open Humanitas_orbis
+
 type filter = [
 | `imperii
 | `dominium

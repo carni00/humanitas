@@ -21,7 +21,8 @@
 
  *)
 
-
+open Humanitas_tools
+open Humanitas_orbis
 
 val font  : Color.t
 val wsb   : Color.t
