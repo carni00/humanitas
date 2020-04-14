@@ -1,0 +1,4 @@
+(library
+  (name humanitas_sdlext)
+  (public_name humanitas.sdlext)
+  (libraries sdl))
