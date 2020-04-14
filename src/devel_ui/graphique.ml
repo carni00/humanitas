@@ -21,6 +21,9 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_orbis
+open Humanitas_game
 open Std
 module RS = React.S
 module Co = Color
@@ -33,9 +36,9 @@ module Display = functor (Draw : Video.Draw) -> struct
 module D = Draw
 open Tfloat
 
-let rsm  = RS.map
+(*let rsm  = RS.map*)
 let rsv  = RS.value
-let rsf  = rsv |- foi
+(*let rsf  = rsv |- foi*)
 
 let swip = rsv D.swip
 let ship = rsv D.ship
@@ -60,18 +63,20 @@ let display_graphique atelier =
       let x turn  = x turn -- x_shift in
 
       let color   = Ci.natioKey key in
-      let g n s e = Draw.line color (x n) (y s) (x (n ++ 1)) (y e) ; e in (** affiche un segment *)
+      let g n s e = Draw.line color (x n) (y s) (x (n ++ 1)) (y e) ; e in 
+      (* affiche un segment *)
+
       let yList   = List.rev (F.yList flexura) in
       let _ = match yList with
       | []            -> 0.
-      | y0 :: []      -> 0.
+      | _y0 :: []      -> 0.
       | y0 :: y1 :: q -> 
         Draw.strn ~yAlign:Draw.Top ~co:color (Si.natioKey key) 0 (y y0) ;
         Tlist.fold_lefti g y0 (y1 :: q) in () in
-    (** affiche d’une courbe *)
+    (* affiche d’une courbe *)
 
     let _ = Ilist.iteri draw_flexura flexurae in ()
-    (** affiche de toutes les courbes d’une natio *)
+    (* affiche de toutes les courbes d’une natio *)
 
 
 end

@@ -26,5 +26,5 @@
 
 
 module Display : functor (Draw : Video.Draw) -> sig
-  val display_graphique : Status.Atelier.t -> unit
+  val display_graphique : Humanitas_game.Status.Atelier.t -> unit
 end

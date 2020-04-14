@@ -21,6 +21,8 @@
 
  *)
 
+open Humanitas_game
+
 type t = {
   screen  : Sdlvideo.surface;
   picking : Sdlvideo.surface;

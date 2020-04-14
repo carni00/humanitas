@@ -21,6 +21,10 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+open Humanitas_orbis
+open Humanitas_game
 open Std
 module E  = Espace
 module Rvi= Rv.Incola
@@ -55,13 +59,13 @@ type element =
 type t = title * element
 
 let rsm  = RS.map
-let rsm2 = RS.l2
+(*let rsm2 = RS.l2*)
 let c    = RS.const
 let juce   = (`justified,`center)
-let juri   = (`justified,`right)
-let jule   = (`justified,`left)
+let _juri   = (`justified,`right)
+let _jule   = (`justified,`left)
 let toce   = (`justified,`center)
-let tori   = (`justified,`right)
+let _tori   = (`justified,`right)
 let tole   = (`justified,`left)
 
 (********************************* Orbis windows **********************************)
@@ -116,7 +120,6 @@ let atelier a wid =
 (********************************* Natio windows **********************************)
 
 let fines atelier nid =
-  let open Tfloat in
   let game = Status.Atelier.game atelier in
   let o    = Game.orbis game in
   let luc  = o.Orbis.lucrum in
@@ -295,7 +298,7 @@ let pyramid atelier nid =
   let o    = Game.orbis game in
   let n    = NatioList.get o.Orbis.natioList nid in
   let pyramid = Dx.Pyramid.vigesimal (Natio.pyramid n) in
-  let nbList  = List.map (fun (tranche, nb) -> nb) pyramid in
+  let nbList  = List.map (fun (_tranche, nb) -> nb) pyramid in
   let numerousGen = Tlist.max nbList in
   let line i = 
     let tranche = let min=i*5 in let max=min+4 in [min;max] in
@@ -347,7 +350,7 @@ let regio atelier rid =
     line "hospitalitas"                 (Strn.float   0  (R.hospitalitas r))       ;
     ]
   and incola_lines = match Rv.contents rv with
-  | Rv.Desertum_for n -> [
+  | Rv.Desertum_for _n -> [
     empty_line;
     empty_line;
     line "tegmen"                       (Si.tegmen tegmen) ;

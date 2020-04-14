@@ -29,7 +29,7 @@ type t = {
 (*val make : Status.t -> t*)
 (** initialisation de l’écran ; renvoie un Bitmap.t *)
 
-val make : Screen.t -> t
+val make : Humanitas_game.Screen.t -> t
 (** initialisation de l’écran ; renvoie un Bitmap.t *)
 
 (*val update : t -> Status.t -> int32 -> t*Status.t*)

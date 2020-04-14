@@ -21,6 +21,8 @@
 
  *)
 open React
+open Humanitas_tools
+open Humanitas_game
 
 module Make (B:Video.Draw) : sig
   module UI : module type of Frui.Make(B)

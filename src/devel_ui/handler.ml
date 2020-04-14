@@ -21,6 +21,10 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+open Humanitas_orbis 
+open Humanitas_game 
 open Std
 
 module E = Sdlevent
@@ -60,7 +64,7 @@ let mods keo (*keyboard_event option*) =
   rctrl = f Sdlkey.kmod_rctrl;
   }
 
-let no_mod mods =
+let _no_mod mods =
      mods.shift = false
   && mods.lalt  = false
   && mods.ralt  = false
@@ -76,7 +80,7 @@ let mouse_button = function
 | _ -> None
 
 
-let mouse_state = function
+let _mouse_state = function
 | E.PRESSED  -> `pressed
 | E.RELEASED -> `released
 

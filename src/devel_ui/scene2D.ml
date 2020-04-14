@@ -21,6 +21,10 @@
 
  *)
 
+open Humanitas_tools 
+open Humanitas_physis 
+open Humanitas_orbis 
+open Humanitas_game 
 open Std
 module T  = Tabula
 module E  = Espace
@@ -81,9 +85,9 @@ let qiter qtree gr f =
   Qtree.set_iter_rect ~ul ~lr f (qtree:> Tabula.regio Qtree.set)
 
 
-let vorid e povOpt ria qiter =
+let vorid e povOpt _ria qiter =
   let open Tabula in
-  let default = match povOpt with None -> Natio.Cognita | Some n -> Natio.Incognita in
+  let default = match povOpt with None -> Natio.Cognita | Some _n -> Natio.Incognita in
   let ba   = Ria.make (Espace.sir e) default in
   let f n v2 regio = 
     let lat,lon     = v2.V2.y, v2.V2.x in 
@@ -95,7 +99,7 @@ let vorid e povOpt ria qiter =
   | None   -> ()
   | Some n -> qiter (fun v2 regio -> f n v2 regio) in
 (*  (fun rid -> Ria.get ba rid )*)
-  (fun rid -> Natio.Cognita )
+  (fun _rid -> Natio.Cognita )
 (* caractère connu ou non d’une regio appelée par son rid *)
 (* qiter = parcours de toutes les regiones à afficher, stockage des données calculées dans un array *)
 
@@ -113,7 +117,7 @@ module Display = functor (Draw : Video.Draw) -> struct
 
 module D = Draw
 open Tfloat
-let rsm  = RS.map
+(*let rsm  = RS.map*)
 let rsv  = RS.value
 let rsf  = rsv |- foi
 let h  x = x * 0.5
@@ -125,7 +129,7 @@ let grass    = D.load_bmp "grass"
 let mountain = D.load_bmp "mountain"
 let wood     = D.load_bmp "wood"
 let field    = D.load_bmp "field"
-let civitas  = D.load_bmp "civitas"
+(*let civitas  = D.load_bmp "civitas"*)
 let field_and_grass = D.load_bmp "field_and_grass2"
 let field_and_wood  = D.load_bmp "field_and_wood2"
 
@@ -165,11 +169,11 @@ let draw_lat laty aos lat a =
     )
 (* dessine une latitude pour un float (lat) et un float (alpha) *)
 
-let draw_pays_names vorid por rw rh scene nl = 
+let draw_pays_names vorid por _rw _rh scene nl = 
   let f natio =
     let rid = fst (Natio.origo natio) in
     if vorid rid = Natio.Cognita then
-    match por rid with None -> () | Some (lat,lon,x,y) -> 
+    match por rid with None -> () | Some (_lat,_lon,x,y) -> 
       let nid = Natio.nid natio in
       let co = Color.nil (Ci.natio nid) 500 200 in
       let s  = iw (rsv D.ehip * (0.5 + 0.6 * Scene.ascale scene )) in
@@ -177,11 +181,11 @@ let draw_pays_names vorid por rw rh scene nl =
   NatioList.iter f nl
 (* affichage des noms des pays *)
 
-let draw_civitates vorid por rw rh scene cl = 
+let draw_civitates vorid por rw _rh scene cl = 
   let f civitas =
     let rid = Civitas.rid civitas in
     if vorid rid = Natio.Cognita then
-    match por rid with None -> () | Some (lat,lon,x,y) -> 
+    match por rid with None -> () | Some (_lat,_lon,x,y) -> 
       let inw = iw (rw / 12.) in (* largeur insula *)
       let ew  = ip (rw / 24.) in (* espace entre centre regio et insula *)
       let dw  = inw ++ ew in
@@ -204,7 +208,7 @@ let draw_civitates vorid por rw rh scene cl =
 let draw_selection por rw rh scene =
   match (Scene.sr scene) with
   | None -> ()
-  | Some rid -> match por rid with None -> () | Some (lat,lon,x,y) ->
+  | Some rid -> match por rid with None -> () | Some (lat,_lon,x,y) ->
     Draw.rect ~a:0.6 Color.yellow 2 (iw rw) (iw (rh lat)) (ip (x-h(rw))) (ip (y-h(rh(abs lat / 1.1))))
   (* cadre lumineux désignant la regio sélectionnée *)
 
@@ -221,7 +225,6 @@ let texture ?(aMin=0.) a t x y i m rw rh aos =
 
 
 let draw_terra_incognita rw rh x y =
-  let open Tabula in
   let xMin, yMin  = ip(x - h rw), ip(y - h rh) in
   Draw.fill_rect   Tabula.Color.terra_incognita (iw rw) (iw rh) xMin yMin
 
@@ -229,7 +232,7 @@ let draw_terra_incognita rw rh x y =
 let draw_cognita scene rw rh x y aos regio = 
   let open Tabula in
   let xMin, yMin  = ip(x - h rw), ip(y - h rh) in
-  let texture ?aMin a t m = texture ~aMin:0. a t xMin yMin (regio.rid:>int) m rw rh aos in
+  let texture (*?aMin*) a t m = texture ~aMin:0. a t xMin yMin (regio.rid:>int) m rw rh aos in
   let filter = Scene.filter scene in
   let color = match filter, Scene.nations scene, Scene.altitude scene with
   |  _        , true , true-> regio.color.natAlt
@@ -275,13 +278,12 @@ let draw_cognita scene rw rh x y aos regio =
     | _ -> () 
     ) ;
   if regio.mountain 
-      then texture ~aMin:0.08 (foi regio.alt * 0.2 / 6.) mountain 0;
+      then texture (*~aMin:0.08*) (foi regio.alt * 0.2 / 6.) mountain 0;
   ) 
 (* draw_cognita *)
 
 let draw_regio vor pow rw rh scene aos v2 regio =
-  match pow v2 with None -> () | Some (lat, lon, x, y) ->
-  let open Tabula in
+  match pow v2 with None -> () | Some (lat, _lon, x, y) ->
   let rh          = rh lat in 
   match vor regio with
               | Natio.Incognita -> ()
@@ -289,11 +291,11 @@ let draw_regio vor pow rw rh scene aos v2 regio =
               | Natio.Cognita         -> draw_cognita scene rw rh x y aos regio
 
 
-let draw_flumen vor pow por rw exiem scene res v2 regio = 
+let draw_flumen vor pow por _rw exiem scene _res v2 regio = 
   let open Tabula in
   match regio.hydros, vor regio with R.River river, Natio.Cognita -> (
-      match pow v2 with None -> () | Some (lat, lon, rx, ry) ->
-      match por (river.R.dest) with None -> () | Some (plat, plon, px, py) -> 
+      match pow v2 with None -> () | Some (_lat, _lon, rx, ry) ->
+      match por (river.R.dest) with None -> () | Some (_plat, _plon, px, py) -> 
       if not (exiem rx px) then
       let w = Scene.fluwip scene (foi river.R.fluxus) in
       let a = min 1. (w * 0.15) in
@@ -304,12 +306,12 @@ let draw_flumen vor pow por rw exiem scene res v2 regio =
 
 let draw_borders vor pow por rw rh exiem v2 regio =
   match vor regio with Natio.Cognita -> (
-      match pow v2 with None -> () | Some (lat, lon, rx, ry) ->
+      match pow v2 with None -> () | Some (_lat, _lon, rx, ry) ->
       let open Tabula in
       let hrw     = 0.5 *  rw in
       let hrh lat = 0.5 * (rh lat) in
       let draw_border prid =
-        match por prid with None -> () | Some (plat, plon, px, py) -> 
+        match por prid with None -> () | Some (plat, _plon, px, py) -> 
            if not (exiem rx px) then
              if px=rx then let y = ip(barycenter ry py) in  Draw.line ~a:0.6 Color.border (ip(rx-hrw)) y (ip(rx+hrw)) y
         else if py=ry then let x = ip(barycenter rx px) in  Draw.line ~a:0.6 Color.border x (ip(ry-hrh plat+0.5)) x (ip(ry+hrh plat-0.5)) in

@@ -21,6 +21,11 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+open Humanitas_orbis
+open Humanitas_game
+
 type title = string React.signal
 type button = Sdlkey.t * string * Task.t list
 

@@ -21,6 +21,9 @@
 
 *)
 
+open Humanitas_tools
+open Humanitas_orbis 
+open Humanitas_game 
 open Std
 module H    = Handler
 module W    = WindowID
@@ -49,7 +52,7 @@ module Make (Draw : Video.Draw) = struct
 
     let collect es = RE.merge (fun l x -> x @ l) [] es
 (* addition d’events de task *)
-    let modulate_tasks list = fun button_up_event -> H.modulate_tasks list
+    let modulate_tasks list = fun _button_up_event -> H.modulate_tasks list
 (* mise à jour liste de tâches en fonction des mods ctrl, alt etc. *)
 
     let margin x = k { Frui.top = x ; bottom = x ; left = x ; right = x }
@@ -107,10 +110,10 @@ module Make (Draw : Video.Draw) = struct
     let void     w = Widget (T.void ~w:w      ~h:(ehs 1.) ())
     let cStrn    s = Widget (T.label   (k s) )
     let strn     s = Widget (T.label      s  )
-    let line ~w ss = Widget (T.div ~background:(k (Some Ci.wsb)) ~w:(ews 14.) ~h:(ehs 1.) [T.label ss])
-    let button ~w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (title), task )
+    let line (*~w*) ss = Widget (T.div ~background:(k (Some Ci.wsb)) ~w:(ews 14.) ~h:(ehs 1.) [T.label ss])
+    let _button ~w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (title), task )
     let cButton ~w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (k title), task )
-    let rect w h c = Button(T.button ~w:(ews w) ~h:(ehs h) (k " "), [] )
+    let rect w h _c = Button(T.button ~w:(ews w) ~h:(ehs h) (k " "), [] )
 
     let box w h ha widget =
 	Widget ( T.div 
@@ -123,9 +126,9 @@ module Make (Draw : Video.Draw) = struct
     let liste dir wList =
       let rec split = function 
 	| [] -> ([], [])
-	| Widget( w       )::q -> let (wq, eq) = split q in (w::wq,    eq) 
-	| Button((w,c,e),t)::q -> let (wq, eq) = split q in (w::wq, (RE.map (modulate_tasks t) e)::eq) 
-	| Frame ( w,  e   )::q -> let (wq, eq) = split q in (w::wq, e::eq) in
+	| Widget( w        )::q -> let (wq, eq) = split q in (w::wq,    eq) 
+	| Button((w,_c,e),t)::q -> let (wq, eq) = split q in (w::wq, (RE.map (modulate_tasks t) e)::eq) 
+	| Frame ( w,   e   )::q -> let (wq, eq) = split q in (w::wq, e::eq) in
       let wList, eList = split wList in
       match dir with
       | Win.Columns       ->
@@ -237,10 +240,10 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	| Win.LB but   -> cButton ~w:12. but
 	| Win.SB but   -> cButton ~w:2.7 but
 	| Win.S string -> cStrn string
-	| Win.Z strSnl -> line ~w:16. strSnl
+	| Win.Z strSnl -> line (*~w:16.*) strSnl
 	| Win.List fra -> frame fra 
-	| Win.Box (w,h,ha, Win.S s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (k s))
-	| Win.Box (w,h,ha, Win.Z s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (s)  )
+	| Win.Box (w,h,_ha, Win.S s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (k s))
+	| Win.Box (w,h,_ha, Win.Z s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (s)  )
 	| Win.Box (w,h,ha,e) -> box w h ha (match widget e with Widget w -> w | _ -> T.void() ) in
       match (liste dir (List.map widget list)) with (w,e) -> Frame(w,e)
 
@@ -313,7 +316,7 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
       let atelier_s = RSAO.map Status.atelier status_s in
       let left_stack_s = RS.map  (Status.windows |- Windows.leftStack)  status_s
       and right_stack_s = RS.map (Status.windows |- Windows.rightStack) status_s
-      and which_stack left_stack right_stack wid =
+      and which_stack left_stack _right_stack wid =
 	if List.mem wid left_stack then `left else `right
       in
       let f wid =
@@ -431,7 +434,7 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	    let f = function
 	      | W.Towers -> None
 	      | wid -> Some (Windows.windowPos (Status.windows status) wid) in
-	    let win_pos = Core.Option.bind wid_opt f in
+	    let win_pos = Core.Option.bind wid_opt ~f in
 	    [ `sFocus win_pos ])
 	  window_focus_changes
 	  status_s
@@ -454,7 +457,7 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
       let module X = Gen(Tk) in
       X.make status_s
     in
-    let ui, ui_events, output = UI.make ~initial_focus:WindowID.Towers f in
+    let ui, _ui_events, output = UI.make ~initial_focus:WindowID.Towers f in
     (* let ui_events = RE.trace (List.iter (UI.string_of_ui_event |- print_endline)) ui_events in *)
     (* let output = RE.merge ( @ ) [] [ *)
     (*   output ; *)

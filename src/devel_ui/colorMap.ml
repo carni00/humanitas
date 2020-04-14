@@ -21,6 +21,8 @@
 
  *)
 
+(*
+open Humanitas_tools
 open Std
 
 module Co=Color
@@ -86,5 +88,5 @@ module Display = functor (Draw : Video.Draw) -> struct
     else if (l mod (lumDegres/4))=0 then drawStrn (N.to_strn nua)  x y )))
  
   end
-  
+*)
 (*EOF*)

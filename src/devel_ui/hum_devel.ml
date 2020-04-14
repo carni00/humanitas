@@ -22,6 +22,10 @@
  *)
 
 
+open Humanitas_tools
+open Humanitas_physis 
+open Humanitas_orbis 
+open Humanitas_game 
 open Std
 
 module RS = React.S
@@ -75,13 +79,13 @@ let handle_next_event ws pick =
   if not gui_event then send_agenda (Task.check_odyssey (Handler.task_list ws pick (mods, next_event)))
 
 
-let display_atelier atelier screen =
+let display_atelier atelier _screen =
     let module SA = Status.Atelier in
     let espace = Orbis.espace (Game.orbis (SA.game atelier)) in
     match SA.background atelier, SA.tabula atelier with
     | SA.Tabula, Tabula.Qtree qtree -> Earth.display_scene (SA.scene atelier) (SA.geoRect atelier) (SA.game atelier) (SA.player atelier) qtree ;
                                        Earth.regio_of_pos espace (SA.scene atelier) (SA.geoRect atelier)
-    | SA.Graphique, _               -> Graph.display_graphique atelier ; (fun (x,y) -> None)
+    | SA.Graphique, _               -> Graph.display_graphique atelier ; (fun (_x,_y) -> None)
   (*  | _ -> (fun (x,y) -> None)*)
   (* affiche la carte, et retourne une fonction de picking des regiones *)
   
@@ -99,7 +103,7 @@ let rec cycle () =
 (*Draw.clear_screen();*)
   Draw.clear_picking();
   let get_regio = match Status.atelier s with
-  | None         -> (fun (x,y) -> None)
+  | None         -> (fun (_x,_y) -> None)
   | Some atelier -> display_atelier atelier (Status.screen s) in
   let pick = pick (Draw.get_element) (get_regio) in
   Gui.UI.draw gui;

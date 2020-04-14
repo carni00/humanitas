@@ -21,6 +21,9 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_game
+
 type video_info 
 type fontFun = (Font.id -> int -> Sdlttf.font)
 (** function that associates a SDL font to a font style and a font size *)
@@ -60,9 +63,9 @@ module type Draw = sig
   val viseur     : int -> int -> unit
 
   val strnDim    : Font.id -> int -> string -> int * int
-  val strn       : ?pe:Picking.element -> ?xd:int -> ?yd:int -> ?xAlign:xAlign -> ?yAlign:yAlign -> ?font:Font.id -> ?size:int ->
+  val strn       : (*?pe:Picking.element ->*) ?xd:int -> ?yd:int -> ?xAlign:xAlign -> ?yAlign:yAlign -> ?font:Font.id -> ?size:int ->
   ?co:Color.t -> string -> int -> int -> unit
-  val antiStrn   : ?pe:Picking.element -> ?xd:int -> ?yd:int -> ?xAlign:xAlign -> ?yAlign:yAlign -> ?font:Font.id -> ?size:int -> string -> int -> int -> unit
+  val antiStrn   : (*?pe:Picking.element ->*) ?xd:int -> ?yd:int -> ?xAlign:xAlign -> ?yAlign:yAlign -> ?font:Font.id -> ?size:int -> string -> int -> int -> unit
   
   val fill_rect  : ?pe:Picking.element -> ?a:float -> Color.t -> int -> int -> int -> int -> unit
   val line       : ?pe:Picking.element -> ?a:float -> Color.t -> int -> int -> int -> int -> unit

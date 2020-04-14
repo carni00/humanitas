@@ -21,6 +21,7 @@
 
  *)
 
+open Humanitas_game
 
 (*module NewTask : functor (Draw : Video.Draw) -> sig*)
 (*  val get : unit -> Task.t list*)

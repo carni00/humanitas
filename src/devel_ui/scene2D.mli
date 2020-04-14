@@ -21,6 +21,10 @@
 
  *)
 
+open Humanitas_tools
+open Humanitas_physis
+open Humanitas_game
+
 (** Affichage d’un plan de regiones (considéré comme un cylindre)
 
     Prise en compte des paramètres de Scene.t : échelle, position, angle comme variation des distance et position de
@@ -32,6 +36,7 @@ plan de la sphère *)
 module Display : functor (Draw : Video.Draw) -> sig
   val display_scene : Scene.t -> Scene.GeoRect.t -> Game.t -> Game.Player.t -> Tabula.regio Rid.Array.t * Tabula.regio Qtree.set -> unit
 (**  affichage de la carte *)
+
   val regio_of_pos : Espace.t -> Scene.t -> Scene.GeoRect.t -> int*int -> Rid.t option
 (** regio située au pixel x,y *)
 end

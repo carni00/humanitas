@@ -20,9 +20,10 @@
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
  *)
-
+(*
 module Display : functor (Draw : Video.Draw) -> sig
   val champ   : unit -> unit
   val nuances : unit -> unit
   val brown   : unit -> unit
 end
+*)
