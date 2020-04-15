@@ -25,7 +25,8 @@
 open Humanitas_tools
 open Humanitas_physis 
 open Humanitas_orbis 
-open Humanitas_game 
+open Humanitas_game
+open Humanitas_devel_ui
 open Std
 
 module RS = React.S

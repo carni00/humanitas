@@ -1,4 +1,7 @@
 (library
   (name humanitas_sdlext)
   (public_name humanitas.sdlext)
-  (libraries sdl))
+  (libraries sdl)
+  (c_names sdl_gfx_stub)
+  (c_flags -I /usr/include/SDL)
+  (c_library_flags :standard -lSDL_gfx))

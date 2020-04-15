@@ -1,4 +1,11 @@
+(executable
+  (name hum_devel)
+  (public_name hum_devel)
+  (modules Hum_devel)
+  (libraries humanitas.devel_ui))
+
 (library
   (name humanitas_devel_ui)
   (public_name humanitas.devel_ui)
-  (libraries humanitas.sdlext humanitas.game humanitas.tools humanitas.physis humanitas.orbis))
+  (modules (:standard \ Hum_devel))
+  (libraries humanitas.sdlext humanitas.game humanitas.tools humanitas.physis humanitas.orbis sdl.sdlttf))
