@@ -57,6 +57,7 @@ val first_pid   : t -> Player.id
 
 val create       : laws -> t
 val update_orbis : t -> int -> t
+val update_orbis_till_next_eventum : t -> t
 
 val alter_player_pov : t -> Player.id -> Nid.t -> t
 val get_player_pov   : t -> Player.id -> Nid.t

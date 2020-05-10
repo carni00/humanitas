@@ -86,8 +86,9 @@ let position = function
 
 let task = function
 | `do_nothing       -> "nothing"
-(*| `new_game _       -> "new_game _    "*)
+| `new_game _       -> "new_game _    "
 | `end_of_turn _    -> "end_of_turn _    "
+| `next_event       -> "next_event "
 (*| `map_center _     -> "map_center _  "*)
 (*| `map_move _       -> "map_move _  "*)
 | `move_sr  _       -> "move_sr  _  "

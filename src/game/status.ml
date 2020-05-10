@@ -83,6 +83,7 @@ module Atelier = struct
   let update atelier task screen = 
     let game , tabula_need_update = match task with 
     | `end_of_turn int            -> Game.update_orbis (atelier.game) int, true
+    | `next_event                 -> Game.update_orbis_till_next_eventum (atelier.game)    ,   true
     | `alter_player_pov (pid,nid) -> Game.alter_player_pov (atelier.game) pid nid, false
     | _ -> atelier.game, false in
     let orbis= Game.orbis game in

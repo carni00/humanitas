@@ -35,6 +35,7 @@ type t = [
 | `wait
 | `save_game
 | `end_of_turn of int
+| `next_event
 | `load_game of (Game.t * Game.Player.t)
 | `new_game of Game.laws
 

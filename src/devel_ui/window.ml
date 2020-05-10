@@ -423,6 +423,7 @@ let data staSnl wid = match wid with
   LB( K.KEY_l       , "L"                             , [`end_of_turn 50 ] );
   LB( K.KEY_c       , "C"                             , [`end_of_turn 100 ] );
   LB( K.KEY_d       , "D"                             , [`end_of_turn 500 ] );
+  LB( K.KEY_n       , "till Next event"               , [`next_event ] );
   ])
 
 | W.NewGame -> c "New Game menu", List(Lines juce,
