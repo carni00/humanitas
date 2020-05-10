@@ -34,12 +34,12 @@ module Actio : sig
 end
 
 type t
+type eventum = t
   
-(*val concat : Date.t -> (Ars.cognitio * Ars.t) list Nid.Nil.t -> t*)
 
-module Vetera : sig
+module List : sig
 
-  type t 
+  val create : Date.t -> (Ars.cognitio * Ars.t) list Nid.Nil.t -> eventum list
 
 end
 

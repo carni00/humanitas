@@ -1,6 +1,6 @@
 (*
 
- ****************************** eventus.ml ******************************
+ ****************************** eventum.ml ******************************
 
 
  *  This file is part of Humanitas.
@@ -34,30 +34,57 @@ type t =
   | Pax        of Nid.t (* paix conclue avec .. *)
 
 
-(*let of_inventio cognitio ars = match cognitio with*)
-(*| `inventio -> Inventio ars*)
-(*| `propagatio -> Propagatio ars*)
+let of_inventio cognitio ars = match cognitio with
+| `inventio -> Inventio ars
+| `propagatio -> Propagatio ars
 
 end
 
 
-type eventus = {
+type eventum = {
   actio   : Actio.t;
   date    : Date.t;
   acteur  : Nid.t;
   spectateurs : Nid.t list;
 }
 
-type t = eventus
+type t = eventum
+
+let make_eventus actio date acteur = {
+  actio   ;
+  date    ;
+  acteur  ;
+  spectateurs=[];
+}
 (*
 let make_eventus nl actio date acteur = {
   actio   ;
   date    ;
   acteur  ;
-  spectateurs = NatioList.pil nl acteur ;
+  spectateurs ;
+(*  spectateurs = NatioList.pil nl acteur ;*)
 }
 *)
 
+module List = struct
+
+  let create date inl = 
+    let eventus_list nid list = List.map (fun (cognitio,ars) -> make_eventus (Actio.of_inventio cognitio ars) date nid) list in 
+    List.concat ( Nid.Nil.mapi_to_list eventus_list inl ) 
+ 
+end
+
+(*  val mapi_to_list : (nid->'a->'b) -> 'a t -> 'b list*)
+
+(*  type t = (int*eventus) list*)
+(*  let make = []*)
+(*  let add ilist eventus = match (ilist:> (int*eventus) list) with*)
+(*  | []       ->  (    0, eventus) :: []*)
+(*  | (i,e)::q ->  ((i+1), eventus) :: q*)
+  
+
+
+(*  val make : (Ars.cognitio * Ars.t) list Nid.Nil.t -> t*)
 (*let rec concat date nl to_actio (nil:> (Nid.t * 'a list) list) = *)
 (*
 let concat date nl to_actio nil =
@@ -72,16 +99,4 @@ let concat date nl to_actio nil =
 (* concaténation de data annuelle en liste d’eventus *)
 
 
-module Vetera = struct
 
-  type t = (int*eventus) list
-(*  let make = []*)
-(*  let add ilist eventus = match (ilist:> (int*eventus) list) with*)
-(*  | []       ->  (    0, eventus) :: []*)
-(*  | (i,e)::q ->  ((i+1), eventus) :: q*)
-  
-
-
-(*  val make : (Ars.cognitio * Ars.t) list Nid.Nil.t -> t*)
-
-end

@@ -38,8 +38,8 @@ type t = (* monde : ne change qu'en cas de end_of_turn ou new_game ou load_game 
   proximaeList : Proxima.t Nid.Nil.t Nid.Nil.t;
   junctiones : Junctiones.t;
   sd : Strategica.Data.d;
+  eventi     : Eventum.t list; (*eventi de l’année*)
   flexuraeList : Flexurae.t Nid.Nil.t;
-  eventusNil : Eventum.t Nid.Nil.t; (* eventus de l’année *)
 (*  vetera : Vetera.t;*)
 (* données variable du monde *)
   }
