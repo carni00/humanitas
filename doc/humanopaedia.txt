@@ -78,7 +78,8 @@ Les premières dynasties sumériennes apparaissent vers 2900BC, soit en même te
 le latifundium.
 
 --- 18 Brumaire an 215 
-DDM  3 brumaire an 225
+DDM 21 floreal an 228
+
 
 Du vocabulaire.
 
@@ -93,17 +94,17 @@ La natio dispose d’un territoire.
 Elle dispose chaque année d’une capacité sociale de production.
 
 La capacite sociale se repartit entre pls attributiones.  Les attributiones sont : 
-- [labor] : travail matériel primaire visant la survie de la population 
-- [sapientia] : activités supérieures visant le bien-être de la population
-  (sciences, arts, instruction, médecine, etc.) 
+- [labor] : travaux physiques aux fins des besoins matériels immédiats (nourriture, logement)
+- [sapientia] : activités secondaires augmentant le bien-être de la population
+  (progrès et enseignement des sciences, arts, techniques, de la médecine etc.) 
+- [militaria] : fonctionnement de l’appareil militaire (mise à disposition d'hommes aux armées et
+  production d'armement)
+- religio : activités visant à augmenter l'aptitude à la servitude
+- luxus : travaux physiques au bénéfice de l’aristocratie (biens matériels et services)
 - oppressio : extorsion directe du spolium par un appareil policier
-- [militaria] : entretien de l’appareil militaire (production armement et mise à
-disposition d'hommes aux armées) 
-- religio : production idéologique visant à accroître l'aptitude à la servitude
-- luxus : consommation et domesticité d’une éventuelle classe dominante 
 - otium : désoeuvrement
 
-On distingue : 
+On distingue :
 - spolium : capacité sociale effectivement commandée par l’aristocratie ( oppressio + militaria +
   religio + luxus ) 
 - alienatio : capacité sociale spontanément consentie à l’aristocratie SIC
@@ -224,10 +225,10 @@ La cité peut se doter ou non d’une boulê, c’est-à-dire d’instutions org
 l’exercice démocratique du pouvoir politique.
 
 Dans les cités dépourvues de boulê, si fides atteint un certain niveau (0.10),
- les élites dirigeantes développent l’affectatio religio pour accroitre encore
+ l’élite dirigeante développe l’affectatio religio pour accroitre encore
 au-delà le capital fides.
 
-Lorsque fides atteint un niveau suffisant, les élites s’approprient les biens publics :
+Lorsque fides atteint un niveau suffisant, l’élite s’approprie les biens publics :
 la propriété lucrative - le latifundium - succède à la propriété collective - mir - 
 sur la chora.
 
@@ -254,20 +255,21 @@ Les princes qui souhaitent durer devront par conséquent veiller à prévenir la
 constitution de boulê dans les cités.
 
 Les nationes peuvent donc être
+- tribale      : pas de cité
 - poliade
 - démocratique : cité + boulê
-- tribale      : pas de cité
 
 On dira des nationes qu’elles sont :
 - primitive     (tribale, égalitaire, et anarchique)
-- féodale       (tribale, latifundiaire et anarchique) (après disparition des cités)
 - poliade       (poliade, égalitaire, et anarchique)
 - aristocratique(poliade, latifundiaire, et anarchique)
+- féodale       (tribale, latifundiaire, et anarchique) (après disparition des cités aristocratiques)
 - démocratique  (démocratique, égalitaire, et anarchique)
-- républicaine  (démocratique, égalitaire, et centralisé)
-- impériale     (poliade ou tribale, latifundiaire ou non, et centralisé)
+- républicaine  (démocratique, égalitaire, et centralisée)
+- impériale     (poliade ou tribale, latifundiaire ou non, et centralisée)
 
-Note : la démocratie exclut le latifundium.
+Note : la démocratie et le latifundium s'excluent mutuellement (le latifundium ne peut apparaitre
+qu'en l’absence de boulê, la formation de boulê entraine l'abolition du latifundium).
 
 
 *** 8 nivose an 225
