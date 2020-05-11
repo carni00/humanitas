@@ -199,7 +199,7 @@ let draw_civitates vorid por rw _rh scene cl =
       fill_rect (iof x ++ ew) (iof y ++ ew) in
       (* quatre insulae *)
       let s  = iw (rsv D.ehip * (0.4 + 0.4 * Scene.ascale scene )) in
-      let name = Si.civitas (nid) (Civitas.nth civitas) in
+      let name = Si.civitas civitas in
       D.strn ~size:s ~co:co ~xAlign:D.Left ~yAlign:D.Top name (ip (x-h(rw))) (ip y ++ inw) in
       (* affichage des noms des cités *)
   CivitasList.iter f cl

@@ -372,7 +372,7 @@ let regio atelier rid =
     ]
   and civitas_lines = match CivitasList.search o.Orbis.civitasList rid with 
   | Some civitas -> [
-    line (Si.civitas (Civitas.civ civitas) (Civitas.nth civitas)) " " ;
+    line (Si.civitas civitas) " " ;
     line "founded in"                   (Si.date (Civitas.origo civitas) ) ;
     line "urbani"                       (Si.plebs (Civitas.plebs civitas) ) ;
   

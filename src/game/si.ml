@@ -257,7 +257,8 @@ let natioName     = natio Name
 let natioApoc     = natio Apoc
 let natioAdj      = natio Adj
 let natioRegio    = natio Regio
-let civitas nid i = natio (Civitas i) nid
+let natioCivitas nid i = natio (Civitas i) nid
+let civitas c = match Civitas.name_key c with civ,nth -> natioCivitas civ nth
 
 
 let natioKey = function
@@ -320,4 +321,14 @@ let tactic = function
 | Junctiones.Offensive off -> "Off. ("^(offensive off)^")"
 | Junctiones.Defensive -> "Def. (Defensive)"
 | Junctiones.Retreat   -> "Ret. (Retreat)  "
+(*
+let actio = function
+| Eventum.Actio.Civitas    civitas  -> "found "^
+| Eventum.Actio.Inventio   ars      ->
+| Eventum.Actio.Propagatio ars      ->
+| Eventum.Actio.Mutatio    politeia ->
+| Eventum.Actio.Bellum     nid      ->
+| Eventum.Actio.Offensive  nid      ->
+| Eventum.Actio.Pax        nid      ->
+*)
 
