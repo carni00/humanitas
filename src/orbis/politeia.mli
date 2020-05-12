@@ -38,11 +38,13 @@ type arkhe =
 (** Détenteur du pouvoir exécutif *)
 
 type summa =
-| Anarkhia
-| Feudalism
-| Respublica
-| Plutocracy
-| Regnum
+| Anarkhia     
+| Feudum       
+| Demokratia   
+| Aristokratia 
+| Respublica   
+| Oligarkhia   
+| Regnum       
 (** résumé du régime politique *)
 
 

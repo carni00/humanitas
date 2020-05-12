@@ -28,7 +28,7 @@ type t =
   | Civitas    of Civitas.t (* fondation de cité *)
   | Inventio   of Ars.t (* découverte d’ars *)
   | Propagatio of Ars.t (* acquisition d’ars par diffusion  *)
-  | Mutatio    of Politeia.summa (* changement de régime *)
+(*  | Mutatio    of Politeia.summa (* changement de régime *)*)
   | Bellum     of Nid.t (* déclaration de guerre à ..*)
   | Offensive  of Nid.t (* passage à l’offensive contre ...*)
   | Pax        of Nid.t (* paix conclue avec .. *)
@@ -49,6 +49,12 @@ type eventum = {
 }
 
 type t = eventum
+
+let  actio     t = t.actio
+let  date      t = t.date
+let  acteur    t = t.acteur
+let  spectateurs   t = t.spectateurs
+
 
 let make_eventus actio date acteur = {
   actio   ;

@@ -80,19 +80,38 @@ let natioApoc             = natio Apoc
 let natioAdj              = natio Adj
 let natioRegio            = natio Regio
 let natioCivitas ~nid ~i  = natio (Civitas i) nid
-let civitas c             = match Civitas.name_key c with nid,i -> natioCivitas ~nid ~i
+let civitas cvt           = match Civitas.name_key cvt with nid,i -> natioCivitas ~nid ~i
 
-(*
+let ars = function
+| Ars.AGR -> "agriculture"
+| Ars.MET -> "metallurgy"
+| Ars.WRI -> "writing"
+| Ars.NAV -> "navigation"
+| Ars.GUN -> "gunpowder"
+| Ars.STE -> "steam engine"
+| Ars.CMB -> "combustion"
+| Ars.ELE -> "electricity"
+| Ars.N_ARS -> "nulla ars"
+
 let actio = function
-| Eventum.Actio.Civitas    civitas  -> "found "^
-| Eventum.Actio.Inventio   ars      ->
-| Eventum.Actio.Propagatio ars      ->
-| Eventum.Actio.Mutatio    politeia ->
-| Eventum.Actio.Bellum     nid      ->
-| Eventum.Actio.Offensive  nid      ->
-| Eventum.Actio.Pax        nid      ->
-*)
+| Eventum.Actio.Civitas    cvt      -> "found "    ^ civitas cvt
+| Eventum.Actio.Inventio   ars_id   -> "discover " ^ ars ars_id
+| Eventum.Actio.Propagatio ars_id   -> "acquire "  ^ ars ars_id
+(*| Eventum.Actio.Mutatio    politeia ->*)
+| Eventum.Actio.Bellum     nid      -> "declare war on "  ^ natioName nid
+| Eventum.Actio.Offensive  nid      -> "attack "          ^ natioName nid
+| Eventum.Actio.Pax        nid      -> "make peace with " ^ natioName nid
 
+let date = function
+| Date.G g -> let g = (g:>int) in if g<0 then soi(-g)^" BCE" else soi g ^" CE"
+| Date.N _ -> "national date"
+| Date.Unknown -> "unknown date"
+
+let eventum evt =
+  let actio  = actio     (Eventum.actio  evt) in
+  let acteur = natioName (Eventum.acteur evt) in
+  let date   = date      (Eventum.date   evt) in
+  date ^ " : " ^ acteur ^ " " ^ actio
 
 
 let regio e rid = 
@@ -250,10 +269,6 @@ let dominium = function
 
 
 
-let date = function
-| Date.G g -> let g = (g:>int) in if g<0 then soi(-g)^" BCE" else soi g ^" CE"
-| Date.N _ -> "national date"
-| Date.Unknown -> "unknown date"
 
 let filter = function
 | `artes    -> "artes"       
@@ -286,17 +301,6 @@ let natioKey = function
   | Natio.Densitas        -> "Densitas"           
 (*  | _                     -> "natioKey"           *)
               
-
-let ars = function
-| Ars.AGR -> "agriculture"
-| Ars.MET -> "metallurgy"
-| Ars.WRI -> "writing"
-| Ars.NAV -> "navigation"
-| Ars.GUN -> "gunpowder"
-| Ars.STE -> "steam engine"
-| Ars.CMB -> "combustion"
-| Ars.ELE -> "electricity"
-| Ars.N_ARS -> "nulla ars"
 
 let arsID = function
 | Ars.AGR -> "AGR"

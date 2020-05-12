@@ -37,29 +37,24 @@ type arkhe =
 (** Type de pouvoir exécutif national *)
 
 type summa =
-| Anarkhia
-| Feudalism
-| Respublica
-| Plutocracy
-| Regnum
+| Anarkhia     
+| Feudum       
+| Demokratia   
+| Aristokratia 
+| Respublica   
+| Oligarkhia   
+| Regnum       
+
 
 type nid = Nid.t
 
 type t = 
   {
-  poleis : bool; (* y a-t-il des cités (au moins une)  *)
+  polis  : bool; (* y a-t-il des cités (au moins une)  *)
   boule  : bool; (* les cités disposent-elles d’institutions démocratiques *) 
   latifundium : float; (* taux de latifundium *)
   arkhe       : arkhe;
   }
-
-let dominus         p = if p.latifundium < 0.5 then Demos else Aristoi
-let is_aristocratic p = dominus p = Aristoi
-let is_democratic   p = dominus p = Demos
-let is_centralized  p = p.arkhe <> Anarchy
-let is_civilized    p = p.poleis
-let has_boule       p = p.boule = true
-let arkhe           p = p.arkhe
 
 type natio =
   {
@@ -74,21 +69,34 @@ type natio =
   }
 (* paramètres du calcul de la politeia *)
 
-let summa p = match dominus p, p.arkhe, p.poleis with
-| Demos, Anarchy, _ -> Anarkhia
-| _    , Anarchy, _ -> Feudalism
-| Demos, Council, _ -> Respublica
-| _    , Council, _ -> Plutocracy
-| _    , Monarch, _ -> Regnum
+
+let has_boule       p = p.boule = true
+let dominus         p = if p.boule = true || p.latifundium < 0.5 then Demos else Aristoi
+let is_aristocratic p = dominus p = Aristoi
+let is_democratic   p = dominus p = Demos
+let is_centralized  p = p.arkhe <> Anarchy
+let is_civilized    p = p.polis
+let arkhe           p = p.arkhe
+
+let summa p = match p.arkhe, p.polis, dominus p with
+| Anarchy, false, Demos -> Anarkhia
+| Anarchy, false, _     -> Feudum
+| Anarchy, true , Demos -> Demokratia
+| Anarchy, true , _     -> Aristokratia
+| Council, _    , Demos -> Respublica
+| Council, _    , _     -> Oligarkhia
+| Monarch, _    , _     -> Regnum
 
 let to_string p = match summa p with
-| Anarkhia    -> "Anarkhia"  
-| Feudalism   -> "Feudalism"    
-| Respublica  -> "Respublica"     
-| Plutocracy  -> "Plutocracy"     
-| Regnum      -> "Regnum"    
+| Anarkhia     -> "Anarkhia"  
+| Feudum       -> "Feudalism"    
+| Demokratia   -> "Demokratia"     
+| Aristokratia -> "Aristokratia"     
+| Respublica   -> "Respublica"     
+| Oligarkhia   -> "Oligarkhia"  
+| Regnum       -> "Regnum"    
 
-let anarchy = { poleis = false; boule = false ; latifundium = 0. ; arkhe = Anarchy }
+let anarchy = { polis = false; boule = false ; latifundium = 0. ; arkhe = Anarchy }
 
 open Tfloat
 
@@ -112,7 +120,7 @@ let next_arkhe n =
 let update n = 
   {
   n.p with
-  poleis       = n.poleis;
+  polis       = n.poleis;
   latifundium  = n.latifundium;
   arkhe        = next_arkhe n;
   }

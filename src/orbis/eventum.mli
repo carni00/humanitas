@@ -27,7 +27,7 @@ module Actio : sig
   | Civitas    of Civitas.t (* fondation de cité *)
   | Inventio   of Ars.t (* découverte d’ars *)
   | Propagatio of Ars.t (* acquisition d’ars par diffusion  *)
-  | Mutatio    of Politeia.summa (* changement de régime *)
+(*  | Mutatio    of Politeia.summa (* changement de régime *)*)
   | Bellum     of Nid.t (* déclaration de guerre à ..*)
   | Offensive  of Nid.t (* passage à l’offensive contre ...*)
   | Pax        of Nid.t (* paix conclue avec .. *)
@@ -35,7 +35,12 @@ end
 
 type t
 type eventum = t
-  
+
+val  actio   : t -> Actio.t
+val  date    : t -> Date.t
+val  acteur  : t -> Nid.t
+val  spectateurs : t -> Nid.t list
+
 
 module List : sig
 
