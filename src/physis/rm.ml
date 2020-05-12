@@ -106,7 +106,7 @@ let arrayCreate e (ll, dl, rl, sl) =
     let latMin, latMax = if y<equatLat 
                          then asy vm ED.nord lat, asy vm ED.nord (Tlist.following lat rvll)
                          else asy vm ED.sud  (Tlist.following lat rvll), asy vm ED.sud lat in
-    let ryPos = u * (y-latMin) / (latMax-latMin) in
+    let ryPos = u * (y-latMin) / (max 1 (latMax-latMin)) in
     let yPos = (y>=equatLat => ryPos) (u-ryPos) in
     let plsrd = (srd (Tlist.following lat rvll )) in (*previous lat srd*)
     yPos * (srd lat - plsrd) / u + plsrd in (* climatic lat en degrés *)

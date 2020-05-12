@@ -33,6 +33,7 @@ type t =
 | ContactusMx
 | Display
 | Dx
+| Fines
 | Game
 | Help
 | Humanitas
@@ -50,7 +51,7 @@ type t =
 | TaskHistory
 | Tactics
 | Time
-| Fines
+| Vetera
 (* queens_and_sheets *)
 
 let queens_and_sheets = [
@@ -78,7 +79,8 @@ let queens_and_sheets = [
   Tactics;
   TaskHistory;
   Time;
-  Fines
+  Fines;
+  Vetera;
 ]
 (* toutes sauf towers *)
 
@@ -129,6 +131,7 @@ let defSide = function
 | Dx
 | Regio
 | Fines
+| Vetera 
 | Tactics -> Right
 | TaskHistory 
 | Game

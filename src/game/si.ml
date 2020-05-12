@@ -161,6 +161,7 @@ let role = function
 | W.Partitio    -> "Annual products and incomes"
 | W.TaskHistory -> "Task history"
 | W.Tactics     -> "Tactics"
+| W.Vetera     -> "Vetera"
 
 let position = function
 | W.Default -> "Default"  

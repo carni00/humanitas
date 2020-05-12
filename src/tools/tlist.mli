@@ -30,6 +30,9 @@ val len  : 'a list -> int
 val snth : 'a -> 'a list -> int -> 'a
 (** secured [List.nth] (a default value must be given as first arg) *)
 
+val n_first : 'a list -> int -> 'a list
+(** n first elements of a list (returns as much elements as possible) *)
+
 val last : 'a list -> 'a
 (** last element of a list *)
 

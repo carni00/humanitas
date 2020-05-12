@@ -354,6 +354,7 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	    in
 	    RS.map f atelier_s
 	  )
+	  | W.Vetera
 	  | W.Orbis -> (
 	    let f = function
 	      | Some a -> Some (wid, Window.atelier a wid)

@@ -69,6 +69,13 @@ let _tori   = (`justified,`right)
 let tole   = (`justified,`left)
 
 (********************************* Orbis windows **********************************)
+let vetera atelier =
+  let game = Status.Atelier.game atelier in
+  let o    = Game.orbis game in
+  let line evt = Box (16., 1., `left, S (Si.eventum evt) ) in
+  c("   Vetera   "),
+  List(Lines toce, List.map line (List.rev (Tlist.n_first o.Orbis.vetera 12)) )
+
 
 let display atelier =
   let scale = Strn.percent (0) (Scene.ascale (Status.Atelier.scene atelier)) in
@@ -114,6 +121,7 @@ let orbis atelier =
 let atelier a wid = 
   let f = function 
 | W.Display -> display
+| W.Vetera  -> vetera
 | _         -> orbis in  
   (f wid) a
 
@@ -417,13 +425,12 @@ let data staSnl wid = match wid with
 
 | W.Time -> c "Hourglass of fate", List(Lines juce, [
   S( "Pick a number of year to pass : " );
-  LB( K.KEY_i       , "I"                             , [`end_of_turn 1 ] );
-  LB( K.KEY_v       , "V"                             , [`end_of_turn 5 ] );
-  LB( K.KEY_y       , "X (press Y)"                   , [`end_of_turn 10 ] );
+  LB( K.KEY_i       , "I (press enter)"               , [`end_of_turn 1 ] );
+  LB( K.KEY_t       , "Ten"                           , [`end_of_turn 10 ] );
   LB( K.KEY_l       , "L"                             , [`end_of_turn 50 ] );
   LB( K.KEY_c       , "C"                             , [`end_of_turn 100 ] );
   LB( K.KEY_d       , "D"                             , [`end_of_turn 500 ] );
-  LB( K.KEY_n       , "till Next event"               , [`next_event ] );
+  LB( K.KEY_n       , "go to Next event (Ctrl + N)"   , [`next_event ] );
   ])
 
 | W.NewGame -> c "New Game menu", List(Lines juce,

@@ -31,6 +31,7 @@ type t =
 | ContactusMx
 | Display
 | Dx
+| Fines
 | Game
 | Help
 | Humanitas
@@ -48,7 +49,7 @@ type t =
 | TaskHistory
 | Tactics
 | Time
-| Fines
+| Vetera
 
 type position =
 | Default

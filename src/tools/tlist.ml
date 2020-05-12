@@ -45,6 +45,12 @@ let rec optLast = function
   | _    :: q  -> optLast q
 (* dernier élément d’une list *)
 
+let rec n_first list n = match n,list with
+  | n , _ when n<0 -> failwith "Tlist.n_first : negative argument not allowed"
+  | 0 , _      -> []
+  | _ , []     -> []
+  | n , e :: q -> e :: n_first q (n-1)
+
 let min = function
   | [] -> raise (Invalid_argument "List.min")
   | e::q -> List.fold_left min e q

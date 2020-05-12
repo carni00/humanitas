@@ -48,8 +48,6 @@ val data  : Status.t React.signal -> WindowID.t -> t
 val natio : Status.Atelier.t -> Nid.t -> WindowID.t -> t
 
 val regio : Status.Atelier.t (*React.signal*) -> Rid.t (*React.signal*) -> t
-(*val polis : Status.Atelier.t (*React.signal*) -> Nid.t (*React.signal*) -> t*)
-(*val pyramid : Status.Atelier.t (*React.signal*) -> Nid.t (*React.signal*) -> t*)
 val atelier : Status.Atelier.t (*React.signal*) -> WindowID.t -> t
 
 (*

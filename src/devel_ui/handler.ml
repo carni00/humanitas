@@ -157,7 +157,8 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_HOME   when not m.rctrl            -> [`move_to_capitolium ]
     | KEY_RIGHT  when m.lctrl                -> [`alter_player_pov (pid,sfollowing ); `move_to_capitolium ]
     | KEY_LEFT   when m.lctrl                -> [`alter_player_pov (pid,sprevious  ); `move_to_capitolium ]
-    | KEY_n      when m.lctrl                -> [`alter_player_pov (pid,Nid.none   ) ]
+    | KEY_KP0    when m.lctrl                -> [`alter_player_pov (pid,Nid.none   ) ]
+    | KEY_n      when m.lctrl                -> [`next_event ]
     | KEY_a     -> [`toggle_altitude]
     | KEY_b     -> [`toggle_borders]
     | KEY_e     -> [`toggle_earthMode]
@@ -179,7 +180,7 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_DOWN 
     | KEY_LEFT  -> ( move orbis.Orbis.espace scene geoRect m k )
     | KEY_RETURN   -> [`end_of_turn 1]
-    | KEY_v        -> [`end_of_turn 5]
+    | KEY_v                                  -> [`wOpen (W.Vetera, W.Default) ]
     | KEY_y        -> [`end_of_turn 10]
     | KEY_l        -> [`end_of_turn 50]
     | _ -> [])
