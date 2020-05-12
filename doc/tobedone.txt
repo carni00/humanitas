@@ -27,6 +27,7 @@ croissance lente de l’indice de luxus
 pallier à l’augmentation du luxe - ou pas - par le seul moyen possible : oppressio
 limiter religio par le niveau de fides
 
+mise à jour raccourcis clavier et informations sur yceulx
 seditio -> révolution sociale
 
 si occupation, coder les passages en latifundium en fonction de fides

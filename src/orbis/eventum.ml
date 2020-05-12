@@ -21,6 +21,8 @@
 
  *)
 
+open Humanitas_tools
+open Std
 
 module Actio = struct
 
@@ -74,9 +76,13 @@ let make_eventus nl actio date acteur = {
 
 module List = struct
 
+  type t = eventum list
+
   let create date inl = 
     let eventus_list nid list = List.map (fun (cognitio,ars) -> make_eventus (Actio.of_inventio cognitio ars) date nid) list in 
     List.concat ( Nid.Nil.mapi_to_list eventus_list inl ) 
+
+  let concat ~vetera ~addendum = addendum ^^ vetera
  
 end
 
