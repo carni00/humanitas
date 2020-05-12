@@ -28,6 +28,73 @@ open Std
 
 module W = WindowID
 
+type natio = { adj : string; regio : string; prin : string; civitates : string list; }
+
+let natioList = [
+{ adj="Native"   ;regio="Earth"   ;prin="Nobody"      ; civitates=["A";"B";"C";"D"]; };
+{ adj="Egyptian" ;regio="Aegyptus";prin="Kheops"      ;civitates=["Memphis"   ;"Thebes"     ;"Akhetaton";"Pi-Ramses" ]; };
+{ adj="Akkadian" ;regio="Akkad"   ;prin="Sargon"      ;civitates=["Nippour"   ;"Kish"       ;"Mari"     ;"Babylone"   ]; };
+{ adj="Indian"   ;regio="Sindhu"  ;prin="Açoka"       ;civitates=["Harappa"   ;"Pataliputra";"Vijayanagara";"Dehli"   ]; };
+{ adj="Assyrian" ;regio="Assyria" ;prin="Assurbanipal";civitates=["Assur"     ;"Kalkhu" ;"Dur-Sharrukin";"Ninive"     ]; };
+{ adj="Greek"    ;regio="Ellas"   ;prin="Alexandre"   ;civitates=["Knossos"   ;"Mukenai"    ;"Sparta"   ;"Athinai"    ]; };
+{ adj="Persian"  ;regio="Iran"    ;prin="Cyrus"       ;civitates=["Persepolis";"Pasargades" ;"Ectabane" ;"Ispahan"    ]; };
+{ adj="Punic"    ;regio="Africa"  ;prin="Hannibal"    ;civitates=["Karthago"  ;"Hadrumete"  ;"Utique"   ;"Gadès"      ]; };
+{ adj="Celt"     ;regio="Gallia"  ;prin="Brennos"     ;civitates=["Hallstatt" ;"La Tene"    ;"Cenabum"  ;"Tara"       ]; };
+{ adj="Roman"    ;regio="Italia"  ;prin="Caesar"      ;civitates=["Roma"      ;"Veies"      ;"Antium"   ;"Mediolanum" ]; };
+{ adj="Han"      ;regio="Zhonghua";prin="Liu Bang"    ;civitates=["Changan"   ;"Luoyang"    ;"Kaifeng"  ;"Beijing"    ]; };
+{ adj="Ethiopian";regio="Ethiopia";prin="Ezana"       ;civitates=["Aksoum"    ;"Yeha"       ;"Méroé"    ;"Gondar"     ]; };
+{ adj="Maya"     ;regio="Yucatan" ;prin="Pacal"       ;civitates=["Calakmul"  ;"Tikal"      ;"Palenque";"Chichen Itza"]; };
+{ adj="Viking"   ;regio="Norge"   ;prin="Knut"        ;civitates=["Haithabu"  ;"Birka"      ;"Ribe"     ;"Trondheim"  ]; };
+{ adj="Khmer"    ;regio="Funan"   ;prin="Jayavarman"  ;civitates=["Vyadhapura";"Ishanapura" ;"Hariharalaya";"Angkor"  ]; };
+{ adj="Songhai"  ;regio="Mali"    ;prin="Soni Ali"    ;civitates=["Gao"       ;"Tombouctou" ;"Niani"    ;"Djenné"     ]; };
+{ adj="Uzbek"    ;regio="Sogdiane";prin="Timur"       ;civitates=["Samarkand" ;"Bokhara"    ;"Nishapur" ;"Tabriz"     ]; };
+{ adj="Aztec"    ;regio="Aztlan"  ;prin="Moctezuma"   ;civitates=["Tenochtitlan";"Chapultepec";"Texcoco";"Tlacopan"   ]; };
+{ adj="Inca"; regio="Tawantinsuyu";prin="Pachacutec"  ;civitates=["Cuzco"     ;"Machu Pichu";"Tihuanacu";"Vilcabamba" ]; };
+{ adj="Zoulou"   ;regio="Mutapa"  ;prin="Chaka"       ;civitates=["Zimbabwe"  ;"Ulundi"    ;"Isandlwana";"Tugela"     ]; };
+
+]
+(* classées par convention par ordre chronologique *)
+
+type natioForm =
+| Name
+| Apoc 
+| Adj
+| Regio
+| Civitas of int
+
+let natio natioForm nid =
+  let tab = Array.of_list natioList in
+  if nid = Nid.none then "none" else 
+  let base = tab.(Nid.ti nid) in
+  match natioForm with
+  | Name  -> (match base.adj with 
+             | "Chinese" -> "Chinese"
+             | _         -> base.adj^"s")
+  | Apoc -> String.sub base.adj 0 3
+  | Adj   -> base.adj
+  | Regio -> base.regio
+  | Civitas n -> if n>=0 && n<4 then List.nth base.civitates n else base.regio^" no"^(soi n)
+
+let natioName             = natio Name
+let natioApoc             = natio Apoc
+let natioAdj              = natio Adj
+let natioRegio            = natio Regio
+let natioCivitas ~nid ~i  = natio (Civitas i) nid
+let civitas c             = match Civitas.name_key c with nid,i -> natioCivitas ~nid ~i
+
+(*
+let actio = function
+| Eventum.Actio.Civitas    civitas  -> "found "^
+| Eventum.Actio.Inventio   ars      ->
+| Eventum.Actio.Propagatio ars      ->
+| Eventum.Actio.Mutatio    politeia ->
+| Eventum.Actio.Bellum     nid      ->
+| Eventum.Actio.Offensive  nid      ->
+| Eventum.Actio.Pax        nid      ->
+*)
+
+
+
 let regio e rid = 
   let lat,lon = Espace.Regio.coords e rid in
   (*"Regio "^*)(Strn.coords lat lon)
@@ -199,68 +266,6 @@ let filter = function
 | `vis      -> "vis"        
 | `tegmen   -> "tegmen"        
 
-type natio =
-{
-adj       : string;
-regio     : string;
-prin      : string;
-civitates : string list;
-}
-
-let natioList = [
-{ adj="Native"   ;regio="Earth"   ;prin="Nobody"      ; civitates=["A";"B";"C";"D"]; };
-{ adj="Egyptian" ;regio="Aegyptus";prin="Kheops"      ;civitates=["Memphis"   ;"Thebes"     ;"Akhetaton";"Pi-Ramses" ]; };
-{ adj="Akkadian" ;regio="Akkad"   ;prin="Sargon"      ;civitates=["Nippour"   ;"Kish"       ;"Mari"     ;"Babylone"   ]; };
-{ adj="Indian"   ;regio="Sindhu"  ;prin="Açoka"       ;civitates=["Harappa"   ;"Pataliputra";"Vijayanagara";"Dehli"   ]; };
-{ adj="Assyrian" ;regio="Assyria" ;prin="Assurbanipal";civitates=["Assur"     ;"Kalkhu" ;"Dur-Sharrukin";"Ninive"     ]; };
-{ adj="Greek"    ;regio="Ellas"   ;prin="Alexandre"   ;civitates=["Knossos"   ;"Mukenai"    ;"Sparta"   ;"Athinai"    ]; };
-{ adj="Persian"  ;regio="Iran"    ;prin="Cyrus"       ;civitates=["Persepolis";"Pasargades" ;"Ectabane" ;"Ispahan"    ]; };
-{ adj="Punic"    ;regio="Africa"  ;prin="Hannibal"    ;civitates=["Karthago"  ;"Hadrumete"  ;"Utique"   ;"Gadès"      ]; };
-{ adj="Celt"     ;regio="Gallia"  ;prin="Brennos"     ;civitates=["Hallstatt" ;"La Tene"    ;"Cenabum"  ;"Tara"       ]; };
-{ adj="Roman"    ;regio="Italia"  ;prin="Caesar"      ;civitates=["Roma"      ;"Veies"      ;"Antium"   ;"Mediolanum" ]; };
-{ adj="Han"      ;regio="Zhonghua";prin="Liu Bang"    ;civitates=["Changan"   ;"Luoyang"    ;"Kaifeng"  ;"Beijing"    ]; };
-{ adj="Ethiopian";regio="Ethiopia";prin="Ezana"       ;civitates=["Aksoum"    ;"Yeha"       ;"Méroé"    ;"Gondar"     ]; };
-{ adj="Maya"     ;regio="Yucatan" ;prin="Pacal"       ;civitates=["Calakmul"  ;"Tikal"      ;"Palenque";"Chichen Itza"]; };
-{ adj="Viking"   ;regio="Norge"   ;prin="Knut"        ;civitates=["Haithabu"  ;"Birka"      ;"Ribe"     ;"Trondheim"  ]; };
-{ adj="Khmer"    ;regio="Funan"   ;prin="Jayavarman"  ;civitates=["Vyadhapura";"Ishanapura" ;"Hariharalaya";"Angkor"  ]; };
-{ adj="Songhai"  ;regio="Mali"    ;prin="Soni Ali"    ;civitates=["Gao"       ;"Tombouctou" ;"Niani"    ;"Djenné"     ]; };
-{ adj="Uzbek"    ;regio="Sogdiane";prin="Timur"       ;civitates=["Samarkand" ;"Bokhara"    ;"Nishapur" ;"Tabriz"     ]; };
-{ adj="Aztec"    ;regio="Aztlan"  ;prin="Moctezuma"   ;civitates=["Tenochtitlan";"Chapultepec";"Texcoco"  ;"Tlacopan"]; };
-{ adj="Inca"; regio="Tawantinsuyu";prin="Pachacutec"  ;civitates=["Cuzco"     ;"Machu Pichu";"Tihuanacu";"Vilcabamba" ]; };
-{ adj="Zoulou"   ;regio="Mutapa"  ;prin="Chaka"       ;civitates=["Zimbabwe"  ;"Ulundi"    ;"Isandlwana";"Tugela"     ]; };
-
-]
-(* classées par convention par ordre chronologique *)
-
-
-type natioForm =
-| Name
-| Apoc 
-| Adj
-| Regio
-| Civitas of int
-
-let natio natioForm nid =
-  let tab = Array.of_list natioList in
-  if nid = Nid.none then "none" else 
-  let base = tab.(Nid.ti nid) in
-  match natioForm with
-  | Name  -> (match base.adj with 
-             | "Chinese" -> "Chinese"
-             | _         -> base.adj^"s")
-  | Apoc -> String.sub base.adj 0 3
-  | Adj   -> base.adj
-  | Regio -> base.regio
-  | Civitas n -> if n>=0 && n<4 then List.nth base.civitates n else base.regio^" no"^(soi n)
-
-let natioName     = natio Name
-let natioApoc     = natio Apoc
-let natioAdj      = natio Adj
-let natioRegio    = natio Regio
-let natioCivitas nid i = natio (Civitas i) nid
-let civitas c = match Civitas.name_key c with civ,nth -> natioCivitas civ nth
-
-
 let natioKey = function
   | Natio.Facultas        -> "Facultas"           
   | Natio.Plebs           -> "Plebs"           
@@ -321,14 +326,4 @@ let tactic = function
 | Junctiones.Offensive off -> "Off. ("^(offensive off)^")"
 | Junctiones.Defensive -> "Def. (Defensive)"
 | Junctiones.Retreat   -> "Ret. (Retreat)  "
-(*
-let actio = function
-| Eventum.Actio.Civitas    civitas  -> "found "^
-| Eventum.Actio.Inventio   ars      ->
-| Eventum.Actio.Propagatio ars      ->
-| Eventum.Actio.Mutatio    politeia ->
-| Eventum.Actio.Bellum     nid      ->
-| Eventum.Actio.Offensive  nid      ->
-| Eventum.Actio.Pax        nid      ->
-*)
 
