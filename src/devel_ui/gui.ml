@@ -187,7 +187,7 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	and right_towers a = 
           let turn   = (Game.orbis (SA.game a)).Orbis.turn in [
             void (k `expands) ;
-			      b (KEY_v       , " << "        , [`wOpen (Vetera , Default)]    );
+			      b (KEY_F9      , " << "        , [`wOpen (Vetera , Default)]    );
 			      b (KEY_F10     , Si.date turn  , [`wOpen (Time   , Default)]    );
             b (KEY_RETURN  , " > "         , [`end_of_turn 1        ]    );
             b (KEY_F12     , " >> "        , [`next_event           ]    );

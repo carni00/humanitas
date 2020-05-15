@@ -403,8 +403,6 @@ let data staSnl wid = match wid with
   LB( K.KEY_g       ,  "G : Game main menu"                  , [`wOpen (W.Game    , W.Default)] );
   LB( K.KEY_k       ,  "K : Keyboard shorcuts list"          , [`wOpen (W.Keys    , W.Default)] );
   LB( K.KEY_m       ,  "M : Mouse hints"                     , [`wOpen (W.Mouse   , W.Default)] );
-  LB( K.KEY_RETURN  ,  "<return> : end of turn"              , [`end_of_turn 1                ] );
-  LB( K.KEY_SPACE   ,  "<space>  : hourglass of fate"        , [`wOpen (W.Time    , W.Default)] );
   LB( K.KEY_q       ,  "Q : Quit humanitas"                  , [`wOpen (W.Quit    , W.Default)] );
   ])
 
@@ -419,18 +417,19 @@ let data staSnl wid = match wid with
   LB( K.KEY_s       , "Save current state of the game", [                               ] );
   LB( K.KEY_r       , "Restore last saved state"      , [                               ] );
   LB( K.KEY_o       , "game Options"                  , [                               ] );
-  LB( K.KEY_a       , "bAby mode (Ctrl+Ctrl+Home to cancel)", [ `switch_baby_mode true; `new_game { Game.resolution=E.Low }; `wClose W.Game  ] );
+  LB( K.KEY_a       , "bAby mode (Ctrl+Alt+Home to cancel)", [ `switch_baby_mode true; `new_game { Game.resolution=E.Low }; `wClose W.Game  ] );
   LB( K.KEY_q       , "Quit humanitas"                , [`wOpen (W.Quit    , W.Default) ] );
   ])
 
 | W.Time -> c "Hourglass of fate", List(Lines juce, [
-  S( "Pick a number of year to pass : " );
-  LB( K.KEY_i       , "I (press enter)"               , [`end_of_turn 1 ] );
-  LB( K.KEY_t       , "Ten"                           , [`end_of_turn 10 ] );
-  LB( K.KEY_l       , "L"                             , [`end_of_turn 50 ] );
-  LB( K.KEY_c       , "C"                             , [`end_of_turn 100 ] );
-  LB( K.KEY_d       , "D"                             , [`end_of_turn 500 ] );
-  LB( K.KEY_n       , "go to Next event"   , [`next_event ] );
+  LB( K.KEY_F9      , "F9  : consult the archives"    , [`wOpen (W.Vetera  , W.Default)] );
+  LB( K.KEY_F10     , "F10 : open this menu"          , [`wOpen (W.Time    , W.Default)] );
+  LB( K.KEY_RETURN  , "<return> : end of turn"        , [`end_of_turn 1                ] );
+  LB( K.KEY_t       , "pass Ten years"                , [`end_of_turn 10 ] );
+  LB( K.KEY_l       , " 50 (L) years"                 , [`end_of_turn 50 ] );
+  LB( K.KEY_c       , "100 (C) years"                 , [`end_of_turn 100 ] );
+  LB( K.KEY_d       , "500 (D) years"                 , [`end_of_turn 500 ] );
+  LB( K.KEY_F12     , "F12 : go to next event"        , [`next_event ] );
   ])
 
 | W.NewGame -> c "New Game menu", List(Lines juce,
@@ -449,49 +448,46 @@ let data staSnl wid = match wid with
   let box  w a strn = Box (w, 1., a, S strn) in
   let line strn1 strn2 = List (Columns, [box 3. `right strn1 ; S "  :  " ; box 9. `left strn2] ) in
   c "Keyboard shortcuts", List(Lines juce, [
-    S "Global shortcuts"  ;
-    line "Esc" "focus cancellation" ;
-(*    line "<space>" "time window" ;*)
-    line "F1"  "Help" ;
-    line "H"   "Hide all opened windows" ;
-    line "K"   "Keyboard shortcuts (this window)" ;
+    line "K"   "open this window" ;
+    line "Esc" "cancel focus" ;
+    line "Tab" "focus/un-hide window" ;
+    line "H"   "Hide all windows" ;
     line "Q"   "Quit" ;
-    line "Ctrl+Ctrl+End"   "Quit --force" ;
-    line "Ctrl+Ctrl+k"     "Exit 0" ;
+    line "Ctrl+Alt+Home"  "Leave baby mode" ;
+    line "Ctrl+Alt+End"   "Quit without confirm" ;
     S "---"  ;
     S "Map shortcuts"  ;
     line "+ or Z"   "zoom in" ;
     line "- or W"   "zoom out" ;
-    line "E"   "show the entire Earth" ;
+    line "E"   "toggle Earth mode" ;
+    line "Home" "center map to Homeland" ;
     line "A"   "show Altitude" ;
     line "B"   "show Borders" ;
     line "N"   "show Nations" ;
     line "F"   "swith Filter" ;
-    line "Ctrl+C"   "move to Capitolium" ;
 (*    (SL None, [S " "    ; S "Window stack shortcuts"] );*)
     S "---"  ;
     S "Managing windows"  ;
-    line "<-"  "Previous sheet" ;
-    line "->"  "Next sheet" ;
     line "M"   "Move sheet" ;
-    line "X"   "Remove sheet" ;
-    line "H"   "Hide stack" ;
+    line "PgUp"  "Previous sheet" ;
+    line "PgDown"  "Next sheet" ;
     line "U"   "Un-select stack / Undo" ;
-    line "Tab" "select / un-hide stack" ;
+    line "H"   "Hide stack" ;
+    line "X"   "Remove sheet" ;
 (*    line "Shift + X" "Close stack" ;*)
 (*    (SL None, [S ""    ; S "Gates"] );*)
 (*    line "C"   "Consilium" ;*)
-    S "---"  ;
-    S "Opening common windows"  ;
-    line "D"   "Display" ;
-    line "G"   "Game" ;
+(*    S "---"  ;*)
+(*    S "Opening common windows"  ;*)
+(*    line "D"   "Display" ;*)
+(*    line "G"   "Game" ;*)
 (*    line "I"   "Imperium" ;*)
 (*    line "J"   "Junctiones" ;*)
 (*    line "L"   "Load game" ;*)
 (*    line "M"   "Mouse hints" ;*)
 (*    line "O"   "Orbis" ;*)
-    line "P"   "Polis" ;
-    line "R"   "Regio" ;
+(*    line "P"   "Polis" ;*)
+(*    line "R"   "Regio" ;*)
 (*    line "S"   "Stratiotikon" ;*)
 (*    line "T"   "Task history" ;*)
 (*    line "V"   "Vetera" ;*)

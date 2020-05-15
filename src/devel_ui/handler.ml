@@ -64,7 +64,7 @@ let mods keo (*keyboard_event option*) =
   rctrl = f Sdlkey.kmod_rctrl;
   }
 
-let _no_mod mods =
+let no_mod mods =
      mods.shift = false
   && mods.lalt  = false
   && mods.ralt  = false
@@ -154,7 +154,7 @@ let atelier_tasks atelier pick (m, nextEvent) =
   | Key   (k, `release) -> K.(match k with
     | KEY_r      when Scene.sr scene  = None -> [`do_nothing ]
     | KEY_ESCAPE when Scene.sr scene <> None -> [`wClose W.Regio ; `select_regio None ]
-    | KEY_HOME   when not m.rctrl            -> [`move_to_capitolium ]
+    | KEY_HOME   when no_mod m               -> [`move_to_capitolium ]
     | KEY_RIGHT  when m.lctrl                -> [`alter_player_pov (pid,sfollowing ); `move_to_capitolium ]
     | KEY_LEFT   when m.lctrl                -> [`alter_player_pov (pid,sprevious  ); `move_to_capitolium ]
     | KEY_KP0    when m.lctrl                -> [`alter_player_pov (pid,Nid.none   ) ]
@@ -180,7 +180,7 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_DOWN 
     | KEY_LEFT  -> ( move orbis.Orbis.espace scene geoRect m k )
 (*    | KEY_RETURN   -> [`end_of_turn 1]*)
-(*    | KEY_v                                  -> [`wOpen (W.Vetera, W.Default) ]*)
+    | KEY_v                                  -> [`wOpen (W.Vetera, W.Default) ]
     | KEY_y        -> [`end_of_turn 10]
     | KEY_l        -> [`end_of_turn 50]
     | _ -> [])

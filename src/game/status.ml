@@ -142,7 +142,10 @@ let update status task =
     | Some a,  _                        -> Some (Atelier.update a task screen)
     | None  ,  _                        -> None in
   let running   = if task == `quit && status.baby_mode == false then false else status.running in
-  let baby_mode = match task with `switch_baby_mode bool -> bool | _ -> status.baby_mode in
+  let baby_mode = ( match task with 
+  | `switch_baby_mode true -> true 
+  | `switch_baby_mode false -> false 
+  | _ -> status.baby_mode ) in
   {
   baby_mode;
   screen;
