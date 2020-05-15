@@ -179,8 +179,8 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_RIGHT
     | KEY_DOWN 
     | KEY_LEFT  -> ( move orbis.Orbis.espace scene geoRect m k )
-    | KEY_RETURN   -> [`end_of_turn 1]
-    | KEY_v                                  -> [`wOpen (W.Vetera, W.Default) ]
+(*    | KEY_RETURN   -> [`end_of_turn 1]*)
+(*    | KEY_v                                  -> [`wOpen (W.Vetera, W.Default) ]*)
     | KEY_y        -> [`end_of_turn 10]
     | KEY_l        -> [`end_of_turn 50]
     | _ -> [])

@@ -184,12 +184,17 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
             b (KEY_r       , "Regio"       , [`secure_sr ; `wOpen (Regio  , Default)]    );
             sb(KEY_p       , "Polis"       , [             `wOpen (Polis  , Default)]    );
           ]
-	and right_towers = [
-          void (k `expands) ;
+	and right_towers a = 
+          let turn   = (Game.orbis (SA.game a)).Orbis.turn in [
+            void (k `expands) ;
+			      b (KEY_v       , " << "        , [`wOpen (Vetera , Default)]    );
+			      b (KEY_F10     , Si.date turn  , [`wOpen (Time   , Default)]    );
+            b (KEY_RETURN  , " > "         , [`end_of_turn 1        ]    );
+            b (KEY_F12     , " >> "        , [`next_event           ]    );
 	] in
 	let list = match atelier_opt with
-	  | Some a -> left_towers @ (middle_towers a) @ right_towers
-	  | _      -> left_towers @ right_towers in
+	  | Some a -> left_towers @ (middle_towers a) @ (right_towers a)
+    | _      -> left_towers @ [ void (k `expands) ] in
 	liste Win.Columns list
       in
       map_s_e (RS.map Status.atelier status_s) tower_list
@@ -198,7 +203,6 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 
     let bottomBar staSnl =
       let open Sdlkey in
-      let open WindowID in
       let open Tfloat in
       let ews    r = RS.map (fun w -> `fixed (foi w * foi r / 100.)) D.swip in (* width signal *)
       (* redefinition de ews : l'unité de base de largeur est un centième de la largeur de l'écran *)
@@ -207,14 +211,14 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
       let f s = 
 	liste Win.Columns ( 
 	  let ao = Status.atelier s in match ao with 
-	    | Some a ->( let turn   = (Game.orbis (SA.game a)).Orbis.turn in
-                         let module GP = Game.Player in
+	    | Some a ->( 
+                   let module GP = Game.Player in
 	                 let player = SA.player a in
 			 [
 			   b 10 (KEY_UNKNOWN , GP.name player                    , []    );
 			   b 10 (KEY_UNKNOWN , "role : "^Si.role  (GP.role player)         , []    );
 			   b 15 (KEY_UNKNOWN , "pov  : "^Si.natio Si.Name (GP.pov player)  , []    );
-			   b 30 (KEY_SPACE   , Si.date turn          , [`wOpen (Time   , Default)]    );
+(*			   b 30 (KEY_SPACE   , Si.date turn          , [`wOpen (Time   , Default)]    );*)
                            void (k `expands) ;
 			 ])
 	    | None -> [ ] )

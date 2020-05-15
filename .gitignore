@@ -18,6 +18,7 @@ refonte/
 dune.txt
 commit.txt
 script.txt
+tobedone.txt
 humanitas.exe
 src/devel_ui/dune.exc
 src/devel_ui/dune.lib

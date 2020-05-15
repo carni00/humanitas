@@ -1,3 +1,6 @@
+228.flo.26.15H43
+Right toolbar (time toolbar)
+
 228.flo.23.19H22
 fenêtre Vetera
 Tlist.n_first
