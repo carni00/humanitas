@@ -266,21 +266,20 @@ let polis atelier nid =
   let o    = Game.orbis game in
   let n    = NatioList.get o.Orbis.natioList nid in
   let sof i f = Strn.float i (f n) in
-  let box  a strn = Box (5., 1., a, S strn) in
-  let void = Box (2.7, 1., `left, S " " ) in
-  let line  strn1 strn2   = List (Columns, [box `right strn1 ; S "  :  " ; box `left strn2 ; void] ) in
-  let lineb strn1 strn2 b = List (Columns, [box `right strn1 ; S "  :  " ; box `left strn2 ; b] ) in
+  let box     a strn = Box (5., 1., a, S strn) in
+  let line  strn1 strn2         = List (Columns, [box `right strn1 ; S "  :  " ; box `left strn2 ] ) in
+  let gate  strn        key wid = LB( key, strn, [`wOpen ( wid, W.Default)] ) in
+  let lineB strn1 strn2 key wid = gate (strn1^"  :  "^strn2) key wid in
     c(Si.natio Si.Name nid), List(Lines toce, [
-    line "F5 / P"       "open this window" ;
-    line "origo"        (Si.date (snd(N.origo n))) ;
-    line "politeia"     (Politeia.to_string  (N.politeia n)) ;
-    lineb "artes"       (last_artes 2 (N.artes n))     (SB(K.KEY_a, "Artes"   ,[`wOpen (W.Artes,   W.Default)]));
-    lineb "vis"         (sof (-2) N.vis   )            (SB(K.KEY_t, "Tactics" ,[`wOpen (W.Tactics, W.Default)]));
-    lineb "chora"       (sof   4  N.chora    ^" km2")  (SB(K.KEY_c, "Chora"   ,[`wOpen (W.Chora  , W.Default)]));
-    lineb "imperium"    (sof   4  N.imperium ^" km2")  (SB(K.KEY_f, "Fines"   ,[`wOpen (W.Fines  , W.Default)]));
-    lineb "fructus"     " "                            (SB(K.KEY_p, "Partitio",[`wOpen (W.Partitio,W.Default)]));
-    lineb "facultas"    (sof   5  N.facultas   )       (SB(K.KEY_d, "Demog."  ,[`wOpen (W.Dx,      W.Default)]));
-    lineb "plebs"       (Si.plebs (N.plebs n))         (SB(K.KEY_y, "pYramid" ,[`wOpen (W.Pyramid, W.Default)]));
+    line  "politeia"    (Politeia.to_string  (N.politeia n)) ;
+    line  "Vis"         (sof (-2) N.vis   ) ;
+    lineB "Origo"       (Si.date (snd(N.origo n)))    K.KEY_o  W.Vetera  ;
+    lineB "Artes"       (last_artes 2 (N.artes n))     K.KEY_a  W.Artes   ;
+    lineB "Chora"       (sof   4  N.chora    ^" km2")  K.KEY_c  W.Chora   ;
+    lineB "Imperium"    (sof   4  N.imperium ^" km2")  K.KEY_i  W.Fines   ;
+    lineB "Facultas"    (sof   5  N.facultas   )       K.KEY_f  W.Dx ;
+    lineB "plEbs"       (Si.plebs (N.plebs n))         K.KEY_e  W.Pyramid ;
+    gate  "Partitio"                                   K.KEY_p  W.Partitio;
     line "populatio"    (Si.population(N.plebs n)((N.chora n)))  ;
     line "occupatio"    (Strn.percent (-1) (1. /. N.agriCopia n))  ;
 (*    line "seditiones"   N.seditiones    ;*)

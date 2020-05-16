@@ -95,7 +95,6 @@ module Make (Draw : Video.Draw) = struct
     	bt K.KEY_u       "U"           [`sFocus None                ]    ;
     	bt' K.KEY_h      "H"           (fun side -> [`sHide  side; `sFocus None  ])    ;
     	bt K.KEY_x       "X"           [`wClose id                   ]    ;
-(*    	bt' K.KEY_x      "X"           (fun side -> [`sClose side; `sFocus None  ])    ;*)
       ]
       in
       columns contents
@@ -115,14 +114,6 @@ module Make (Draw : Video.Draw) = struct
     let cButton ~w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (k title), task )
     let rect w h _c = Button(T.button ~w:(ews w) ~h:(ehs h) (k " "), [] )
 
-    let box w h ha widget =
-	Widget ( T.div 
-	  ~w:(ews w) (* ne fonctionne pas *)
-	  ~h:(ehs h) (* ne fonctionne pas *)
-	  ~layout:(k (`vpack (`packed `center, ha)))
-	  [widget] )
-      
-     
     let liste dir wList =
       let rec split = function 
 	| [] -> ([], [])
@@ -146,6 +137,34 @@ module Make (Draw : Video.Draw) = struct
 	  wList, 
 	collect eList
   (* liste de widget, disposés horizontalement ou verticalement *)
+
+    let box_of_element w h ha element =
+	Widget ( T.div 
+	  ~w:(ews w) (* ne fonctionne pas *)
+	  ~h:(ehs h) (* ne fonctionne pas *)
+	  ~layout:(k (`vpack (`packed `center, ha)))
+	  [element] )
+
+    let rec frame fra =
+      let dir, list = fra in
+      let rec widget = function
+	| Win.Rect (w,h,c) -> rect w h c
+	| Win.LB but   -> cButton ~w:12. but
+	| Win.SB but   -> cButton ~w:2.7 but
+	| Win.S string -> cStrn string
+	| Win.Z strSnl -> line (*~w:16.*) strSnl
+	| Win.List fra -> frame fra 
+	| Win.Box (w,h,_ha, Win.S s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (k s))
+	| Win.Box (w,h,_ha, Win.Z s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (s)  )
+	| Win.Box (w,_h,_ha, Win.SB but) -> cButton ~w but
+	| Win.Box (w,h,ha,we) -> box_of_element w h ha 
+      (match widget we with 
+      | Widget element -> element 
+      | _ -> T.void() ) 
+      in
+      match (liste dir (List.map widget list)) with (w,e) -> Frame(w,e)
+
+     
 (*type layout = [
 | `hpack of halign spacing * valign
 | `vpack of valign spacing * halign
@@ -182,8 +201,8 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
             b (KEY_F4      , filter        , [`switch_filter           ]    );
             space 0.25;
             sb(KEY_F5      , Si.natioName pov, [ `wOpen (Polis  , Default)]    );
-            sb(KEY_F6      , " ", [ `wOpen (Polis  , Default)]    );
-            sb(KEY_F7      , " ", [ `wOpen (Polis  , Default)]    );
+            sb(KEY_s       , "Stratiotikon",   [ `wOpen (Polis  , Default)]    );
+            sb(KEY_j       , "Junctiones",     [ `wOpen (Tactics, Default)]    );
             sb(KEY_F8      , " ", [ `wOpen (Polis  , Default)]    );
           ]
 	and right_towers a = 
@@ -217,9 +236,9 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
                    let module GP = Game.Player in
 	                 let player = SA.player a in
 			 [
-			   b 10 (KEY_UNKNOWN , GP.name player                    , []    );
+(*		   b 10 (KEY_UNKNOWN , GP.name player                    , []    );*)
 			   b 10 (KEY_UNKNOWN , "role : "^Si.role  (GP.role player)         , []    );
-			   b 15 (KEY_UNKNOWN , "pov  : "^Si.natio Si.Name (GP.pov player)  , []    );
+(*  	   b 15 (KEY_UNKNOWN , "pov  : "^Si.natio Si.Name (GP.pov player)  , []    );*)
                            void (k `expands) ;
 			 ])
 	    | None -> [ ] )
@@ -237,20 +256,6 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	void (k `expands);
 	tb (K.KEY_x       , "X"           , [`wClose id               ]    );
       ]
-
-    let rec frame fra =
-      let dir, list = fra in
-      let rec widget = function
-	| Win.Rect (w,h,c) -> rect w h c
-	| Win.LB but   -> cButton ~w:12. but
-	| Win.SB but   -> cButton ~w:2.7 but
-	| Win.S string -> cStrn string
-	| Win.Z strSnl -> line (*~w:16.*) strSnl
-	| Win.List fra -> frame fra 
-	| Win.Box (w,h,_ha, Win.S s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (k s))
-	| Win.Box (w,h,_ha, Win.Z s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (s)  )
-	| Win.Box (w,h,ha,e) -> box w h ha (match widget e with Widget w -> w | _ -> T.void() ) in
-      match (liste dir (List.map widget list)) with (w,e) -> Frame(w,e)
 
     let truc = 
       RS.trace 

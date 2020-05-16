@@ -161,7 +161,8 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_F2     -> [ `wOpen (W.Orbis,W.Default) ]
     | KEY_F3     -> [ `wOpen (W.Tabula,W.Default) ]
     | KEY_F4     -> [ `switch_filter  ]
-    | KEY_p
+    | KEY_p      when pov = Nid.none -> [`alter_player_pov (pid,sfollowing ); `move_to_capitolium ; `wOpen (W.Polis,W.Default) ]
+    | KEY_p      
     | KEY_F5     -> [ `wOpen (W.Polis,W.Default) ]
     | KEY_F9     -> [ `wOpen (W.Vetera,W.Default)] 
     | KEY_F10    -> [ `wOpen (W.Time,W.Default)] 
