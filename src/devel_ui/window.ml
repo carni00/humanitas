@@ -271,6 +271,7 @@ let polis atelier nid =
   let line  strn1 strn2   = List (Columns, [box `right strn1 ; S "  :  " ; box `left strn2 ; void] ) in
   let lineb strn1 strn2 b = List (Columns, [box `right strn1 ; S "  :  " ; box `left strn2 ; b] ) in
     c(Si.natio Si.Name nid), List(Lines toce, [
+    line "F5 / P"       "open this window" ;
     line "origo"        (Si.date (snd(N.origo n))) ;
     line "politeia"     (Politeia.to_string  (N.politeia n)) ;
     lineb "artes"       (last_artes 2 (N.artes n))     (SB(K.KEY_a, "Artes"   ,[`wOpen (W.Artes,   W.Default)]));

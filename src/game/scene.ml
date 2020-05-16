@@ -268,7 +268,8 @@ let urbsRid o p =
 
 
 let move_to_capitolium o s p =
-  { s with earthMode=false;
+  { s with 
+(*    earthMode=false;*)
 (*           scale    = Level.set s.scale 5;*)
            cr       = urbsRid o p }
 (* centrage sur la capitale *)
@@ -300,7 +301,7 @@ let create o p =
   angle    = Level.make 4 9 9;
   forme    = Plan;
   earthMode= true;
-  options  = { altitude = false;  borders = false ; nations=false };
+  options  = { altitude = false;  borders = true ; nations=false };
   cr       = ( match natio with None   -> Espace.centerRid o.Orbis.espace
                               | Some n -> n.urbsRid );
 (*  cr       = urbsRid o p;*)

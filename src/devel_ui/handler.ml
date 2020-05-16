@@ -152,19 +152,23 @@ let atelier_tasks atelier pick (m, nextEvent) =
 (*    | `wheelup               -> [`zoom_in ] *)
     | _                               -> [])
   | Key   (k, `release) -> K.(match k with
+    | KEY_LEFT   when m.lctrl                -> [`alter_player_pov (pid,sprevious ); `move_to_capitolium ]
+    | KEY_c      when m.lctrl                -> [`alter_player_pov (pid,sprevious ); `move_to_capitolium ]
+    | KEY_RIGHT  when m.lctrl                -> [`alter_player_pov (pid,sfollowing ); `move_to_capitolium ]
+    | KEY_r      when m.lctrl                -> [`alter_player_pov (pid,sfollowing ); `move_to_capitolium ]
     | KEY_r      when Scene.sr scene  = None -> [`do_nothing ]
     | KEY_ESCAPE when Scene.sr scene <> None -> [`wClose W.Regio ; `select_regio None ]
-    | KEY_F2     -> [ `wOpen (W.Tabula,W.Default) ]
-    | KEY_F3     -> [ `switch_filter  ]
+    | KEY_F2     -> [ `wOpen (W.Orbis,W.Default) ]
+    | KEY_F3     -> [ `wOpen (W.Tabula,W.Default) ]
+    | KEY_F4     -> [ `switch_filter  ]
+    | KEY_p
+    | KEY_F5     -> [ `wOpen (W.Polis,W.Default) ]
     | KEY_F9     -> [ `wOpen (W.Vetera,W.Default)] 
     | KEY_F10    -> [ `wOpen (W.Time,W.Default)] 
     | KEY_RETURN -> [`end_of_turn 1]
     | KEY_F12    -> [ `next_event     ]
     | KEY_HOME   when no_mod m               -> [`move_to_capitolium ]
-    | KEY_RIGHT  when m.lctrl                -> [`alter_player_pov (pid,sfollowing ); `move_to_capitolium ]
-    | KEY_LEFT   when m.lctrl                -> [`alter_player_pov (pid,sprevious  ); `move_to_capitolium ]
     | KEY_KP0    when m.lctrl                -> [`alter_player_pov (pid,Nid.none   ) ]
-    | KEY_n      when m.lctrl                -> [`next_event ]
     | KEY_a     -> [`toggle_altitude]
     | KEY_b     -> [`toggle_borders]
     | KEY_e     -> [`toggle_earthMode]

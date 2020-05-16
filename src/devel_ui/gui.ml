@@ -177,10 +177,14 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
           let pov    = Game.Player.pov (SA.player a) in
           let sb bt  = if pov = Nid.none then space 1. else b bt in 
           [
+            b (KEY_o       , "Orbis"       , [`wOpen (Orbis, Default)]    );
             b (KEY_t       , "Tabula"      , [`wOpen (Tabula, Default)]    );
-            b (KEY_F3      , filter        , [`switch_filter           ]    );
+            b (KEY_F4      , filter        , [`switch_filter           ]    );
             space 0.25;
-            sb(KEY_p       , "Polis"       , [             `wOpen (Polis  , Default)]    );
+            sb(KEY_F5      , Si.natioName pov, [ `wOpen (Polis  , Default)]    );
+            sb(KEY_F6      , " ", [ `wOpen (Polis  , Default)]    );
+            sb(KEY_F7      , " ", [ `wOpen (Polis  , Default)]    );
+            sb(KEY_F8      , " ", [ `wOpen (Polis  , Default)]    );
           ]
 	and right_towers a = 
           let turn   = (Game.orbis (SA.game a)).Orbis.turn in [
@@ -216,7 +220,6 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 			   b 10 (KEY_UNKNOWN , GP.name player                    , []    );
 			   b 10 (KEY_UNKNOWN , "role : "^Si.role  (GP.role player)         , []    );
 			   b 15 (KEY_UNKNOWN , "pov  : "^Si.natio Si.Name (GP.pov player)  , []    );
-(*			   b 30 (KEY_SPACE   , Si.date turn          , [`wOpen (Time   , Default)]    );*)
                            void (k `expands) ;
 			 ])
 	    | None -> [ ] )
