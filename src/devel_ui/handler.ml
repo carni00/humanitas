@@ -154,7 +154,12 @@ let atelier_tasks atelier pick (m, nextEvent) =
   | Key   (k, `release) -> K.(match k with
     | KEY_r      when Scene.sr scene  = None -> [`do_nothing ]
     | KEY_ESCAPE when Scene.sr scene <> None -> [`wClose W.Regio ; `select_regio None ]
-    | KEY_F2                                 -> [`wOpen  (W.Tabula,W.Default) ]
+    | KEY_F2     -> [ `wOpen (W.Tabula,W.Default) ]
+    | KEY_F3     -> [ `switch_filter  ]
+    | KEY_F9     -> [ `wOpen (W.Vetera,W.Default)] 
+    | KEY_F10    -> [ `wOpen (W.Time,W.Default)] 
+    | KEY_RETURN -> [`end_of_turn 1]
+    | KEY_F12    -> [ `next_event     ]
     | KEY_HOME   when no_mod m               -> [`move_to_capitolium ]
     | KEY_RIGHT  when m.lctrl                -> [`alter_player_pov (pid,sfollowing ); `move_to_capitolium ]
     | KEY_LEFT   when m.lctrl                -> [`alter_player_pov (pid,sprevious  ); `move_to_capitolium ]
@@ -179,7 +184,6 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_RIGHT
     | KEY_DOWN 
     | KEY_LEFT  -> ( move orbis.Orbis.espace scene geoRect m k )
-(*    | KEY_RETURN   -> [`end_of_turn 1]*)
     | KEY_v                                  -> [`wOpen (W.Vetera, W.Default) ]
     | KEY_y        -> [`end_of_turn 10]
     | KEY_l        -> [`end_of_turn 50]
@@ -204,8 +208,6 @@ let task_list status pick (m, nextEvent) =
     | KEY_k     -> [`wOpen (W.Keys, W.Default)]
     | KEY_h       when (m.lctrl)  -> [`wOpen (W.TaskHistory, W.Default)]
     | KEY_h     -> [`sHide W.Left; `sHide W.Right]
-    | KEY_SLASH    -> [`screenSizeAlter (1. /. 1.10)]
-    | KEY_ASTERISK -> [`screenSizeAlter  1.10]
     | KEY_ESCAPE   ->(match Ws.queen ws with 
       | Some wid -> [`wClose wid] 
       | _ when Ws.activeWindow ws <> None -> [`sFocus None] 
