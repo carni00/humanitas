@@ -177,9 +177,8 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
           let pov    = Game.Player.pov (SA.player a) in
           let sb bt  = if pov = Nid.none then space 1. else b bt in 
           [
-            b (KEY_t       , "Tabula"      , [`wOpen (Display, Default)]    );
-            b (KEY_f       , filter        , [`switch_filter           ]    );
-            b (KEY_r       , "Regio"       , [`secure_sr ; `wOpen (Regio  , Default)]    );
+            b (KEY_t       , "Tabula"      , [`wOpen (Tabula, Default)]    );
+            b (KEY_F3      , filter        , [`switch_filter           ]    );
             space 0.25;
             sb(KEY_p       , "Polis"       , [             `wOpen (Polis  , Default)]    );
           ]
@@ -328,9 +327,10 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	    (Status.windows |- (flip Windows.windowPos) wid) 
 	    status_s 
 	and win_contents_s = match wid with
-	  | W.Display ->
+	  | W.Filters
+	  | W.Tabula ->
 	    let atelier_s = RSAO.map Status.atelier status_s in
-	    RS.map (function Some a -> Some(W.Display, Window.atelier a wid) | _ -> None) atelier_s
+	    RS.map (function Some a -> Some(wid, Window.atelier a wid) | _ -> None) atelier_s
 	  | W.Artes
 	  | W.Chora
 	  | W.Dx
@@ -401,9 +401,9 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
       let f wid =
 	let win_contents_s = 
 	  match wid with
-	  | W.Display ->
+	  | W.Tabula ->
 	    let atelier_s = RSAO.map Status.atelier staSnl in
-	    RS.map (function Some a -> Some(W.Display, Window.atelier a wid) | _ -> None) atelier_s
+	    RS.map (function Some a -> Some(W.Tabula, Window.atelier a wid) | _ -> None) atelier_s
 	  | id ->
 	    k (Some (id, Window.data staSnl id))
 	in

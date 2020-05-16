@@ -154,6 +154,7 @@ let atelier_tasks atelier pick (m, nextEvent) =
   | Key   (k, `release) -> K.(match k with
     | KEY_r      when Scene.sr scene  = None -> [`do_nothing ]
     | KEY_ESCAPE when Scene.sr scene <> None -> [`wClose W.Regio ; `select_regio None ]
+    | KEY_F2                                 -> [`wOpen  (W.Tabula,W.Default) ]
     | KEY_HOME   when no_mod m               -> [`move_to_capitolium ]
     | KEY_RIGHT  when m.lctrl                -> [`alter_player_pov (pid,sfollowing ); `move_to_capitolium ]
     | KEY_LEFT   when m.lctrl                -> [`alter_player_pov (pid,sprevious  ); `move_to_capitolium ]
@@ -162,9 +163,8 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_a     -> [`toggle_altitude]
     | KEY_b     -> [`toggle_borders]
     | KEY_e     -> [`toggle_earthMode]
-    | KEY_f     -> [`switch_filter]
+    | KEY_f                                  -> [`wOpen (W.Filters, W.Default) ]
     | KEY_n     -> [`toggle_nations]
-    | KEY_o                                  -> [`wOpen (W.Orbis, W.Default) ]
     | KEY_z
     | KEY_PLUS
     | KEY_KP_PLUS  -> [`zoom_in  ]
@@ -202,8 +202,8 @@ let task_list status pick (m, nextEvent) =
     | KEY_F11   -> [`switch_fullscreen]
     | KEY_q     -> [`wOpen (W.Quit, W.Default)]
     | KEY_k     -> [`wOpen (W.Keys, W.Default)]
+    | KEY_h       when (m.lctrl)  -> [`wOpen (W.TaskHistory, W.Default)]
     | KEY_h     -> [`sHide W.Left; `sHide W.Right]
-    | KEY_t       when (m.lctrl && m.lalt)  -> [`wOpen (W.TaskHistory, W.Default)]
     | KEY_SLASH    -> [`screenSizeAlter (1. /. 1.10)]
     | KEY_ASTERISK -> [`screenSizeAlter  1.10]
     | KEY_ESCAPE   ->(match Ws.queen ws with 

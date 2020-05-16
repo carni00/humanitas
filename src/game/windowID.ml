@@ -31,7 +31,8 @@ type t =
 | Computing
 | Consilium
 | ContactusMx
-| Display
+| Tabula
+| Filters
 | Dx
 | Fines
 | Game
@@ -60,7 +61,8 @@ let queens_and_sheets = [
   Computing;
   Consilium;
   ContactusMx;
-  Display;
+  Tabula;
+  Filters;
   Dx;
   Game;
   Help;
@@ -134,7 +136,8 @@ let defSide = function
 | Tactics -> Right
 | TaskHistory 
 | Game
-| Display
+| Tabula
+| Filters
 | Natio 
 | Imperium
 | Consilium
@@ -153,11 +156,12 @@ type tower =
 | Gate of t (*towerButton servant à ouvrir d’autre window*)
 (* towers *)
 
+
 let topLeftTowers = [
   Esc;
   Gate Help;
   Gate Game;
-  Gate Display;
+  Gate Tabula;
   Filter;
   Gate Regio;
   ]

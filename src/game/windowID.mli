@@ -29,7 +29,8 @@ type t =
 | Computing
 | Consilium
 | ContactusMx
-| Display
+| Tabula
+| Filters
 | Dx
 | Fines
 | Game

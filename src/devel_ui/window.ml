@@ -73,36 +73,46 @@ let vetera atelier =
   let game = Status.Atelier.game atelier in
   let o    = Game.orbis game in
   let line evt = Box (16., 1., `left, S (Si.eventum evt) ) in
-  c("   Vetera   "),
-  List(Lines toce, List.map line (List.rev (Tlist.n_first o.Orbis.vetera 12)) )
+  c("   Vetera   "), List(Lines juce,
+  Box (16., 1., `left, S " ") ::
+  List.map line (List.rev (Tlist.n_first o.Orbis.vetera 12)) )
 
 
-let display atelier =
+let tabula atelier =
   let scale = Strn.percent (0) (Scene.ascale (Status.Atelier.scene atelier)) in
   let wik   = Strn.float   (2) (Scene.wik    (Status.Atelier.scene atelier)) in
-  c "Tabula menu", List(Lines juce, [
+  c "Tabula", List(Lines juce, [
   S( "zoom level    : "^scale );
   S( "scene width   : "^wik^" km" );
+    S "---"  ;
     S "Map shortcuts"  ;
-  LB( K.KEY_r       , "shift + left button : Regio info" , [`wOpen (W.Regio, W.Default)     ] );
-  LB( K.KEY_z       , "Zoom in (+)"             , [`zoom_in                                ] );
-  LB( K.KEY_o       , "zoom Out (-)"            , [`zoom_out                               ] );
-  LB( K.KEY_e       , "toggle Earth mode"       , [`toggle_earthMode                       ] );
-  LB( K.KEY_HOME    , "move to HOMEland"        , [`move_to_capitolium                     ] );
-  LB( K.KEY_b       , "switch Background"       , [`switch_background                      ] );
+  LB( K.KEY_t       , "T : open this window"    , [`wOpen (W.Tabula, W.Default)           ] );
+  LB( K.KEY_r       , "shift + left button : Regio info" , [`secure_sr ; `wOpen (W.Regio, W.Default)     ] );
+  LB( K.KEY_z       , "Z or + : Zoom in"             , [`zoom_in                                ] );
+  LB( K.KEY_w       , "W or - : zoom out"            , [`zoom_out                               ] );
+  LB( K.KEY_e       , "E : toggle Earth mode"       , [`toggle_earthMode                       ] );
+  LB( K.KEY_b       , "B : toggle Borders"          , [`toggle_borders                         ] );
+  LB( K.KEY_a       , "A : toggle Altitude"         , [`toggle_altitude                        ] );
+  LB( K.KEY_n       , "N : toggle Nations"          , [`toggle_nations                         ] );
+  LB( K.KEY_HOME    , "Home : move to Homeland"        , [`move_to_capitolium                     ] );
+  LB( K.KEY_g       , "G : toggle backGround"       , [`switch_background                      ] );
+  LB( K.KEY_f       , "F : tabula Filters"          , [`wOpen (W.Filters, W.Default)             ] );
 (*  LB( K.KEY_h       , "hide Stacks"             , [`sHide W.Left; `sHide W.Right           ] );*)
 (*  LB( K.KEY_y       , "restore default displaY" , [`defaultDisplay                         ] );*)
-    S "Map filters"  ;
-  LB( K.KEY_f       , "switch Filter"           , [`switch_filter                          ] );
-  LB( K.KEY_a       , "filter Artes"            , [`select_filter `artes                   ] );
-  LB( K.KEY_d       , "filter Dominium"         , [`select_filter `dominium                   ] );
-  LB( K.KEY_i       , "filter Imperii"          , [`select_filter `imperii                 ] );
-  LB( K.KEY_m       , "filter Montes"           , [`select_filter `montes                  ] );
-  LB( K.KEY_n       , "filter Nationes"         , [`select_filter `nationes                ] );
-  LB( K.KEY_l       , "filter poLiteia"         , [`select_filter `politeia                ] );
-  LB( K.KEY_p       , "filter Populatio"        , [`select_filter `populatio               ] );
-  LB( K.KEY_t       , "filter Tegmen"           , [`select_filter `tegmen                  ] );
-  LB( K.KEY_v       , "filter Vis"              , [`select_filter `vis                     ] );
+  ])
+
+let filters _atelier =
+  c "Tabula filters", List(Lines juce, [
+  LB( K.KEY_f       , "F : open this window"    , [`wOpen (W.Filters, W.Default)           ] );
+  LB( K.KEY_a       , "A : Artes"            , [`select_filter `artes                   ] );
+  LB( K.KEY_d       , "D : Dominium"         , [`select_filter `dominium                ] );
+  LB( K.KEY_i       , "I : Imperii"          , [`select_filter `imperii                 ] );
+  LB( K.KEY_n       , "N : Nationes"         , [`select_filter `nationes                ] );
+  LB( K.KEY_o       , "O : populatio"        , [`select_filter `populatio               ] );
+  LB( K.KEY_p       , "P : Politeia"         , [`select_filter `politeia                ] );
+  LB( K.KEY_r       , "R : Relief"           , [`select_filter `montes                  ] );
+  LB( K.KEY_t       , "T : Tegmen"           , [`select_filter `tegmen                  ] );
+  LB( K.KEY_v       , "V : Vis"              , [`select_filter `vis                     ] );
 (*  B( K.KEY_g       , "display/hide map Grid"   , [`                                       ] );*)
 (*  B( K.KEY_p       , "display/hide Polyhedron" , [`                                       ] );*)
   ])
@@ -123,7 +133,8 @@ let orbis atelier =
 
 let atelier a wid = 
   let f = function 
-| W.Display -> display
+| W.Tabula  -> tabula
+| W.Filters -> filters
 | W.Vetera  -> vetera
 | _         -> orbis in  
   (f wid) a
@@ -186,7 +197,6 @@ let chora atelier nid =
     ] ^^ funusList ^^ [
     linc "(total)"                  (G.Natio.chora g);
     ] )
-
 
 let tactics atelier nid =
   let game = Status.Atelier.game atelier in

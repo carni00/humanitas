@@ -129,7 +129,6 @@ let role = function
 
  let window = function
 (* | W.Esc         -> "Esc"      *)
-(* | W.Filter      -> "Filter"         *)
 (* | W.Save        -> "Save"       *)
 (* | W.TaskHistory -> "TaskHistory"              *)
 (* | W.Coords      -> "Coords"         *)
@@ -140,7 +139,8 @@ let role = function
 | W.Computing   -> "Computing"
 | W.Help        -> "Getting Started"      
 | W.Game        -> "Humanitas"      
-| W.Display     -> "Map"         
+| W.Tabula      -> "Tabula"         
+| W.Filters      -> "Filters"         
 | W.Dx          -> "Dx"         
 | W.Natio       -> "Natio"        
 | W.Imperium    -> "Imperium"          
