@@ -80,15 +80,20 @@ let vetera atelier =
 let display atelier =
   let scale = Strn.percent (0) (Scene.ascale (Status.Atelier.scene atelier)) in
   let wik   = Strn.float   (2) (Scene.wik    (Status.Atelier.scene atelier)) in
-  c "Display menu", List(Lines juce, [
+  c "Tabula menu", List(Lines juce, [
   S( "zoom level    : "^scale );
   S( "scene width   : "^wik^" km" );
-  LB( K.KEY_y       , "restore default displaY" , [`defaultDisplay                         ] );
+    S "Map shortcuts"  ;
+  LB( K.KEY_r       , "shift + left button : Regio info" , [`wOpen (W.Regio, W.Default)     ] );
   LB( K.KEY_z       , "Zoom in (+)"             , [`zoom_in                                ] );
   LB( K.KEY_o       , "zoom Out (-)"            , [`zoom_out                               ] );
   LB( K.KEY_e       , "toggle Earth mode"       , [`toggle_earthMode                       ] );
+  LB( K.KEY_HOME    , "move to HOMEland"        , [`move_to_capitolium                     ] );
+  LB( K.KEY_b       , "switch Background"       , [`switch_background                      ] );
+(*  LB( K.KEY_h       , "hide Stacks"             , [`sHide W.Left; `sHide W.Right           ] );*)
+(*  LB( K.KEY_y       , "restore default displaY" , [`defaultDisplay                         ] );*)
+    S "Map filters"  ;
   LB( K.KEY_f       , "switch Filter"           , [`switch_filter                          ] );
-  LB( K.KEY_g       , "switch backGround"       , [`switch_background                      ] );
   LB( K.KEY_a       , "filter Artes"            , [`select_filter `artes                   ] );
   LB( K.KEY_d       , "filter Dominium"         , [`select_filter `dominium                   ] );
   LB( K.KEY_i       , "filter Imperii"          , [`select_filter `imperii                 ] );
@@ -100,8 +105,6 @@ let display atelier =
   LB( K.KEY_v       , "filter Vis"              , [`select_filter `vis                     ] );
 (*  B( K.KEY_g       , "display/hide map Grid"   , [`                                       ] );*)
 (*  B( K.KEY_p       , "display/hide Polyhedron" , [`                                       ] );*)
-  LB( K.KEY_h       , "hide Stacks"             , [`sHide W.Left; `sHide W.Right           ] );
-  LB( K.KEY_HOME    , "move to HOMEland"        , [`move_to_capitolium                     ] );
   ])
    
 let orbis atelier =

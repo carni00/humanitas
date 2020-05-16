@@ -168,20 +168,19 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 
       let tower_list atelier_opt = 
 	let left_towers = [
-          b (KEY_q       , "ESC"         , [`wOpen (Quit   , Default)]    );
+          b (KEY_g       , "Game"        , [`wOpen (Game   , Default)]    );
           space 0.25;
           b (KEY_F1      , "help"        , [`wOpen (Help   , Default)]    );
-          b (KEY_g       , "Game"        , [`wOpen (Game   , Default)]    );
 	]
 	and middle_towers a = 
           let filter = Si.filter (Scene.filter (SA.scene a)) in
           let pov    = Game.Player.pov (SA.player a) in
           let sb bt  = if pov = Nid.none then space 1. else b bt in 
           [
-            b (KEY_d       , "Display"     , [`wOpen (Display, Default)]    );
+            b (KEY_t       , "Tabula"      , [`wOpen (Display, Default)]    );
             b (KEY_f       , filter        , [`switch_filter           ]    );
-            space 0.25;
             b (KEY_r       , "Regio"       , [`secure_sr ; `wOpen (Regio  , Default)]    );
+            space 0.25;
             sb(KEY_p       , "Polis"       , [             `wOpen (Polis  , Default)]    );
           ]
 	and right_towers a = 
@@ -329,6 +328,9 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	    (Status.windows |- (flip Windows.windowPos) wid) 
 	    status_s 
 	and win_contents_s = match wid with
+	  | W.Display ->
+	    let atelier_s = RSAO.map Status.atelier status_s in
+	    RS.map (function Some a -> Some(W.Display, Window.atelier a wid) | _ -> None) atelier_s
 	  | W.Artes
 	  | W.Chora
 	  | W.Dx

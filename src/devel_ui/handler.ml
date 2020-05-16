@@ -203,13 +203,13 @@ let task_list status pick (m, nextEvent) =
     | KEY_q     -> [`wOpen (W.Quit, W.Default)]
     | KEY_k     -> [`wOpen (W.Keys, W.Default)]
     | KEY_h     -> [`sHide W.Left; `sHide W.Right]
-    | KEY_t     -> [`wOpen (W.TaskHistory, W.Default)]
+    | KEY_t       when (m.lctrl && m.lalt)  -> [`wOpen (W.TaskHistory, W.Default)]
     | KEY_SLASH    -> [`screenSizeAlter (1. /. 1.10)]
     | KEY_ASTERISK -> [`screenSizeAlter  1.10]
     | KEY_ESCAPE   ->(match Ws.queen ws with 
       | Some wid -> [`wClose wid] 
       | _ when Ws.activeWindow ws <> None -> [`sFocus None] 
-      | _                                 -> [`wOpen (W.Quit,W.Default)])
+      | _                                 -> [`wOpen (W.Game,W.Default)])
     | _         -> [] ) (* end of match key_released *)
   | _ , list -> list
 

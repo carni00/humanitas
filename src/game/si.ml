@@ -140,7 +140,7 @@ let role = function
 | W.Computing   -> "Computing"
 | W.Help        -> "Getting Started"      
 | W.Game        -> "Humanitas"      
-| W.Display     -> "Display"         
+| W.Display     -> "Map"         
 | W.Dx          -> "Dx"         
 | W.Natio       -> "Natio"        
 | W.Imperium    -> "Imperium"          

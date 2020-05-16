@@ -115,7 +115,6 @@ let duty = function
 (*| Time*)
 | Help
 | NewGame
-| Display
 | ContactusMx
 | Game   -> Queen
 | _ -> Sheet
@@ -135,6 +134,7 @@ let defSide = function
 | Tactics -> Right
 | TaskHistory 
 | Game
+| Display
 | Natio 
 | Imperium
 | Consilium
