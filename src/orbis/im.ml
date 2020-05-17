@@ -235,7 +235,8 @@ let update e rm im j (na:natio Nia.t) =
       if new_vicus then vlr := ( (rid,incola)::(!vlr) ) ;
       Rv.Incol (incola) in
     Rv.update rv dom hum in
-  Ria.init (s) (f), (!vlr)
+  let n_im = Ria.init (s) (f) in
+  n_im, (!vlr)
 (*  Ria.update f im; im : ne fonctionne pas correctemment : il faut différencier la carte de lecture et celle d’écriture*)
 (* mise à jour de l'imperiumMap *)
 

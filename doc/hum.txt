@@ -1,3 +1,9 @@
+228.flo.28.13H31
+bugfix
+(les cités n’apparaissaient plus parce que la liste des vicus candidats était vide)
+(problème d’ordre d’évaluation)
+(depuis le passage de ocaml 4.2 à 4.9 ? )
+
 228.flo.28.12H50
 CivitasList.map
 
