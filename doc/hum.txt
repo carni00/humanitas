@@ -1,3 +1,7 @@
+228.flo.28.16H46
+Civitas.List.create : cités rangées dans l'ordre chronologique 
+Eventum.List.create : traitement de la liste des cités créées
+
 228.flo.28.13H31
 bugfix
 (les cités n’apparaissaient plus parce que la liste des vicus candidats était vide)

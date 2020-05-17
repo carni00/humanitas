@@ -107,3 +107,4 @@ let plebs c = c.plebs
 
 let name_key c = c.civ,c.nth
 
+let compare_origo c d = Date.compare c.origo d.origo

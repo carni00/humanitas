@@ -75,7 +75,7 @@ let vetera atelier =
   let line evt = Box (16., 1., `left, S (Si.eventum evt) ) in
   c("   Vetera   "), List(Lines juce,
   Box (16., 1., `left, S " ") ::
-  List.map line (List.rev (Tlist.n_first o.Orbis.vetera 12)) )
+  List.map line (List.rev (Tlist.n_first o.Orbis.vetera 20)) ) (*20 derniers evenements*)
 
 
 let tabula atelier =
@@ -130,7 +130,7 @@ let orbis atelier =
     line "instrumentum"   (sof   0  NatioList.instrumentum   ) ;
     line "fides"          (sof (-2) NatioList.fides   ) ;
     line "sophia"         (sof (-2) NatioList.sophia   ) ;
-    ] @ CivitasList.map line_of_cvt o.Orbis.civitasList  )
+    ] @ CivitasList.map line_of_cvt (CivitasList.rev o.Orbis.civitasList)  )
 
 let atelier a wid = 
   let f = function 

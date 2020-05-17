@@ -25,16 +25,21 @@ open Humanitas_tools
 open Humanitas_physis
 
 type t 
+(** liste des civitates. La plus récente est en haut de la pile *)
+
+val rev    : t -> t 
+(** reverse order : pour l'affichage de la plus ancienne à la plus récente *)
 
 val iter   : (Civitas.t -> unit) -> t -> unit
 val map    : (Civitas.t -> 'a) -> t -> 'a list
+
 
 val get    : t -> Civitas.t Tid.t -> Civitas.t
 val search : t -> Rid.t           -> Civitas.t option
 val filter : t -> Nid.t           -> Civitas.t list
 
-val create : Espace.t -> ((Rid.t * Date.t) Nid.Nil.t) -> (Rid.t*Rv.Incola.t) list -> t
-val update : Espace.t -> Date.t -> Im.t -> t -> (Rid.t*Rv.Incola.t) list -> t
+val create : Espace.t -> ((Rid.t * Date.t) Nid.Nil.t) -> (Rid.t*Rv.Incola.t) list -> t * (Civitas.t list)
+val update : Espace.t -> Date.t -> Im.t -> t -> (Rid.t*Rv.Incola.t) list -> t * (Civitas.t list)
 (** Attention : l’im est mise à jour par effet de bord (regiones urbs) par cette fonction *)
 
 

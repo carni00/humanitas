@@ -63,3 +63,7 @@ let distance a b= match a,b with
 let precedes a b= match a,b with
 | G a, G b -> a<b
 | _ -> assert false
+
+let compare a b= match a,b with
+| G a, G b -> a-b
+| _ -> assert false

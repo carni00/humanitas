@@ -32,6 +32,7 @@ type t = (Civitas.t Tid.t*Civitas.t) list
 
 let get   t cid = Til.nth t cid
 
+let rev   t = List.rev t
 
 
 let search t rid = Til.search (fun cvt -> Civitas.rid cvt == rid) t
@@ -52,25 +53,33 @@ let test_vicus e (cl:t) rid inc =
                     let d = Espace.Regio.distance e rid (Civitas.rid c) in
                     if n<4 && d>1500. then iter n cq else 4 in
     iter 0 (cl :> ('a*Civitas.t) list)
-    (* tester si le vicus doit devenir ou non une cité *)
+(* tester si le vicus doit devenir ou non une cité *)
 
 type origo =
 | Date of Date.t
 | OrigoList of ((Rid.t * Date.t) Nid.Nil.t)
 
-let rec add e origo (cl:t) vl = match vl with
-  | []            -> cl
+
+let rec add e origo (cl:t) ncl vl = match vl with
+  | []            -> cl, ncl
   | (rid,inc)::vq -> let n=test_vicus e cl rid inc in
-                     if  n==4 then add e origo cl vq (*echec*)
+                     if  n==4 then add e origo cl ncl vq (*echec*)
                      else
                      let o = match origo with 
                      | OrigoList ol -> ( match Nid.Nil.nth ol (Rv.Incola.nid inc) with _rid,date -> Civitas.Post date )
                      | Date date -> Civitas.Equal date in
-                     let c=Civitas.create rid (Espace.Regio.superficie e rid) inc n o in add e origo (Til.add cl c) vq
-    (* ajoute des civitas à cl à partir d’une liste de vicus candidat *)
+                     let c=Civitas.create rid (Espace.Regio.superficie e rid) inc n o in
+                     add e origo (Til.add cl c) (c::ncl) vq 
+(* Ajoute des civitas à cl à partir d’une liste de vicus candidat *)
+(* En outre, renvoie ncl : la list des nouvelles cités créées, pour enregistrement des eventi *)
 
 
-let create e  ol  vl = (add e (OrigoList ol) Til.empty vl)
+let create e  ol  vl = 
+  let _cl, ncl = (add e (OrigoList ol) Til.empty [] vl) in
+  let oncl = List.sort Civitas.compare_origo ncl in (* ordered new civitates list *)
+  let cl   = List.fold_left (fun cl cvt -> Til.add cl cvt) Til.empty oncl in
+  cl, List.rev oncl
+(* création de la civitatesList, c-a-d création des cités fondées avant Date.beginning *)
 
 
 
@@ -79,9 +88,10 @@ let update e turn im cl vl =
     let rid = Civitas.rid cvt in match Im.incola im rid with 
     | None        -> print_endline "CivitasList.update : une cité sans incola ???"; cvt
     | Some incola -> Civitas.update cvt (Espace.Regio.superficie e rid) incola in
-  let cl = Til.map f cl in (* mise à jour cités existantes *)
-  let cl = add e (Date turn) cl vl in (* ajout nouvelles cités *)
-  Im.set_oikos_urbs im (List.map (fun (_cid,c) -> Civitas.rid c) cl) ; cl
+  let cl = Til.map f cl in                           (* mise à jour cités existantes *)
+  let cl, ncl = add e (Date turn) cl [] vl in        (* création de nouvelles cités *)
+  Im.set_oikos_urbs im (List.map (fun (_cid,c) -> Civitas.rid c) cl) ; (cl, ncl)
+(* mise à jour annuelle de la CivitasList *)
 
 (******************************************************************************************************************************)
 
@@ -92,7 +102,8 @@ let create_nil coa nil =
     let r,o =  Nid.Nia.get coa nid in
     Civitas.make_from_imd o r in
   Nil.init f nil 
-(** lors de la création du monde, création artificielle de toutes les cités pour transmettre à la natio son origine (emplacement et date *)
+(* fonction utilisée une seule fois lors de la création de la situation initiale : 
+ * création technique des capitales de chaque civ pour transmettre à la natio son origine (emplacement et date) 
+ * la liste n’est pas conservée *)
  
-
 

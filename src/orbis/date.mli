@@ -37,6 +37,7 @@ val beginning   : t
 
 val make        : int -> t
 val to_int      : t -> int
+val compare     : t -> t -> int
 val precedes    : t -> t -> bool
 val inc         : t -> t
 val distance    : t -> t -> int

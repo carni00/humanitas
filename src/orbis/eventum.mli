@@ -45,7 +45,7 @@ val  spectateurs : t -> Nid.t list
 module List : sig
 
   type t = eventum list
-  val create : Date.t -> (Ars.cognitio * Ars.t) list Nid.Nil.t -> t
+  val create : Date.t -> inl:(Ars.cognitio * Ars.t) list Nid.Nil.t -> ncl:Civitas.t list -> t
   val concat : vetera:t -> addendum:t -> t
 
 end

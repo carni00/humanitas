@@ -58,29 +58,26 @@ let  acteur    t = t.acteur
 let  spectateurs   t = t.spectateurs
 
 
-let make_eventus actio date acteur = {
+let make_eventum actio date acteur = {
   actio   ;
   date    ;
   acteur  ;
   spectateurs=[];
-}
-(*
-let make_eventus nl actio date acteur = {
-  actio   ;
-  date    ;
-  acteur  ;
-  spectateurs ;
 (*  spectateurs = NatioList.pil nl acteur ;*)
 }
-*)
+
 
 module List = struct
 
   type t = eventum list
 
-  let create date inl = 
-    let eventus_list nid list = List.map (fun (cognitio,ars) -> make_eventus (Actio.of_inventio cognitio ars) date nid) list in 
-    List.concat ( Nid.Nil.mapi_to_list eventus_list inl ) 
+  let create date ~inl ~ncl = 
+    let ine =
+      let eventus_list nid list = List.map (fun (cognitio,ars) -> make_eventum (Actio.of_inventio cognitio ars) date nid) list in 
+      List.concat ( Nid.Nil.mapi_to_list eventus_list inl ) in
+    let nce = List.map ( fun cvt -> print_endline ("toto") ; make_eventum (Actio.Civitas cvt) (Civitas.origo cvt) (Civitas.civ cvt) ) ncl in
+    ( ine ^^ nce )
+
 
   let concat ~vetera ~addendum = addendum ^^ vetera
  

@@ -67,8 +67,8 @@ let update orbis (sl:StrategicaList.t) =
   let n_turn = Date.inc o.turn in
   let sd   = SD.make (sl:> Strategica.t Nid.Nil.t) in
   let n_j  = Junctiones.update j (NatioList.jNatioList nl) (SD.jStrategies sd) in
-  let n_im, vl = Im.update e rm im n_j (NatioList.imNatioArray nl) in
-  let cl   = CivitasList.update e n_turn n_im (o.civitasList) vl in
+  let n_im, vl  = Im.update e rm im n_j (NatioList.imNatioArray nl) in
+  let   cl, ncl = CivitasList.update e n_turn n_im (o.civitasList) vl in
   (* Attention : l’im est mise à jour par effet de bord (regiones urbs) par CivitasList.update *)
   let n_g  = G.create  e rm n_im in
   let gnl  = G.natioList n_g nil in
@@ -81,7 +81,7 @@ let update orbis (sl:StrategicaList.t) =
   let inl  = Nil.map3 Natio.inventiones (nl :> Natio.t Nid.Nil.t) rl pal in
   let n_nl = NatioList.update gnl jnl cl nl rl luc pl inl in
   let n_pl = Nid.Nil.init (fun i -> Proxima.proximae n_nl (G.pil nil n_g i)) nil in
-  let addendum = Eventum.List.create n_turn inl in
+  let addendum = Eventum.List.create n_turn ~inl ~ncl in
     {
     orbis with
     turn        = n_turn;
@@ -100,6 +100,7 @@ let update orbis (sl:StrategicaList.t) =
 (* mise à jour de l'humanité résultant de l'écoulement d'une année *)
 
 let create _forme size =
+  let turn = Date.beginning in
   let e  = E.create (E.Cylinder E.Octal) size in
   let rm = Rm.create  e in
   let imd= Imd.create e rm in
@@ -118,13 +119,14 @@ let create _forme size =
   let pl   = Nil.mapi (fun _nid n -> Partitio.primary          n)  pnl    in
   let rl   = Nil.map2 (fun n p   -> Partitio.Record.compute p n)  pnl pl in
   let luc  = Lucrum.compute g j nil rl in
-  let cl   = CivitasList.create e (NatioList.origoList nl) vl in
+  let cl, ncl = CivitasList.create e (NatioList.origoList nl) vl in
   let nl   = NatioList.update gnl jnl cl nl rl luc pl (Nil.init (fun _i -> []) nil) in
   let pl   = Nid.Nil.init (fun i -> Proxima.proximae nl (G.pil nil g i)) nil in
+  let addendum = Eventum.List.create turn ~inl:[] ~ncl in
   let orbis = {
     espace      = e;
     regioMap    = rm;
-    turn        = Date.beginning;
+    turn        = turn;
     imperiumMap = im;
     geographia  = g;
     lucrum      = luc;
@@ -135,8 +137,8 @@ let create _forme size =
     natioIdList = nil;
     sd          = SD.of_nil nil;
     flexuraeList= Nid.Nil.init (fun _i -> Flexurae.make) nil ;
-    addendum    = [];
-    vetera      = [];
+    addendum    = addendum;
+    vetera      = addendum;
     }
   in orbis
 (* creation ex nihilo d'un orbis *)

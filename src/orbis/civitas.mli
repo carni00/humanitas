@@ -57,3 +57,4 @@ val incola : t -> Nid.t
 val nth  : t -> int
 val plebs: t -> float
 val name_key : t -> Nid.t * int
+val compare_origo : t -> t -> int
