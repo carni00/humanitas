@@ -39,96 +39,86 @@ module Ws   = Windows
 
 module Make (Draw : Video.Draw) = struct
 
-  module UI = Frui.Make(Draw) 
-  type t    = UI.t
-
+  module RSAO = RS.Make(struct type 'a t = SA.t option let equal = ( == ) end)
+  module D    = Draw
+  module UI   = Frui.Make(Draw) 
+  type t      = UI.t
   module Gen(T : UI.Toolkit) = struct
-
-    module D    = Draw
-    module RSAO = RS.Make(struct type 'a t = SA.t option let equal = ( == ) end)
   
-    let k   = RS.const  
-    let rsm = RS.map
+let k   = RS.const  
+let rsm = RS.map
 
-    let collect es = RE.merge (fun l x -> x @ l) [] es
+let collect es = RE.merge (fun l x -> x @ l) [] es
 (* addition d’events de task *)
-    let modulate_tasks list = fun _button_up_event -> H.modulate_tasks list
+let modulate_tasks list = fun _button_up_event -> H.modulate_tasks list
 (* mise à jour liste de tâches en fonction des mods ctrl, alt etc. *)
 
-    let margin x = k { Frui.top = x ; bottom = x ; left = x ; right = x }
- 
-    let ews r = rsm (fun w -> `fixed (r *. w)) D.ewip  (* element width signal *)
-    let uws   = rsm (fun w -> `fixed       w ) D.ewip  (* unity element width signal *)
-    let ehs r = rsm (fun h -> `fixed (r *. h)) D.ehip
-    let uhs   = rsm (fun h -> `fixed (     h)) D.ehip
-  
-    let map_s_e s f =
-      let s' = RS.map ~eq:( == ) f s in
-      let init = RS.value s' in
-      let changes = RS.changes s' in
-      RS.hold ~eq:( == ) (fst init) (RE.map fst changes),
-      RE.switch (snd init) (RE.map snd changes)
+let margin x = k { Frui.top = x ; bottom = x ; left = x ; right = x }
 
+let ews r = rsm (fun w -> `fixed (r *. w)) D.ewip  (* element width signal *)
+let uws   = rsm (fun w -> `fixed       w ) D.ewip  (* unity element width signal *)
+let ehs r = rsm (fun h -> `fixed (r *. h)) D.ehip
+let uhs   = rsm (fun h -> `fixed (     h)) D.ehip
 
-    let sheet_titleBar side id title =
-      let button key label f = 
-    	let elt,_,bt_fires = T.button ~w:uws ~h:uhs ~shortcut:key (k label) in
-    	elt, f bt_fires in
-      let bt  key label task = button key label (RE.map ((modulate_tasks task)))
-      and bt' key label f    = button key label (fun fires -> RS.sample (fun () s -> f s) fires side)
-      and void w = T.void ~w ~h:uhs (), RE.never
-      and strn s = T.label s, RE.never
-      and columns cols =
-    	T.hpack
-    	  ~spacing:(k (`packed `center))
-    	  ~w:(k `expands)
-    	  (List.map fst cols),
-    	collect (List.map snd cols)
-      in
-      let contents = [
-    	bt K.KEY_m       "M"           [`wMove                       ]    ;
-    	bt K.KEY_PAGEUP    "pgup"           [`wPrevious                   ]   ;
-    	bt K.KEY_PAGEDOWN  "pgdn"           [`wNext                       ] ;
-    	void (k `expands);
-    	strn title;
-    	void (k `expands);
-    	bt K.KEY_u       "U"           [`sFocus None                ]    ;
-    	bt' K.KEY_h      "H"           (fun side -> [`sHide  side; `sFocus None  ])    ;
-    	bt K.KEY_x       "X"           [`wClose id                   ]    ;
-      ]
-      in
-      columns contents
+let map_s_e s f =
+  let s' = RS.map ~eq:( == ) f s in
+  let init = RS.value s' in
+  let changes = RS.changes s' in
+  RS.hold ~eq:( == ) (fst init) (RE.map fst changes),
+  RE.switch (snd init) (RE.map snd changes)
+
+let sheet_titleBar side id title =
+  let button key label f = 
+  	let elt,_,bt_fires = T.button ~w:uws ~h:uhs ~shortcut:key (k label) in
+    elt, f bt_fires in
+  let bt  key label task = button key label (RE.map ((modulate_tasks task)))
+  and bt' key label f    = button key label (fun fires -> RS.sample (fun () s -> f s) fires side)
+  and void w = T.void ~w ~h:uhs (), RE.never
+  and strn s = T.label s, RE.never
+  and columns cols = T.hpack ~spacing:(k (`packed `center)) ~w:(k `expands) (List.map fst cols),
+                     collect (List.map snd cols) in
+  let contents = [
+    bt    K.KEY_m        "M"              [`wMove                       ] ;
+    bt    K.KEY_PAGEUP   "pgup"           [`wPrevious                   ] ;
+    bt    K.KEY_PAGEDOWN "pgdn"           [`wNext                       ] ;
+    void (k `expands);
+    strn title;
+    void (k `expands);
+    bt    K.KEY_u        "U"              [`sFocus None                ]  ;
+    bt'   K.KEY_h        "H" (fun side -> [`sHide  side; `sFocus None  ]) ;
+    bt    K.KEY_x        "X"              [`wClose id                  ]  ;
+  ] in columns contents
 (* la sheet_titleBar est le seul machin qui soit géré directement en T(oolkit) ;
    les widgets suivants sont faits de Gen.widget *)
 
-    type widget =
-    | Widget of UI.element
-    | Button of ((UI.element * bool React.signal * unit React.event) * Task.t list)
-    | Frame  of UI.element * (Task.t list) React.event
+type widget =
+  | Widget of   UI.element
+  | Button of ((UI.element * bool React.signal * unit React.event) * Task.t list)
+  | Frame  of   UI.element * (Task.t list) React.event
 
-    let void     w = Widget (T.void ~w:w      ~h:(ehs 1.) ())
-    let cStrn    s = Widget (T.label   (k s) )
-    let strn     s = Widget (T.label      s  )
-    let line (*~w*) ss = Widget (T.div ~background:(k (Some Ci.wsb)) ~w:(ews 14.) ~h:(ehs 1.) [T.label ss])
-    let _button ~w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (title), task )
-    let cButton ~w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (k title), task )
-    let rect w h _c = Button(T.button ~w:(ews w) ~h:(ehs h) (k " "), [] )
+let void     w              = Widget (T.void ~w:w      ~h:(ehs 1.) ())
+let cStrn    s              = Widget (T.label   (k s) )
+let strn     s              = Widget (T.label      s  )
+let line    ss              = Widget (T.div ~background:(k (Some Ci.wsb)) ~w:(ews 14.) ~h:(ehs 1.) [T.label ss])
+let _button ~w (k, s, task) = Button (T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:k (         s), task )
+let cButton ~w (k, s, task) = Button (T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:k (RS.const s), task )
+let rect     w  h  _c       = Button (T.button ~w:(ews w) ~h:(ehs h) (k " "), [] )
 
-    let liste dir wList =
-      let rec split = function 
+let liste dir wList =
+  let rec split = function 
 	| [] -> ([], [])
 	| Widget( w        )::q -> let (wq, eq) = split q in (w::wq,    eq) 
 	| Button((w,_c,e),t)::q -> let (wq, eq) = split q in (w::wq, (RE.map (modulate_tasks t) e)::eq) 
 	| Frame ( w,   e   )::q -> let (wq, eq) = split q in (w::wq, e::eq) in
-      let wList, eList = split wList in
-      match dir with
-      | Win.Columns       ->
+  let wList, eList = split wList in
+  match dir with
+  | Win.Columns       ->
 	T.hpack
 	  ~spacing:(k (`packed `center))
 	  ~w:(k `expands)                       
 	  wList, 
 	collect eList
-      | Win.Lines (vc,ha) ->
+  | Win.Lines (vc,ha) ->
 	T.div
 	  ~layout:(k (`vpack (vc, ha)))
 (*	  ~layout:(k (`vpack (`packed `top, ha)))*)
@@ -138,16 +128,16 @@ module Make (Draw : Video.Draw) = struct
 	collect eList
   (* liste de widget, disposés horizontalement ou verticalement *)
 
-    let box_of_element w h ha element =
+let box_of_element w h ha element =
 	Widget ( T.div 
 	  ~w:(ews w) (* ne fonctionne pas *)
 	  ~h:(ehs h) (* ne fonctionne pas *)
 	  ~layout:(k (`vpack (`packed `center, ha)))
 	  [element] )
 
-    let rec frame fra =
-      let dir, list = fra in
-      let rec widget = function
+let rec frame fra =
+  let dir, list = fra in
+  let rec widget = function
 	| Win.Rect (w,h,c) -> rect w h c
 	| Win.LB but   -> cButton ~w:12. but
 	| Win.SB but   -> cButton ~w:2.7 but
@@ -158,11 +148,11 @@ module Make (Draw : Video.Draw) = struct
 	| Win.Box (w,h,_ha, Win.Z s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (s)  )
 	| Win.Box (w,_h,_ha, Win.SB but) -> cButton ~w but
 	| Win.Box (w,h,ha,we) -> box_of_element w h ha 
-      (match widget we with 
-      | Widget element -> element 
-      | _ -> T.void() ) 
-      in
-      match (liste dir (List.map widget list)) with (w,e) -> Frame(w,e)
+  (match widget we with 
+  | Widget element -> element 
+  | _ -> T.void() ) 
+  in
+  match (liste dir (List.map widget list)) with (w,e) -> Frame(w,e)
 
      
 (*type layout = [
@@ -175,17 +165,17 @@ and valign = [`top | `center | `bottom ]
 and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 
 	
-    let topBar status_s = 
-      let open Sdlkey in
-      let open WindowID in
-      let open Tfloat in
-      let ews    r = RS.map (fun w -> `fixed (r * foi w / 13.75)) D.swip in (* width signal *)
-      (* redefinition de ews : l'unité de base de largeur est la largeur d'un bouton (et non d'un élément) *)
-      (* la largeur du bouton est fonction de la largeur de l'écran *)
-      let space r = void ( ews r ) in 
-      let b (key, title, task) = Button( T.button ~w:(ews 1.) ~h:(ehs 1.) ~shortcut:key (k title), task ) in
+let topBar status_s = 
+  let open Sdlkey in
+  let open WindowID in
+  let open Tfloat in
+  let ews    r = RS.map (fun w -> `fixed (r * foi w / 13.75)) D.swip in (* width signal *)
+  (* redefinition de ews : l'unité de base de largeur est la largeur d'un bouton (et non d'un élément) *)
+  (* la largeur du bouton est fonction de la largeur de l'écran *)
+  let space r = void ( ews r ) in 
+  let b (key, title, task) = Button( T.button ~w:(ews 1.) ~h:(ehs 1.) ~shortcut:key (k title), task ) in
 
-      let tower_list atelier_opt = 
+  let tower_list atelier_opt = 
 	let left_towers = [
           b (KEY_g       , "Game"        , [`wOpen (Game   , Default)]    );
           space 0.25;
@@ -222,14 +212,14 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
     (* top bar *)
 
 
-    let bottomBar staSnl =
-      let open Sdlkey in
-      let open Tfloat in
-      let ews    r = RS.map (fun w -> `fixed (foi w * foi r / 100.)) D.swip in (* width signal *)
-      (* redefinition de ews : l'unité de base de largeur est un centième de la largeur de l'écran *)
-      let b w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (k title), task ) in
+let bottomBar status_s =
+  let open Sdlkey in
+  let open Tfloat in
+  let ews    r = RS.map (fun w -> `fixed (foi w * foi r / 100.)) D.swip in (* width signal *)
+  (* redefinition de ews : l'unité de base de largeur est un centième de la largeur de l'écran *)
+  let b w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (k title), task ) in
 
-      let f s = 
+  let f s = 
 	liste Win.Columns ( 
 	  let ao = Status.atelier s in match ao with 
 	    | Some a ->( 
@@ -243,12 +233,12 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 			 ])
 	    | None -> [ ] )
       in
-      map_s_e staSnl f
+      map_s_e status_s f
     (* bottom bar *)
 
 
-    let queen_titleBar id title =
-      let tb = cButton ~w:1.  in
+let queen_titleBar id title =
+  let tb = cButton ~w:1.  in
       liste Win.Columns [
 	tb (K.KEY_u       , "U"           , [`wUndo                   ]    );
 	void (k `expands);
@@ -257,25 +247,25 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	tb (K.KEY_x       , "X"           , [`wClose id               ]    );
       ]
 
-    let truc = 
+let truc = 
       RS.trace 
 	(Std.Opt.smap "none" Draw.Window.string_of_id |- Printf.printf "tk: %s\n%!"  )
 (*	(Core.Option.value_map ~default:"none" ~f:Draw.Window.string_of_id |- Printf.printf "tk: %s\n%!")*)
 (* remplacement parce que core.option n’est plus connu au make *)
 	T.window_focus
 
-    let window_focus_signal wid =
-      RS.map (fun x -> x = Some wid) truc (* T.window_focus *)
+let window_focus_signal wid =
+  RS.map (fun x -> x = Some wid) truc (* T.window_focus *)
   (* évolution du focussage d’une window *)
 
-    let window_visibility = function
-      | W.Alive
-      | W.Frozen    -> `opaque
-      | W.Invisible
-      | W.Nil
-      | W.Glass     -> `invisible
+let window_visibility = function
+  | W.Alive
+  | W.Frozen    -> `opaque
+  | W.Invisible
+  | W.Nil
+  | W.Glass     -> `invisible
 
-    let window_visibility_signal wid status =
+let window_visibility_signal wid status =
       RS.map 
 	(fun s->
 	  let windows = Status.windows s in
@@ -291,11 +281,11 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 
 
     (* FIXME: pas optimal, pos devrait être un signal *)
-    let window pos staSnl data =
-      let id, (title, element)   = data in
-      let fra = (Win.Columns, [element] ) in 
-      let contents, cEvents  = match frame fra with Frame (w,e) -> w,e | _ -> (T.void(), RE.never) in
-      let titleBar, tbEvents = (match W.duty id with
+let window pos status_s data =
+  let id, (title, element)   = data in
+  let fra = (Win.Columns, [element] ) in 
+  let contents, cEvents  = match frame fra with Frame (w,e) -> w,e | _ -> (T.void(), RE.never) in
+  let titleBar, tbEvents = (match W.duty id with
 	| W.Sheet -> sheet_titleBar pos id title 
 	| _       -> queen_titleBar id title) 
       in
@@ -303,7 +293,7 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	~layout:(k (`vpack (`justified, `center)))
 	~h:(match W.duty id with W.Sheet -> k `expands | _ -> k `tight)
 	~background:(k (Some Ci.wsb))
-	~visibility:(window_visibility_signal id staSnl)
+	~visibility:(window_visibility_signal id status_s)
 	~framed:(window_focus_signal id)
 	~margin:(margin 1.)
 	[ titleBar ; contents ; T.void ~h:(k `expands) () ],
@@ -311,10 +301,10 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
   (* construction d'un widget window *)
 
 
-    let towers status =
-      let topBar, topBarEvents = topBar status in
-      let bottomBar, bottomBarEvents = bottomBar status in
-      UI.ES.l2
+let towers status =
+  let topBar, topBarEvents = topBar status in
+  let bottomBar, bottomBarEvents = bottomBar status in
+  UI.ES.l2
 	(fun topBar bottomBar ->
 	  T.vpack  
 	    ~w:(k `expands) ~h:(k `expands)  (* remplir l’écran *)
@@ -322,11 +312,11 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	topBar bottomBar,
       collect [ bottomBarEvents ; topBarEvents ]
 
-    let sheets status_s =
-      let atelier_s = RSAO.map Status.atelier status_s in
-      let left_stack_s = RS.map  (Status.windows |- Windows.leftStack)  status_s
-      and right_stack_s = RS.map (Status.windows |- Windows.rightStack) status_s
-      and which_stack left_stack _right_stack wid =
+let sheets status_s =
+  let atelier_s = RSAO.map Status.atelier status_s in
+  let left_stack_s = RS.map  (Status.windows |- Windows.leftStack)  status_s
+  and right_stack_s = RS.map (Status.windows |- Windows.rightStack) status_s
+  and which_stack left_stack _right_stack wid =
 	if List.mem wid left_stack then `left else `right
       in
       let f wid =
@@ -405,74 +395,52 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 
 	
 
-    let queens staSnl =
-      let f wid =
-	let win_contents_s = 
-	  match wid with
-	  | W.Newspaper ->
-	    let atelier_s = RSAO.map Status.atelier staSnl in
-	    RS.map (function Some a -> Some(W.Newspaper, Window.atelier a wid) | _ -> None) atelier_s
-	  | id ->
-	    k (Some (id, Window.data staSnl id))
-	in
-	let element_s, output = map_s_e win_contents_s (function 
-	  | Some w -> window (k W.Central) staSnl w
-	  | None -> T.void (), RE.never
-	) 
-	in
-	T.window wid element_s, output
-      in
-      List.map f W.queens
+let queen status_s wid =
+  let win_contents_s = match wid with
+    | W.Newspaper -> let atelier_s = RSAO.map Status.atelier status_s in
+                     RS.map (function Some a -> Some(W.Newspaper, Window.atelier a wid) | _ -> None) atelier_s
+    | id -> k (Some (id, Window.data status_s id)) in
+  let f = function 
+    | Some w -> window (k W.Central) status_s w
+    | None   -> T.void (), RE.never in
+  match map_s_e win_contents_s f with element_s, output -> T.window wid element_s, output
 
-    let make status_s =
-      let window_focus_changes = RS.changes T.window_focus in
+(***************************************** Gen.make *******************************************)
+
+let make status_s =
+  let window_focus_changes = RS.changes T.window_focus in
       (* event to update frui focus*)
-      let focus_e =
-	RE.merge ( @ ) [] [
-	  (* créer un evt frui si le focus change dans status *)
-	  RS.map 
-	    (fun status -> 
-	       match Windows.activeWindow (Status.windows status) with
-	       | Some wid -> [ `focus (wid, None) ]
-	       | None -> [ `focus (WindowID.Towers, None) ])
-	    status_s
-          |> RS.changes ;
-	  (* si le focus frui est à none, le ramener sur les towers *)
-	  RE.fmap
-	    (function None -> Some [ `focus (WindowID.Towers, None) ] | _ -> None)
-	    window_focus_changes
-	]
-      in
-      let focus_tk2st =
-        RS.sample
-	  (fun wid_opt status ->
-	    let f = function
-	      | W.Towers -> None
-	      | wid -> Some (Windows.windowPos (Status.windows status) wid) in
-	    let win_pos = Core.Option.bind wid_opt ~f in
-	    [ `sFocus win_pos ])
-	  window_focus_changes
-	  status_s
-      in	  
-      let queens = queens status_s in
-      let towers, towersEvent = towers status_s in
-      let sheets = sheets status_s in
-      List.concat [
-	List.map fst queens ;
-	List.map fst sheets ;
-	[ T.window WindowID.Towers towers ] ;
-      ],
-      focus_e,
-      collect (focus_tk2st :: towersEvent :: (List.map snd sheets) @ (List.map snd queens))
+  let focus_e = RE.merge ( @ ) [] [
+      RS.map (fun status -> match Windows.activeWindow (Status.windows status) with
+      | Some wid -> [ `focus (wid, None) ]
+      | None -> [ `focus (WindowID.Towers, None) ]) status_s |> RS.changes ;
+  	  (* si le focus frui est à none, le ramener sur les towers *)
+      RE.fmap (function None -> Some [ `focus (WindowID.Towers, None) ] | _ -> None) window_focus_changes
+    	] in
+      (* créer un evt frui si le focus change dans status *)
+  let focus_task_list wid_opt status =
+      let f = function
+      | W.Towers -> None
+      | wid -> Some (Windows.windowPos (Status.windows status) wid) in
+      let win_pos = Core.Option.bind wid_opt ~f in
+      [ `sFocus win_pos ] in
+  let focus_tk2st = RS.sample focus_task_list window_focus_changes status_s in	  
+  let queens              = List.map (queen status_s) W.queens in
+  let towers, towersEvent = towers status_s in
+  let sheets = sheets status_s in
+  let windows= List.concat [ List.map fst queens ; List.map fst sheets ; [ T.window WindowID.Towers towers ] ; ] in
+  let event  = collect (focus_tk2st :: towersEvent :: (List.map snd sheets) @ (List.map snd queens)) in
+  windows, focus_e, event
 
-  end
+end
 
-  let main status_s = 
-    let f (module Tk : UI.Toolkit) =
-      let module X = Gen(Tk) in
-      X.make status_s
-    in
-    let ui, _ui_events, output = UI.make ~initial_focus:WindowID.Towers f in
+(***************************************** Make.main *******************************************)
+
+let main status_s = 
+  let f (module Tk : UI.Toolkit) =
+    let module X = Gen(Tk) in
+    X.make status_s in
+  let ui, _ui_events, output = UI.make ~initial_focus:WindowID.Towers f in
     (* let ui_events = RE.trace (List.iter (UI.string_of_ui_event |- print_endline)) ui_events in *)
     (* let output = RE.merge ( @ ) [] [ *)
     (*   output ; *)
@@ -491,5 +459,6 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
     (* ] *)
     (* in *)
     ui, output
-      
 end
+
+(* EOF *)
