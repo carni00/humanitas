@@ -21,17 +21,17 @@
 
  *)
 
-
 type t = 
 | Towers
+| Newspaper
 | Artes
 | Chora
 | Computing
 | Consilium
 | ContactusMx
-| Tabula
-| Filters
 | Dx
+| Eventum
+| Filters
 | Fines
 | Game
 | Help
@@ -47,10 +47,13 @@ type t =
 | Pyramid
 | Quit
 | Regio
+| Tabula
 | TaskHistory
 | Tactics
 | Time
 | Vetera
+(* queens_and_sheets *)
+
 
 type position =
 | Default

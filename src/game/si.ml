@@ -31,7 +31,7 @@ module W = WindowID
 type natio = { adj : string; regio : string; prin : string; civitates : string list; }
 
 let natioList = [
-{ adj="Native"   ;regio="Earth"   ;prin="Nobody"      ; civitates=["A";"B";"C";"D"]; };
+{ adj="Native"   ;regio="Earth"   ;prin="Sitting Bull";civitates=["Cahokia";"B";"C";"D"]; };
 { adj="Egyptian" ;regio="Aegyptus";prin="Kheops"      ;civitates=["Memphis"   ;"Thebes"     ;"Akhetaton";"Pi-Ramses" ]; };
 { adj="Akkadian" ;regio="Akkad"   ;prin="Sargon"      ;civitates=["Nippour"   ;"Kish"       ;"Mari"     ;"Babylone"   ]; };
 { adj="Indian"   ;regio="Sindhu"  ;prin="Açoka"       ;civitates=["Harappa"   ;"Pataliputra";"Vijayanagara";"Dehli"   ]; };
@@ -64,7 +64,7 @@ type natioForm =
 
 let natio natioForm nid =
   let tab = Array.of_list natioList in
-  if nid = Nid.none then "none" else 
+(*if nid = Nid.none then "none" else *)
   let base = tab.(Nid.ti nid) in
   match natioForm with
   | Name  -> (match base.adj with 
@@ -80,6 +80,7 @@ let natioApoc             = natio Apoc
 let natioAdj              = natio Adj
 let natioRegio            = natio Regio
 let natioCivitas ~nid ~i  = natio (Civitas i) nid
+let newspaper nid         = "The "^(natioCivitas ~nid ~i:0)^" tribune"
 let civitas cvt           = match Civitas.name_key cvt with nid,i -> natioCivitas ~nid ~i
 
 let ars = function
@@ -135,8 +136,10 @@ let role = function
 (* | W.Fps         -> "Fps"      *)
 (*| W.Gate w      -> "Gate"^window w         *)
 | W.Towers      -> "Towers"
+| W.Newspaper   -> "Newspaper"
 | W.Chora       -> "Chora"
 | W.Computing   -> "Computing"
+| W.Eventum     -> "Eventum"
 | W.Help        -> "Getting Started"      
 | W.Game        -> "Humanitas"      
 | W.Tabula      -> "Tabula"         

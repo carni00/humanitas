@@ -165,7 +165,8 @@ let atelier_tasks atelier pick (m, nextEvent) =
     | KEY_p      
     | KEY_F5     -> [ `wOpen (W.Polis,W.Default) ]
     | KEY_F9     -> [ `wOpen (W.Vetera,W.Default)] 
-    | KEY_F10    -> [ `wOpen (W.Time,W.Default)] 
+    | KEY_F10    -> [ `wOpen (W.Newspaper,W.Default)] 
+    | KEY_SPACE  -> [ `wOpen (W.Time,W.Default)] 
     | KEY_RETURN -> [`end_of_turn 1]
     | KEY_F12    -> [ `next_event     ]
     | KEY_HOME   when no_mod m               -> [`move_to_capitolium ]

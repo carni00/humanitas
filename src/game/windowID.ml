@@ -26,14 +26,15 @@ open Std
 
 type t = 
 | Towers
+| Newspaper
 | Artes
 | Chora
 | Computing
 | Consilium
 | ContactusMx
-| Tabula
-| Filters
 | Dx
+| Eventum
+| Filters
 | Fines
 | Game
 | Help
@@ -49,6 +50,7 @@ type t =
 | Pyramid
 | Quit
 | Regio
+| Tabula
 | TaskHistory
 | Tactics
 | Time
@@ -56,14 +58,15 @@ type t =
 (* queens_and_sheets *)
 
 let queens_and_sheets = [
+  Newspaper;
   Artes;
   Chora;
   Computing;
   Consilium;
   ContactusMx;
-  Tabula;
-  Filters;
   Dx;
+  Eventum;
+  Filters;
   Game;
   Help;
   Humanitas;
@@ -78,6 +81,7 @@ let queens_and_sheets = [
   Pyramid;
   Quit;
   Regio;
+  Tabula;
   Tactics;
   TaskHistory;
   Time;
@@ -112,9 +116,10 @@ type duty =
 
 let duty = function
 | Towers -> Tower
+| Newspaper
 | Computing
 | Quit
-(*| Time*)
+| Eventum
 | Help
 | NewGame
 | ContactusMx

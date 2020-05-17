@@ -32,6 +32,7 @@ module Co = Color
 module N  = Natio
 module K  = Sdlkey
 module W  = WindowID
+module SA = Status.Atelier
 module SS = Scene
 module RS = React.S
 module Nil= Nid.Nil 
@@ -69,6 +70,18 @@ let _tori   = (`justified,`right)
 let tole   = (`justified,`left)
 
 (********************************* Orbis windows **********************************)
+let newspaper atelier =
+  let pov  = Game.Player.pov (SA.player atelier) in
+  let game = Status.Atelier.game atelier in
+  let o    = Game.orbis game in
+  let line evt = Box (16., 1., `left, S (Si.eventum evt) ) in
+  c( Si.newspaper pov ), List(Lines juce,
+  Box (16., 1., `left, S " ") ::
+  List.map line (List.rev o.Orbis.addendum ) @ [
+  LB( K.KEY_o       , "OK"                            , [`wClose W.Newspaper] );
+  LB( K.KEY_F9      , "F9  : open the archives"       , [`wOpen (W.Vetera, W.Default); `sFocus (Some W.Central) ] );
+  LB( K.KEY_F12     , "F12 : go to next event"        , [`wClose W.Newspaper; `next_event ] );
+  ] )
 let vetera atelier =
   let game = Status.Atelier.game atelier in
   let o    = Game.orbis game in
@@ -137,10 +150,13 @@ let atelier a wid =
 | W.Tabula  -> tabula
 | W.Filters -> filters
 | W.Vetera  -> vetera
+| W.Newspaper-> newspaper
 | _         -> orbis in  
   (f wid) a
 
 (********************************* Natio windows **********************************)
+
+
 
 let fines atelier nid =
   let game = Status.Atelier.game atelier in
@@ -409,7 +425,6 @@ let regio atelier rid =
 
 let data staSnl wid = match wid with
 
-(*| W.Display -> c "Display menu", (Lines juce, [*)
 
 | W.Help -> c "Getting started", List(Lines juce, [
   LB( K.KEY_h       ,  "F1 : open this window"               , [`wOpen (W.Help    , W.Default)] );
@@ -437,6 +452,7 @@ let data staSnl wid = match wid with
 
 | W.Time -> c "Hourglass of fate", List(Lines juce, [
   LB( K.KEY_F9      , "F9  : consult the archives"    , [`wOpen (W.Vetera  , W.Default)] );
+  LB( K.KEY_F12     , "F12 : go to next event"        , [`next_event ] );
   LB( K.KEY_F10     , "F10 : open this menu"          , [`wOpen (W.Time    , W.Default)] );
   LB( K.KEY_RETURN  , "<return> : end of turn"        , [`end_of_turn 1                ] );
   LB( K.KEY_t       , "pass Ten years"                , [`end_of_turn 10 ] );

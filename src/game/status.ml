@@ -23,6 +23,7 @@
 
 open Humanitas_tools
 open Humanitas_orbis
+module W=WindowID
 
 module Atelier = struct
 
@@ -81,25 +82,28 @@ module Atelier = struct
     }
 *)
   let update atelier task screen = 
-    let game , tabula_need_update = match task with 
+    let game , orbis_update = match task with 
     | `end_of_turn int            -> Game.update_orbis (atelier.game) int, true
-    | `next_event                 -> Game.update_orbis_till_next_eventum (atelier.game)    ,   true
+    | `next_event                 -> Game.update_orbis_till_next_eventum (atelier.game)  ,  true
     | `alter_player_pov (pid,nid) -> Game.alter_player_pov (atelier.game) pid nid, false
     | _ -> atelier.game, false in
     let orbis= Game.orbis game in
+    let extra_task = if orbis_update == true && orbis.Orbis.addendum <> [] then `wOpen ( W.Newspaper, W.Default ) else `do_nothing in
     let scene = Scene.update game (atelier.scene) (player atelier) task in
+    let n_atelier =
     {
     atelier with
     game;
     (* on procède ainsi pour éviter un circular build : la task `load_game prend en arg un game *)
     scene;
-    tabula= if tabula_need_update then Tabula.make game else atelier.tabula;
+    tabula= if orbis_update then Tabula.make game else atelier.tabula;
     (* le calcul de tabula prend 0.3 secondes ; n'en abusons pas *)
     geoRect = Scene.GeoRect.compute (Orbis.espace orbis) scene screen ;
     background = ( match task with 
                  | `switch_background -> (Tlist.following_or_first atelier.background [Tabula; Graphique] )
                  | _                  -> atelier.background )
     }
+    in n_atelier, extra_task
 
 end
 
@@ -133,25 +137,28 @@ let create () =
   }
 
 
-let update status task = 
+let rec update status task = 
   let screen  = Screen.alter   status.screen  task in
   let windows = Windows.update status.windows task in
-  let atelier = match status.atelier, task with
-(*    | _     , `load_game (game, player) -> Some (Atelier.create game player )*)
-    | _     , `new_game  laws           -> Some (Atelier.createb laws screen)
-    | Some a,  _                        -> Some (Atelier.update a task screen)
-    | None  ,  _                        -> None in
+  let atelier, extra_task = match status.atelier, task with
+(*  | _     , `load_game (game, player) -> Some (Atelier.create game player )*)
+    | _     , `new_game  laws           -> Some (Atelier.createb laws screen), `do_nothing
+    | Some a,  _                        -> (match Atelier.update a task screen with atelier, extra_task -> Some atelier, extra_task)
+    | None  ,  _                        -> None , `do_nothing in
   let running   = if task == `quit && status.baby_mode == false then false else status.running in
   let baby_mode = ( match task with 
   | `switch_baby_mode true -> true 
   | `switch_baby_mode false -> false 
   | _ -> status.baby_mode ) in
-  {
-  baby_mode;
-  screen;
-  windows;
-  atelier;
-  running;
-  task_history = task :: status.task_history;
-  }
+  let n_status = {
+    baby_mode;
+    screen;
+    windows;
+    atelier;
+    running;
+    task_history = task :: status.task_history;
+    } in
+  match extra_task with
+  | `do_nothing -> n_status
+  | _  -> update n_status extra_task 
    

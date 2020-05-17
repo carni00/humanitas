@@ -208,8 +208,8 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 	and right_towers a = 
           let turn   = (Game.orbis (SA.game a)).Orbis.turn in [
             void (k `expands) ;
-			      b (KEY_F9      , " << "        , [`wOpen (Vetera , Default)]    );
-			      b (KEY_F10     , Si.date turn  , [`wOpen (Time   , Default)]    );
+			      b (KEY_F9      , " << "        , [`wOpen (Vetera    , Default)]    );
+			      b (KEY_F10     , Si.date turn  , [`wOpen (Newspaper , Default)]    );
             b (KEY_RETURN  , " > "         , [`end_of_turn 1        ]    );
             b (KEY_F12     , " >> "        , [`next_event           ]    );
 	] in
@@ -409,9 +409,9 @@ and 'a spacing = [ `packed of 'a | `justified | `spread]*)
       let f wid =
 	let win_contents_s = 
 	  match wid with
-	  | W.Tabula ->
+	  | W.Newspaper ->
 	    let atelier_s = RSAO.map Status.atelier staSnl in
-	    RS.map (function Some a -> Some(W.Tabula, Window.atelier a wid) | _ -> None) atelier_s
+	    RS.map (function Some a -> Some(W.Newspaper, Window.atelier a wid) | _ -> None) atelier_s
 	  | id ->
 	    k (Some (id, Window.data staSnl id))
 	in
