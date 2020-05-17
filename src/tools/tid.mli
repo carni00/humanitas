@@ -45,6 +45,7 @@ module Til : sig
 
   val iter      : ('a -> unit) -> 'a t -> unit 
   val map       : (         'a -> 'b) -> 'a t -> 'b t
+  val map_to_list : (       'a -> 'b) -> 'a t -> 'b list
   val mapi      : ('a id -> 'a -> 'b) -> 'a t -> 'b t
   val find      : ('a -> bool) -> 'a t -> 'a
   val search    : ('a -> bool) -> 'a t -> 'a option

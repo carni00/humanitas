@@ -42,6 +42,7 @@ module Til =
   let iter f l = List.iter(fun (_, a)-> f   a ) l
   let map  f l = List.map (fun (i, a)-> (i, f a)) l
   let mapi f l = List.map (fun (i, a)-> (i, f i a) ) l
+  let map_to_list  f l = List.map (fun (_i, a)-> (f a)) l
   let add l a    = 
     let key_list = List.map (fun (i,_) -> i) l in
     let rec choose_id i = if not (List.mem i key_list) then i else choose_id (i+1) in

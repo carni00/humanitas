@@ -124,12 +124,13 @@ let orbis atelier =
   let sof i f = Strn.float i (f nl) in
   let box  a strn = Box (6.6, 1., a, S strn) in
   let line strn1 strn2 = List (Columns, [box `right strn1 ; S "  :  " ; box `left strn2] ) in
+  let line_of_cvt cvt = line ( Si.civitas cvt ) ( "toto" ) in
     c("Orbis"), List(Lines toce, [
     line "plebs"  (Si.plebs (NatioList.plebs nl)) ;
     line "instrumentum"   (sof   0  NatioList.instrumentum   ) ;
     line "fides"          (sof (-2) NatioList.fides   ) ;
     line "sophia"         (sof (-2) NatioList.sophia   ) ;
-    ])
+    ] @ CivitasList.map line_of_cvt o.Orbis.civitasList  )
 
 let atelier a wid = 
   let f = function 

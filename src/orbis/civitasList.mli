@@ -27,6 +27,7 @@ open Humanitas_physis
 type t 
 
 val iter   : (Civitas.t -> unit) -> t -> unit
+val map    : (Civitas.t -> 'a) -> t -> 'a list
 
 val get    : t -> Civitas.t Tid.t -> Civitas.t
 val search : t -> Rid.t           -> Civitas.t option

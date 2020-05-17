@@ -41,6 +41,7 @@ let filter t nid = Til.filter (fun cvt -> Civitas.incola cvt == nid) t
 
 
 let iter f (cl:t) = Til.iter f cl
+let map  f (cl:t) = Til.map_to_list f cl
 
 
 let test_vicus e (cl:t) rid inc =
