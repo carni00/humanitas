@@ -312,19 +312,7 @@ let towers status =
 	topBar bottomBar,
       collect [ bottomBarEvents ; topBarEvents ]
 
-let sheets status_s =
-  let atelier_s = RSAO.map Status.atelier status_s in
-  let left_stack_s = RS.map  (Status.windows |- Windows.leftStack)  status_s
-  and right_stack_s = RS.map (Status.windows |- Windows.rightStack) status_s
-  and which_stack left_stack _right_stack wid =
-	if List.mem wid left_stack then `left else `right
-      in
-      let f wid =
-	let win_pos_s = 
-	  RS.map 
-	    (Status.windows |- (flip Windows.windowPos) wid) 
-	    status_s 
-	and win_contents_s = match wid with
+let sheet_content_s status_s atelier_s wid = match wid with
 	  | W.Filters
 	  | W.Tabula ->
 	    let atelier_s = RSAO.map Status.atelier status_s in
@@ -367,44 +355,48 @@ let sheets status_s =
 	    RS.map f atelier_s
 	  )
 	  | id -> k (Some (id, Window.data status_s id))
-	in
-	let element_s, output = map_s_e win_contents_s (function 
-	  | Some w -> window win_pos_s status_s w
-	  | None -> T.void (), RE.never
-	)
-	in
-	let element_s' =
-	  RS.map
-	    (fun elt ->
-	      let spacing = 
-		RS.l2 
-		  (fun left_stack right_stack -> `packed (which_stack left_stack right_stack wid))
-		  left_stack_s right_stack_s
-	      in
-	      T.vpack ~w:(k`expands) ~h:(k`expands) [
-		T.void ~h:uhs () ;
-		T.hpack ~w:(k`expands) ~h:(k`expands) ~spacing [ elt ] ;
-		T.void ~h:uhs () ;
-	      ])		
-	    element_s
 
-	in
-	T.window wid element_s', output
-      in
-      List.map f W.sheets
 
-	
+(***************************************** Gen.queens and sheets *******************************************)
+
+let sheet_pack spacing e = 
+    let uhs = rsm (fun h -> `fixed ( h +. 2.)) D.ehip in (* + 2. pour laisser la place au focus jaune *)
+    T.vpack ~w:(k`expands) ~h:(k`expands) [
+    T.void ~h:uhs () ;
+    T.hpack ~w:(k`expands) ~h:(k`expands) ~spacing [ e ] ;
+    T.void ~h:uhs () ;
+    ]
+
+let t_window opt_f status_s pos_s win_contents_s wid = 
+  let opt_window = function
+  | Some w -> window pos_s status_s w
+  | None   -> T.void (), RE.never in
+  let element_s, output = map_s_e win_contents_s opt_window in match opt_f with
+  | None   -> T.window wid            element_s  , output (* queen *)
+  | Some f -> T.window wid ( RS.map f element_s ), output (* sheet *)
+(* commun à queen et sheet *)
 
 let queen status_s wid =
   let win_contents_s = match wid with
     | W.Newspaper -> let atelier_s = RSAO.map Status.atelier status_s in
                      RS.map (function Some a -> Some(W.Newspaper, Window.atelier a wid) | _ -> None) atelier_s
     | id -> k (Some (id, Window.data status_s id)) in
-  let f = function 
-    | Some w -> window (k W.Central) status_s w
-    | None   -> T.void (), RE.never in
-  match map_s_e win_contents_s f with element_s, output -> T.window wid element_s, output
+  t_window None status_s (k W.Central) win_contents_s wid
 
+let sheet spacing status_s wid =
+  let spacing = spacing wid in
+  let atelier_s = RSAO.map Status.atelier status_s in
+  let win_pos_s = RS.map (Status.windows |- (flip Windows.windowPos) wid) status_s 
+  and win_contents_s = sheet_content_s status_s atelier_s wid	in
+  t_window (Some (sheet_pack spacing)) status_s win_pos_s win_contents_s wid
+
+let sheets status_s =
+  let left_stack_s  = RS.map (Status.windows |- Windows.leftStack)  status_s
+  and right_stack_s = RS.map (Status.windows |- Windows.rightStack) status_s
+  and which_stack left_stack _right_stack wid = if List.mem wid left_stack then `left else `right in
+  let spacing wid = RS.l2 (fun left_stack right_stack -> `packed (which_stack left_stack right_stack wid)) left_stack_s right_stack_s in
+  List.map (sheet spacing status_s) W.sheets
+	
 (***************************************** Gen.make *******************************************)
 
 let make status_s =
@@ -427,7 +419,7 @@ let make status_s =
   let focus_tk2st = RS.sample focus_task_list window_focus_changes status_s in	  
   let queens              = List.map (queen status_s) W.queens in
   let towers, towersEvent = towers status_s in
-  let sheets = sheets status_s in
+  let sheets              = sheets status_s in
   let windows= List.concat [ List.map fst queens ; List.map fst sheets ; [ T.window WindowID.Towers towers ] ; ] in
   let event  = collect (focus_tk2st :: towersEvent :: (List.map snd sheets) @ (List.map snd queens)) in
   windows, focus_e, event
