@@ -285,17 +285,6 @@ let window_visibility_signal wid status =
 
     (* FIXME: pas optimal, pos devrait être un signal *)
 
-let towers status =
-  let topBar, topBarEvents = topBar status in
-  let bottomBar, bottomBarEvents = bottomBar status in
-  UI.ES.l2
-	(fun topBar bottomBar ->
-	  T.vpack  
-	    ~w:(k `expands) ~h:(k `expands)  (* remplir l’écran *)
-	    [ topBar ; T.void ~h:(k `expands) () ; bottomBar ])
-	topBar bottomBar,
-      collect [ bottomBarEvents ; topBarEvents ]
-
 let sheet_content_s status_s atelier_s wid = match wid with
 	  | W.Filters
 	  | W.Tabula ->
@@ -400,6 +389,12 @@ let uiw_sheet_list status_s =
   and which_stack left_stack _right_stack wid = if List.mem wid left_stack then `left else `right in
   let spacing wid = RS.l2 (fun left_stack right_stack -> `packed (which_stack left_stack right_stack wid)) left_stack_s right_stack_s in
   List.map (uiw_sheet spacing status_s) W.sheets
+
+let uies_towers status_s =
+  let topBar   , topBarEvents    = topBar status_s in
+  let bottomBar, bottomBarEvents = bottomBar status_s in
+  let vpack tb bb = T.vpack  ~w:(k `expands) ~h:(k `expands) [ tb ; T.void ~h:(k `expands) () ; bb ] in
+  UI.ES.l2 vpack topBar bottomBar, collect [ bottomBarEvents ; topBarEvents ]
 	
 (***************************************** Gen.make *******************************************)
 
@@ -421,11 +416,11 @@ let make status_s =
       let win_pos = Core.Option.bind wid_opt ~f in
       [ `sFocus win_pos ] in
   let focus_tk2st = RS.sample focus_task_list window_focus_changes status_s in	  
-  let queens              = List.map (uiw_queen status_s) W.queens in
-  let towers, towersEvent = towers status_s in
-  let sheets              = uiw_sheet_list status_s in
-  let windows= List.concat [ List.map fst queens ; List.map fst sheets ; [ T.window WindowID.Towers towers ] ; ] in
-  let event  = collect (focus_tk2st :: towersEvent :: (List.map snd sheets) @ (List.map snd queens)) in
+  let towers, towersEvent = uies_towers status_s in
+  let sheet_list          = uiw_sheet_list status_s in
+  let queen_list          = List.map (uiw_queen status_s) W.queens in
+  let windows= List.concat [ List.map fst queen_list ; List.map fst sheet_list ; [ T.window WindowID.Towers towers ] ; ] in
+  let event  = collect (focus_tk2st :: towersEvent :: (List.map snd sheet_list) @ (List.map snd queen_list)) in
   windows, focus_e, event
 
 end
