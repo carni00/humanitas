@@ -110,6 +110,8 @@ let tabula atelier =
   LB( K.KEY_HOME    , "Home : move to Homeland"        , [`move_to_capitolium                     ] );
   LB( K.KEY_g       , "G : toggle backGround"       , [`switch_background                      ] );
   LB( K.KEY_f       , "F : tabula Filters"          , [`wOpen (W.Filters, W.Default)             ] );
+(*  B( K.KEY_g       , "display/hide map Grid"   , [`                                       ] );*)
+(*  B( K.KEY_p       , "display/hide Polyhedron" , [`                                       ] );*)
 (*  LB( K.KEY_h       , "hide Stacks"             , [`sHide W.Left; `sHide W.Right           ] );*)
 (*  LB( K.KEY_y       , "restore default displaY" , [`defaultDisplay                         ] );*)
   ])
@@ -409,6 +411,7 @@ let regio atelier rid =
 
 let data staSnl wid = match wid with
 
+(*****************************************************************************************************)
 | W.Filters -> c "Tabula filters", List(Lines juce, [
   LB( K.KEY_f       , "F : open this window"    , [`wOpen (W.Filters, W.Default)           ] );
   LB( K.KEY_a       , "A : Artes"            , [`select_filter `artes                   ] );
@@ -420,24 +423,8 @@ let data staSnl wid = match wid with
   LB( K.KEY_r       , "R : Relief"           , [`select_filter `montes                  ] );
   LB( K.KEY_t       , "T : Tegmen"           , [`select_filter `tegmen                  ] );
   LB( K.KEY_v       , "V : Vis"              , [`select_filter `vis                     ] );
-(*  B( K.KEY_g       , "display/hide map Grid"   , [`                                       ] );*)
-(*  B( K.KEY_p       , "display/hide Polyhedron" , [`                                       ] );*)
   ])
- 
-| W.Help -> c "Getting started", List(Lines juce, [
-  LB( K.KEY_h       ,  "F1 : open this window"               , [`wOpen (W.Help    , W.Default)] );
-  LB( K.KEY_d       ,  "D : restore Default display"         , [`defaultDisplay               ] );
-  LB( K.KEY_g       ,  "G : Game main menu"                  , [`wOpen (W.Game    , W.Default)] );
-  LB( K.KEY_k       ,  "K : Keyboard shorcuts list"          , [`wOpen (W.Keys    , W.Default)] );
-  LB( K.KEY_m       ,  "M : Mouse hints"                     , [`wOpen (W.Mouse   , W.Default)] );
-  LB( K.KEY_q       ,  "Q : Quit humanitas"                  , [`wOpen (W.Quit    , W.Default)] );
-  ])
-
-| W.Quit -> c "Quit humanitas", List(Lines juce, [
-  LB( K.KEY_q       , "Quit"            , [`quit                 ] );
-  LB( K.KEY_c       , "Cancel"          , [`wUndo  ] );
-  ])
-
+(*****************************************************************************************************)
 | W.Game -> c "Game main menu", List(Lines juce, [
   LB( K.KEY_b       , "Begin a new game"              , [`wOpen (W.NewGame , W.Default) ] );
   LB( K.KEY_l       , "Load a previous game"          , [                               ] );
@@ -447,31 +434,16 @@ let data staSnl wid = match wid with
   LB( K.KEY_a       , "bAby mode (Ctrl+Alt+Home to cancel)", [ `switch_baby_mode true; `new_game { Game.resolution=E.Low }; `wClose W.Game  ] );
   LB( K.KEY_q       , "Quit humanitas"                , [`wOpen (W.Quit    , W.Default) ] );
   ])
-
-| W.Time -> c "Hourglass of fate", List(Lines juce, [
-  LB( K.KEY_F9      , "F9  : consult the archives"    , [`wOpen (W.Vetera  , W.Default)] );
-  LB( K.KEY_F12     , "F12 : go to next event"        , [`next_event ] );
-  LB( K.KEY_F10     , "F10 : open this menu"          , [`wOpen (W.Time    , W.Default)] );
-  LB( K.KEY_RETURN  , "<return> : end of turn"        , [`end_of_turn 1                ] );
-  LB( K.KEY_t       , "pass Ten years"                , [`end_of_turn 10 ] );
-  LB( K.KEY_l       , " 50 (L) years"                 , [`end_of_turn 50 ] );
-  LB( K.KEY_c       , "100 (C) years"                 , [`end_of_turn 100 ] );
-  LB( K.KEY_d       , "500 (D) years"                 , [`end_of_turn 500 ] );
-  LB( K.KEY_F12     , "F12 : go to next event"        , [`next_event ] );
+(*****************************************************************************************************)
+| W.Help -> c "Getting started", List(Lines juce, [
+  LB( K.KEY_h       ,  "F1 : open this window"               , [`wOpen (W.Help    , W.Default)] );
+  LB( K.KEY_d       ,  "D : restore Default display"         , [`defaultDisplay               ] );
+  LB( K.KEY_g       ,  "G : Game main menu"                  , [`wOpen (W.Game    , W.Default)] );
+  LB( K.KEY_k       ,  "K : Keyboard shorcuts list"          , [`wOpen (W.Keys    , W.Default)] );
+  LB( K.KEY_m       ,  "M : Mouse hints"                     , [`wOpen (W.Mouse   , W.Default)] );
+  LB( K.KEY_q       ,  "Q : Quit humanitas"                  , [`wOpen (W.Quit    , W.Default)] );
   ])
-
-| W.NewGame -> c "New Game menu", List(Lines juce,
-  let strn res = Strn.pth(soi(E.Cylinder.wir res)^" * "^soi(E.Cylinder.hir res)) in
-  let task res = [`new_game { Game.resolution=res } ] in
-  [
-  S( "Pick a map resolution : " );
-  LB( K.KEY_h  , "High "^(strn E.High), task E.High );
-  LB( K.KEY_l  , "Low "^(strn E.Low), task E.Low );
-  LB( K.KEY_r  , "loweR "^(strn E.Lower), task E.Lower );
-  LB( K.KEY_c  , "Cancel"                  , [`wUndo  ] );
-  ])
-
-
+(*****************************************************************************************************)
 | W.Keys   ->   
   let box  w a strn = Box (w, 1., a, S strn) in
   let line strn1 strn2 = List (Columns, [box 3. `right strn1 ; S "  :  " ; box 9. `left strn2] ) in
@@ -505,22 +477,24 @@ let data staSnl wid = match wid with
 (*    line "Shift + X" "Close stack" ;*)
 (*    (SL None, [S ""    ; S "Gates"] );*)
 (*    line "C"   "Consilium" ;*)
-(*    S "---"  ;*)
-(*    S "Opening common windows"  ;*)
-(*    line "D"   "Display" ;*)
-(*    line "G"   "Game" ;*)
-(*    line "I"   "Imperium" ;*)
-(*    line "J"   "Junctiones" ;*)
-(*    line "L"   "Load game" ;*)
-(*    line "M"   "Mouse hints" ;*)
-(*    line "O"   "Orbis" ;*)
-(*    line "P"   "Polis" ;*)
-(*    line "R"   "Regio" ;*)
-(*    line "S"   "Stratiotikon" ;*)
-(*    line "T"   "Task history" ;*)
-(*    line "V"   "Vetera" ;*)
   ])
-
+(*****************************************************************************************************)
+| W.NewGame -> c "New Game menu", List(Lines juce,
+  let strn res = Strn.pth(soi(E.Cylinder.wir res)^" * "^soi(E.Cylinder.hir res)) in
+  let task res = [`new_game { Game.resolution=res } ] in
+  [
+  S( "Pick a map resolution : " );
+  LB( K.KEY_h  , "High "^(strn E.High), task E.High );
+  LB( K.KEY_l  , "Low "^(strn E.Low), task E.Low );
+  LB( K.KEY_r  , "loweR "^(strn E.Lower), task E.Lower );
+  LB( K.KEY_c  , "Cancel"                  , [`wUndo  ] );
+  ])
+(*****************************************************************************************************)
+| W.Quit -> c "Quit humanitas", List(Lines juce, [
+  LB( K.KEY_q       , "Quit"            , [`quit                 ] );
+  LB( K.KEY_c       , "Cancel"          , [`wUndo  ] );
+  ])
+(*****************************************************************************************************)
 | W.TaskHistory -> c "Task History", List(Lines juce,
   let listSnl = rsm Status.task_history staSnl in
   let wsSnl   = rsm Status.windows staSnl in
@@ -530,9 +504,20 @@ let data staSnl wid = match wid with
   LB( K.KEY_c       , "Click me"        , [                      ]) ::
   Tlist.init 8 f
   )
-
-
-| _      -> c "Unknown window", List(Lines juce, [
+(*****************************************************************************************************)
+| W.Time -> c "Hourglass of fate", List(Lines juce, [
+  LB( K.KEY_F9      , "F9  : consult the archives"    , [`wOpen (W.Vetera  , W.Default)] );
+  LB( K.KEY_F12     , "F12 : go to next event"        , [`next_event ] );
+  LB( K.KEY_F10     , "F10 : open this menu"          , [`wOpen (W.Time    , W.Default)] );
+  LB( K.KEY_RETURN  , "<return> : end of turn"        , [`end_of_turn 1                ] );
+  LB( K.KEY_t       , "pass Ten years"                , [`end_of_turn 10 ] );
+  LB( K.KEY_l       , " 50 (L) years"                 , [`end_of_turn 50 ] );
+  LB( K.KEY_c       , "100 (C) years"                 , [`end_of_turn 100 ] );
+  LB( K.KEY_d       , "500 (D) years"                 , [`end_of_turn 500 ] );
+  LB( K.KEY_F12     , "F12 : go to next event"        , [`next_event ] );
+  ])
+(*****************************************************************************************************)
+| _ -> c "Unknown window", List(Lines juce, [
   LB( K.KEY_c       , "Click me"        , [                      ]);
 ]) 
 
