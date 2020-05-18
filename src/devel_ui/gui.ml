@@ -91,15 +91,18 @@ let sheet_titleBar side id title =
 (* la sheet_titleBar est le seul machin qui soit géré directement en T(oolkit) ;
    les widgets suivants sont faits de Gen.widget *)
 
-type widget =
-  | Widget of   UI.element
-  | Button of ((UI.element * bool React.signal * unit React.event) * Task.t list)
-  | Frame  of   UI.element * (Task.t list) React.event
+type button = (UI.element * bool React.signal * unit React.event) * Task.t list
+type frame  =  UI.element * (Task.t list) React.event
 
-let void     w              = Widget (T.void ~w:w      ~h:(ehs 1.) ())
-let cStrn    s              = Widget (T.label   (k s) )
-let strn     s              = Widget (T.label      s  )
-let line    ss              = Widget (T.div ~background:(k (Some Ci.wsb)) ~w:(ews 14.) ~h:(ehs 1.) [T.label ss])
+type widget =
+  | Element of  UI.element
+  | Button  of  button
+  | Frame   of  frame
+
+let void     w              = Element (T.void ~w:w      ~h:(ehs 1.) ())
+let cStrn    s              = Element (T.label   (k s) )
+let strn     s              = Element (T.label      s  )
+let line    ss              = Element (T.div ~background:(k (Some Ci.wsb)) ~w:(ews 14.) ~h:(ehs 1.) [T.label ss])
 let _button ~w (k, s, task) = Button (T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:k (         s), task )
 let cButton ~w (k, s, task) = Button (T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:k (RS.const s), task )
 let rect     w  h  _c       = Button (T.button ~w:(ews w) ~h:(ehs h) (k " "), [] )
@@ -107,7 +110,7 @@ let rect     w  h  _c       = Button (T.button ~w:(ews w) ~h:(ehs h) (k " "), []
 let liste dir wList =
   let rec split = function 
 	| [] -> ([], [])
-	| Widget( w        )::q -> let (wq, eq) = split q in (w::wq,    eq) 
+	| Element( w        )::q -> let (wq, eq) = split q in (w::wq,    eq) 
 	| Button((w,_c,e),t)::q -> let (wq, eq) = split q in (w::wq, (RE.map (modulate_tasks t) e)::eq) 
 	| Frame ( w,   e   )::q -> let (wq, eq) = split q in (w::wq, e::eq) in
   let wList, eList = split wList in
@@ -129,13 +132,13 @@ let liste dir wList =
   (* liste de widget, disposés horizontalement ou verticalement *)
 
 let box_of_element w h ha element =
-	Widget ( T.div 
+	Element ( T.div 
 	  ~w:(ews w) (* ne fonctionne pas *)
 	  ~h:(ehs h) (* ne fonctionne pas *)
 	  ~layout:(k (`vpack (`packed `center, ha)))
 	  [element] )
 
-let rec frame fra =
+let rec widget_frame fra =
   let dir, list = fra in
   let rec widget = function
 	| Win.Rect (w,h,c) -> rect w h c
@@ -143,13 +146,13 @@ let rec frame fra =
 	| Win.SB but   -> cButton ~w:2.7 but
 	| Win.S string -> cStrn string
 	| Win.Z strSnl -> line (*~w:16.*) strSnl
-	| Win.List fra -> frame fra 
-	| Win.Box (w,h,_ha, Win.S s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (k s))
-	| Win.Box (w,h,_ha, Win.Z s) -> Widget (T.label ~w:(ews w) ~h:(ehs h) (s)  )
+	| Win.List fra -> widget_frame fra 
+	| Win.Box (w,h,_ha, Win.S s) -> Element (T.label ~w:(ews w) ~h:(ehs h) (k s))
+	| Win.Box (w,h,_ha, Win.Z s) -> Element (T.label ~w:(ews w) ~h:(ehs h) (s)  )
 	| Win.Box (w,_h,_ha, Win.SB but) -> cButton ~w but
 	| Win.Box (w,h,ha,we) -> box_of_element w h ha 
   (match widget we with 
-  | Widget element -> element 
+  | Element element -> element 
   | _ -> T.void() ) 
   in
   match (liste dir (List.map widget list)) with (w,e) -> Frame(w,e)
@@ -281,25 +284,6 @@ let window_visibility_signal wid status =
 
 
     (* FIXME: pas optimal, pos devrait être un signal *)
-let window pos status_s data =
-  let id, (title, element)   = data in
-  let fra = (Win.Columns, [element] ) in 
-  let contents, cEvents  = match frame fra with Frame (w,e) -> w,e | _ -> (T.void(), RE.never) in
-  let titleBar, tbEvents = (match W.duty id with
-	| W.Sheet -> sheet_titleBar pos id title 
-	| _       -> queen_titleBar id title) 
-      in
-      T.div
-	~layout:(k (`vpack (`justified, `center)))
-	~h:(match W.duty id with W.Sheet -> k `expands | _ -> k `tight)
-	~background:(k (Some Ci.wsb))
-	~visibility:(window_visibility_signal id status_s)
-	~framed:(window_focus_signal id)
-	~margin:(margin 1.)
-	[ titleBar ; contents ; T.void ~h:(k `expands) () ],
-      collect [cEvents; tbEvents]
-  (* construction d'un widget window *)
-
 
 let towers status =
   let topBar, topBarEvents = topBar status in
@@ -357,45 +341,65 @@ let sheet_content_s status_s atelier_s wid = match wid with
 	  | id -> k (Some (id, Window.data status_s id))
 
 
-(***************************************** Gen.queens and sheets *******************************************)
+(***************************************** ui.element constructeurs *******************************************)
 
-let sheet_pack spacing e = 
-    let uhs = rsm (fun h -> `fixed ( h +. 2.)) D.ehip in (* + 2. pour laisser la place au focus jaune *)
-    T.vpack ~w:(k`expands) ~h:(k`expands) [
-    T.void ~h:uhs () ;
-    T.hpack ~w:(k`expands) ~h:(k`expands) ~spacing [ e ] ;
-    T.void ~h:uhs () ;
-    ]
+let uie_frame pos status_s data =
+  let id, (title, element)   = data in
+  let fra = (Win.Columns, [element] ) in 
+  let contents, cEvents  = match widget_frame fra with Frame (w,e) -> w,e | _ -> (T.void(), RE.never) in
+  let titleBar, tbEvents = (match W.duty id with
+	| W.Sheet -> sheet_titleBar pos id title 
+	| _       -> queen_titleBar id title) in
+  T.div
+     ~layout:(k (`vpack (`justified, `center)))
+     ~h:(match W.duty id with W.Sheet -> k `expands | _ -> k `tight)
+     ~background:(k (Some Ci.wsb))
+     ~visibility:(window_visibility_signal id status_s)
+     ~framed:(window_focus_signal id)
+     ~margin:(margin 1.)
+     [ titleBar ; contents ; T.void ~h:(k `expands) () ], collect [cEvents; tbEvents]
+(* construction d'un ui.element de type frame (sheet ou queen) *)
 
-let t_window opt_f status_s pos_s win_contents_s wid = 
+let uie_cadre_de_sheet spacing e = 
+  let uhs = rsm (fun h -> `fixed ( h +. 2.)) D.ehip in (* + 2. pour laisser la place au focus jaune *)
+  T.vpack ~w:(k`expands) ~h:(k`expands) [
+     T.void ~h:uhs () ;
+     T.hpack ~w:(k`expands) ~h:(k`expands) ~spacing [ e ] ;
+     T.void ~h:uhs () ;
+     ]
+(* construction d'un ui.element de type cadre de sheet *)
+
+(***************************************** ui.window constructeurs *******************************************)
+
+let ui_window opt_f status_s pos_s win_contents_s wid = 
   let opt_window = function
-  | Some w -> window pos_s status_s w
+  | Some w -> uie_frame pos_s status_s w
   | None   -> T.void (), RE.never in
   let element_s, output = map_s_e win_contents_s opt_window in match opt_f with
   | None   -> T.window wid            element_s  , output (* queen *)
   | Some f -> T.window wid ( RS.map f element_s ), output (* sheet *)
-(* commun à queen et sheet *)
+(* commun à uiw_queen et uiw_sheet *)
 
-let queen status_s wid =
+let uiw_queen status_s wid =
   let win_contents_s = match wid with
     | W.Newspaper -> let atelier_s = RSAO.map Status.atelier status_s in
                      RS.map (function Some a -> Some(W.Newspaper, Window.atelier a wid) | _ -> None) atelier_s
     | id -> k (Some (id, Window.data status_s id)) in
-  t_window None status_s (k W.Central) win_contents_s wid
+  ui_window None status_s (k W.Central) win_contents_s wid
 
-let sheet spacing status_s wid =
+let uiw_sheet spacing status_s wid =
   let spacing = spacing wid in
   let atelier_s = RSAO.map Status.atelier status_s in
   let win_pos_s = RS.map (Status.windows |- (flip Windows.windowPos) wid) status_s 
   and win_contents_s = sheet_content_s status_s atelier_s wid	in
-  t_window (Some (sheet_pack spacing)) status_s win_pos_s win_contents_s wid
+  ui_window (Some (uie_cadre_de_sheet spacing)) status_s win_pos_s win_contents_s wid
 
-let sheets status_s =
+let uiw_sheet_list status_s =
   let left_stack_s  = RS.map (Status.windows |- Windows.leftStack)  status_s
   and right_stack_s = RS.map (Status.windows |- Windows.rightStack) status_s
   and which_stack left_stack _right_stack wid = if List.mem wid left_stack then `left else `right in
   let spacing wid = RS.l2 (fun left_stack right_stack -> `packed (which_stack left_stack right_stack wid)) left_stack_s right_stack_s in
-  List.map (sheet spacing status_s) W.sheets
+  List.map (uiw_sheet spacing status_s) W.sheets
 	
 (***************************************** Gen.make *******************************************)
 
@@ -417,9 +421,9 @@ let make status_s =
       let win_pos = Core.Option.bind wid_opt ~f in
       [ `sFocus win_pos ] in
   let focus_tk2st = RS.sample focus_task_list window_focus_changes status_s in	  
-  let queens              = List.map (queen status_s) W.queens in
+  let queens              = List.map (uiw_queen status_s) W.queens in
   let towers, towersEvent = towers status_s in
-  let sheets              = sheets status_s in
+  let sheets              = uiw_sheet_list status_s in
   let windows= List.concat [ List.map fst queens ; List.map fst sheets ; [ T.window WindowID.Towers towers ] ; ] in
   let event  = collect (focus_tk2st :: towersEvent :: (List.map snd sheets) @ (List.map snd queens)) in
   windows, focus_e, event
