@@ -285,49 +285,34 @@ let window_visibility_signal wid status =
 
     (* FIXME: pas optimal, pos devrait être un signal *)
 
+
 let sheet_content_s status_s atelier_s wid = match wid with
-	  | W.Filters
-	  | W.Tabula ->
-	    let atelier_s = RSAO.map Status.atelier status_s in
-	    RS.map (function Some a -> Some(wid, Window.atelier a wid) | _ -> None) atelier_s
-	  | W.Artes
-	  | W.Chora
-	  | W.Dx
-	  | W.Fines
-	  | W.Partitio
-	  | W.Polis 
-	  | W.Tactics 
-	  | W.Pyramid -> (
-	    let f = function
-	      | Some a ->( 
-                let nid = Game.Player.pov (SA.player a) in
-                if nid = Nid.none then None 
-                else Some (wid, Window.natio a nid wid)
-                )
-	      | _ -> None
-	    in
-	    RS.map f atelier_s 
-          )
-	  | W.Regio -> (
-	    let f = function
-	      | Some a -> (
-		match Scene.sr (SA.scene a) with
-		| Some rid -> Some (W.Regio, Window.regio a rid)
-		| _ -> None
-	      )
-	      | _ -> None
-	    in
-	    RS.map f atelier_s
-	  )
-	  | W.Vetera
-	  | W.Orbis -> (
-	    let f = function
-	      | Some a -> Some (wid, Window.atelier a wid)
-	      | _ -> None
-	    in
-	    RS.map f atelier_s
-	  )
-	  | id -> k (Some (id, Window.data status_s id))
+  | W.Artes
+  | W.Chora
+  | W.Dx 
+  | W.Fines
+  | W.Partitio
+  | W.Polis 
+  | W.Tactics
+  | W.Pyramid -> ( let f = function
+        | Some a ->( 
+               let nid = Game.Player.pov (SA.player a) in
+               if nid = Nid.none then None 
+               else Some (wid, Window.natio a nid wid)
+               )
+        | _ -> None in RS.map f atelier_s )
+  | W.Regio -> ( let f = function
+        | Some a -> ( match Scene.sr (SA.scene a) with
+                   | Some rid -> Some (W.Regio, Window.regio a rid)
+                   | _ -> None )
+        | _ -> None in RS.map f atelier_s)
+  | W.Filters
+  | W.Tabula
+  | W.Vetera
+  | W.Orbis -> ( let f = function
+      | Some a -> Some (wid, Window.atelier a wid)
+      | _ -> None in RS.map f atelier_s)
+  | id -> k (Some (id, Window.data status_s id))
 
 
 (***************************************** ui.element constructeurs *******************************************)
