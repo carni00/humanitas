@@ -114,22 +114,7 @@ let tabula atelier =
 (*  LB( K.KEY_y       , "restore default displaY" , [`defaultDisplay                         ] );*)
   ])
 
-let filters _atelier =
-  c "Tabula filters", List(Lines juce, [
-  LB( K.KEY_f       , "F : open this window"    , [`wOpen (W.Filters, W.Default)           ] );
-  LB( K.KEY_a       , "A : Artes"            , [`select_filter `artes                   ] );
-  LB( K.KEY_d       , "D : Dominium"         , [`select_filter `dominium                ] );
-  LB( K.KEY_i       , "I : Imperii"          , [`select_filter `imperii                 ] );
-  LB( K.KEY_n       , "N : Nationes"         , [`select_filter `nationes                ] );
-  LB( K.KEY_o       , "O : populatio"        , [`select_filter `populatio               ] );
-  LB( K.KEY_p       , "P : Politeia"         , [`select_filter `politeia                ] );
-  LB( K.KEY_r       , "R : Relief"           , [`select_filter `montes                  ] );
-  LB( K.KEY_t       , "T : Tegmen"           , [`select_filter `tegmen                  ] );
-  LB( K.KEY_v       , "V : Vis"              , [`select_filter `vis                     ] );
-(*  B( K.KEY_g       , "display/hide map Grid"   , [`                                       ] );*)
-(*  B( K.KEY_p       , "display/hide Polyhedron" , [`                                       ] );*)
-  ])
-   
+  
 let orbis atelier =
   let game = Status.Atelier.game atelier in
   let o    = Game.orbis game in
@@ -148,7 +133,6 @@ let orbis atelier =
 let atelier a wid = 
   let f = function 
 | W.Tabula  -> tabula
-| W.Filters -> filters
 | W.Vetera  -> vetera
 | W.Newspaper-> newspaper
 | _         -> orbis in  
@@ -425,7 +409,21 @@ let regio atelier rid =
 
 let data staSnl wid = match wid with
 
-
+| W.Filters -> c "Tabula filters", List(Lines juce, [
+  LB( K.KEY_f       , "F : open this window"    , [`wOpen (W.Filters, W.Default)           ] );
+  LB( K.KEY_a       , "A : Artes"            , [`select_filter `artes                   ] );
+  LB( K.KEY_d       , "D : Dominium"         , [`select_filter `dominium                ] );
+  LB( K.KEY_i       , "I : Imperii"          , [`select_filter `imperii                 ] );
+  LB( K.KEY_n       , "N : Nationes"         , [`select_filter `nationes                ] );
+  LB( K.KEY_o       , "O : populatio"        , [`select_filter `populatio               ] );
+  LB( K.KEY_p       , "P : Politeia"         , [`select_filter `politeia                ] );
+  LB( K.KEY_r       , "R : Relief"           , [`select_filter `montes                  ] );
+  LB( K.KEY_t       , "T : Tegmen"           , [`select_filter `tegmen                  ] );
+  LB( K.KEY_v       , "V : Vis"              , [`select_filter `vis                     ] );
+(*  B( K.KEY_g       , "display/hide map Grid"   , [`                                       ] );*)
+(*  B( K.KEY_p       , "display/hide Polyhedron" , [`                                       ] );*)
+  ])
+ 
 | W.Help -> c "Getting started", List(Lines juce, [
   LB( K.KEY_h       ,  "F1 : open this window"               , [`wOpen (W.Help    , W.Default)] );
   LB( K.KEY_d       ,  "D : restore Default display"         , [`defaultDisplay               ] );

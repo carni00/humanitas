@@ -306,7 +306,6 @@ let sheet_content_s status_s atelier_s wid = match wid with
                    | Some rid -> Some (W.Regio, Window.regio a rid)
                    | _ -> None )
         | _ -> None in RS.map f atelier_s)
-  | W.Filters
   | W.Tabula
   | W.Vetera
   | W.Orbis -> ( let f = function
