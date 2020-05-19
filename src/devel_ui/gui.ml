@@ -25,7 +25,6 @@ open Humanitas_tools
 open Humanitas_orbis 
 open Humanitas_game 
 open Std
-module H    = Handler
 module W    = WindowID
 module K    = Sdlkey
 module RE   = React.E
@@ -34,9 +33,6 @@ module SA   = Status.Atelier
 module Win  = Window
 module Ws   = Windows
 
-
-
-
 module Make (Draw : Video.Draw) = struct
 
   module D    = Draw
@@ -44,12 +40,14 @@ module Make (Draw : Video.Draw) = struct
   type t      = UI.t
   module Gen(T : UI.Toolkit) = struct
   
-let k   = RS.const  
 let rsm = RS.map
+let k   = RS.const  
+let kx  = RS.const `expands
 
 let collect es = RE.merge (fun l x -> x @ l) [] es
-(* addition d’events de task *)
-let modulate_tasks list = fun _button_up_event -> H.modulate_tasks list
+(* concaténation de list de React.event *)
+
+let modulate_tasks list = fun _button_up_event -> Handler.modulate_tasks list
 (* mise à jour liste de tâches en fonction des mods ctrl, alt etc. *)
 
 let margin x = k { Frui.top = x ; bottom = x ; left = x ; right = x }
@@ -68,22 +66,20 @@ let map_s_e s f =
 (* map signal element, je suppose *)
 
 let sheet_titleBar side id title =
-  let button key label f = 
-  	let elt,_,bt_fires = T.button ~w:uws ~h:uhs ~shortcut:key (k label) in
-    elt, f bt_fires in
+  let button key label f = match T.button ~w:uws ~h:uhs ~shortcut:key (k label) with elt,_,bt_fires -> elt, f bt_fires in
   let bt  key label task = button key label (RE.map ((modulate_tasks task)))
   and bt' key label f    = button key label (fun fires -> RS.sample (fun () s -> f s) fires side)
   and void w = T.void ~w ~h:uhs (), RE.never
   and strn s = T.label s, RE.never
-  and columns cols = T.hpack ~spacing:(k (`packed `center)) ~w:(k `expands) (List.map fst cols),
+  and columns cols = T.hpack ~spacing:(k (`packed `center)) ~w:kx (List.map fst cols),
                      collect (List.map snd cols) in
   let contents = [
     bt    K.KEY_m        "M"              [`wMove                       ] ;
     bt    K.KEY_PAGEUP   "pgup"           [`wPrevious                   ] ;
     bt    K.KEY_PAGEDOWN "pgdn"           [`wNext                       ] ;
-    void (k `expands);
+    void kx;
     strn title;
-    void (k `expands);
+    void kx;
     bt    K.KEY_u        "U"              [`sFocus None                ]  ;
     bt'   K.KEY_h        "H" (fun side -> [`sHide  side; `sFocus None  ]) ;
     bt    K.KEY_x        "X"              [`wClose id                  ]  ;
@@ -106,37 +102,19 @@ let line    ss              = Element (T.div ~background:(k (Some Ci.wsb)) ~w:(e
 let _button ~w (k, s, task) = Button (T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:k (         s), task )
 let cButton ~w (k, s, task) = Button (T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:k (RS.const s), task )
 let rect     w  h  _c       = Button (T.button ~w:(ews w) ~h:(ehs h) (k " "), [] )
+let box_of_element w h ha element = Element ( T.div ~w:(ews w) ~h:(ehs h) ~layout:(k (`vpack (`packed `center, ha))) [element] )
 
-let liste dir wList =
+let uie_of_widget_list dir widget_list =
   let rec split = function 
-	| [] -> ([], [])
-	| Element( w        )::q -> let (wq, eq) = split q in (w::wq,    eq) 
-	| Button((w,_c,e),t)::q -> let (wq, eq) = split q in (w::wq, (RE.map (modulate_tasks t) e)::eq) 
-	| Frame ( w,   e   )::q -> let (wq, eq) = split q in (w::wq, e::eq) in
-  let wList, eList = split wList in
-  match dir with
-  | Win.Columns       ->
-	T.hpack
-	  ~spacing:(k (`packed `center))
-	  ~w:(k `expands)                       
-	  wList, 
-	collect eList
-  | Win.Lines (vc,ha) ->
-	T.div
-	  ~layout:(k (`vpack (vc, ha)))
-(*	  ~layout:(k (`vpack (`packed `top, ha)))*)
-	  ~w:(k `expands)
-	  ~margin:(margin 5.)
-	  wList, 
-	collect eList
-  (* liste de widget, disposés horizontalement ou verticalement *)
+  | [] -> ([], [])
+  | Element( w        )::q -> let (wq, eq) = split q in (w::wq,    eq) 
+  | Button ((w,_c,e),t)::q -> let (wq, eq) = split q in (w::wq, (RE.map (modulate_tasks t) e)::eq) 
+  | Frame  ( w,   e   )::q -> let (wq, eq) = split q in (w::wq, e::eq) in
+  let wList, eList = split widget_list in match dir with
+  | Win.Columns       -> T.hpack ~spacing:(k (`packed `center)) ~w:kx                     wList, collect eList
+  | Win.Lines (vc,ha) -> T.div    ~layout:(k (`vpack (vc, ha))) ~w:kx ~margin:(margin 5.) wList, collect eList
+ (* liste de widget, disposés horizontalement ou verticalement *)
 
-let box_of_element w h ha element =
-	Element ( T.div 
-	  ~w:(ews w) (* ne fonctionne pas *)
-	  ~h:(ehs h) (* ne fonctionne pas *)
-	  ~layout:(k (`vpack (`packed `center, ha)))
-	  [element] )
 
 let rec widget_frame fra =
   let dir, list = fra in
@@ -155,7 +133,7 @@ let rec widget_frame fra =
   | Element element -> element 
   | _ -> T.void() ) 
   in
-  match (liste dir (List.map widget list)) with (w,e) -> Frame(w,e)
+  match (uie_of_widget_list dir (List.map widget list)) with (w,e) -> Frame(w,e)
 
      
 (*type layout = [
@@ -167,7 +145,7 @@ and halign = [`left | `center | `right ]
 and valign = [`top | `center | `bottom ]
 and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 
-	
+
 let topBar status_s = 
   let open Sdlkey in
   let open WindowID in
@@ -209,7 +187,7 @@ let topBar status_s =
 	let list = match atelier_opt with
 	  | Some a -> left_towers @ (middle_towers a) @ (right_towers a)
     | _      -> left_towers @ [ void (k `expands) ] in
-	liste Win.Columns list
+	uie_of_widget_list Win.Columns list
       in
       map_s_e (RS.map Status.atelier status_s) tower_list
     (* top bar *)
@@ -223,7 +201,7 @@ let bottomBar status_s =
   let b w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (k title), task ) in
 
   let f s = 
-	liste Win.Columns ( 
+	uie_of_widget_list Win.Columns ( 
 	  let ao = Status.atelier s in match ao with 
 	    | Some a ->( 
                    let module GP = Game.Player in
@@ -242,7 +220,7 @@ let bottomBar status_s =
 
 let queen_titleBar id title =
   let tb = cButton ~w:1.  in
-      liste Win.Columns [
+      uie_of_widget_list Win.Columns [
 	tb (K.KEY_u       , "U"           , [`wUndo                   ]    );
 	void (k `expands);
 	strn title;
@@ -292,7 +270,7 @@ let window_visibility_signal wid status =
 let uies_towers status_s =
   let topBar   , topBarEvents    = topBar status_s in
   let bottomBar, bottomBarEvents = bottomBar status_s in
-  let vpack tb bb = T.vpack  ~w:(k `expands) ~h:(k `expands) [ tb ; T.void ~h:(k `expands) () ; bb ] in
+  let vpack tb bb = T.vpack  ~w:kx ~h:kx [ tb ; T.void ~h:kx () ; bb ] in
   UI.ES.l2 vpack topBar bottomBar, collect [ bottomBarEvents ; topBarEvents ]
 
 let uie_frame pos status_s data =
@@ -304,19 +282,19 @@ let uie_frame pos status_s data =
 	| _       -> queen_titleBar id title) in
   T.div
      ~layout:(k (`vpack (`justified, `center)))
-     ~h:(match W.duty id with W.Sheet -> k `expands | _ -> k `tight)
+     ~h:(match W.duty id with W.Sheet -> kx | _ -> k `tight)
      ~background:(k (Some Ci.wsb))
      ~visibility:(window_visibility_signal id status_s)
      ~framed:(window_focus_signal id)
      ~margin:(margin 1.)
-     [ titleBar ; contents ; T.void ~h:(k `expands) () ], collect [cEvents; tbEvents]
+     [ titleBar ; contents ; T.void ~h:kx () ], collect [cEvents; tbEvents]
 (* construction d'un ui.element de type frame (sheet ou queen), sans contents *)
 
 let uie_cadre_de_sheet spacing e = 
   let uhs = rsm (fun h -> `fixed ( h +. 2.)) D.ehip in (* + 2. pour laisser la place au focus jaune *)
-  T.vpack ~w:(k`expands) ~h:(k`expands) [
+  T.vpack ~w:kx ~h:kx [
      T.void ~h:uhs () ;
-     T.hpack ~w:(k`expands) ~h:(k`expands) ~spacing [ e ] ;
+     T.hpack ~w:kx ~h:kx ~spacing [ e ] ;
      T.void ~h:uhs () ;
      ]
 (* construction d'un ui.element de type cadre de sheet *)
