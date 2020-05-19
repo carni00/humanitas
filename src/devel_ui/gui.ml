@@ -40,22 +40,14 @@ module Make (Draw : Video.Draw) = struct
   type t      = UI.t
   module Gen(T : UI.Toolkit) = struct
   
-let rsm = RS.map
-let k   = RS.const  
-let kx  = RS.const `expands
+let truc = RS.trace (Std.Opt.smap "none" Draw.Window.string_of_id |- Printf.printf "tk: %s\n%!"  ) T.window_focus
+  (*	(Core.Option.value_map ~default:"none" ~f:Draw.Window.string_of_id |- Printf.printf "tk: %s\n%!")*)
+  (* remplacement parce que core.option n’est plus connu au make *)
+let window_focus_signal wid = RS.map (fun x -> x = Some wid) truc (* T.window_focus *)
+  (* évolution du focussage d’une window *)
 
 let collect es = RE.merge (fun l x -> x @ l) [] es
 (* concaténation de list de React.event *)
-
-let modulate_tasks list = fun _button_up_event -> Handler.modulate_tasks list
-(* mise à jour liste de tâches en fonction des mods ctrl, alt etc. *)
-
-let margin x = k { Frui.top = x ; bottom = x ; left = x ; right = x }
-
-let ews r = rsm (fun w -> `fixed (r *. w)) D.ewip  (* element width signal *)
-let uws   = rsm (fun w -> `fixed       w ) D.ewip  (* unity element width signal *)
-let ehs r = rsm (fun h -> `fixed (r *. h)) D.ehip
-let uhs   = rsm (fun h -> `fixed (     h)) D.ehip
 
 let map_s_e s f =
   let s' = RS.map ~eq:( == ) f s in
@@ -65,9 +57,23 @@ let map_s_e s f =
   RE.switch (snd init) (RE.map snd changes)
 (* map signal element, je suppose *)
 
+let modulate_tasks list = fun _button_up_event -> Handler.modulate_tasks list
+(* mise à jour liste de tâches en fonction des mods ctrl, alt etc. *)
+
+
 type button = (UI.element * bool React.signal * unit React.event) * Task.t list
 type frame  =  UI.element * (Task.t list) React.event
 type widget =  Element of  UI.element | Button  of  button | Frame   of  frame
+
+
+let rsm      = RS.map
+let k        = RS.const  
+let kx       = RS.const `expands
+let ews    r = rsm (fun w -> `fixed (r *. w)) D.ewip  (* element width signal *)
+let uws      = rsm (fun w -> `fixed       w ) D.ewip  (* unity element width signal *)
+let ehs    r = rsm (fun h -> `fixed (r *. h)) D.ehip
+let uhs      = rsm (fun h -> `fixed (     h)) D.ehip
+let margin x = k   { Frui.top = x ; bottom = x ; left = x ; right = x }
 
 let void     w              = Element (T.void ~w:w      ~h:(ehs 1.) ())
 let cStrn    s              = Element (T.label   (k s) )
@@ -108,7 +114,6 @@ let rec widget_frame fra =
   in
   match (uie_of_widget_list dir (List.map widget list)) with (w,e) -> Frame(w,e)
 
-     
 (*type layout = [
 | `hpack of halign spacing * valign
 | `vpack of valign spacing * halign
@@ -118,49 +123,17 @@ and halign = [`left | `center | `right ]
 and valign = [`top | `center | `bottom ]
 and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 
-
-
-let truc = 
-      RS.trace 
-	(Std.Opt.smap "none" Draw.Window.string_of_id |- Printf.printf "tk: %s\n%!"  )
-(*	(Core.Option.value_map ~default:"none" ~f:Draw.Window.string_of_id |- Printf.printf "tk: %s\n%!")*)
-(* remplacement parce que core.option n’est plus connu au make *)
-	T.window_focus
-
-let window_focus_signal wid =
-  RS.map (fun x -> x = Some wid) truc (* T.window_focus *)
-  (* évolution du focussage d’une window *)
-
-let window_visibility = function
-  | W.Alive
-  | W.Frozen    -> `opaque
-  | W.Invisible
-  | W.Nil
-  | W.Glass     -> `invisible
-
-let window_visibility_signal wid status_s =
-  let f = (fun s->
-    let windows = Status.windows s in
-    let is_hidden_by_stack = match WindowID.duty wid, Windows.windowPos windows wid with
-      | W.Sheet, W.Left -> List.mem (Windows.leftStackStatus windows) W.([ Glass ; Invisible ; Nil ])
-      | W.Sheet, W.Right -> List.mem (Windows.rightStackStatus windows) W.([ Glass ; Invisible ; Nil ])
-      | _ -> false in
-    if is_hidden_by_stack then `invisible
-    else window_visibility (Ws.windowState windows wid)) in
-  RS.map f status_s
-  (* état courant de la window *)
-
 (***************************************** ui.element constructeurs *******************************************)
 
 let uie_queen_titleBar id title =
   let tb = cButton ~w:1.  in
-      uie_of_widget_list Win.Columns [
-	tb (K.KEY_u       , "U"           , [`wUndo                   ]    );
-	void (k `expands);
-	strn title;
-	void (k `expands);
-	tb (K.KEY_x       , "X"           , [`wClose id               ]    );
-      ]
+  uie_of_widget_list Win.Columns [
+    tb (K.KEY_u       , "U"           , [`wUndo                   ]    );
+    void (k `expands);
+    strn title;
+    void (k `expands);
+    tb (K.KEY_x       , "X"           , [`wClose id               ]    );
+  ]
 
 let uie_sheet_titleBar side id title =
   let button key label f = match T.button ~w:uws ~h:uhs ~shortcut:key (k label) with elt,_,bt_fires -> elt, f bt_fires in
@@ -183,6 +156,25 @@ let uie_sheet_titleBar side id title =
   ] in columns contents
 (* la sheet_titleBar est le seul machin qui soit géré directement en T(oolkit) ;
    les widgets suivants sont faits de Gen.widget *)
+
+let window_visibility = function
+  | W.Alive
+  | W.Frozen    -> `opaque
+  | W.Invisible
+  | W.Nil
+  | W.Glass     -> `invisible
+
+let window_visibility_signal wid status_s =
+  let f = (fun s->
+    let windows = Status.windows s in
+    let is_hidden_by_stack = match WindowID.duty wid, Windows.windowPos windows wid with
+      | W.Sheet, W.Left -> List.mem (Windows.leftStackStatus windows) W.([ Glass ; Invisible ; Nil ])
+      | W.Sheet, W.Right -> List.mem (Windows.rightStackStatus windows) W.([ Glass ; Invisible ; Nil ])
+      | _ -> false in
+    if is_hidden_by_stack then `invisible
+    else window_visibility (Ws.windowState windows wid)) in
+  RS.map f status_s
+  (* état courant de la window *)
 
 let uie_frame pos status_s data =
   let id, (title, element)   = data in
