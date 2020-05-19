@@ -67,11 +67,7 @@ let map_s_e s f =
 
 type button = (UI.element * bool React.signal * unit React.event) * Task.t list
 type frame  =  UI.element * (Task.t list) React.event
-
-type widget =
-  | Element of  UI.element
-  | Button  of  button
-  | Frame   of  frame
+type widget =  Element of  UI.element | Button  of  button | Frame   of  frame
 
 let void     w              = Element (T.void ~w:w      ~h:(ehs 1.) ())
 let cStrn    s              = Element (T.label   (k s) )
@@ -92,7 +88,6 @@ let uie_of_widget_list dir widget_list =
   | Win.Columns       -> T.hpack ~spacing:(k (`packed `center)) ~w:kx                     wList, collect eList
   | Win.Lines (vc,ha) -> T.div    ~layout:(k (`vpack (vc, ha))) ~w:kx ~margin:(margin 5.) wList, collect eList
  (* liste de widget, disposés horizontalement ou verticalement *)
-
 
 let rec widget_frame fra =
   let dir, list = fra in
@@ -124,77 +119,6 @@ and valign = [`top | `center | `bottom ]
 and 'a spacing = [ `packed of 'a | `justified | `spread]*)
 
 
-let topBar status_s = 
-  let open Sdlkey in
-  let open WindowID in
-  let open Tfloat in
-  let ews    r = RS.map (fun w -> `fixed (r * foi w / 13.75)) D.swip in (* width signal *)
-  (* redefinition de ews : l'unité de base de largeur est la largeur d'un bouton (et non d'un élément) *)
-  (* la largeur du bouton est fonction de la largeur de l'écran *)
-  let space r = void ( ews r ) in 
-  let b (key, title, task) = Button( T.button ~w:(ews 1.) ~h:(ehs 1.) ~shortcut:key (k title), task ) in
-
-  let tower_list atelier_opt = 
-	let left_towers = [
-          b (KEY_g       , "Game"        , [`wOpen (Game   , Default)]    );
-          space 0.25;
-          b (KEY_F1      , "help"        , [`wOpen (Help   , Default)]    );
-	]
-	and middle_towers a = 
-          let filter = Si.filter (Scene.filter (SA.scene a)) in
-          let pov    = Game.Player.pov (SA.player a) in
-          let sb bt  = if pov = Nid.none then space 1. else b bt in 
-          [
-            b (KEY_o       , "Orbis"       , [`wOpen (Orbis, Default)]    );
-            b (KEY_t       , "Tabula"      , [`wOpen (Tabula, Default)]    );
-            b (KEY_F4      , filter        , [`switch_filter           ]    );
-            space 0.25;
-            sb(KEY_F5      , Si.natioName pov, [ `wOpen (Polis  , Default)]    );
-            sb(KEY_s       , "Stratiotikon",   [ `wOpen (Polis  , Default)]    );
-            sb(KEY_j       , "Junctiones",     [ `wOpen (Tactics, Default)]    );
-            sb(KEY_F8      , " ", [ `wOpen (Polis  , Default)]    );
-          ]
-	and right_towers a = 
-          let turn   = (Game.orbis (SA.game a)).Orbis.turn in [
-            void (k `expands) ;
-			      b (KEY_F9      , " << "        , [`wOpen (Vetera    , Default)]    );
-			      b (KEY_F10     , Si.date turn  , [`wOpen (Newspaper , Default)]    );
-            b (KEY_RETURN  , " > "         , [`end_of_turn 1        ]    );
-            b (KEY_F12     , " >> "        , [`next_event           ]    );
-	] in
-	let list = match atelier_opt with
-	  | Some a -> left_towers @ (middle_towers a) @ (right_towers a)
-    | _      -> left_towers @ [ void (k `expands) ] in
-	uie_of_widget_list Win.Columns list
-      in
-      map_s_e (RS.map Status.atelier status_s) tower_list
-    (* top bar *)
-
-
-let bottomBar status_s =
-  let open Sdlkey in
-  let open Tfloat in
-  let ews    r = RS.map (fun w -> `fixed (foi w * foi r / 100.)) D.swip in (* width signal *)
-  (* redefinition de ews : l'unité de base de largeur est un centième de la largeur de l'écran *)
-  let b w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (k title), task ) in
-
-  let f s = 
-	uie_of_widget_list Win.Columns ( 
-	  let ao = Status.atelier s in match ao with 
-	    | Some a ->( 
-                   let module GP = Game.Player in
-	                 let player = SA.player a in
-			 [
-(*		   b 10 (KEY_UNKNOWN , GP.name player                    , []    );*)
-			   b 10 (KEY_UNKNOWN , "role : "^Si.role  (GP.role player)         , []    );
-(*  	   b 15 (KEY_UNKNOWN , "pov  : "^Si.natio Si.Name (GP.pov player)  , []    );*)
-                           void (k `expands) ;
-			 ])
-	    | None -> [ ] )
-      in
-      map_s_e status_s f
-    (* bottom bar *)
-
 
 let truc = 
       RS.trace 
@@ -214,32 +138,19 @@ let window_visibility = function
   | W.Nil
   | W.Glass     -> `invisible
 
-let window_visibility_signal wid status =
-      RS.map 
-	(fun s->
-	  let windows = Status.windows s in
-	  let is_hidden_by_stack = match WindowID.duty wid, Windows.windowPos windows wid with
-	    | W.Sheet, W.Left -> List.mem (Windows.leftStackStatus windows) W.([ Glass ; Invisible ; Nil ])
-	    | W.Sheet, W.Right -> List.mem (Windows.rightStackStatus windows) W.([ Glass ; Invisible ; Nil ])
-	    | _ -> false
-	  in
-	  if is_hidden_by_stack then `invisible
-	  else window_visibility (Ws.windowState windows wid))
-	 status
+let window_visibility_signal wid status_s =
+  let f = (fun s->
+    let windows = Status.windows s in
+    let is_hidden_by_stack = match WindowID.duty wid, Windows.windowPos windows wid with
+      | W.Sheet, W.Left -> List.mem (Windows.leftStackStatus windows) W.([ Glass ; Invisible ; Nil ])
+      | W.Sheet, W.Right -> List.mem (Windows.rightStackStatus windows) W.([ Glass ; Invisible ; Nil ])
+      | _ -> false in
+    if is_hidden_by_stack then `invisible
+    else window_visibility (Ws.windowState windows wid)) in
+  RS.map f status_s
   (* état courant de la window *)
 
-
-    (* FIXME: pas optimal, pos devrait être un signal *)
-
-
-
 (***************************************** ui.element constructeurs *******************************************)
-
-let uies_towers status_s =
-  let topBar   , topBarEvents    = topBar status_s in
-  let bottomBar, bottomBarEvents = bottomBar status_s in
-  let vpack tb bb = T.vpack  ~w:kx ~h:kx [ tb ; T.void ~h:kx () ; bb ] in
-  UI.ES.l2 vpack topBar bottomBar, collect [ bottomBarEvents ; topBarEvents ]
 
 let uie_queen_titleBar id title =
   let tb = cButton ~w:1.  in
@@ -327,9 +238,86 @@ let uiw_sheet_list status_s =
   let spacing wid = RS.l2 (fun left_stack right_stack -> `packed (which_stack left_stack right_stack wid)) left_stack_s right_stack_s in
   List.map (uiw_sheet spacing status_s) W.sheets
 
+(***************************************** Towers *******************************************)
+
+let topBar status_s = 
+  let open Sdlkey in
+  let open WindowID in
+  let open Tfloat in
+  let ews    r = RS.map (fun w -> `fixed (r * foi w / 13.75)) D.swip in (* width signal *)
+  (* redefinition de ews : l'unité de base de largeur est la largeur d'un bouton (et non d'un élément) *)
+  (* la largeur du bouton est fonction de la largeur de l'écran *)
+  let space r = void ( ews r ) in 
+  let b (key, title, task) = Button( T.button ~w:(ews 1.) ~h:(ehs 1.) ~shortcut:key (k title), task ) in
+
+  let tower_list atelier_opt = 
+	let left_towers = [
+          b (KEY_g       , "Game"        , [`wOpen (Game   , Default)]    );
+          space 0.25;
+          b (KEY_F1      , "help"        , [`wOpen (Help   , Default)]    );
+	]
+	and middle_towers a = 
+          let filter = Si.filter (Scene.filter (SA.scene a)) in
+          let pov    = Game.Player.pov (SA.player a) in
+          let sb bt  = if pov = Nid.none then space 1. else b bt in 
+          [
+            b (KEY_o       , "Orbis"       , [`wOpen (Orbis, Default)]    );
+            b (KEY_t       , "Tabula"      , [`wOpen (Tabula, Default)]    );
+            b (KEY_F4      , filter        , [`switch_filter           ]    );
+            space 0.25;
+            sb(KEY_F5      , Si.natioName pov, [ `wOpen (Polis  , Default)]    );
+            sb(KEY_s       , "Stratiotikon",   [ `wOpen (Polis  , Default)]    );
+            sb(KEY_j       , "Junctiones",     [ `wOpen (Tactics, Default)]    );
+            sb(KEY_F8      , " ", [ `wOpen (Polis  , Default)]    );
+          ]
+	and right_towers a = 
+          let turn   = (Game.orbis (SA.game a)).Orbis.turn in [
+            void (k `expands) ;
+			      b (KEY_F9      , " << "        , [`wOpen (Vetera    , Default)]    );
+			      b (KEY_F10     , Si.date turn  , [`wOpen (Newspaper , Default)]    );
+            b (KEY_RETURN  , " > "         , [`end_of_turn 1        ]    );
+            b (KEY_F12     , " >> "        , [`next_event           ]    );
+	] in
+	let list = match atelier_opt with
+	  | Some a -> left_towers @ (middle_towers a) @ (right_towers a)
+    | _      -> left_towers @ [ void (k `expands) ] in
+	uie_of_widget_list Win.Columns list
+      in
+      map_s_e (RS.map Status.atelier status_s) tower_list
+    (* top bar *)
+
+let bottomBar status_s =
+  let open Sdlkey in
+  let open Tfloat in
+  let ews    r = RS.map (fun w -> `fixed (foi w * foi r / 100.)) D.swip in (* width signal *)
+  (* redefinition de ews : l'unité de base de largeur est un centième de la largeur de l'écran *)
+  let b w (key, title, task) = Button( T.button ~w:(ews w) ~h:(ehs 1.) ~shortcut:key (k title), task ) in
+
+  let f s = 
+	uie_of_widget_list Win.Columns ( 
+	  let ao = Status.atelier s in match ao with 
+	    | Some a ->( 
+                   let module GP = Game.Player in
+	                 let player = SA.player a in
+			 [
+(*		   b 10 (KEY_UNKNOWN , GP.name player                    , []    );*)
+			   b 10 (KEY_UNKNOWN , "role : "^Si.role  (GP.role player)         , []    );
+(*  	   b 15 (KEY_UNKNOWN , "pov  : "^Si.natio Si.Name (GP.pov player)  , []    );*)
+                           void (k `expands) ;
+			 ])
+	    | None -> [ ] )
+      in
+      map_s_e status_s f
+    (* bottom bar *)
+
+let uies_towers status_s =
+  let topBar   , topBarEvents    = topBar status_s in
+  let bottomBar, bottomBarEvents = bottomBar status_s in
+  let vpack tb bb = T.vpack  ~w:kx ~h:kx [ tb ; T.void ~h:kx () ; bb ] in
+  UI.ES.l2 vpack topBar bottomBar, collect [ bottomBarEvents ; topBarEvents ]
+
 
 (***************************************** Gen.make *******************************************)
-
 
 let make status_s =
   let window_focus_changes = RS.changes T.window_focus in
