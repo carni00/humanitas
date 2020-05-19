@@ -22,8 +22,6 @@
  *)
 
 open Humanitas_tools
-open Humanitas_physis
-open Humanitas_orbis
 open Humanitas_game
 
 type title = string React.signal
@@ -42,13 +40,15 @@ type element =
 | Box of (float * float * Frui.halign * element)
 | List of (agencement * element list)
 
-type t = title * element
+type contents = title * element
+type id       = WindowID.t
 
-val data  : Status.t React.signal -> WindowID.t -> t
-val natio : Status.Atelier.t -> Nid.t -> WindowID.t -> t
+val contents_s : Status.t React.signal -> id -> (id * contents) option React.signal
 
-val regio : Status.Atelier.t (*React.signal*) -> Rid.t (*React.signal*) -> t
-val atelier : Status.Atelier.t (*React.signal*) -> WindowID.t -> t
+(*val natio : Status.Atelier.t -> Nid.t -> WindowID.t -> t*)
+
+(*val regio : Status.Atelier.t (*React.signal*) -> Rid.t (*React.signal*) -> t*)
+(*val atelier : Status.Atelier.t (*React.signal*) -> WindowID.t -> t*)
 
 (*
 type sheetItem =

@@ -57,7 +57,8 @@ type element =
 | Box of (float * float * Frui.halign * element)
 | List of (agencement * element list)
 
-type t = title * element
+type contents = title * element
+type id       = WindowID.t
 
 let rsm  = RS.map
 (*let rsm2 = RS.l2*)
@@ -520,5 +521,38 @@ let data staSnl wid = match wid with
 | _ -> c "Unknown window", List(Lines juce, [
   LB( K.KEY_c       , "Click me"        , [                      ]);
 ]) 
+
+(*****************************************************************************************************)
+
+let contents_s status_s wid =
+  let module RSAO = RS.Make(struct type 'a t = SA.t option let equal = ( == ) end) in
+  let atelier_s = RSAO.map Status.atelier status_s in match wid with
+  | W.Artes
+  | W.Chora
+  | W.Dx 
+  | W.Fines
+  | W.Partitio
+  | W.Polis 
+  | W.Tactics
+  | W.Pyramid -> ( let f = function
+        | Some a ->( 
+               let nid = Game.Player.pov (SA.player a) in
+               if nid = Nid.none then None 
+               else Some (wid, natio a nid wid)
+               )
+        | _ -> None in RS.map f atelier_s )
+  | W.Regio -> ( let f = function
+        | Some a -> ( match Scene.sr (SA.scene a) with
+                   | Some rid -> Some (W.Regio, regio a rid)
+                   | _ -> None )
+        | _ -> None in RS.map f atelier_s)
+  | W.Tabula
+  | W.Newspaper
+  | W.Vetera
+  | W.Orbis -> ( let f = function
+      | Some a -> Some (wid, atelier a wid)
+      | _ -> None in RS.map f atelier_s)
+  | id -> RS.const (Some (id, data status_s id))
+
 
 (* EOF *)

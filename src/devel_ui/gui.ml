@@ -286,36 +286,6 @@ let window_visibility_signal wid status =
     (* FIXME: pas optimal, pos devrait être un signal *)
 
 
-let win_content_s status_s wid =
-  let module RSAO = RS.Make(struct type 'a t = SA.t option let equal = ( == ) end) in
-  let atelier_s = RSAO.map Status.atelier status_s in match wid with
-  | W.Artes
-  | W.Chora
-  | W.Dx 
-  | W.Fines
-  | W.Partitio
-  | W.Polis 
-  | W.Tactics
-  | W.Pyramid -> ( let f = function
-        | Some a ->( 
-               let nid = Game.Player.pov (SA.player a) in
-               if nid = Nid.none then None 
-               else Some (wid, Window.natio a nid wid)
-               )
-        | _ -> None in RS.map f atelier_s )
-  | W.Regio -> ( let f = function
-        | Some a -> ( match Scene.sr (SA.scene a) with
-                   | Some rid -> Some (W.Regio, Window.regio a rid)
-                   | _ -> None )
-        | _ -> None in RS.map f atelier_s)
-  | W.Tabula
-  | W.Newspaper
-  | W.Vetera
-  | W.Orbis -> ( let f = function
-      | Some a -> Some (wid, Window.atelier a wid)
-      | _ -> None in RS.map f atelier_s)
-  | id -> k (Some (id, Window.data status_s id))
-
 
 (***************************************** ui.element constructeurs *******************************************)
 
@@ -354,7 +324,7 @@ let uie_cadre_de_sheet spacing e =
 (***************************************** ui.window constructeurs *******************************************)
 
 let ui_window opt_cadre status_s pos_s wid = 
-  let win_contents_s = win_content_s status_s wid	in
+  let win_contents_s = Window.contents_s status_s wid	in
   let opt_uie_frame = function
   | Some win_content -> uie_frame pos_s status_s win_content
   | None             -> T.void (), RE.never in
