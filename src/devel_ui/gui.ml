@@ -65,28 +65,6 @@ let map_s_e s f =
   RE.switch (snd init) (RE.map snd changes)
 (* map signal element, je suppose *)
 
-let sheet_titleBar side id title =
-  let button key label f = match T.button ~w:uws ~h:uhs ~shortcut:key (k label) with elt,_,bt_fires -> elt, f bt_fires in
-  let bt  key label task = button key label (RE.map ((modulate_tasks task)))
-  and bt' key label f    = button key label (fun fires -> RS.sample (fun () s -> f s) fires side)
-  and void w = T.void ~w ~h:uhs (), RE.never
-  and strn s = T.label s, RE.never
-  and columns cols = T.hpack ~spacing:(k (`packed `center)) ~w:kx (List.map fst cols),
-                     collect (List.map snd cols) in
-  let contents = [
-    bt    K.KEY_m        "M"              [`wMove                       ] ;
-    bt    K.KEY_PAGEUP   "pgup"           [`wPrevious                   ] ;
-    bt    K.KEY_PAGEDOWN "pgdn"           [`wNext                       ] ;
-    void kx;
-    strn title;
-    void kx;
-    bt    K.KEY_u        "U"              [`sFocus None                ]  ;
-    bt'   K.KEY_h        "H" (fun side -> [`sHide  side; `sFocus None  ]) ;
-    bt    K.KEY_x        "X"              [`wClose id                  ]  ;
-  ] in columns contents
-(* la sheet_titleBar est le seul machin qui soit géré directement en T(oolkit) ;
-   les widgets suivants sont faits de Gen.widget *)
-
 type button = (UI.element * bool React.signal * unit React.event) * Task.t list
 type frame  =  UI.element * (Task.t list) React.event
 
@@ -218,16 +196,6 @@ let bottomBar status_s =
     (* bottom bar *)
 
 
-let queen_titleBar id title =
-  let tb = cButton ~w:1.  in
-      uie_of_widget_list Win.Columns [
-	tb (K.KEY_u       , "U"           , [`wUndo                   ]    );
-	void (k `expands);
-	strn title;
-	void (k `expands);
-	tb (K.KEY_x       , "X"           , [`wClose id               ]    );
-      ]
-
 let truc = 
       RS.trace 
 	(Std.Opt.smap "none" Draw.Window.string_of_id |- Printf.printf "tk: %s\n%!"  )
@@ -273,13 +241,45 @@ let uies_towers status_s =
   let vpack tb bb = T.vpack  ~w:kx ~h:kx [ tb ; T.void ~h:kx () ; bb ] in
   UI.ES.l2 vpack topBar bottomBar, collect [ bottomBarEvents ; topBarEvents ]
 
+let uie_queen_titleBar id title =
+  let tb = cButton ~w:1.  in
+      uie_of_widget_list Win.Columns [
+	tb (K.KEY_u       , "U"           , [`wUndo                   ]    );
+	void (k `expands);
+	strn title;
+	void (k `expands);
+	tb (K.KEY_x       , "X"           , [`wClose id               ]    );
+      ]
+
+let uie_sheet_titleBar side id title =
+  let button key label f = match T.button ~w:uws ~h:uhs ~shortcut:key (k label) with elt,_,bt_fires -> elt, f bt_fires in
+  let bt  key label task = button key label (RE.map ((modulate_tasks task)))
+  and bt' key label f    = button key label (fun fires -> RS.sample (fun () s -> f s) fires side)
+  and void w = T.void ~w ~h:uhs (), RE.never
+  and strn s = T.label s, RE.never
+  and columns cols = T.hpack ~spacing:(k (`packed `center)) ~w:kx (List.map fst cols),
+                     collect (List.map snd cols) in
+  let contents = [
+    bt    K.KEY_m        "M"              [`wMove                       ] ;
+    bt    K.KEY_PAGEUP   "pgup"           [`wPrevious                   ] ;
+    bt    K.KEY_PAGEDOWN "pgdn"           [`wNext                       ] ;
+    void kx;
+    strn title;
+    void kx;
+    bt    K.KEY_u        "U"              [`sFocus None                ]  ;
+    bt'   K.KEY_h        "H" (fun side -> [`sHide  side; `sFocus None  ]) ;
+    bt    K.KEY_x        "X"              [`wClose id                  ]  ;
+  ] in columns contents
+(* la sheet_titleBar est le seul machin qui soit géré directement en T(oolkit) ;
+   les widgets suivants sont faits de Gen.widget *)
+
 let uie_frame pos status_s data =
   let id, (title, element)   = data in
   let fra = (Win.Columns, [element] ) in 
   let contents, cEvents  = match widget_frame fra with Frame (w,e) -> w,e | _ -> (T.void(), RE.never) in
   let titleBar, tbEvents = (match W.duty id with
-	| W.Sheet -> sheet_titleBar pos id title 
-	| _       -> queen_titleBar id title) in
+	| W.Sheet -> uie_sheet_titleBar pos id title 
+	| _       -> uie_queen_titleBar id title) in
   T.div
      ~layout:(k (`vpack (`justified, `center)))
      ~h:(match W.duty id with W.Sheet -> kx | _ -> k `tight)
