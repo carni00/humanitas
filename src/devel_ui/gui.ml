@@ -318,6 +318,12 @@ let win_content_s status_s wid =
 
 (***************************************** ui.element constructeurs *******************************************)
 
+let uies_towers status_s =
+  let topBar   , topBarEvents    = topBar status_s in
+  let bottomBar, bottomBarEvents = bottomBar status_s in
+  let vpack tb bb = T.vpack  ~w:(k `expands) ~h:(k `expands) [ tb ; T.void ~h:(k `expands) () ; bb ] in
+  UI.ES.l2 vpack topBar bottomBar, collect [ bottomBarEvents ; topBarEvents ]
+	
 let uie_frame pos status_s data =
   let id, (title, element)   = data in
   let fra = (Win.Columns, [element] ) in 
@@ -346,24 +352,23 @@ let uie_cadre_de_sheet spacing e =
 
 (***************************************** ui.window constructeurs *******************************************)
 
-let ui_window opt_f status_s pos_s win_contents_s wid = 
-  let opt_window = function
-  | Some w -> uie_frame pos_s status_s w
-  | None   -> T.void (), RE.never in
-  let element_s, output = map_s_e win_contents_s opt_window in match opt_f with
+let ui_window opt_cadre status_s pos_s wid = 
+  let win_contents_s = win_content_s status_s wid	in
+  let make_uie_frame = function
+  | Some win_content -> uie_frame pos_s status_s win_content
+  | None             -> T.void (), RE.never in
+  let element_s, output = map_s_e win_contents_s make_uie_frame in match opt_cadre with
   | None   -> T.window wid            element_s  , output (* queen *)
   | Some f -> T.window wid ( RS.map f element_s ), output (* sheet *)
 (* commun à uiw_queen et uiw_sheet *)
 
-let uiw_queen status_s wid =
-  let win_contents_s = win_content_s status_s wid	in
-  ui_window None status_s (k W.Central) win_contents_s wid
+let uiw_queen status_s wid = ui_window None status_s (k W.Central) wid
+(* Vu de Frui, une queen est une ui_window en position centrale *)
 
 let uiw_sheet spacing status_s wid =
   let spacing = spacing wid in
-  let win_pos_s = RS.map (Status.windows |- (flip Windows.windowPos) wid) status_s 
-  and win_contents_s = win_content_s status_s wid	in
-  ui_window (Some (uie_cadre_de_sheet spacing)) status_s win_pos_s win_contents_s wid
+  let win_pos_s = RS.map (Status.windows |- (flip Windows.windowPos) wid) status_s in
+  ui_window (Some (uie_cadre_de_sheet spacing)) status_s win_pos_s wid
 
 let uiw_sheet_list status_s =
   let left_stack_s  = RS.map (Status.windows |- Windows.leftStack)  status_s
@@ -372,13 +377,9 @@ let uiw_sheet_list status_s =
   let spacing wid = RS.l2 (fun left_stack right_stack -> `packed (which_stack left_stack right_stack wid)) left_stack_s right_stack_s in
   List.map (uiw_sheet spacing status_s) W.sheets
 
-let uies_towers status_s =
-  let topBar   , topBarEvents    = topBar status_s in
-  let bottomBar, bottomBarEvents = bottomBar status_s in
-  let vpack tb bb = T.vpack  ~w:(k `expands) ~h:(k `expands) [ tb ; T.void ~h:(k `expands) () ; bb ] in
-  UI.ES.l2 vpack topBar bottomBar, collect [ bottomBarEvents ; topBarEvents ]
-	
+
 (***************************************** Gen.make *******************************************)
+
 
 let make status_s =
   let window_focus_changes = RS.changes T.window_focus in
