@@ -46,6 +46,25 @@ let truc = RS.trace (Std.Opt.smap "none" Draw.Window.string_of_id |- Printf.prin
 let window_focus_signal wid = RS.map (fun x -> x = Some wid) truc (* T.window_focus *)
   (* évolution du focussage d’une window *)
 
+let window_visibility = function
+  | W.Alive
+  | W.Frozen    -> `opaque
+  | W.Invisible
+  | W.Nil
+  | W.Glass     -> `invisible
+
+let window_visibility_signal wid status_s =
+  let f = (fun s->
+    let windows = Status.windows s in
+    let is_hidden_by_stack = match WindowID.duty wid, Windows.windowPos windows wid with
+      | W.Sheet, W.Left -> List.mem (Windows.leftStackStatus windows) W.([ Glass ; Invisible ; Nil ])
+      | W.Sheet, W.Right -> List.mem (Windows.rightStackStatus windows) W.([ Glass ; Invisible ; Nil ])
+      | _ -> false in
+    if is_hidden_by_stack then `invisible
+    else window_visibility (Ws.windowState windows wid)) in
+  RS.map f status_s
+  (* état courant de la window *)
+
 let collect es = RE.merge (fun l x -> x @ l) [] es
 (* concaténation de list de React.event *)
 
@@ -156,25 +175,6 @@ let uie_sheet_titleBar side id title =
   ] in columns contents
 (* la sheet_titleBar est le seul machin qui soit géré directement en T(oolkit) ;
    les widgets suivants sont faits de Gen.widget *)
-
-let window_visibility = function
-  | W.Alive
-  | W.Frozen    -> `opaque
-  | W.Invisible
-  | W.Nil
-  | W.Glass     -> `invisible
-
-let window_visibility_signal wid status_s =
-  let f = (fun s->
-    let windows = Status.windows s in
-    let is_hidden_by_stack = match WindowID.duty wid, Windows.windowPos windows wid with
-      | W.Sheet, W.Left -> List.mem (Windows.leftStackStatus windows) W.([ Glass ; Invisible ; Nil ])
-      | W.Sheet, W.Right -> List.mem (Windows.rightStackStatus windows) W.([ Glass ; Invisible ; Nil ])
-      | _ -> false in
-    if is_hidden_by_stack then `invisible
-    else window_visibility (Ws.windowState windows wid)) in
-  RS.map f status_s
-  (* état courant de la window *)
 
 let uie_frame pos status_s data =
   let id, (title, element)   = data in
