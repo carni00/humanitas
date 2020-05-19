@@ -65,6 +65,7 @@ let map_s_e s f =
   let changes = RS.changes s' in
   RS.hold ~eq:( == ) (fst init) (RE.map fst changes),
   RE.switch (snd init) (RE.map snd changes)
+(* map signal element, je suppose *)
 
 let sheet_titleBar side id title =
   let button key label f = 
@@ -323,7 +324,7 @@ let uies_towers status_s =
   let bottomBar, bottomBarEvents = bottomBar status_s in
   let vpack tb bb = T.vpack  ~w:(k `expands) ~h:(k `expands) [ tb ; T.void ~h:(k `expands) () ; bb ] in
   UI.ES.l2 vpack topBar bottomBar, collect [ bottomBarEvents ; topBarEvents ]
-	
+
 let uie_frame pos status_s data =
   let id, (title, element)   = data in
   let fra = (Win.Columns, [element] ) in 
@@ -339,7 +340,7 @@ let uie_frame pos status_s data =
      ~framed:(window_focus_signal id)
      ~margin:(margin 1.)
      [ titleBar ; contents ; T.void ~h:(k `expands) () ], collect [cEvents; tbEvents]
-(* construction d'un ui.element de type frame (sheet ou queen) *)
+(* construction d'un ui.element de type frame (sheet ou queen), sans contents *)
 
 let uie_cadre_de_sheet spacing e = 
   let uhs = rsm (fun h -> `fixed ( h +. 2.)) D.ehip in (* + 2. pour laisser la place au focus jaune *)
@@ -354,12 +355,13 @@ let uie_cadre_de_sheet spacing e =
 
 let ui_window opt_cadre status_s pos_s wid = 
   let win_contents_s = win_content_s status_s wid	in
-  let make_uie_frame = function
+  let opt_uie_frame = function
   | Some win_content -> uie_frame pos_s status_s win_content
   | None             -> T.void (), RE.never in
-  let element_s, output = map_s_e win_contents_s make_uie_frame in match opt_cadre with
+  let element_s, output = map_s_e win_contents_s opt_uie_frame in match opt_cadre with
   | None   -> T.window wid            element_s  , output (* queen *)
   | Some f -> T.window wid ( RS.map f element_s ), output (* sheet *)
+(* construction d’une ui_window (appels à moult code) *)
 (* commun à uiw_queen et uiw_sheet *)
 
 let uiw_queen status_s wid = ui_window None status_s (k W.Central) wid
