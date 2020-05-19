@@ -39,7 +39,6 @@ module Ws   = Windows
 
 module Make (Draw : Video.Draw) = struct
 
-  module RSAO = RS.Make(struct type 'a t = SA.t option let equal = ( == ) end)
   module D    = Draw
   module UI   = Frui.Make(Draw) 
   type t      = UI.t
@@ -286,7 +285,9 @@ let window_visibility_signal wid status =
     (* FIXME: pas optimal, pos devrait être un signal *)
 
 
-let sheet_content_s status_s atelier_s wid = match wid with
+let win_content_s status_s wid =
+  let module RSAO = RS.Make(struct type 'a t = SA.t option let equal = ( == ) end) in
+  let atelier_s = RSAO.map Status.atelier status_s in match wid with
   | W.Artes
   | W.Chora
   | W.Dx 
@@ -307,6 +308,7 @@ let sheet_content_s status_s atelier_s wid = match wid with
                    | _ -> None )
         | _ -> None in RS.map f atelier_s)
   | W.Tabula
+  | W.Newspaper
   | W.Vetera
   | W.Orbis -> ( let f = function
       | Some a -> Some (wid, Window.atelier a wid)
@@ -354,17 +356,13 @@ let ui_window opt_f status_s pos_s win_contents_s wid =
 (* commun à uiw_queen et uiw_sheet *)
 
 let uiw_queen status_s wid =
-  let win_contents_s = match wid with
-    | W.Newspaper -> let atelier_s = RSAO.map Status.atelier status_s in
-                     RS.map (function Some a -> Some(W.Newspaper, Window.atelier a wid) | _ -> None) atelier_s
-    | id -> k (Some (id, Window.data status_s id)) in
+  let win_contents_s = win_content_s status_s wid	in
   ui_window None status_s (k W.Central) win_contents_s wid
 
 let uiw_sheet spacing status_s wid =
   let spacing = spacing wid in
-  let atelier_s = RSAO.map Status.atelier status_s in
   let win_pos_s = RS.map (Status.windows |- (flip Windows.windowPos) wid) status_s 
-  and win_contents_s = sheet_content_s status_s atelier_s wid	in
+  and win_contents_s = win_content_s status_s wid	in
   ui_window (Some (uie_cadre_de_sheet spacing)) status_s win_pos_s win_contents_s wid
 
 let uiw_sheet_list status_s =
